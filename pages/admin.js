@@ -28,7 +28,7 @@ const admin_panel = (props) => {
         </ApolloProvider>
     );
 };
-
+// test
 export async function getServerSideProps(){
     const load_category = await client.query({query:LOAD_CATEGORIES})
     const load_subcategory = await client.query({query:LOAD_SUBCATEGORIES})
