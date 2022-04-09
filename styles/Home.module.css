@@ -1,5 +1,109 @@
-.container {
-  padding: 0 2rem;
+.headerContainer{
+  width: 100%;
+  height: 65px;
+  background: #FFFFFF;
+}
+.HeaderLocation{
+  background: #FAFAFA;
+  width: 100%;
+  height: 172px;
+  margin-bottom: 50px;
+}
+.MainRowNav{
+  margin-top: 10px;
+}
+
+.CategoryMainTitle{
+  display: inline-block;
+}
+
+.CategoryCaretFillOpen{
+  display: inline-block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+
+.inlin_block_margin_right{
+  display: inline-block;
+  margin-right: 5px;
+}
+.inlin_block_margin_left{
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.inline_block{
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.CategoryPageButton{
+  width: 288px;
+  height: 40px;
+}
+.CategoryLearnMore{
+  margin-top: 50px;
+}
+.CategoryLeftCol{
+  flex: 2 0;
+}
+
+.CategoryImage{
+  width: 30px;
+  height: 30px;
+  margin-top: -35px;
+  border-radius: 50%;
+}
+
+.displayInlineWidth40{
+  display: inline-block;
+  width: 40px;
+}
+
+.CategoryEachContainer{
+  margin-bottom: 20px;
+}
+.CategoryEachMainContainer{
+  display: inline-block;
+}
+.CategoryCaretFill{
+  display: inline-block;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.CategorySearch{
+  width: 80%;
+  font-size: 16px;
+  border:1px solid #CECECE;
+  margin-top: 10px;
+  height: 38px;
+  padding-left: 10px;
+}
+
+.BrandTagLine{
+  color: #214151;
+  font-size: 22px;
+}
+
+.MainHeaderName{
+  font-size: 34px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.MainSubHeaderName{
+  font-size: 16px;
+  margin-top:5px;
+}
+
+.directoryNameEach{
+  padding-top: 15px;
+}
+
+.MainImage{
+  width: 154px;
 }
 
 .main {
