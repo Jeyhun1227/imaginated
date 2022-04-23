@@ -67,7 +67,7 @@ const CREATE_INDIVIDUAL_MUTATION = gql`
     $founder: String! 
     $link: String! 
     $category: String! 
-    $subcategory: String!
+    $subcategory: [String!]
     $verified: String!
     $imagelink: String!
   ) {
@@ -150,7 +150,7 @@ const CREATE_INDIVIDUAL_PREMIUM_OFFER_MUTATION = gql`
     $description: String!
     $subheader: String!
     $link: String!
-    $subcategory: String!
+    $subcategory: [String!]
     $imagelink: String!
     $type: String!
     $rank: Int!

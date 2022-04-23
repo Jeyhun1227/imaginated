@@ -8,7 +8,7 @@ import {
   import { onError } from "@apollo/client/link/error";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
-    console.log('networkError', networkError)
+  if(networkError)  console.log('networkError', networkError.result)
     console.log('Graphqlerror', graphqlErrors)
     if (graphqlErrors) {
       graphqlErrors.map(({ message, location, path }) => {

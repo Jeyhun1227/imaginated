@@ -12,14 +12,21 @@ query
           subcategory: $subcategory)
         {
           rows{
+            id
             categoryname
             subcategory
             first_name
             last_name
             aka
+            description
             imagelink
             avg
             count
+          }
+          subcategory{
+            id
+            subcategory
+            categoryname
           }
         }
       }

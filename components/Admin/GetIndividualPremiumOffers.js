@@ -24,7 +24,7 @@ function GetIndividualPremiumOffers({data}) {
   const [imagelink, setimagelink] = useState("");
   const [subcategory, setsubcategory] = useState("");
   const [type, settype] = useState("");
-  const [rank, setrank] = useState("");
+  const [rank, setrank] = useState(0);
 
 
   const [DeleteIds, setDeleteIds] = useState([]);
@@ -33,14 +33,14 @@ function GetIndividualPremiumOffers({data}) {
 
   const addUser = async () => {
     if(individual === '') return;
-    
+    let temp_sub = subcategory.split('||');
     let createdindividual = await createIndividual({
       variables: {
         individual,
         name,
         description,
         subheader,
-        subcategory,
+        subcategory: temp_sub,
         imagelink,
         link,
         type,
@@ -57,7 +57,7 @@ function GetIndividualPremiumOffers({data}) {
     setsubcategory("");
     setimagelink("");
     settype("");
-    setrank("");
+    setrank(0);
 
   };
   const delete_current_values = () => {

@@ -38,7 +38,7 @@ function GetIndividualList({data}) {
   const addUser = async () => {
     if(first_name === '' || last_name === '' || description === '') return;
     let Tempverified = verified;
-    
+    let temp_sub = subcategory.split('||');
     let createdindividual = await createIndividual({
       variables: {
         first_name,
@@ -51,7 +51,7 @@ function GetIndividualList({data}) {
         founder,
         link,
         category,
-        subcategory,
+        subcategory: temp_sub,
         imagelink,
         verified
       },
