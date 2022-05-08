@@ -103,6 +103,7 @@ query{
             rows{
               id
               individual
+              imagelink
               name
               description
               password

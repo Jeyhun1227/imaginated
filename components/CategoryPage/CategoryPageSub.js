@@ -24,7 +24,7 @@ export default function CategoryPageSub(props) {
                     <div className={styles.inline_block}>{e.last_name}</div>
                     {(e.aka && e.aka !== '')?<div className={styles.inlin_block_margin_left}>A.K.A {e.aka}</div>:null}
                     </div>
-                    <Rating name={e.first_name + e.last_name} defaultValue={parseInt(e.avg)} precision={0.5} readOnly/>
+                    <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} readOnly/>
                     <div className={styles.inline_block}>{e.avg}</div>
                     <div className={styles.inline_block}>({e.count})</div></Col></div>
                 </div>)}

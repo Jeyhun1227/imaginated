@@ -17,11 +17,14 @@ export default function SubCategoryPageSub({values}) {
                     <Col className={styles.displayInlineWidth40}><img src={values.imagelink} className={styles.CategoryImage}/></Col>
                     <div className={styles.CategoryEachMainContainer}><Col>
                     <div>
+                    <Link href={'/category/person/' + values.linkname}><div>
                     <div className={styles.inlin_block_margin_right}>{values.first_name}</div>
                     <div className={styles.inline_block}>{values.last_name}</div>
                     {(values.aka && values.aka !== '')?<div className={styles.inlin_block_margin_left}>A.K.A {values.aka}</div>:null}
                     </div>
-                    <Rating name={values.first_name + values.last_name} defaultValue={parseInt(values.avg)} precision={0.5} readOnly/>
+                    </Link>
+                    </div>
+                    <Rating name={values.first_name + values.last_name} value={parseFloat(values.avg)} precision={0.5} readOnly/>
                     <div className={styles.inline_block}>{values.avg}</div>
                     <div className={styles.inline_block}>({values.count})</div></Col></div>
                     <div>{values.description}</div>

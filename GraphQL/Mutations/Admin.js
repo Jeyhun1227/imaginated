@@ -271,6 +271,7 @@ const CREATE_USER_MUTATION = gql`
     $password: String!
     $verified: String!
     $email: String!
+    $imagelink: String!
   ) {
     addUser(
       individual: $individual
@@ -279,7 +280,7 @@ const CREATE_USER_MUTATION = gql`
       password: $password
       verified: $verified
       email: $email
-
+      imagelink: $imagelink
     ) {
       id
     }

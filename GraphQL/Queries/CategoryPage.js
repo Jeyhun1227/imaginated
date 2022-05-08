@@ -19,6 +19,7 @@ query
             last_name
             aka
             description
+            linkname
             imagelink
             avg
             count

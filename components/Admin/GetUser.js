@@ -23,6 +23,8 @@ function GetUsers({data}) {
   const [password, setPassword] = useState("");
   const [verified, setVerified] = useState("");
   const [email, setEmail] = useState("");
+  const [imagelink, setimagelink] = useState("");
+
 
   const [DeleteIds, setDeleteIds] = useState([])
   const [createCategory, { mutation_error_create }] = useMutation(CREATE_USER_MUTATION);
@@ -34,6 +36,7 @@ function GetUsers({data}) {
       variables: {
         individual,
         name,
+        imagelink,
         description,
         password,
         verified,
@@ -42,12 +45,13 @@ function GetUsers({data}) {
     });
     // console.log(createdcategory.data.addCategory.id)
     // CategoryValues.push({category, parent, id: createdcategory.data.addCategory.id});
-    setCategoryValues(CategoryValues.concat({individual, name, description, password, verified, email, id: createdcategory.data.addUser.id}));
+    setCategoryValues(CategoryValues.concat({individual, imagelink, name, description, password, verified, email, id: createdcategory.data.addUser.id}));
     setIndividual("");
     setName("");
     setDescription("");
     setPassword("");
     setVerified("");
+    setimagelink("");
     setEmail("");
   };
   const delete_current_values = () => {
@@ -75,6 +79,9 @@ function GetUsers({data}) {
     field: 'verified', headerName: 'Verified', width: 100
   }, {
     field: 'email', headerName: 'Email', width: 100
+  },
+  {
+    field: 'imagelink', headerName: 'Image Link', width: 100
   }
     ]
 // handleRowSelection = (row_selected) => {
@@ -135,6 +142,14 @@ function GetUsers({data}) {
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="Imagelink"
+        value={imagelink}
+        onChange={(e) => {
+          setimagelink(e.target.value);
         }}
       />
       <Button onClick={addUser} variant="outline-primary">Add</Button>

@@ -60,6 +60,168 @@
   width: 500px;
   margin: 25px 0px;
 }
+.displayNone{
+  display: none;
+}
+.IndividualImage{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.IndividualReviewOfferings{
+  display: inline-block;
+    margin: 0px 12px 0px 0px;
+    padding: 2px 4px;
+    color: black;
+    cursor: pointer;
+    padding: 7px;
+    border: 1px solid #E0E0E0;
+}
+
+.IndividualReviewOfferingsSelected{
+  display: inline-block;
+    margin: 0px 12px 0px 0px;
+    background: #F2F2F2;
+    padding: 2px 4px;
+    color: black;
+    cursor: pointer;
+    padding: 7px;
+    border: 1px solid #E0E0E0;
+}
+
+.MainOfferingImage{
+  width: 250px;
+  height: 220px;
+}
+
+.MainOfferingValue{
+  width: 250px;
+  display: inline-block;
+}
+
+.GridLayoutIndividual{
+  display: grid;
+  grid-template-columns: 100px 2fr 1fr;
+  min-height: 175px;
+}
+
+.IndividualReviewInlineBlock
+{
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.IndividualReviewImg{
+  width: 56px;
+}
+
+.IndividualReviewEachMain{
+  width: 300px;
+  display: inline-block;
+}
+
+.IndividualReviewMain{
+  margin-bottom: 40px;
+}
+
+.IndividualReviewEach{
+  background: #F8DC81;
+  height: 20px;
+}
+
+.DisplayInlineBlock{
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.IndividualGridLayoutDescription{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.IndividualGridLayoutBottom{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.IndividualGridDescription{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin: 30px 0 50px 0;
+}
+
+.IndividualFeatureEach{
+  color: #214151;
+  text-decoration: none;
+}
+.IndividualBar{
+  display: inline-block;
+  margin-left: 10px;
+  color: grey;
+}
+
+.IndividualLeaveReviews{
+  margin-top: 40px;
+}
+
+.IndividualSubHeaders{
+  margin-right: 25px;
+  padding-right: 25px;  
+  margin-top: 15px;
+  display: inline-block;
+  cursor: pointer;
+
+}
+
+.IndividualSubHeadersClicked{
+  margin-right: 50px;
+  margin-top: 15px;
+  display: inline-block;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  cursor: pointer;
+  font-weight: 500;
+
+}
+
+.IndividualBarBlack{
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.GridLayoutImage{
+  padding-top: 30px;
+}
+
+.Image12PX{
+  width: 12px;
+  display: inline-block;
+}
+
+.TextInline{
+  display: inline-block;
+}
+
+/* .GridLayoutValues{
+  grid-column-start: 2;
+    grid-column-end: 5;
+} */
+.SubcategoryBlock:hover {
+  color: black;
+}
+.SubcategoryBlock{
+  display: inline-block;
+  margin: 0px 7px 0px 0px;
+  padding: 2px 4px;
+  background: #F2F2F2;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 
 .MainHeaderSubcategory{
   font-size: 28px;
