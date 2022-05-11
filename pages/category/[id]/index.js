@@ -7,6 +7,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
 import client from '../../../components/GraphQL';
 import CategoryPageSub from '../../../components/CategoryPage/CategoryPageSub';
+import { signIn, signOut, useSession } from "next-auth/react";
 
 
 export default function CategoryPageMain(props) {

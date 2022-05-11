@@ -12,7 +12,6 @@ function GetIndividualList({data}) {
   const [IndividualValues, setIndividualValues] = useState([{'id': 1, 'individual': null, 'parent': null}]);
   useEffect(() => {
     if (data) {
-        console.log(data)
         setIndividualValues(data.getAllIndividual.rows);
     }
   }, [data]);

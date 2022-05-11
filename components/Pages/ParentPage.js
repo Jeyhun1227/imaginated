@@ -73,7 +73,6 @@ return (
           <div className={styles.MainSubHeaderName}>Find, research, or discover a creator to learn from.</div>
         </Row>
         </Container>
-        
       </div>
       <Container>
         <Row>

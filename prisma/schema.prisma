@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model all_reviews {
+  id            Int       @default(autoincrement())
+  individual    Int?
+  user          Int?
+  premium_offer Int?
+  description   String?
+  like          String?
+  dislike       String?
+  benefit       String?
+  type          String?   @db.VarChar(100)
+  review        Int?
+  title         String?   @db.VarChar(400)
+  validation    String?   @db.VarChar(400)
+  createdate    DateTime? @db.Timestamp(6)
+
+  @@ignore
+}
+
+model category {
+  id       Int     @id @default(autoincrement())
+  category String? @db.VarChar(200)
+  parent   String? @db.VarChar(200)
+  ranking  Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model individual {
+  id          Int      @default(autoincrement())
+  first_name  String?  @db.VarChar(200)
+  last_name   String?  @db.VarChar(200)
+  aka         String?  @db.VarChar(200)
+  description String?
+  feature     String?  @db.VarChar(500)
+  company     String?  @db.VarChar(200)
+  location    String?  @db.VarChar(200)
+  founder     String?  @db.VarChar(200)
+  link        String?  @db.VarChar(200)
+  category    String?  @db.VarChar(200)
+  subcategory String[]
+  verified    Boolean?
+  imagelink   String?  @db.VarChar(500)
+  linkname    String?  @db.VarChar(450)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model individual_backup {
+  id          Int?
+  first_name  String?  @db.VarChar(200)
+  last_name   String?  @db.VarChar(200)
+  aka         String?  @db.VarChar(200)
+  description String?
+  feature     String?  @db.VarChar(500)
+  company     String?  @db.VarChar(200)
+  location    String?  @db.VarChar(200)
+  founder     String?  @db.VarChar(200)
+  link        String?  @db.VarChar(200)
+  category    String?  @db.VarChar(200)
+  subcategory String[]
+  verified    Boolean?
+  imagelink   String?  @db.VarChar(500)
+  linkname    String?  @db.VarChar(450)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model individual_favorites {
+  id          Int     @default(autoincrement())
+  individual  Int?
+  category    String? @db.VarChar(200)
+  subcategory String? @db.VarChar(200)
+  name        String? @db.VarChar(200)
+  description String?
+  imagelink   String? @db.VarChar(200)
+  link        String? @db.VarChar(200)
+  validation  String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model individual_free_offerings {
+  id         Int     @default(autoincrement())
+  individual Int?
+  youtube    String? @db.VarChar(200)
+  facebook   String? @db.VarChar(200)
+  twitter    String? @db.VarChar(200)
+  tiktok     String? @db.VarChar(200)
+  instagram  String? @db.VarChar(200)
+  linkedin   String? @db.VarChar(200)
+  slack      String? @db.VarChar(200)
+  discord    String? @db.VarChar(200)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model individual_premium_offerings {
+  id          Int      @default(autoincrement())
+  individual  Int?
+  name        String?  @db.VarChar(200)
+  description String?
+  subheader   String?  @db.VarChar(200)
+  subcategory String[]
+  imagelink   String?  @db.VarChar(200)
+  link        String?  @db.VarChar(200)
+  type        String?  @db.VarChar(250)
+  rank        Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model subcategory {
+  id           Int     @default(autoincrement())
+  subcategory  String? @db.VarChar(200)
+  categoryname String? @db.VarChar(200)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model users {
+  id          Int     @default(autoincrement())
+  individual  Int?
+  name        String? @db.VarChar(200)
+  description String?
+  password    String? @db.VarChar(200)
+  verified    String? @db.VarChar(200)
+  email       String? @db.VarChar(200)
+  imagelink   String? @db.VarChar(450)
+
+  @@ignore
+}

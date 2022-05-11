@@ -1,20 +1,15 @@
-import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Login() {
     const {data} = useSession()
-    // let session = null;
-    // console.log('ses', ses)
   return (
     <div>
-       
-      <Head>
-        <title>Auth Demo</title>
-      </Head>
 
       <nav>
-        {!data ? (
+        {!data ? ( <div>
           <button onClick={() => signIn("google")}>Google Connect</button>
+          <button onClick={() => signIn("facebook")}>facebook Connect</button>
+          </div>
         ) : (
           <div>
             <span>{data.user.name}</span>

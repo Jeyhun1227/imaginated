@@ -12,7 +12,6 @@ function GetIndividualFreeOffers({data}) {
   const [IndividualValues, setIndividualValues] = useState([{'id': 1, 'individual': null, 'parent': null}]);
   useEffect(() => {
     if (data) {
-        console.log(data)
         setIndividualValues(data.getAllIndividualFreeOffer.rows);
     }
   }, [data]);
