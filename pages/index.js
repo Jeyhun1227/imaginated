@@ -1,5 +1,6 @@
 
 import MainParent from "../components/Pages/ParentPage"
+import HeadBar from '../components/NavBars/headBar';
 import { ApolloProvider } from "@apollo/client";
 import client from '../components/GraphQL';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../GraphQL/Queries/Admin";
@@ -8,9 +9,12 @@ import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../GraphQL/Queries/Admin";
 
 export default function MainParentPage({category, subcategory}) {
   return (
+    <div>
+    <HeadBar />
     <ApolloProvider client={client}>
       <MainParent category={category} subcategory={subcategory}/>
     </ApolloProvider>
+  </div>
   )
 }
 export async function getServerSideProps(){
