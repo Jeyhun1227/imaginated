@@ -10,7 +10,9 @@ module.exports = {
       'green ': '#A2D0C1',
       'peach ': '#DDF2DF',
       'yellow ': '#F8DC81',
-      'grey': '#636363',
+      'dim-grey': '#636363',
+      'light-grey': '#FAFAFA',
+      'very-light-grey': '#CECECE',
     },
     fontFamily: {
       sans: ['"Open Sans"','sans-serif'],

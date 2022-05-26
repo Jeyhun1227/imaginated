@@ -62,17 +62,57 @@ export default function MainParent(props) {
 
 
 return (
-    <div className={styles.container}>
-      <Header/>
-      <div className={styles.HeaderLocation}>
-      <Container className={styles.MainRowNav}>
-        <Row>
-        <h1  className={styles.MainHeaderName}>Browse Personal Brands by Category</h1>
-        </Row>
-        <Row>
-          <div className={styles.MainSubHeaderName}>Find, research, or discover a creator to learn from.</div>
-        </Row>
-        </Container>
+    <div>
+      <Header placeholder={"Search for a creator or category"}/>
+      <div className="bg-light-grey">
+        <div className="py-12 mx-auto max-w-7xl">
+          <div className="text-left">
+            <h1 className="text-4xl font-bold tracking-tight text-black">
+              <span className="block xl:inline">Browse Personal Brands </span>{' '}
+              <span className="block text-indigo-600 xl:inline">by Category</span>
+            </h1>
+            <p className="mt-3 text-base text-dim-gray sm:mt-5 sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
+              Find, research, or discover a creator to learn from.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white">
+        <div className="py-12 mx-auto max-w-7xl">
+          <div class="grid grid-rows-3 grid-cols-9 gap-4">
+            <div class="row-span-3 col-span-5 mr-28">
+              <div class="mb-6">
+                <label for="search" class="block mb-2 text-dark-blue text-xl">What did you want to learn today?</label>
+                <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a creator category"/>
+              </div>
+            </div>
+            <div class="row-span-3 col-span-5 mr-28">
+
+            </div>
+            <div class="col-span-4 ml-28">
+              <div className="px-4">
+                <div className="text-center">
+                  <div className="text-xl tracking-tight text-dark-blue">
+                    <span className="block">Looking for a category but can't</span>{' '}
+                    <span className="block">find it? Let us know!</span>
+                  </div>
+                  <div className="mt-4.5 sm:mt-8 sm:flex sm:justify-center">
+                    <div className="w-full shadow bg-dark-blue">
+                      <a
+                        style = {{textDecoration:'none'}}
+                        href="#"
+                        className="flex items-center justify-center w-full px-8 py-2 text-base font-medium text-white border border-transparent md:py-4 md:text-lg md:px-10">
+                        Request a Listing
+                      </a>
+                    </div>
+                  </div>
+                  <p className="pb-5 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
+                </div>
+              </div>
+            </div>
+            <div class="row-span-2 col-span-4 ml-28">03</div>
+          </div>
+        </div>
       </div>
       <Container>
         <Row>
