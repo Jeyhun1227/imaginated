@@ -12,6 +12,7 @@
     "@apollo/client": "^3.5.6",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@headlessui/react": "^1.6.3",
     "@mui/material": "^5.2.5",
     "@mui/x-data-grid": "^5.2.1",
     "@next-auth/prisma-adapter": "^1.0.3",

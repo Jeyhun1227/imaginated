@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CategoryList from "../CategoryComponents/CategoryList"
 import Header from '../NavBars/headers.js';
+import {Disclosure} from '@headlessui/react'
 import styles from '../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
@@ -87,7 +88,11 @@ return (
               </div>
             </div>
             <div class="row-span-3 col-span-5 mr-28">
-
+              <div className="mx-auto max-w-7xl">
+                <div className="relative z-10 flex items-baseline justify-between pb-1 border-b border-very-light-grey">
+                  <h1 className="text-4xl font-medium tracking-tight text-gray-900">Artists</h1>
+                </div>
+              </div>
             </div>
             <div class="col-span-4 ml-28">
               <div className="px-4">
