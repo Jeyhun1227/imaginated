@@ -6,7 +6,7 @@ import styles from '../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
 import { useQuery, gql } from "@apollo/client";
-import { MenuButtonWide } from 'react-bootstrap-icons';
+import { MenuButtonWide, BsChevronDown } from 'react-bootstrap-icons';
 
 
 export default function MainParent(props) {
@@ -92,6 +92,47 @@ return (
                 <div className="relative z-10 flex items-baseline justify-between pb-1 border-b border-very-light-grey">
                   <h1 className="text-4xl font-medium tracking-tight text-gray-900">Artists</h1>
                 </div>
+                <Disclosure as="div" key="1" className="py-6 border-b border-very-light-grey">
+                  {({ open }) => (
+                    <>
+                      <h3 className="flow-root -my-3">
+                        <Disclosure.Button className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
+                          <div className="flex flex-wrap items-center justify-between">
+                            <div className="flex items-center flex-1 w-0">
+                              <span className="flex items-center ml-6">
+                                {open ? (
+                                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                  </svg>
+                                ) : (
+                                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
+                                    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                  </svg>
+                                )}
+                              </span>
+                              <span className="flex pl-2 text-lg text-denim">Photographers</span>
+                            </div>
+                          </div>
+                          <div className="flex-shrink-0 order-2">
+                            <span className="pl-2 text-lg dark-blue">Artists</span>
+                          </div>
+                        </Disclosure.Button>
+                      </h3>
+                      <Disclosure.Panel className="pt-2.5">
+                        <div className="space-y-4">
+                            <div key="1" className="flex items-center justify-between">
+                              <label className="pl-10 ml-3 text-sm text-denim">
+                                Portrait Photographers
+                              </label>
+                              <label className="pl-10 ml-3 text-sm text-dim-grey">
+                              Photographers
+                              </label>
+                            </div>
+                        </div>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
               </div>
             </div>
             <div class="col-span-4 ml-28">
@@ -111,7 +152,7 @@ return (
                       </a>
                     </div>
                   </div>
-                  <p className="pb-5 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
+                  <p className="pb-4 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
                 </div>
               </div>
             </div>
