@@ -90,7 +90,7 @@ return (
             <div class="row-span-3 col-span-5 mr-28">
               <div className="mx-auto max-w-7xl">
                 <div className="relative z-10 flex items-baseline justify-between pb-1 border-b border-very-light-grey">
-                  <h1 className="text-4xl font-medium tracking-tight text-gray-900">Artists</h1>
+                  <h1 className="text-4xl font-medium tracking-tight text-dark-blue">Artists</h1>
                 </div>
                 <Disclosure as="div" key="1" className="py-6 border-b border-very-light-grey">
                   {({ open }) => (
@@ -114,7 +114,7 @@ return (
                             </div>
                           </div>
                           <div className="flex-shrink-0 order-2">
-                            <span className="pl-2 text-lg dark-blue">Artists</span>
+                            <span className="pl-2 text-lg text-dark-blue">Artists</span>
                           </div>
                         </Disclosure.Button>
                       </h3>
@@ -136,27 +136,32 @@ return (
               </div>
             </div>
             <div class="col-span-4 ml-28">
-              <div className="px-4">
-                <div className="text-center">
-                  <div className="text-xl tracking-tight text-dark-blue">
-                    <span className="block">Looking for a category but can't</span>{' '}
-                    <span className="block">find it? Let us know!</span>
+              <div className="text-center">
+                <div className="text-xl tracking-tight text-dark-blue">
+                  <span className="block">Looking for a category but can't</span>{' '}
+                  <span className="block">find it? Let us know!</span>
+                </div>
+                <div className="mt-4.5 sm:mt-8 sm:flex sm:justify-center">
+                  <div className="w-full shadow bg-dark-blue">
+                    <a
+                      style = {{textDecoration:'none'}}
+                      href="#"
+                      className="flex items-center justify-center w-full px-8 py-2 text-base font-medium text-white border border-transparent md:py-4 md:text-lg md:px-10">
+                      Request a Listing
+                    </a>
                   </div>
-                  <div className="mt-4.5 sm:mt-8 sm:flex sm:justify-center">
-                    <div className="w-full shadow bg-dark-blue">
-                      <a
-                        style = {{textDecoration:'none'}}
-                        href="#"
-                        className="flex items-center justify-center w-full px-8 py-2 text-base font-medium text-white border border-transparent md:py-4 md:text-lg md:px-10">
-                        Request a Listing
-                      </a>
-                    </div>
-                  </div>
-                  <p className="pb-4 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
+                </div>
+                <p className="pb-4 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
+              </div>
+            </div>
+            <div class="row-span-2 col-span-4 ml-28">
+              <div className="mx-auto mt-4 max-w-7xl">
+                <div className="relative z-10 flex items-baseline pb-1 border-b justify-left border-very-light-grey">
+                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#214151" d="M21.92,6.62a1,1,0,0,0-.54-.54A1,1,0,0,0,21,6H16a1,1,0,0,0,0,2h2.59L13,13.59l-3.29-3.3a1,1,0,0,0-1.42,0l-6,6a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L9,12.41l3.29,3.3a1,1,0,0,0,1.42,0L20,9.41V12a1,1,0,0,0,2,0V7A1,1,0,0,0,21.92,6.62Z"/></svg>
+                  <div className="pl-2.5 text-2xl tracking-tight text-dark-blue">Popular Categories</div>
                 </div>
               </div>
             </div>
-            <div class="row-span-2 col-span-4 ml-28">03</div>
           </div>
         </div>
       </div>
