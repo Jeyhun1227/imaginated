@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CategoryList from "../CategoryComponents/CategoryList"
 import Header from '../NavBars/headers.js';
+import VerticalCallToAction from '../CallToAction/VerticalCallToAction'
+import HeroNoBtn from "../Hero/HeroNoBtn";
+import PopularCategories from "../CategoryComponents/PopularCategories";
 import {Disclosure} from '@headlessui/react'
 import styles from '../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
@@ -65,19 +68,7 @@ export default function MainParent(props) {
 return (
     <div>
       <Header placeholder={"Search for a creator or category"}/>
-      <div className="bg-light-grey">
-        <div className="py-12 mx-auto max-w-7xl">
-          <div className="text-left">
-            <h1 className="text-4xl font-bold tracking-tight text-black">
-              <span className="block xl:inline">Browse Personal Brands </span>{' '}
-              <span className="block text-indigo-600 xl:inline">by Category</span>
-            </h1>
-            <p className="mt-3 text-base text-dim-gray sm:mt-5 sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
-              Find, research, or discover a creator to learn from.
-            </p>
-          </div>
-        </div>
-      </div>
+      <HeroNoBtn/>
       <div className="bg-white">
         <div className="py-12 mx-auto max-w-7xl">
           <div class="grid grid-rows-3 grid-cols-9 gap-4">
@@ -88,79 +79,13 @@ return (
               </div>
             </div>
             <div class="row-span-3 col-span-5 mr-28">
-              <div className="mx-auto max-w-7xl">
-                <div className="relative z-10 flex items-baseline justify-between pb-1 border-b border-very-light-grey">
-                  <h1 className="text-4xl font-medium tracking-tight text-dark-blue">Artists</h1>
-                </div>
-                <Disclosure as="div" key="1" className="py-6 border-b border-very-light-grey">
-                  {({ open }) => (
-                    <>
-                      <h3 className="flow-root -my-3">
-                        <Disclosure.Button className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
-                          <div className="flex flex-wrap items-center justify-between">
-                            <div className="flex items-center flex-1 w-0">
-                              <span className="flex items-center ml-6">
-                                {open ? (
-                                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                  </svg>
-                                ) : (
-                                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
-                                    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                                )}
-                              </span>
-                              <span className="flex pl-2 text-lg text-denim">Photographers</span>
-                            </div>
-                          </div>
-                          <div className="flex-shrink-0 order-2">
-                            <span className="pl-2 text-lg text-dark-blue">Artists</span>
-                          </div>
-                        </Disclosure.Button>
-                      </h3>
-                      <Disclosure.Panel className="pt-2.5">
-                        <div className="space-y-4">
-                            <div key="1" className="flex items-center justify-between">
-                              <label className="pl-10 ml-3 text-sm text-denim">
-                                Portrait Photographers
-                              </label>
-                              <label className="pl-10 ml-3 text-sm text-dim-grey">
-                              Photographers
-                              </label>
-                            </div>
-                        </div>
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-              </div>
+              {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
             <div class="col-span-4 ml-28">
-              <div className="text-center">
-                <div className="text-xl tracking-tight text-dark-blue">
-                  <span className="block">Looking for a category but can't</span>{' '}
-                  <span className="block">find it? Let us know!</span>
-                </div>
-                <div className="mt-4.5 sm:mt-8 sm:flex sm:justify-center">
-                  <div className="w-full shadow bg-dark-blue">
-                    <a
-                      style = {{textDecoration:'none'}}
-                      href="#"
-                      className="flex items-center justify-center w-full px-8 py-2 text-base font-medium text-white border border-transparent md:py-4 md:text-lg md:px-10">
-                      Request a Listing
-                    </a>
-                  </div>
-                </div>
-                <p className="pb-4 mt-2 text-base border-b border-very-light-grey text-dim-grey">It takes less than 30 seconds</p>
-              </div>
+              <VerticalCallToAction/>
             </div>
             <div class="row-span-2 col-span-4 ml-28">
-              <div className="mx-auto mt-4 max-w-7xl">
-                <div className="relative z-10 flex items-baseline pb-1 border-b justify-left border-very-light-grey">
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#214151" d="M21.92,6.62a1,1,0,0,0-.54-.54A1,1,0,0,0,21,6H16a1,1,0,0,0,0,2h2.59L13,13.59l-3.29-3.3a1,1,0,0,0-1.42,0l-6,6a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L9,12.41l3.29,3.3a1,1,0,0,0,1.42,0L20,9.41V12a1,1,0,0,0,2,0V7A1,1,0,0,0,21.92,6.62Z"/></svg>
-                  <div className="pl-2.5 text-2xl tracking-tight text-dark-blue">Popular Categories</div>
-                </div>
-              </div>
+              {Object.keys(CategoryValuesFilterable).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
           </div>
         </div>
