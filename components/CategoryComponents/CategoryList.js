@@ -50,11 +50,11 @@ export default function CategoryList(props) {
                             <div className="flex items-center flex-1 w-0">
                                 <span className="flex items-center ml-6">
                                 {open ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
                                 ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
                                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                     </svg>
                                 )}
@@ -63,13 +63,13 @@ export default function CategoryList(props) {
                             </div>: null}
                             </div>
                             <div className="flex-shrink-0 order-2">
-                            <span className="pl-2 text-lg text-dark-blue">Artists</span>
+                            <span className="pl-2 text-lg text-dark-blue">{props.parent}</span>
                             </div>
                         </Disclosure.Button>
                         </h3>
                         <Disclosure.Panel className="pt-2.5">
                         <div className="space-y-4">
-                            {(showSubCategory.includes(e.category) && subcategory) ? categorySubValues[e.category].map((sub) =>
+                            {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
                                 <label className="pl-10 ml-3 text-sm text-denim">
                                     {sub.subcategory}
@@ -90,7 +90,8 @@ export default function CategoryList(props) {
         //     <h2>{props.parent}</h2>
         //     <div >
         //     {category.map((e) => <div key={'category_'+e.id}>
-        //         {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?<ChevronRight className={(showSubCategory.includes(e.category) && subcategory)? styles.CategoryCaretFillOpen: styles.CategoryCaretFill} onClick={(w) => ShowSubCategoryFunc(e.category)}/>: null}
+        //         {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?<ChevronRight className={(showSubCategory.includes(e.category) && subcategory)? 
+        //          styles.CategoryCaretFillOpen: styles.CategoryCaretFill} onClick={(w) => ShowSubCategoryFunc(e.category)}/>: null}
         //         <Link href={'category/' + e.category} className={styles.CategoryMainTitle} >{e.category}</Link>
         //         {(showSubCategory.includes(e.category) && subcategory)? categorySubValues[e.category].map((sub) => <div id={sub.id}>{sub.subcategory}</div>):null}
         //         </div>)}

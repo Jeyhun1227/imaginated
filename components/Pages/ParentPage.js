@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CategoryList from "../CategoryComponents/CategoryList"
-import Header from '../NavBars/headers.js';
+import Header from '../NavBars/headers';
+import Footer from '../NavBars/footer';
 import VerticalCallToAction from '../CallToAction/VerticalCallToAction'
 import HeroNoBtn from "../Hero/HeroNoBtn";
 import PopularCategories from "../CategoryComponents/PopularCategories";
@@ -90,7 +91,11 @@ return (
           </div>
         </div>
       </div>
-      <Container>
+      <div className="shadow-inner bg-light-grey">
+        <Footer/>
+      </div>
+      
+      {/* <Container>
         <Row>
         <Col className={styles.CategoryLeftCol}>
         <div className={styles.BrandTagLine}>What did you want to learn today?</div>
@@ -117,7 +122,7 @@ return (
           </div>
         </Col>
         </Row>
-        </Container>
+        </Container> */}
     </div>
   )
 
