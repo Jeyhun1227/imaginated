@@ -73,17 +73,17 @@ return (
       <div className="bg-white">
         <div className="py-12 mx-auto max-w-7xl">
           <div class="grid grid-rows-3 grid-cols-9 gap-4">
-            <div class="row-span-3 col-span-5 mr-28">
+            <div class="row-span-3 items-center col-span-5 mr-28">
               <label for="search" class="block mb-2 text-dark-blue text-xl">What did you want to learn today?</label>
               <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a creator category"/>
             </div>
-            <div class="row-span-3 col-span-5 mr-28">
+            <div class="row-span-3 items-center col-span-5 mr-28">
               {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
-            <div class="col-span-4 ml-28">
+            <div class="col-span-4 items-center ml-28">
               <VerticalCallToAction/>
             </div>
-            <div class="row-span-2 col-span-4 ml-28">
+            <div class="items-center col-span-4 ml-28">
               {Object.keys(CategoryValuesFilterable).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
           </div>
