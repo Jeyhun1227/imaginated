@@ -38,31 +38,21 @@ export default function PopularCategories(props) {
         </div>
         {category.map((e) =>
         <Disclosure as="div" key={'category_'+e.id} className="py-6 border-b border-very-light-grey">
-            {({ open }) => (
-            <>
                 <h3 className="flow-root -my-3">
-                    <Disclosure.Button className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
+                    <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
                         <div className="flex flex-wrap items-center justify-between">
                             <a href={'category/' + e.category} className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.category}</a>
                         </div>
                         <div className="flex-shrink-0 order-2">
-                            {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?
                             <div className="flex items-center flex-1">
                                 <span className="flex items-center">
-                                {open ? (
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
                                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                     </svg>
-                                )}
-                                </span>
-                                
-                            </div>: null}
+                                </span>   
+                            </div>
                         </div>
-                    </Disclosure.Button>
+                    </div>
                 </h3>
                 <Disclosure.Panel className="pt-2.5">
                 <div className="space-y-4">
@@ -77,8 +67,6 @@ export default function PopularCategories(props) {
                     </div>):null}
                 </div>
                 </Disclosure.Panel>
-            </>
-            )}
         </Disclosure>
         )}
     </div>

@@ -3,6 +3,7 @@ import CategoryList from "../CategoryComponents/CategoryList"
 import Header from '../NavBars/headers';
 import Footer from '../NavBars/footer';
 import VerticalCallToAction from '../CallToAction/VerticalCallToAction'
+import QASingle from "../CallToAction/QASingle";
 import HeroNoBtn from "../Hero/HeroNoBtn";
 import PopularCategories from "../CategoryComponents/PopularCategories";
 import {Disclosure} from '@headlessui/react'
@@ -85,6 +86,9 @@ return (
             </div>
             <div class="items-center col-span-4 ml-28">
               {Object.keys(CategoryValuesFilterable).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
+            </div>
+            <div class="items-center row-span-3 mt-5 mb-auto col-span-4 ml-28">
+              <QASingle/>
             </div>
           </div>
         </div>
