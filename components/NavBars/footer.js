@@ -13,7 +13,7 @@ export default function Footer() {
     
     <div className="mt-4">
             <div className="w-full lg:w-11/12 md:w-11/12 lg:mx-auto md:mx-auto">
-                <div className="container py-12 mx-auto">
+                <div className="container pt-12 mx-auto pb-9">
                     <div className="xl:flex lg:flex md:flex">
                         <div className="w-11/12 mx-auto xl:w-3/6 lg:w-2/5 lg:mx-0 xl:mx-0">
                             <div className="flex items-center mb-6 xl:mb-0 lg:mb-0">
@@ -64,67 +64,67 @@ export default function Footer() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="xl:mx-0 xl:mb-0">
+                                <div className="mt-3 xl:mx-0 xl:mb-0">
                                     <p className="mb-0 text-base text-dim-grey">© 2021 Imaginated.com</p>
                                 </div>
                             </div>    
                         </div>
-                        <div className="w-11/12 pt-3 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-blue">Content</li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Photography</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Post-Production</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Marketing</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Case Studies</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Mind</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Social Media</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Reviews</a>
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-3 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Glossary</li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Art</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Design</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Photography</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Writing</a>
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-3 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Company</li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="/">Home</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="/about">About</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="/contact">Contact</a>
                                 </li>
-                                <li className="mb-3 text-base text-gray-600 hover:text-gray-700">
+                                <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="/resources">Resources</a>
                                 </li>
                             </ul>
