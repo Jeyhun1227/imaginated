@@ -12,15 +12,15 @@ export default function Header({placeholder = 'Search for a creator or category'
     <nav class="bg-white border-gray-200 px-2 h-16 sm:px-4 py-2.5">
       <div class="container flex flex-wrap justify-between items-center mx-auto">
           <a href="/" class="flex items-center">
-              <img src="/imaginated_logo.png" class="mr-3 mt-1 h-6 sm:h-9" alt="Imaginated Logo" />
+              <img src="/imaginated_logo.png" class="mr-3 mt-1 xl:h-10 lg:h-8 sm:h-9" alt="Imaginated Logo" />
           </a>
-          <div class="hidden justify-between mt-2 items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-3">
+          <div class="hidden justify-between mt-2 items-center w-full lg:w-56 md:flex md:w-auto md:order-1" id="mobile-menu-3">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
-                <input type="text" id="simple-search" data-dropdown-toggle="dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 py-2 pr-20 pl-11" placeholder={placeholder} required/>
+                <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="block py-2 text-sm text-gray-900 border border-gray-300 xl:pr-20 lg:pr-10 w-96 pl-11 lg:w-80" placeholder={placeholder} required/>
                 <div id="dropdown" class="hidden z-10 w-96 bg-white rounded divide-y divide-gray-100 shadow" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style={{position: "absolute", inset: "auto auto 0px 0px", margin: "0px", transform: "translate3d(0px, 175px, 0px)"}}>
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdown-button">
                     <li>
@@ -56,15 +56,15 @@ export default function Header({placeholder = 'Search for a creator or category'
             </div>
           </div>
           <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-4">
-            <ul class="flex flex-col mb-0 mt-2 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <ul class="flex flex-col mb-0 mt-2 md:flex-row xl:space-x-8 lg:space-x-4 md:mt-0 md:text-sm md:font-medium">
               <li>
                 <a href="/about" class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 text-dim-grey no-underline" aria-current="page">About</a>
               </li>
               <li>
-                <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:hover:text-dim-grey md:p-0 text-dim-grey no-underline">Directory</a>
+                <a href="/directory" class="block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:hover:text-dim-grey md:p-0 text-dim-grey no-underline">Directory</a>
               </li>
               <li>
-                <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:hover:text-dim-grey md:p-0 text-dim-grey no-underline">Market</a>
+                <a href="/market" class="block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:hover:text-dim-grey md:p-0 text-dim-grey no-underline">Market</a>
               </li>
               <li>
                 <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 mr-15 md:border-0 md:hover:text-dim-grey md:p-0 text-dim-grey no-underline">Claim Listing</a>

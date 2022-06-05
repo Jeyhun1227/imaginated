@@ -48,7 +48,7 @@ export default function CategoryList(props) {
                             <div className="flex flex-wrap items-center justify-between">
                             {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?
                             <div className="flex items-center flex-1 w-0">
-                                <span className="flex items-center ml-6">
+                                <span className="flex items-center">
                                 {open ? (
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" stroke-width="1">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -71,9 +71,9 @@ export default function CategoryList(props) {
                         <div className="space-y-4">
                             {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <label className="pl-10 ml-3 text-sm text-denim">
+                                <a href={'category/' + e.category + '/' + sub.subcategory} className="pl-4 ml-3 text-sm no-underline text-denim">
                                     {sub.subcategory}
-                                </label>
+                                </a>
                                 <label className="pl-10 ml-3 text-sm text-dim-grey">
                                 Photographers
                                 </label>

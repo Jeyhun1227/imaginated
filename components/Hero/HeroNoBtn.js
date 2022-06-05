@@ -10,12 +10,12 @@ export default function HeroNoBtn() {
 
   return (
     
-    <div className="bg-light-grey">
+    <div className="bg-light-grey lg:px-32">
         <div className="py-12 mx-auto max-w-7xl">
             <div className="text-left">
             <h1 className="text-4xl font-bold tracking-tight text-black">
-                <span className="block xl:inline">{largeTextTop}</span>{' '}
-                <span className="block text-indigo-600 xl:inline">{largeTextBottom}</span>
+                <span className="block lg:inline">{largeTextTop}</span>{' '}
+                <span className="block text-black lg:inline">{largeTextBottom}</span>
             </h1>
             <p className="mt-3 text-base text-dim-gray sm:mt-5 sm:max-w-xl sm:mx-auto md:mt-5 lg:mx-0">
                 {smallText}

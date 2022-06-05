@@ -19,7 +19,7 @@ export default function Footer() {
                             <div className="flex items-center mb-6 xl:mb-0 lg:mb-0">
                                 <img src="/imaginated_logo.png" class="mr-3 mt-1 h-6 sm:h-9" alt="Imaginated Logo" />
                             </div>
-                            <div className="pt-4 mx-auto mt-8 mb-6 lg:mx-0 xl:mx-0 lg:mb-0 xl:mb-0 lg:mt-8 xl:mt-0">
+                            <div className="pt-4 mx-auto mb-6 lg:mt-0 xl:mt-8 lg:mx-0 xl:mx-0 lg:mb-0 xl:mb-0 lg:mt-8 xl:mt-0">
                                 <div className="flex justify-start pr-2 space-x-6 sm:justify-start xl:justify-start xl:pr-0 lg:pr-0 md:pr-0 sm:pr-0">
                                     <div>
                                         <a href="javascript:void(0)">
@@ -64,12 +64,12 @@ export default function Footer() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="mt-3 xl:mx-0 xl:mb-0">
+                                <div className="mt-2.5 xl:mx-0 xl:mb-0">
                                     <p className="mb-0 text-base text-dim-grey">© 2021 Imaginated.com</p>
                                 </div>
                             </div>    
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-blue">Content</li>
                                 <li className="mb-3">
@@ -95,7 +95,7 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Glossary</li>
                                 <li className="mb-3">
@@ -112,7 +112,7 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-2/5 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Company</li>
                                 <li className="mb-3">
