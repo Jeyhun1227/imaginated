@@ -27,7 +27,7 @@ const solutions = [
 
 
   return (
-    <Popover className="relative bg-white md:hidden">
+    <Popover className="relative z-10 bg-white md:hidden">
       <div className="px-4 mx-auto max-w-7xl sm:px-6">
         <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">

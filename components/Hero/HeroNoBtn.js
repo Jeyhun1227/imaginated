@@ -10,8 +10,8 @@ export default function HeroNoBtn() {
 
   return (
     
-    <div className="bg-light-grey sm:px-32">
-        <div className="py-12 mx-auto max-w-7xl">
+    <div className="sm:px-10 bg-light-grey">
+        <div className="px-4 py-12 mx-auto sm:px-0 max-w-7xl">
             <div className="text-left">
             <h1 className="text-4xl font-bold tracking-tight text-black">
                 <span className="block sm:inline">{largeTextTop}</span>{' '}

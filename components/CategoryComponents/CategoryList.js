@@ -36,7 +36,7 @@ export default function CategoryList(props) {
     return (
         <div>
             <div className="mx-auto py-9 max-w-7xl">
-                <div className="relative z-10 flex items-baseline justify-between pb-1 border-b border-very-light-grey">
+                <div className="relative flex items-baseline justify-between pb-1 border-b border-very-light-grey">
                     <h2 className="text-4xl font-medium tracking-tight text-dark-blue">{props.parent}</h2>
                 </div>
                 {category.map((e) =>

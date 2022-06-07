@@ -74,22 +74,22 @@ return (
       <Header placeholder={"Search for a creator or category"}/>
       <HeroNoBtn/>
       <div className="bg-white sm:px-10">
-        <div className="py-12 mx-auto max-w-7xl">
-          <div class="grid grid-rows-3 grid-cols-9 gap-4">
-            <div class="row-span-3 items-center col-span-5 xl:mr-28 sm:mr-16">
+        <div className="px-4 py-12 mx-auto sm:px-0 max-w-7xl">
+          <div class="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
+            <div class="sm:row-span-3 items-center sm:col-span-5 xl:mr-28 sm:mr-16">
               <label for="search" class="block mb-2 text-dark-blue text-xl">What did you want to learn today?</label>
               <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a creator category"/>
             </div>
-            <div class="row-span-3 items-center col-span-5 xl:mr-28 sm:mr-16">
+            <div class="sm:row-span-3 items-center sm:col-span-5 xl:mr-28 sm:mr-16">
               {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
-            <div class="col-span-4 items-center xl:ml-28 sm:ml-16">
+            <div class="sm:col-span-4 items-center xl:ml-28 sm:ml-16">
               <VerticalCallToAction/>
             </div>
-            <div class="items-center col-span-4 xl:ml-28 sm:ml-16">
+            <div class="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
               {Object.keys(CategoryValuesFilterable).slice(0, 1).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
             </div>
-            <div class="items-center row-span-3 mt-5 mb-auto col-span-4 xl:ml-28 sm:ml-16">
+            <div class="items-center sm:row-span-3 mt-5 mb-auto sm:col-span-4 xl:ml-28 sm:ml-16">
               <QASingle/>
             </div>
           </div>
