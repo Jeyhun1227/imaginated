@@ -12,15 +12,15 @@ export default function Footer() {
   return (
     
     <div className="mt-4">
-            <div className="w-full lg:w-11/12 md:w-11/12 lg:mx-auto md:mx-auto">
-                <div className="container pt-12 mx-auto pb-9">
-                    <div className="xl:flex lg:flex md:flex">
-                        <div className="w-11/12 mx-auto xl:w-3/6 lg:w-2/5 lg:mx-0 xl:mx-0">
-                            <div className="flex items-center mb-6 xl:mb-0 lg:mb-0">
+            <div className="w-full sm:w-11/12 sm:mx-auto">
+                <div className="pt-12 mx-auto pb-9">
+                    <div className="xl:flex sm:flex">
+                        <div className="w-11/12 mx-auto xl:w-3/6 sm:w-2/5 sm:mx-0 xl:mx-0">
+                            <div className="flex items-center mb-6 xl:mb-0 sm:mb-0">
                                 <img src="/imaginated_logo.png" class="mr-3 mt-1 h-6 sm:h-9" alt="Imaginated Logo" />
                             </div>
-                            <div className="pt-4 mx-auto mb-6 lg:mt-0 xl:mt-8 lg:mx-0 xl:mx-0 lg:mb-0 xl:mb-0 lg:mt-8 xl:mt-0">
-                                <div className="flex justify-start pr-2 space-x-6 sm:justify-start xl:justify-start xl:pr-0 lg:pr-0 md:pr-0 sm:pr-0">
+                            <div className="pt-4 mx-auto mb-6 sm:mt-0 sm:mx-0 xl:mx-0 sm:mb-0 xl:mb-0 xl:mt-0">
+                                <div className="flex justify-start pr-2 space-x-6 sm:justify-start xl:justify-start xl:pr-0 sm:pr-0">
                                     <div>
                                         <a href="javascript:void(0)">
                                             <Linkedin color="#636363" size={15} />
@@ -44,7 +44,7 @@ export default function Footer() {
                                 </div>
                             </div>
                             <div className="flex flex-col">
-                                <div className="mt-28 lg:mx-0 xl:mx-0 lg:mb-0 xl:mb-0">
+                                <div className="mt-28 sm:mx-0 xl:mx-0 sm:mb-0 xl:mb-0">
                                     <ul className="flex justify-start pl-0">
                                         <li className="pr-2 text-base border-r text-dim-grey hover:text-gray-900 sm:mb-0">
                                             <a className= "no-underline text-dim-grey" href="javascript:void(0)">Privacy Policy</a>
@@ -54,7 +54,7 @@ export default function Footer() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="mb-6 lg:mx-0 xl:mx-0 lg:mb-0 xl:mb-0">
+                                <div className="mb-6 sm:mx-0 xl:mx-0 sm:mb-0 xl:mb-0">
                                     <ul className="flex justify-start pl-0">
                                         <li className="pr-2 mb-4 text-base border-r text-dim-grey hover:text-gray-900 sm:mb-0">
                                             <a className= "no-underline text-dim-grey" href="javascript:void(0)">Site/Affiliate Disclaimer</a>
@@ -69,7 +69,7 @@ export default function Footer() {
                                 </div>
                             </div>    
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 sm:w-1/6 sm:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
                                 <li className="mb-6 text-2xl text-dark-blue">Content</li>
                                 <li className="mb-3">
@@ -95,9 +95,9 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 sm:w-1/6 sm:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
-                                <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Glossary</li>
+                                <li className="mb-6 text-2xl text-dark-blue">Glossary</li>
                                 <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="javascript:void(0)">Art</a>
                                 </li>
@@ -112,9 +112,9 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 lg:w-1/6 lg:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
+                        <div className="w-11/12 pt-2 pl-3 mx-auto xl:w-1/6 sm:w-1/6 sm:mx-0 xl:mx-0 xl:flex xl:justify-end sm:pl-0">
                             <ul>
-                                <li className="mb-6 text-2xl text-dark-bluetext-2xl text-dark-blue">Company</li>
+                                <li className="mb-6 text-2xl text-dark-blue">Company</li>
                                 <li className="mb-3">
                                     <a className= "no-underline text-dim-grey" href="/">Home</a>
                                 </li>
