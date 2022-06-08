@@ -10,11 +10,10 @@ import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../GraphQL/Queries/Admin";
 export default function MainParentPage({category, subcategory}) {
   return (
     <div>
-    <HeadBar />
-    <ApolloProvider client={client}>
-      <MainParent category={category} subcategory={subcategory}/>
-    </ApolloProvider>
-  </div>
+      <ApolloProvider client={client}>
+        <MainParent category={category} subcategory={subcategory}/>
+      </ApolloProvider>
+    </div>
   )
 }
 export async function getServerSideProps(){

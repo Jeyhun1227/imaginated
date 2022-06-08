@@ -70,9 +70,6 @@ export default function MainParent(props) {
 
 return (
     <div>
-      <MobileNav/>
-      <Header placeholder={"Search for a creator or category"}/>
-      <HeroNoBtn/>
       <div className="bg-white sm:px-10">
         <div className="px-4 py-12 mx-auto sm:px-0 max-w-7xl">
           <div class="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -94,9 +91,6 @@ return (
             </div>
           </div>
         </div>
-      </div>
-      <div className="shadow-inner bg-light-grey">
-        <Footer/>
       </div>
       
       {/* <Container>

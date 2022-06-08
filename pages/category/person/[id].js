@@ -83,7 +83,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
 
   return <div className={styles.container}>
-        <Header/>
         <div >
           <Container className={styles.MainRowNav}>
           <Row>

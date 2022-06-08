@@ -59,7 +59,6 @@ export default function SubCategoryPageMain(props) {
     }
 
     return <div className={styles.container}>
-        <Header/>
         <div className={styles.HeaderLocation}>
         <Container className={styles.MainRowNav}>
         <Row>
