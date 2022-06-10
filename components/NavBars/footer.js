@@ -90,7 +90,7 @@ export default function Footer() {
     <div className="px-4 mx-auto mt-4 max-w-7xl">
         <div className="pt-12 mx-auto pb-9">
             <div className="flex flex-col-reverse md:flex-row">
-                <div className="pt-8 md:w-2/5 md:mr-auto">
+                <div className="pt-8 md:pt-2 md:w-2/5 md:mr-auto">
                     <div className="flex items-center mb-6 xl:mb-0 sm:mb-0">
                         <img src="/imaginated_logo.png" className="h-6 mt-1 ml-auto mr-auto md:ml-0 md:mr-3 sm:h-9" alt="Imaginated Logo" />
                     </div>

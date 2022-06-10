@@ -8,7 +8,7 @@ export default function HeadBar() {
 
   return (
     
-      closeHeadBar && <div className="flex items-center justify-center w-screen h-10 bg-dark-blue">
+      closeHeadBar && <div className="flex items-center justify-center h-10 bg-dark-blue">
       <div className="text-center">
         <div className="text-xs text-white sm:text-base ">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
       </div>

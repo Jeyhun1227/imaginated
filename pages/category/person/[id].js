@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
-import Header from '../../../components/NavBars/headers';
 import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
+import { Bookmark, ExclamationCircle } from 'react-bootstrap-icons';
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
@@ -84,50 +84,72 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   return <div className={styles.container}>
         <div >
-          <Container className={styles.MainRowNav}>
+          <Container className={`${styles.MainRowNav} px-4 pt-2`}>
           <Row>
-          <div>
-            <img src='/home.svg'/>
-            <div className={styles.IndividualBar}>/</div>
-            <div className={styles.IndividualBar}>Course</div>
-            <div className={styles.IndividualBar}>/</div>
-            <div className={styles.IndividualBarBlack}>Profile</div>
+          <div className="flex flex-row flex-wrap space-x-3">
+            <a href="/" className="inline-flex items-center justify-center">  
+              <img className="content-center h-4" src='/home.svg'/>
+            </a>
+            <div className="inline-flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" stroke-width="1">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <span className={styles.IndividualBar} >Course</span>
+            <div className="inline-flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" stroke-width="1">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div className={`${styles.IndividualBarBlack} text-dark-blue font-semibold`}>Profile</div>
           </div>
 
             <div className={styles.GridLayoutIndividual}>
               <div className={styles.GridLayoutImage}><img src={Individual_values.imagelink} className={styles.IndividualImage}/></div>
-              <div className={styles.GridlayoutValues}>
-                <h2  className={styles.MainHeaderName}>{Individual_values.first_name + ' ' + Individual_values.last_name}</h2>
-                <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
-                <div className={styles.inline_block}>{Individual_values.avg}</div>
-                <div className={styles.inline_block}>({Individual_values.count})</div>
-                <div>
+              <div className={`${styles.GridlayoutValues} space-y-3 mr-auto`}>
+                <h2  className="text-2xl font-semibold pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name}</h2>
+                <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
+                  <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
+                  <div className={styles.inline_block}>{Individual_values.avg}</div>
+                  <div className={styles.inline_block}>({Individual_values.count})</div>
+                </div>
+                <div className="space-y-3 sm:space-x-3">
                   {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className={styles.SubcategoryBlock}>{e}</a>)}
                 </div>
-                <Link href={'/claim-listing'}>Claim Profile</Link>
+                <div>
+                  <button className="inline-flex items-center px-2 py-1 underline bg-light-grey" href={'/claim-listing'}>
+                    <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                    Claim Profile</button>
+                </div>
               </div>
-              <div className={styles.IndividualLeaveReviews}>
-                <div> <div><button>Write a review</button></div>
-                <img className={styles.Image12PX} src='/bookmark.svg'/> <div className={styles.TextInline}>Save this profile</div>
+              <div className={`${styles.IndividualLeaveReviews} ml-auto`}>
+                <div className="flex space-y-3 md:flex-col md:justify-end"> 
+                  <div>
+                    <button className="px-3 py-2 mr-3 text-sm text-center text-white truncate bg-dark-blue sm:mr-0">Write a review</button>
+                  </div>
+                  <button className="inline-flex items-center py-1 bg-white" href={'#'}>
+                    <Bookmark className="mr-2 fill-dark-blue"/>
+                    <span className={`${styles.TextInline} text-dark-blue text-sm`}>Save this profile</span>
+                  </button>
                 </div>
               </div>
             </div>
           </Row>
-          <Row>
-          <div>
-          <div onClick={(e) => chanUrlType('')} className={urlType ? styles.IndividualSubHeaders : styles.IndividualSubHeadersClicked }>
-            About
-          </div>
-          <div onClick={(e) => chanUrlType('offerings')} className={urlType === 'offerings' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
-            Offerings
-          </div>
-          <div onClick={(e) => chanUrlType('reviews')}  className={urlType === 'reviews' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
-            Reviews
-          </div>
-          <div onClick={(e) => chanUrlType('favorites')}  className={urlType === 'favorites' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
-            Favorites
-          </div>
-          </div>
+          <Row className="border-b border-very-light-grey">
+            <div>
+              <div onClick={(e) => chanUrlType('')} className={urlType ? styles.IndividualSubHeaders : styles.IndividualSubHeadersClicked }>
+                About
+              </div>
+              <div onClick={(e) => chanUrlType('offerings')} className={urlType === 'offerings' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+                Offerings
+              </div>
+              <div onClick={(e) => chanUrlType('reviews')}  className={urlType === 'reviews' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+                Reviews
+              </div>
+              <div onClick={(e) => chanUrlType('favorites')}  className={urlType === 'favorites' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+                Favorites
+              </div>
+            </div>
           </Row>
           <div className={(!urlType)? null: styles.displayNone}>
             <div className={styles.IndividualGridDescription}>

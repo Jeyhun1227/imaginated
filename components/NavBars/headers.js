@@ -9,12 +9,12 @@ export default function Header({placeholder = 'Search for a creator or category'
 
 
   return (
-    <nav className="max-w-7xl mx-auto shadow-sm px-2 h-16 sm:px-4 py-2.5">
-      <div className="items-center justify-between hidden mx-auto md:flex flex-nowrap">
+    <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
+      <div className="flex items-center justify-between mx-auto flex-nowrap">
           <a href="/" className="flex items-center mr-3">
-              <img src="/imaginated_logo.png" className="mt-1 xl:h-10 sm:h-5 md:h-7" alt="Imaginated Logo" />
+              <img src="/imaginated_logo.png" className="xl:h-10 sm:h-5 md:h-7" alt="Imaginated Logo" />
           </a>
-          <div className="items-start justify-start hidden mt-2 xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
+          <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
             <label for="simple-search" className="sr-only">Search</label>
             <div className="relative w-full">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -24,7 +24,7 @@ export default function Header({placeholder = 'Search for a creator or category'
             </div>
           </div>
           <div className="items-center justify-between hidden w-full sm:flex sm:w-auto sm:order-1" id="mobile-menu-4">
-            <ul className="flex flex-col mt-2 mb-0 sm:flex-row xl:space-x-8 sm:space-x-4 sm:mt-0 sm:text-sm sm:font-medium">
+            <ul className="flex flex-col mb-0 sm:flex-row xl:space-x-8 sm:space-x-4 sm:mt-0 sm:text-sm sm:font-medium">
               <li>
                 <a href="/about" className="block py-2 pl-3 pr-4 no-underline rounded sm:bg-transparent sm:p-0 text-dim-grey" aria-current="page">About</a>
               </li>
