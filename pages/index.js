@@ -1,6 +1,5 @@
 
 import MainParent from "../components/Pages/ParentPage"
-import HeadBar from '../components/NavBars/headBar';
 import { ApolloProvider } from "@apollo/client";
 import client from '../components/GraphQL';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../GraphQL/Queries/Admin";

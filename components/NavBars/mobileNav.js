@@ -6,7 +6,7 @@ import { List, X } from 'react-bootstrap-icons';
 
 export default function MobileNav() {
 
-const solutions = [
+const links = [
     {
       name: 'About',
       href: '/about'
@@ -27,7 +27,7 @@ const solutions = [
 
 
   return (
-    <Popover className="relative z-10 bg-white md:hidden">
+    <Popover className="relative z-10 bg-white shadow-sm md:hidden">
       <div className="px-4 mx-auto max-w-7xl sm:px-6">
         <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -78,7 +78,7 @@ const solutions = [
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {solutions.map((item) => (
+                  {links.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -97,13 +97,13 @@ const solutions = [
                   className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                   Log In/Sign Up
                 </a>
-                <div class="relative">
-                  <div class="flex absolute inset-y-0 left-0 items-center pl-3 pt-4 pointer-events-none">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pt-4 pl-3 pointer-events-none">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                   </div>
                   <div className="flex items-center justify-between w-full pt-4">
-                    <input placeholder="Search for a creator or category" type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-8/12 py-2 text-sm text-gray-900 border border-very-light-grey pl-11" required/>
-                    <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 text-sm border border-black text-dark-blue hover:text-indigo-500">
+                    <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-8/12 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey pl-11" placeholder="Search for a creator or category" required/>
+                    <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 overflow-hidden text-sm border border-black text-dark-blue hover:text-indigo-500">
                       <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
                     </button>
                   </div>

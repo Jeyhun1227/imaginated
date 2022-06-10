@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from '../NavBars/headers.js';
-import styles from '../../styles/Home.module.css';
-import {Container, Row, Col} from 'react-bootstrap';
-import { ChevronRight } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import {Disclosure} from '@headlessui/react'
 
