@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle } from 'react-bootstrap-icons';
+import { Bookmark, ExclamationCircle, ShareFill } from 'react-bootstrap-icons';
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
@@ -82,10 +82,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
 
 
-  return <div className={styles.container}>
-        <div >
-          <Container className={`${styles.MainRowNav} px-4 pt-2`}>
-          <Row>
+  return <div className= "mx-auto max-w-7xl">
+        <main className="pt-2 px-2 mt-2.5">
           <div className="flex flex-row flex-wrap space-x-3">
             <a href="/" className="inline-flex items-center justify-center">  
               <img className="content-center h-4" src='/home.svg'/>
@@ -95,46 +93,59 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
               </svg>
             </div>
-            <span className={styles.IndividualBar} >Course</span>
+            <span className="inline-block ml-2 text-whisper" >Course</span>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" stroke-width="1">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
               </svg>
             </div>
-            <div className={`${styles.IndividualBarBlack} text-dark-blue font-semibold`}>Profile</div>
+            <div className="inline-block ml-2.5 text-dark-blue font-semibold">Profile</div>
           </div>
-
-            <div className={styles.GridLayoutIndividual}>
-              <div className={styles.GridLayoutImage}><img src={Individual_values.imagelink} className={styles.IndividualImage}/></div>
-              <div className={`${styles.GridlayoutValues} space-y-3 mr-auto`}>
-                <h2  className="text-2xl font-semibold pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name}</h2>
-                <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
-                  <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
-                  <div className={styles.inline_block}>{Individual_values.avg}</div>
-                  <div className={styles.inline_block}>({Individual_values.count})</div>
-                </div>
-                <div className="space-y-3 sm:space-x-3">
-                  {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className={styles.SubcategoryBlock}>{e}</a>)}
-                </div>
-                <div>
-                  <button className="inline-flex items-center px-2 py-1 underline bg-light-grey" href={'/claim-listing'}>
-                    <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
-                    Claim Profile</button>
-                </div>
+          <div className="grid items-center grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
+            <div className="self-start mt-6">
+              <img src={Individual_values.imagelink} className={styles.IndividualImage}/>
+            </div>
+            <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
+              <div className="flex flex-row flex-wrap space-x-3"> 
+                <h2  className="font-semibold md:text-3xl text:xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
+                  <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
+                </div> 
               </div>
-              <div className={`${styles.IndividualLeaveReviews} ml-auto`}>
-                <div className="flex space-y-3 md:flex-col md:justify-end"> 
-                  <div>
-                    <button className="px-3 py-2 mr-3 text-sm text-center text-white truncate bg-dark-blue sm:mr-0">Write a review</button>
-                  </div>
-                  <button className="inline-flex items-center py-1 bg-white" href={'#'}>
-                    <Bookmark className="mr-2 fill-dark-blue"/>
-                    <span className={`${styles.TextInline} text-dark-blue text-sm`}>Save this profile</span>
-                  </button>
-                </div>
+              <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
+                <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
+                <div className={styles.inline_block}>{Individual_values.avg}</div>
+                <div className={styles.inline_block}>({Individual_values.count})</div>
+              </div>
+              <div className="hidden space-y-3 sm:space-x-3 md:flex">
+                {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+              </div>
+              <div className="hidden md:flex">
+                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
+                  <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                  Claim Profile</button>
               </div>
             </div>
-          </Row>
+            <div className="block col-span-5 md:hidden">
+              <div className="flex flex-row space-y-3 md:hidden sm:space-x-3">
+                {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+              </div>
+              <div className="flex mt-4 md:hidden">
+                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
+                  <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                  Claim Profile</button>
+              </div>
+            </div>  
+            <div className="col-span-4 sm:col-span-5 md:col-span-2 lg:col-span-2 md:ml-auto">
+              <div className="flex space-y-3 md:flex-col md:justify-end"> 
+                <button className="px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue ">Write a review</button>
+                <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex" href={'#'}>
+                  <Bookmark className="mr-2 fill-dark-blue"/>
+                  <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
+                </button>
+              </div>
+            </div>
+          </div>
           <Row className="border-b border-very-light-grey">
             <div>
               <div onClick={(e) => chanUrlType('')} className={urlType ? styles.IndividualSubHeaders : styles.IndividualSubHeadersClicked }>
@@ -266,8 +277,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div>
               </div>)}
           </div>
-          </Container>
-        </div>
+        </main>
     </div>
 
 }

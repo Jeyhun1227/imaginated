@@ -12,7 +12,9 @@ module.exports = {
       'peach ': '#DDF2DF',
       'yellow ': '#F8DC81',
       'dim-grey': '#636363',
+      'whisper': '#E5E5E5',
       'light-grey': '#FAFAFA',
+      'white-smoke': '#F2F2F2',
       'very-light-grey': '#CECECE',
     },
     fontFamily: {
