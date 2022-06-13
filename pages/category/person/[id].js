@@ -81,6 +81,15 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     }
   }
 
+  const [showMoreSubcategory, setShowMoreSubcategory] = useState({itemsToShow: 1, expanded: false});
+  
+  const showMore = () => {
+    showMoreSubcategory.itemsToShow === 1 ? (
+      setShowMoreSubcategory({ itemsToShow: Individual_values.subcategory.length, expanded: true })
+    ) : (
+      setShowMoreSubcategory({ itemsToShow: 3, expanded: false })
+    )
+  }
 
   return <div className= "mx-auto max-w-7xl">
         <main className="pt-2 px-2 mt-2.5">
@@ -101,12 +110,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="inline-block ml-2.5 text-dark-blue font-semibold">Profile</div>
           </div>
-          <div className="grid items-center grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
+          <div className="grid items-center grid-cols-4 mb-6 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
             <div className="self-start mt-6">
               <img src={Individual_values.imagelink} className={styles.IndividualImage}/>
             </div>
             <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
-              <div className="flex flex-row flex-wrap space-x-3"> 
+              <div className="flex flex-row space-x-3 flex-nowrap"> 
                 <h2  className="font-semibold md:text-3xl text:xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
                 <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                   <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
@@ -118,7 +127,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className={styles.inline_block}>({Individual_values.count})</div>
               </div>
               <div className="hidden space-y-3 sm:space-x-3 md:flex">
-                {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+                <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow == 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
                 <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
@@ -127,8 +137,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
             <div className="block col-span-5 md:hidden">
-              <div className="flex flex-row space-y-3 md:hidden sm:space-x-3">
-                {Individual_values.subcategory.map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+              <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
+              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+                <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow == 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
                 <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
