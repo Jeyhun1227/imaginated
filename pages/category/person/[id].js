@@ -157,30 +157,49 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          <Row className="border-b border-very-light-grey">
+          <div className="flex flex-row space-x-3 border-b flex-nowrap border-very-light-grey">
             <div>
-              <div onClick={(e) => chanUrlType('')} className={urlType ? styles.IndividualSubHeaders : styles.IndividualSubHeadersClicked }>
+              <div onClick={(e) => chanUrlType('')} className={`cursor-pointer inline-block mt-3.5 ${urlType ? "md:mr-12 mr-8" : "mr-8 md:mr-12 border-b border-black pb-3.5" }`}>
                 About
               </div>
-              <div onClick={(e) => chanUrlType('offerings')} className={urlType === 'offerings' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+              <div onClick={(e) => chanUrlType('offerings')} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'offerings' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
                 Offerings
               </div>
-              <div onClick={(e) => chanUrlType('reviews')}  className={urlType === 'reviews' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+              <div onClick={(e) => chanUrlType('reviews')}  className={`cursor-pointer inline-block mt-3.5 ${urlType === 'reviews' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
                 Reviews
               </div>
-              <div onClick={(e) => chanUrlType('favorites')}  className={urlType === 'favorites' ? styles.IndividualSubHeadersClicked : styles.IndividualSubHeaders}>
+              <div onClick={(e) => chanUrlType('favorites')}  className={`cursor-pointer inline-block mt-3.5 ${urlType === 'favorites' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
                 Favorites
               </div>
             </div>
-          </Row>
-          <div className={(!urlType)? null: styles.displayNone}>
-            <div className={styles.IndividualGridDescription}>
+          </div>
+          <div className={(!urlType) ? "my-8" : "hidden"}>
+            <div className="pb-12 border-b border-very-light-grey">
+              <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
+              <div className="">
+                <div className="">{Individual_values.description}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 my-12">
+              <div className="">
+                <h2>Featured In</h2>
+                <ul>{feature.map((url) => <li key={url}><a  href={url} className="">{new URL(url).hostname}</a></li>)}</ul>
+              </div>
+              <div className="">
+                <h2>Contact Details</h2>
+                  {(Individual_values.company)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
+                  {(Individual_values.location)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
+                  {(Individual_values.founder)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
+                  {(Individual_values.link)?<div className="flex text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><a href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</a></div>:null}
+              </div>
+            </div>
+            {/* <div className={styles.IndividualGridDescription}>
               <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
               <div className={styles.GridLayoutIndividual}>
                 <div className={styles.IndividualGridLayoutDescription}>{Individual_values.description}</div>
               </div>
             </div>
-              <div className={styles.IndividualGridLayoutBottom}>
+            <div className={styles.IndividualGridLayoutBottom}>
               <div>
                 <h2>Featured In</h2>
                 <ul>{feature.map((url) => <li key={url}><a  href={url} className={styles.IndividualFeatureEach}>{new URL(url).hostname}</a></li>)}</ul>
@@ -193,8 +212,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {(Individual_values.link)?<div><img src={'/link.svg'}/><a href={Individual_values.link} className={styles.IndividualFeatureEach}> {Individual_values.link}</a></div>:null}
 
               </div>
-              </div>
-            </div>
+            </div> */}
+          </div>
           <div className={(urlType === 'offerings')? null: styles.displayNone}>
             <h2>Free Offerings</h2>
             <div>
