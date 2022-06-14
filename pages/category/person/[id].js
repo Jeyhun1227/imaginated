@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle, ShareFill } from 'react-bootstrap-icons';
+import { Bookmark, ExclamationCircle, ShareFill, Dot } from 'react-bootstrap-icons';
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
@@ -177,42 +177,27 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="pb-12 border-b border-very-light-grey">
               <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
               <div className="">
-                <div className="">{Individual_values.description}</div>
+                <div className="text-dim-grey">{Individual_values.description}</div>
               </div>
             </div>
             <div className="grid grid-cols-2 my-12">
               <div className="">
                 <h2>Featured In</h2>
-                <ul>{feature.map((url) => <li key={url}><a  href={url} className="">{new URL(url).hostname}</a></li>)}</ul>
+                <ul className="pl-0.5 list-outside">{feature.map((url) => 
+                  <li className="" key={url}>
+                    <Dot className="inline-flex items-center justify-center fill-dim-grey"/>
+                    <a  href={url} className="pl-1 no-underline text-dim-grey">{new URL(url).hostname}</a>
+                  </li>)}
+                </ul>
               </div>
               <div className="">
                 <h2>Contact Details</h2>
-                  {(Individual_values.company)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
-                  {(Individual_values.location)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
-                  {(Individual_values.founder)?<div className="text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div className="flex text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><a href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</a></div>:null}
+                  {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
+                  {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
+                  {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
+                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><a href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</a></div>:null}
               </div>
             </div>
-            {/* <div className={styles.IndividualGridDescription}>
-              <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
-              <div className={styles.GridLayoutIndividual}>
-                <div className={styles.IndividualGridLayoutDescription}>{Individual_values.description}</div>
-              </div>
-            </div>
-            <div className={styles.IndividualGridLayoutBottom}>
-              <div>
-                <h2>Featured In</h2>
-                <ul>{feature.map((url) => <li key={url}><a  href={url} className={styles.IndividualFeatureEach}>{new URL(url).hostname}</a></li>)}</ul>
-              </div>
-              <div>
-                <h2>Contact Details</h2>
-                  {(Individual_values.company)?<div><img src={'/company.svg'}/> {Individual_values.company}</div>:null}
-                  {(Individual_values.location)?<div><img src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
-                  {(Individual_values.founder)?<div><img src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div><img src={'/link.svg'}/><a href={Individual_values.link} className={styles.IndividualFeatureEach}> {Individual_values.link}</a></div>:null}
-
-              </div>
-            </div> */}
           </div>
           <div className={(urlType === 'offerings')? null: styles.displayNone}>
             <h2>Free Offerings</h2>
