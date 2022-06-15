@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle, ShareFill, Dot } from 'react-bootstrap-icons';
+import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill } from 'react-bootstrap-icons';
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
@@ -226,7 +226,68 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>)}
             </div>
           </div>
-          <div className={(urlType === 'reviews')? null: styles.displayNone}>
+          <div className={(urlType === 'reviews')? "my-8" : "hidden" }>
+            <div>
+              <div className="flex flex-col gap-8 md:flex-row">
+                <div className="md:w-1/2">
+                  <h5 className="mb-6 font-bold">Student Ratings</h5>
+                  <div className="flex flex-row">
+                    <div className="flex flex-col items-center justify-center w-1/4 mx-auto">
+                      <h1 className="font-bold">{Individual_values.avg}</h1>
+                      <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
+                      <div className="pt-2">{Individual_values.count} Reviews</div>
+                    </div>
+                    <div className="flex flex-col w-3/4 pl-12">
+                        {Object.keys(count_each_rating).reverse().map((e) => <div key={e} className="flex flex-row items-center">
+                          <div className="w-full h-2 rounded-full bg-white-smoke">
+                            <div style={{width: Math.round((count_each_rating[e] / reviews.length) * 100) + '%'}} className="h-2 rounded-full bg-saffron"></div>
+                          </div>
+                            <div className="flex flex-row-reverse pl-3">
+                              <div className="pl-1">{e}</div>
+                              <img src='/star.svg'/>
+                            </div>
+                          </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="md:w-1/2">
+                    <h5 className="mb-6 font-bold">Categories</h5>
+                    <div className="flex flex-row flex-wrap">
+                      {reviews_category.map((e) => <div key={e} className={`mr-4 mb-6 flex items-center justify-center px-2.5 py-2 text-center text-black cursor-pointer border border-gainsboro ${(reviewClickedValue === e)? " bg-white-smoke " : ""}`} onClick={()=> reviewClicked(e)}>{e}</div>)}
+                    </div>
+                </div>
+              </div>
+              <div className="my-6">
+                <h5 className="font-bold ">Reviews</h5>
+                {reviewAll.map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
+                  <div className="flex flex-row">
+                    <div className="pr-4">
+                      <img className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"}/>
+                    </div>
+                    <div className="">
+                      <div className="mb-2 font-semibold">{rev.name}</div>
+                      <div className="flex flex-row space-x-4">
+                        {(rev.validation === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="">Validated Review</div></div> : <div className="inline-flex items-center justify-center space-x-2"><HourglassBottom className="w-3.5 h-3.5 fill-silver"/><div className="">Pending Validated</div></div>}
+                        {(rev.verified === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="">Verified User</div></div> : <div className="inline-flex items-center justify-center space-x-2"><PersonXFill className="w-3.5 h-3.5 fill-silver"/><div className="">Unverified User</div></div>}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row flex-wrap mt-4 mb-2">
+                    <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} readOnly/>
+                    <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
+                    <div className="text-dim-grey">{rev.createDate_Val}</div>
+                    <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
+                    <div className="text-dim-grey">{rev.premium_name_value}</div>
+                  </div>
+                  <h4>"{rev.title}"</h4>
+                  <div>{rev.like}</div>
+                  <div>{rev.dislike}</div>
+                </div> )}
+              </div>
+            </div>
+          </div>
+          {/* <div className={(urlType === 'reviews')? "my-8" : "hidden" }>
             <div>
               <div className={styles.DisplayInlineBlock}>
                 <h4>Ratings</h4>
@@ -275,7 +336,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div>{rev.dislike}</div>
               </div> )}
             </div>
-          </div>
+          </div> */}
           <div className={(urlType === 'favorites')? null: styles.displayNone}>
           {Object.keys(favorites_offers).map((key) => <div key={key}>
               <h2>{key}</h2>
