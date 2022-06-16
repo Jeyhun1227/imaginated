@@ -6,7 +6,8 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill } from 'react-bootstrap-icons';
+import { Listbox, Transition } from '@headlessui/react'
+import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown } from 'react-bootstrap-icons';
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
@@ -81,15 +82,44 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     }
   }
 
-  const [showMoreSubcategory, setShowMoreSubcategory] = useState({itemsToShow: 1, expanded: false});
+  const [showMoreSubcategory, setShowMoreSubcategory] = useState({itemsToShow: 3, expanded: false});
   
   const showMore = () => {
-    showMoreSubcategory.itemsToShow === 1 ? (
+    showMoreSubcategory.itemsToShow === 3 ? (
       setShowMoreSubcategory({ itemsToShow: Individual_values.subcategory.length, expanded: true })
     ) : (
       setShowMoreSubcategory({ itemsToShow: 3, expanded: false })
     )
   }
+
+  const [showMoreReview, setShowMoreReview] = useState({itemsToShow: 3, expanded: false});
+  
+  const reviewShowMore = () => {
+    showMoreReview.itemsToShow === 3 ? (
+      setShowMoreReview({ itemsToShow: reviews.length, expanded: true })
+    ) : (
+      setShowMoreReview({ itemsToShow: 3, expanded: false })
+    )
+  }
+
+  const select = [
+    {
+      id: 1,
+      name: 'YouTube Channel'
+    },
+    {
+      id: 2,
+      name: 'Facebook Page'
+    },
+    {
+      id: 3,
+      name: 'Udemy'
+    },
+  ]
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+  const [selected, setSelected] = useState(select[0])
 
   return <div className= "mx-auto max-w-7xl">
         <main className="pt-2 px-2 mt-2.5">
@@ -122,13 +152,22 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div> 
               </div>
               <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
-                <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
+                <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
+                          color: "yellow",
+                          borderRadius: '10px',
+                          '& .MuiSvgIcon-root': {
+                            fill: '#F8DC81',
+                          },
+                          '& .css-dqr9h-MuiRating-label': {
+                          display: 'block'
+                          }                        
+                        }} readOnly/>
                 <div className={styles.inline_block}>{Individual_values.avg}</div>
                 <div className={styles.inline_block}>({Individual_values.count})</div>
               </div>
               <div className="hidden space-y-3 sm:space-x-3 md:flex">
                 {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
-                <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow == 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
+                <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
                 <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
@@ -139,7 +178,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="block col-span-5 md:hidden">
               <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
               {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
-                <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow == 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
+                <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
                 <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
@@ -217,7 +256,16 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     currentTarget.src="/No-image.png";
                   }} />
                     <div>{value.name}</div>
-                    <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} readOnly/>
+                    <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} sx={{
+                          color: "yellow",
+                          borderRadius: '10px',
+                          '& .MuiSvgIcon-root': {
+                            fill: '#F8DC81',
+                          },
+                          '& .css-dqr9h-MuiRating-label': {
+                          display: 'block'
+                          }                        
+                        }} readOnly/>
                     <div className={styles.inline_block}>{value.avg}</div>
                     <div className={styles.inline_block}>({value.count})</div>
                   <div>{value.description}</div>
@@ -228,13 +276,167 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           </div>
           <div className={(urlType === 'reviews')? "my-8" : "hidden" }>
             <div>
+              <form action="#" method="POST">
+                <div className="p-4 bg-light-grey">
+                  <h5 className="mb-4 font-bold">Student Ratings</h5>
+                  <div className="flex flex-col gap-3 md:gap-8 md:flex-row">
+                    <div className="md:w-1/2">
+                      <div className="mb-4">
+                        {/* <label htmlFor="source" className="block pb-2.5 text-sm font-medium text-black">
+                          What offering would you like to review?
+                        </label> */}
+                        <Listbox value={selected} onChange={setSelected}>
+                          {({ open }) => (
+                            <>
+                              <Listbox.Label className="block pb-2.5 text-sm font-medium text-black">What offering would you like to review?</Listbox.Label>
+                              <div className="relative mt-1">
+                                <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                  <span className="flex items-center">
+                                    <span className="block ml-3 truncate text-trolley-grey">{selected.name}</span>
+                                  </span>
+                                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
+                                    <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
+                                  </span>
+                                </Listbox.Button>
+
+                                <Transition
+                                  show={open}
+                                  leave="transition ease-in duration-100"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
+                                >
+                                  <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                    {select.map((source) => (
+                                      <Listbox.Option
+                                        key={source.id}
+                                        className={({ active }) =>
+                                          classNames(
+                                            active ? 'text-white bg-whisper' : 'text-black',
+                                            'cursor-default select-none relative py-2 pl-3 pr-9'
+                                          )
+                                        }
+                                        value={source}
+                                      >
+                                        {({ selected, active }) => (
+                                          <>
+                                            <div className="flex items-center">
+                                              <span
+                                                className={classNames(selected ? 'font-semibold' : 'font-normal', 'text-trolley-grey ml-3 block truncate')}
+                                              >
+                                                {source.name}
+                                              </span>
+                                            </div>
+
+                                            {selected ? (
+                                              <span
+                                                className={classNames(
+                                                  active ? 'text-white' : 'text-indigo-600',
+                                                  'absolute inset-y-0 right-0 flex items-center pr-4'
+                                                )}
+                                              >
+                                                <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                              </span>
+                                            ) : null}
+                                          </>
+                                        )}
+                                      </Listbox.Option>
+                                    ))}
+                                  </Listbox.Options>
+                                </Transition>
+                              </div>
+                            </>
+                          )}
+                        </Listbox>
+                        {/* <select
+                          id="source"
+                          name="source"
+                          autoComplete="source-name"
+                          className="block w-full px-3 py-2 mt-1 bg-white border border-very-light-grey text-trolley-grey sm:text-sm"
+                        >
+                          <option>YouTube Channel</option>
+                          <option>Facebook Page</option>
+                          <option>Udemy</option>
+                        </select> */}
+                      </div>
+                      <div>
+                        <label htmlFor="about" className="pb-2.5 block text-sm font-medium text-gray-700">
+                          How has this offering benefited you?
+                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            id="about"
+                            name="about"
+                            rows={6}
+                            className="block w-full px-3 py-2 mt-1 border border-very-light-grey sm:text-sm"
+                            placeholder="Enter here"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-2.5 md:w-1/2">
+                      <div className="mb-3 md:mb-4">
+                        <label htmlFor="source" className="pb-2.5 block text-sm font-medium text-black">
+                          Your rating of this offering?
+                        </label>
+                        <Rating
+                          name="Form Review"
+                          defaultValue={0}
+                          precision={0.5}
+                          sx={{
+                          color: "yellow",
+                          '& .MuiSvgIcon-root': {
+                            fill: '#F8DC81'
+                          },
+                          '& .css-dqr9h-MuiRating-label': {
+                          display: 'block'
+                          }
+                        }}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="about" className="pb-2.5 block text-sm font-medium text-gray-700">
+                          What do you think could be better?
+                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            id="about"
+                            name="about"
+                            rows={6}
+                            className="block w-full px-3 py-2 mt-1 border shadow-sm border-very-light-grey sm:text-sm"
+                            placeholder="Enter here"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="py-3 text-left ">
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
+                  >
+                    Submit Review
+                  </button>
+                </div>
+                </div>
+              </form>
               <div className="flex flex-col gap-8 md:flex-row">
                 <div className="md:w-1/2">
                   <h5 className="mb-6 font-bold">Student Ratings</h5>
                   <div className="flex flex-row">
                     <div className="flex flex-col items-center justify-center w-1/4 mx-auto">
                       <h1 className="font-bold">{Individual_values.avg}</h1>
-                      <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
+                      <Rating className="text-base md:text-2xl" name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
+                          color: "yellow",
+                          borderRadius: '10px',
+                          '& .MuiSvgIcon-root': {
+                            fill: '#F8DC81',
+                          },
+                          '& .css-dqr9h-MuiRating-label': {
+                          display: 'block'
+                          }                        
+                        }} readOnly/>
                       <div className="pt-2">{Individual_values.count} Reviews</div>
                     </div>
                     <div className="flex flex-col w-3/4 pl-12">
@@ -254,13 +456,13 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className="md:w-1/2">
                     <h5 className="mb-6 font-bold">Categories</h5>
                     <div className="flex flex-row flex-wrap">
-                      {reviews_category.map((e) => <div key={e} className={`mr-4 mb-6 flex items-center justify-center px-2.5 py-2 text-center text-black cursor-pointer border border-gainsboro ${(reviewClickedValue === e)? " bg-white-smoke " : ""}`} onClick={()=> reviewClicked(e)}>{e}</div>)}
+                      {reviews_category.map((e) => <div key={e} className={`mr-4 mb-6 truncate flex items-center justify-center px-2.5 py-2 text-center text-black cursor-pointer border border-gainsboro ${(reviewClickedValue === e)? " bg-white-smoke " : ""}`} onClick={()=> reviewClicked(e)}>{e}</div>)}
                     </div>
                 </div>
               </div>
               <div className="my-6">
                 <h5 className="font-bold ">Reviews</h5>
-                {reviewAll.map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
+                {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                   <div className="flex flex-row">
                     <div className="pr-4">
                       <img className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"}/>
@@ -268,22 +470,38 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <div className="">
                       <div className="mb-2 font-semibold">{rev.name}</div>
                       <div className="flex flex-row space-x-4">
-                        {(rev.validation === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="">Validated Review</div></div> : <div className="inline-flex items-center justify-center space-x-2"><HourglassBottom className="w-3.5 h-3.5 fill-silver"/><div className="">Pending Validated</div></div>}
-                        {(rev.verified === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="">Verified User</div></div> : <div className="inline-flex items-center justify-center space-x-2"><PersonXFill className="w-3.5 h-3.5 fill-silver"/><div className="">Unverified User</div></div>}
+                        {(rev.validation === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Validated Review</div></div> : <div className="inline-flex items-center justify-center space-x-2"><HourglassBottom className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Pending Validated</div></div>}
+                        {(rev.verified === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Verified User</div></div> : <div className="inline-flex items-center justify-center space-x-2"><PersonXFill className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Unverified User</div></div>}
                       </div>
                     </div>
                   </div>
                   <div className="flex flex-row flex-wrap mt-4 mb-2">
-                    <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} readOnly/>
+                    <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} sx={{
+                          color: "yellow",
+                          borderRadius: '10px',
+                          '& .MuiSvgIcon-root': {
+                            fill: '#F8DC81',
+                          },
+                          '& .css-dqr9h-MuiRating-label': {
+                          display: 'block'
+                          }                        
+                        }} readOnly/>
                     <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
                     <div className="text-dim-grey">{rev.createDate_Val}</div>
                     <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
-                    <div className="text-dim-grey">{rev.premium_name_value}</div>
+                    <div className="text-dim-grey">Review for {rev.premium_name_value}</div>
                   </div>
-                  <h4>"{rev.title}"</h4>
+                  <h4 className="font-semibold">"{rev.title}"</h4>
+                  <div className="pb-2 mt-4 font-semibold">How has this benefited you?</div>
                   <div>{rev.like}</div>
+                  <div className="pb-2 mt-4 font-semibold">What do you think could be better?</div>
                   <div>{rev.dislike}</div>
                 </div> )}
+                <div className="border-t-2 -mt-0.5 border-white">
+                  <div className="flex mr-auto truncate lg:w-2/12">
+                    <div onClick={reviewShowMore} className={`"items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-1 border-green-vogue" ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

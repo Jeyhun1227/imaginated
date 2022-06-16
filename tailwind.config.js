@@ -7,6 +7,7 @@ module.exports = {
     colors: {
       'dark-blue': '#214151',
       'denim': '#187BC0',
+      'green-vogue': '#214151',
       'sand': '#9DB9E6',
       'green': '#A2D0C1',
       'sea-green': '#219653',
@@ -16,6 +17,7 @@ module.exports = {
       'dim-grey': '#636363',
       'whisper': '#E5E5E5',
       'light-grey': '#FAFAFA',
+      'trolley-grey': '#828282',
       'white-smoke': '#F2F2F2',
       'very-light-grey': '#CECECE',
       'gainsboro': '#E0E0E0',
