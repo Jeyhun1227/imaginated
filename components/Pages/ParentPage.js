@@ -84,7 +84,7 @@ return (
               <VerticalCallToAction/>
             </div>
             <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
-              {Object.keys(CategoryValuesFilterable).slice(0, 1).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
+              {Object.keys(CategoryValues).slice(0, 1).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValues[e]}/>)}
             </div>
             <div className="items-center mt-5 mb-auto sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
               <QASingle/>

@@ -36,7 +36,7 @@ export default function CategoryList(props) {
                     <h2 className="text-4xl font-medium tracking-tight text-dark-blue">{props.parent}</h2>
                 </div>
                 {category.map((e) =>
-                <Disclosure defaultOpen as="div" key={'category_'+e.id} className="py-6 border-b border-very-light-grey">
+                <Disclosure as="div" key={'category_'+e.id} className="py-6 border-b border-very-light-grey">
                     {({ open }) => (
                     <>
                         <h3 className="flow-root -my-3">

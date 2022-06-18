@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Menu, Transition } from '@headlessui/react'
 import React, {useState } from "react";
-import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight } from 'react-bootstrap-icons';
+import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } from 'react-bootstrap-icons';
 
 
 export default function Header({placeholder = 'Search for a creator or category'}) {
@@ -28,7 +28,7 @@ export default function Header({placeholder = 'Search for a creator or category'
     {
       title: 'Rating',
       href: '/rating',
-      svg: <Star/>
+      svg: <Star className='fill-black'/>
     },
     {
       title: 'Setting',
@@ -69,20 +69,84 @@ export default function Header({placeholder = 'Search for a creator or category'
               <li>
                 <a href="#" className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Claim Listing</a>
               </li>
-              {(session) ? <>
+              {!(session) ? <>
               <li>
                 <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login';}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
               </li>
               </> : <> 
               <li className='flex items-center'>
-                <div onClick={() => {
-                  setNotification(prevNotification => !prevNotification);
-                }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="13" height="13">
-                    <path fill-rule="evenodd" style={{fill: '#000000'}} d="m7.2 15.8q-0.3-0.1-0.6-0.4-0.3-0.3-0.4-0.6-0.2-0.4-0.2-0.8h4q0 0.4-0.2 0.8-0.1 0.3-0.4 0.6-0.3 0.3-0.6 0.4-0.4 0.2-0.8 0.2-0.4 0-0.8-0.2zm7-3.8q0.4 0.7 0.8 1h-14q0.4-0.3 0.8-1c0.9-1.8 1.2-5.1 1.2-6 0-2.4 1.7-4.4 4-4.9 0-0.3 0.1-0.6 0.3-0.8 0.1-0.2 0.4-0.3 0.7-0.3 0.3 0 0.6 0.1 0.7 0.3 0.2 0.2 0.3 0.5 0.3 0.8q0.8 0.2 1.6 0.6 0.7 0.5 1.3 1.1 0.5 0.7 0.8 1.5 0.3 0.8 0.3 1.7c0 0.9 0.3 4.2 1.2 6zm-6.2-10.1l-0.8 0.2q-0.7 0.1-1.3 0.5-0.6 0.3-1 0.9-0.4 0.5-0.7 1.2-0.2 0.6-0.2 1.3c0 0.6-0.1 2.2-0.5 3.7-0.1 0.8-0.3 1.6-0.6 2.3h10.2c-0.3-0.7-0.5-1.5-0.6-2.3-0.4-1.5-0.5-3.1-0.5-3.7q0-0.7-0.2-1.3-0.3-0.7-0.7-1.2-0.4-0.6-1-0.9-0.6-0.4-1.3-0.5c0 0-0.8-0.2-0.8-0.2z"/>
-                    <path style={{fill: notification ?  "#93bdb0" : '#000000'}} d="m13.3 0.2c1.6 0.2 2.2 1 2.2 2.8 0 1.9-0.6 2.6-2.3 2.8-1.4 0.1-2.4-0.5-2.8-1.5-0.3-1-0.3-2.4 0-3.1 0.4-0.7 1.7-1.2 2.9-1z"/>
-                  </svg>
-                </div>
+              <Menu as="div" className="relative inline-block">
+                  <>
+                  <div>
+                    <Menu.Button onClick={() => {setNotification(prevNotification => !prevNotification);}} className="inline-flex items-center content-center justify-center pt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="13" height="13">
+                      <path fill-rule="evenodd" style={{fill: '#000000'}} d="m7.2 15.8q-0.3-0.1-0.6-0.4-0.3-0.3-0.4-0.6-0.2-0.4-0.2-0.8h4q0 0.4-0.2 0.8-0.1 0.3-0.4 0.6-0.3 0.3-0.6 0.4-0.4 0.2-0.8 0.2-0.4 0-0.8-0.2zm7-3.8q0.4 0.7 0.8 1h-14q0.4-0.3 0.8-1c0.9-1.8 1.2-5.1 1.2-6 0-2.4 1.7-4.4 4-4.9 0-0.3 0.1-0.6 0.3-0.8 0.1-0.2 0.4-0.3 0.7-0.3 0.3 0 0.6 0.1 0.7 0.3 0.2 0.2 0.3 0.5 0.3 0.8q0.8 0.2 1.6 0.6 0.7 0.5 1.3 1.1 0.5 0.7 0.8 1.5 0.3 0.8 0.3 1.7c0 0.9 0.3 4.2 1.2 6zm-6.2-10.1l-0.8 0.2q-0.7 0.1-1.3 0.5-0.6 0.3-1 0.9-0.4 0.5-0.7 1.2-0.2 0.6-0.2 1.3c0 0.6-0.1 2.2-0.5 3.7-0.1 0.8-0.3 1.6-0.6 2.3h10.2c-0.3-0.7-0.5-1.5-0.6-2.3-0.4-1.5-0.5-3.1-0.5-3.7q0-0.7-0.2-1.3-0.3-0.7-0.7-1.2-0.4-0.6-1-0.9-0.6-0.4-1.3-0.5c0 0-0.8-0.2-0.8-0.2z"/>
+                      <path style={{fill: notification ?  "#93bdb0" : '#000000'}} d="m13.3 0.2c1.6 0.2 2.2 1 2.2 2.8 0 1.9-0.6 2.6-2.3 2.8-1.4 0.1-2.4-0.5-2.8-1.5-0.3-1-0.3-2.4 0-3.1 0.4-0.7 1.7-1.2 2.9-1z"/>
+                    </svg>
+                    </Menu.Button>
+                  </div>
+
+                  <Transition
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="hover:bg-white-smoke">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <div className='flex items-center mx-3.5 no-underline border-b border-gainsboro'>
+                              <span className='block py-2.5 text-sm font-semibold text-black no-underline'>
+                                Notifications
+                              </span>
+                              <a href="#" className='flex ml-auto text-black'>
+                                See All
+                              </a>
+                            </div>
+                          )}
+                        </Menu.Item>
+                      </div>
+                      <div className='my-2'>
+                        <Menu.Item>
+                          <div className='py-2 hover:bg-white-smoke'>
+                            <a href="#" className='flex items-center px-3.5 no-underline'>
+                              <div className='pr-2 text-black no-underline'>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                                </svg>
+                              </div>
+                              <span className='block text-xs font-semibold text-black no-underline'> 
+                                SANJ replied to your comment
+                              </span>
+                            </a>
+                            <span className='block pt-2 text-xs text-black no-underline pl-9'>
+                              5:00 pm
+                            </span>
+                          </div>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <div className='py-2 hover:bg-white-smoke'>
+                            <a href="#" className='flex items-center px-3.5 no-underline'>
+                              <div className='pr-2 text-black no-underline'>
+                                <PlayBtn/>
+                              </div>
+                              <span className='block text-xs font-semibold text-black no-underline'>
+                                Jhon updated their content, go check it out now!
+                              </span>
+                            </a>
+                            <span className='block pt-2 text-xs text-black no-underline pl-9'>
+                              Yesterday
+                            </span>
+                          </div>
+                        </Menu.Item>
+                      </div>  
+                    </Menu.Items>
+                  </Transition>
+                  </>
+                </Menu>
               </li>
               <li className='flex items-center'>
                 <Menu as="div" className="relative inline-block">
@@ -114,18 +178,21 @@ export default function Header({placeholder = 'Search for a creator or category'
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 w-56 px-3.5 pb-1 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1 border-b border-gainsboro">
+                    <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="hover:bg-white-smoke">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
-                                'block no-underline text-black py-2 text-sm'
-                              )}
-                            >
-                              Name LastName
+                            <a  href="#" className={classNames(
+                              active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
+                              'flex items-center mx-3.5 no-underline border-b border-gainsboro')}>
+                              <div className='pr-2 text-black'>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
+                                  <path fill-rule="evenodd" className='fill-black' d="m49.5 4.1c5.7-0.1 9.7 0.5 14 1.9 3.3 1.2 7.8 3.1 10 4.4 2.2 1.3 6.2 4.5 8.8 7.2 2.7 2.7 6 6.9 7.4 9.4 1.5 2.5 3.5 7.2 4.5 10.5 1 3.3 1.8 8.7 1.8 12 0 3.3-0.7 8.7-1.6 12-0.9 3.3-2.8 8.3-4.4 11-1.6 2.7-5 7.2-7.7 9.9-2.6 2.7-6.6 5.9-8.8 7.2-2.2 1.3-6.7 3.2-10 4.4-4 1.4-8.5 2-13.5 2-4.5 0-9.7-0.8-13-1.9-3-1-7.5-3-10-4.4-2.5-1.4-6.7-4.7-9.3-7.4-2.7-2.6-6-6.8-7.4-9.3-1.5-2.5-3.5-7.2-4.5-10.5-1-3.3-1.8-8.7-1.8-12 0-3.3 0.7-8.7 1.6-12 0.8-3.3 2.7-8.2 4.2-10.9 1.5-2.6 5-7 7.7-9.7 2.8-2.7 6.6-5.9 8.5-7.1 1.9-1.2 6.2-3.2 9.5-4.4 4.2-1.5 8.4-2.2 14-2.3zm-11.5 57.6c1.1 1.8 3.6 4 5.5 4.8 1.9 0.8 4.9 1.5 6.5 1.5 1.6 0 4.6-0.7 6.5-1.5 1.9-0.8 4.4-3 5.5-4.8 1.7-2.8 2-5 2-16.4 0-12.6-0.1-13.3-2-13.3-1.9 0-2 0.7-2 11.8 0 9.1-0.4 12.5-1.8 15.2-1.1 2.2-2.8 3.8-4.7 4.4-1.8 0.5-4.4 0.5-6.5 0-2.5-0.7-4-1.9-5.2-4.4-1.4-2.7-1.8-6.1-1.8-15.3 0-11-0.1-11.7-2-11.7-1.9 0-2 0.7-2 13.3 0 11.4 0.3 13.6 2 16.4z"/>
+                                </svg>
+                              </div>
+                              <span className='block py-3 text-sm text-black no-underline'>
+                                Name LastName
+                              </span>
                             </a>
                           )}
                         </Menu.Item>
@@ -134,18 +201,13 @@ export default function Header({placeholder = 'Search for a creator or category'
                         <Menu.Item> 
                           {({ active }) => (
                             <>
-                            <div key={menu.title}>
-                              {menu.svg}
-                            </div>
-                            <a
-                              key={menu.title}
-                              href={menu.href}
-                              className={classNames(
-                                active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
-                                'block no-underline text-black py-2 text-sm'
-                              )}
-                            >
-                              {menu.title}
+                            <a key={menu.title} href={menu.href} className='hover:bg-white-smoke no-underline px-3.5 flex items-center'>
+                              <div className='pr-2 text-black'>
+                                {menu.svg}
+                              </div>
+                              <span className='block py-2 text-sm text-black no-underline'>
+                                {menu.title}
+                              </span>
                             </a>
                             </>
                           )}
@@ -153,14 +215,16 @@ export default function Header({placeholder = 'Search for a creator or category'
                         ))}
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
-                                'block no-underline text-black py-2 text-sm'
-                              )}
-                            >
-                              Foll
+                            <a href="#" className={classNames(
+                              active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
+                              'flex items-center px-3.5 no-underline')}>
+                              <div className='pr-2 text-black no-underline'>
+                                <BoxArrowInRight/>
+                              </div>
+                              <span className='block py-2 text-sm text-black no-underline'
+                              >
+                                Log out
+                              </span>
                             </a>
                           )}
                         </Menu.Item>
@@ -169,16 +233,6 @@ export default function Header({placeholder = 'Search for a creator or category'
                   </>
                     )}
                 </Menu>
-                {/* <div className='inline-flex items-center content-center justify-center'>
-                  <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div> 
-                  <div className='pl-2'>
-                    <ChevronDown className="w-3 h-3 opacity-100 stroke-2 fill-black" aria-hidden="true" />
-                  </div>
-                </div> */}
               </li>
                 </>}
             </ul>
