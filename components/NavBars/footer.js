@@ -97,22 +97,22 @@ export default function Footer() {
                     <div className="pt-3 mx-auto mb-6 md:pt-20 md:mt-0 md:mx-0 md:mb-0">
                         <div className="flex justify-center pr-2 space-x-6 md:justify-start xl:pr-0 sm:pr-0">
                             <div>
-                                <a href="javascript:void(0)">
+                                <a href="#">
                                     <Linkedin color="#636363" size={15} />
                                 </a>
                             </div>
                             <div>
-                                <a href="javascript:void(0)">
+                                <a href="#">
                                     <Facebook color="#636363" size={15} />
                                 </a>
                             </div>
                             <div>
-                                <a href="javascript:void(0)">
+                                <a href="#">
                                     <Twitter color="#636363" size={15} />
                                 </a>
                             </div>
                             <div>
-                                <a href="javascript:void(0)">
+                                <a href="#">
                                     <Instagram color="#636363" size={15} />
                                 </a>
                             </div>
@@ -123,20 +123,20 @@ export default function Footer() {
                             <div className="md:mt-32 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pr-2 text-xs border-r sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="javascript:void(0)">Privacy Policy</a>
+                                        <a className= "no-underline truncate text-dim-grey" href="#">Privacy Policy</a>
                                     </li>
                                     <li className="px-2 text-xs border-r sm:text-base md:border-r-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="javascript:void(0)">Terms of Service</a>
+                                        <a className= "no-underline truncate text-dim-grey" href="#">Terms of Service</a>
                                     </li>
                                 </ul>
                             </div>
                             <div className="md:mb-6 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pl-2 pr-2 mb-4 text-xs border-r sm:text-base md:pl-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="javascript:void(0)">Site/Affiliate Disclaimer</a>
+                                        <a className= "no-underline truncate text-dim-grey" href="#">Site/Affiliate Disclaimer</a>
                                     </li>
                                     <li className="pl-2 mb-4 text-xs sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="javascript:void(0)">Sitemap</a>
+                                        <a className= "no-underline truncate text-dim-grey" href="#">Sitemap</a>
                                     </li>
                                 </ul>
                             </div>
@@ -176,12 +176,12 @@ export default function Footer() {
                                         <div className="flex items-center flex-1">
                                             <span className="flex items-center ">
                                             {open ? (
-                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5 fill-very-light-grey" viewBox="0 0 20 20" fill="currentColor" stroke="#CECECE" stroke-width="1">
-                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5 fill-very-light-grey" viewBox="0 0 20 20" fill="currentColor" stroke="#CECECE" strokeWidth="1">
+                                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                                 </svg>
                                             ) : (
-                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5 fill-very-light-grey" viewBox="0 0 20 20" fill="currentColor" stroke="#CECECE" stroke-width="1">
-                                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5 fill-very-light-grey" viewBox="0 0 20 20" fill="currentColor" stroke="#CECECE" strokeWidth="1">
+                                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                                 </svg>
                                             )}
                                             </span>
