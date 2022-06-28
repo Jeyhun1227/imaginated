@@ -70,24 +70,27 @@ export default function MainParent(props) {
 
 return (
     <div>
-      <div className="bg-white sm:px-10">
-        <div className="px-4 py-12 mx-auto sm:px-0 max-w-7xl">
-          <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
-            <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-              <label htmlFor="search" className="block mb-2 text-xl text-dark-blue">What did you want to learn today?</label>
-              <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a creator category"/>
-            </div>
-            <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-              {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
-            </div>
-            <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
-              <VerticalCallToAction/>
-            </div>
-            <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
-              {Object.keys(CategoryValues).slice(0, 1).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValues[e]}/>)}
-            </div>
-            <div className="items-center mt-5 mb-auto sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
-              <QASingle/>
+      <div className="bg-white xl:px-0">
+        <HeroNoBtn/>
+        <div className="px-4 sm:px-0">
+          <div className="py-12 mx-auto max-w-7xl">
+            <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
+              <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+                <label htmlFor="search" className="block mb-2 text-xl text-dark-blue">What did you want to learn today?</label>
+                <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a creator category"/>
+              </div>
+              <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+                {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
+              </div>
+              <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
+                <VerticalCallToAction/>
+              </div>
+              <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
+                {Object.keys(CategoryValues).slice(0, 1).map((e) => <PopularCategories key={'cat'+e} parent={e} category={CategoryValues[e]}/>)}
+              </div>
+              <div className="items-center mt-5 mb-auto sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
+                <QASingle/>
+              </div>
             </div>
           </div>
         </div>

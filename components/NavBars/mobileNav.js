@@ -195,8 +195,8 @@ export default function MobileNav() {
                   </div>
                   <div className="border-b border-gainsboro">
                   {userMenu.map((menu) => (
-                    <div className=""> 
-                        <a key={menu.title} href={menu.href} className=' no-underline px-3.5 flex items-center'>
+                    <div key={menu.title} className=""> 
+                        <a  href={menu.href} className=' no-underline px-3.5 flex items-center'>
                           <div className='pr-2 text-black'>
                             {menu.svg}
                           </div>
