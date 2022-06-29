@@ -25,11 +25,11 @@ export default function CategoryPageMain(props) {
 
     return <div>
       <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Discover the best ${routerID} to learn from. Compare reviews and explore their offferings.`}/>
-      <div className="bg-white sm:px-10">
-        <div className="py-12 mx-auto  sm:px-0 max-w-7xl">
+      <div className="px-4 bg-white sm:px-0">
+        <div className="py-12 mx-auto sm:px-0 max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
           <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-            <h2 className="pb-3 text-4xl font-medium tracking-tight text-dark-blue">Popular {routerID} Categories</h2>
+            <h2 className="pb-4 text-2xl font-medium tracking-tight sm:text-4xl text-dark-blue">Popular {routerID} Categories</h2>
           </div>
             <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
               <div>

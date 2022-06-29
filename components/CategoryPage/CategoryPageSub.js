@@ -7,25 +7,25 @@ import Link from 'next/link';
 
 export default function CategoryPageSub(props) {
 
-  return  <div className="mb-8">
+  return  <div className="mb-12">
         <div className="relative flex items-baseline justify-between pb-3 border-b border-very-light-grey">
-            <a href={props.category + '/' + props.subcategory} className="text-2xl font-medium tracking-tight no-underline text-dark-blue">{props.subcategory}</a>
+            <a href={props.category + '/' + props.subcategory} className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-dark-blue">{props.subcategory}</a>
         </div>
         <div className="py-6 border-b border-very-light-grey">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                {props.values.map((e) => <div className="flex flex-row items-center flex-shrink-0 overflow-hidden">
+                {props.values.map((e) => <div className="flex flex-row items-center flex-shrink-0 truncate">
                     <div className="flex-shrink-0 pr-2.5 overflow-hidden">
-                        <img src={e.imagelink} className="w-10 h-10 rounded-full"/>
+                        <img src={e.imagelink} className="w-8 h-8 rounded-full sm:w-10 sm:h-10"/>
                     </div>
                     <div className="">
-                        <div className="flex flex-row space-x-1 flex-nowrap"> 
-                            <h2  className="mb-0 truncate md:text-base text-denim">{e.first_name + ' ' + e.last_name} </h2>
+                        <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-nowrap"> 
+                            <h2  className="mb-0 text-sm truncate sm:text-base md:text-lg text-denim">{e.first_name + ' ' + e.last_name} </h2>
                             <div className="inline-flex items-center justify-center pl-3"> 
-                                <span className="truncate text-ellipsis">A.K.A {e.aka}</span>
+                                <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">A.K.A {e.aka}</span>
                             </div> 
                         </div>
-                        <div className="flex space-x-1.5 sm:flex-row sm:flex-wrap">
-                            <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} sx={{
+                        <div className="flex space-x-0.5 sm:space-x-1.5 items-center sm:flex-row sm:flex-wrap">
+                            <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} size="small" sx={{
                                     color: "yellow",
                                     borderRadius: '10px',
                                     '& .MuiSvgIcon-root': {
@@ -35,8 +35,8 @@ export default function CategoryPageSub(props) {
                                     display: 'block'
                                     }                        
                                     }} readOnly/>
-                            <div className={`{styles.inline_block} text-denim`}>{e.avg}</div>
-                            <div className={`{styles.inline_block} text-denim`}>({e.count})</div>
+                            <div className={`{styles.inline_block} text-denim sm:text-sm text-xs`}>{e.avg}</div>
+                            <div className={`{styles.inline_block} text-denim sm:text-sm text-xs`}>({e.count})</div>
                         </div>
                     </div>
                 </div>)}
