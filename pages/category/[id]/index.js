@@ -24,7 +24,7 @@ export default function CategoryPageMain(props) {
 
 
     return <div>
-      <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Discover the best ${routerID} to learn from. Compare reviews and explore their offferings.`}/>
+      <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Discover the best ${routerID} to learn from. Compare reviews and explore their offerings.`}/>
       <div className="px-4 bg-white sm:px-0">
         <div className="py-12 mx-auto sm:px-0 max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -42,11 +42,10 @@ export default function CategoryPageMain(props) {
             <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
               <div className="mx-auto mt-4 max-w-7xl">
                   <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
-                      <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#214151" d="M21.92,6.62a1,1,0,0,0-.54-.54A1,1,0,0,0,21,6H16a1,1,0,0,0,0,2h2.59L13,13.59l-3.29-3.3a1,1,0,0,0-1.42,0l-6,6a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L9,12.41l3.29,3.3a1,1,0,0,0,1.42,0L20,9.41V12a1,1,0,0,0,2,0V7A1,1,0,0,0,21.92,6.62Z"/></svg>
-                      <div className="pl-2.5 text-2xl tracking-tight text-dark-blue">{routerID} Categories</div>
+                      <div className="pl-2 text-2xl tracking-tight text-dark-blue">{routerID} Categories</div>
                   </div>
               </div>
-              {subcategory.map((e) =>
+              {subcategory.slice(0, 5).map((e) =>
               <div key={e} className="py-6 border-b border-very-light-grey">
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
