@@ -83,20 +83,20 @@ export default function SubCategoryPageMain(props) {
 
     return <div>
       <HeroNoBtn setLargeTextTop={props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Discover the best ${props.subcategoryName} to learn from. Compare reviews and explore their offerings.`}/>
-      <div className="px-4 sm:px-0">
+      <div className="">
         <div className="py-12 mx-auto max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
-            <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-              <label htmlFor="search" className="block mb-2 text-3xl text-dark-blue">Looking for someone specific?</label>
+            <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+              <label htmlFor="search" className="block mb-2 text-2xl sm:text-3xl text-dark-blue">Looking for someone specific?</label>
               <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a personal brand"/>
             </div>
-            <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+            <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
               <div>
               {IndividualEach.map((e) => <SubCategoryPageSub key={e.id} values={e}/>)}
               </div>
             </div>
-            <div className="items-center -mt-14 sm:col-span-4 xl:ml-28 sm:ml-16">
-              <div className="flex flex-row items-center pb-5 space-x-4 border-b border-very-light-grey">
+            <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 sm:ml-16">
+              <div className="flex flex-row items-center pb-5 space-x-4 sm:border-b sm:border-very-light-grey">
                 <Listbox value={selected} onChange={setSelected}>
                   {({ open }) => (
                     <>
@@ -145,10 +145,10 @@ export default function SubCategoryPageMain(props) {
                 </Listbox>
               </div>
             </div>
-            <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
+            <div className="items-center px-4 sm:bg-white sm:px-0 bg-light-grey sm:col-span-4 xl:ml-28 sm:ml-16">
               <VerticalCallToAction/>
             </div>
-            <div className="items-center sm:col-span-4 xl:ml-28 sm:ml-16">
+            <div className="items-center px-4 mb-auto sm:px-0 sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
               <div className="mx-auto mt-4 max-w-7xl">
                   <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
                       <div className="pl-2 text-2xl tracking-tight text-dark-blue">Related Categories</div>

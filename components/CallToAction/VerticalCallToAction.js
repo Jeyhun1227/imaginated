@@ -26,7 +26,7 @@ export default function VerticalCallToAction() {
             </a>
             </div>
         </div>
-        <p className="pb-4 mt-2 text-base border-b border-very-light-grey text-dim-grey">{smallText}</p>
+        <p className="pb-4 mt-2 text-base sm:border-b sm:border-very-light-grey text-dim-grey">{smallText}</p>
     </div>
     
   )

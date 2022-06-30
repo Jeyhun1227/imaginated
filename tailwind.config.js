@@ -22,6 +22,7 @@ module.exports = {
       'very-light-grey': '#CECECE',
       'gainsboro': '#E0E0E0',
       'silver': '#BDBDBD',
+      'white': '#fff',
     },
     fontFamily: {
       sans: ['"Open Sans"','sans-serif'],
