@@ -562,17 +562,19 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
           </div> */}
           <div className={(urlType === 'favorites')? null: styles.displayNone}>
-          {Object.keys(favorites_offers).map((key) => <div key={key}>
-              <h2>{key}</h2>
-              <div className={styles.MainOfferingKeys}>
-              {favorites_offers[key].map((value) => <div key={value.name} className={styles.MainOfferingValue}>
-                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className={styles.MainOfferingImage}   onError={({ currentTarget }) => {
+          {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
+              <h3 className="pb-3">{key}</h3>
+              <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
+              {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3">
+                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; 
                     currentTarget.src="/No-image.png";
                   }} />
-                    <div>{value.name}</div>
-                    <div>{value.description}</div>
-                    <a href={value.link} target="_blank">See Price {value.linkName}</a>
+                    <div className="text-lg text-black ">{value.name}</div>
+                    <div className="w-48 text-sm text-dim-grey">{value.description}</div>
+                    <div className="pt-2">
+                      <a href={value.link} className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue" target="_blank">See Price {value.linkName}</a>
+                    </div>
                 </div>)}
                 </div>
               </div>)}
