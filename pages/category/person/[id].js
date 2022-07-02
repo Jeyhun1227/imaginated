@@ -196,7 +196,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          <div className="flex flex-row space-x-3 border-b flex-nowrap border-very-light-grey">
+          <div className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
             <div>
               <div onClick={(e) => chanUrlType('')} className={`cursor-pointer inline-block mt-3.5 ${urlType ? "md:mr-12 mr-8" : "mr-8 md:mr-12 border-b border-black pb-3.5" }`}>
                 About
@@ -239,36 +239,42 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
           </div>
           <div className={(urlType === 'offerings')? null: styles.displayNone}>
-            <h2>Free Offerings</h2>
-            <div>
-              {free_offers_array.map((e) => <a key={e.name} href={e.link} className={styles.SubcategoryBlock}>
-              <div><img src={e.images_name[0]}/> <div>{e.images_name[1]}</div></div>
+            <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
+              <h3>Free Offerings</h3>
+            </div>
+            <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
+              {free_offers_array.map((e) => <a key={e.name} href={e.link} className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim">
+              <div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
               {e.name}
-              
               </a>)}
             </div>
-            <div>{Object.keys(premium_offers_types).map((key) => <div key={key}>
-              <h2>{key}</h2>
-              <div className={styles.MainOfferingKeys}>
-              {premium_offers_types[key].map((value) => <div key={value.name} className={styles.MainOfferingValue}>
-                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className={styles.MainOfferingImage}   onError={({ currentTarget }) => {
+            <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
+              <div className="flex justify-between pb-3">
+                <h3 className="">{key}</h3>
+                <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button>
+              </div>
+              <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
+              {premium_offers_types[key].map((value) => <div key={value.name} className="">
+                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; 
                     currentTarget.src="/No-image.png";
                   }} />
-                    <div>{value.name}</div>
-                    <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} sx={{
-                          color: "yellow",
-                          borderRadius: '10px',
-                          '& .MuiSvgIcon-root': {
-                            fill: '#F8DC81',
-                          },
-                          '& .css-dqr9h-MuiRating-label': {
-                          display: 'block'
-                          }                        
-                        }} readOnly/>
-                    <div className={styles.inline_block}>{value.avg}</div>
-                    <div className={styles.inline_block}>({value.count})</div>
-                  <div>{value.description}</div>
+                    <div className="pt-3 text-lg text-denim">{value.name}</div>
+                    <div className="flex flex-row flex-wrap items-center space-x-2">
+                      <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
+                            color: "yellow",
+                            borderRadius: '10px',
+                            '& .MuiSvgIcon-root': {
+                              fill: '#F8DC81',
+                            },
+                            '& .css-dqr9h-MuiRating-label': {
+                            display: 'block'
+                            }                        
+                          }} readOnly/>
+                      <div className="text-denim">{value.avg}</div>
+                      <div className="text-denim">({value.count})</div>
+                    </div>
+                  <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                 </div>)}
                 </div>
               </div>)}
