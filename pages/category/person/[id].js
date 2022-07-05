@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
@@ -25,6 +25,19 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     history.replaceState(undefined, undefined, '#'+ type)
     seturlType(type)
   }
+
+  const aboutSection = useRef(null);
+  const offeringsSection = useRef(null);
+  const reviewsSection = useRef(null);
+  const favoritesSection = useRef(null);
+
+  const handleClick = (ref) => {
+    window.scrollTo({
+      top: ref.current.offsetTop-50,
+      behavior: 'smooth',
+    });
+  };
+
   let feature = Individual_values.feature? Individual_values.feature.split('||'): [];
   let at_types = ['twitter', 'instagram', 'tiktok']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
@@ -198,21 +211,22 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           </div>
           <div className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
             <div>
-              <div onClick={(e) => chanUrlType('')} className={`cursor-pointer inline-block mt-3.5 ${urlType ? "md:mr-12 mr-8" : "mr-8 md:mr-12 border-b border-black pb-3.5" }`}>
+              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('');}} className={`cursor-pointer inline-block mt-3.5  ${urlType ? "md:mr-12 mr-8" : "mr-8 md:mr-12 border-b border-black pb-3.5" }`}>
                 About
               </div>
-              <div onClick={(e) => chanUrlType('offerings')} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'offerings' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'offerings' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
                 Offerings
               </div>
-              <div onClick={(e) => chanUrlType('reviews')}  className={`cursor-pointer inline-block mt-3.5 ${urlType === 'reviews' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
-                Reviews
-              </div>
-              <div onClick={(e) => chanUrlType('favorites')}  className={`cursor-pointer inline-block mt-3.5 ${urlType === 'favorites' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(favoritesSection); chanUrlType('favorites');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'favorites' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
                 Favorites
+              </div>
+              <div  onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'reviews' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+                Reviews
               </div>
             </div>
           </div>
-          <div className={(!urlType) ? "my-8" : "hidden"}>
+          {/* <div className={(!urlType) ? "my-8" : "hidden"}> */}
+          <div className={"my-10"} ref={aboutSection}>
             <div className="pb-12 border-b border-very-light-grey">
               <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
               <div className="">
@@ -238,7 +252,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          <div className={(urlType === 'offerings')? null: styles.displayNone}>
+          {/* <div className={(urlType === 'offerings')? null: styles.displayNone}> */}
+          <div className={"my-10"} ref={offeringsSection}>
             <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
               <h3>Free Offerings</h3>
             </div>
@@ -280,7 +295,27 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>)}
             </div>
           </div>
-          <div className={(urlType === 'reviews')? "my-8" : "hidden" }>
+          {/* <div className={(urlType === 'favorites')? null: styles.displayNone}> */}
+          <div className={"my-8"} ref={favoritesSection}>
+          {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
+              <h3 className="pb-3">{key}</h3>
+              <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
+              {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3">
+                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; 
+                    currentTarget.src="/No-image.png";
+                  }} />
+                    <div className="text-lg text-black ">{value.name}</div>
+                    <div className="w-48 text-sm text-dim-grey">{value.description}</div>
+                    <div className="pt-2">
+                      <a href={value.link} className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue" target="_blank">See Price {value.linkName}</a>
+                    </div>
+                </div>)}
+                </div>
+              </div>)}
+          </div>
+          {/* <div className={(urlType === 'reviews')? "my-8" : "hidden" }> */}
+          <div className={"my-10"} ref={reviewsSection}>
             <div>
               <form action="#" method="POST">
                 <div className="p-4 bg-light-grey">
@@ -561,24 +596,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div> )}
             </div>
           </div> */}
-          <div className={(urlType === 'favorites')? null: styles.displayNone}>
-          {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
-              <h3 className="pb-3">{key}</h3>
-              <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
-              {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3">
-                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
-                    currentTarget.onerror = null; 
-                    currentTarget.src="/No-image.png";
-                  }} />
-                    <div className="text-lg text-black ">{value.name}</div>
-                    <div className="w-48 text-sm text-dim-grey">{value.description}</div>
-                    <div className="pt-2">
-                      <a href={value.link} className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue" target="_blank">See Price {value.linkName}</a>
-                    </div>
-                </div>)}
-                </div>
-              </div>)}
-          </div>
         </main>
     </div>
 
