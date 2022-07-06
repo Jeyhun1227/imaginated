@@ -58,7 +58,7 @@ export default function Header({placeholder = 'Search for a creator or category'
           <div className="items-center justify-between hidden w-full sm:flex sm:w-auto sm:order-1" id="mobile-menu-4">
             <ul className="flex flex-col mb-0 sm:flex-row xl:space-x-8 sm:space-x-4 sm:mt-0 sm:text-sm sm:font-medium">
               <li>
-                <a href="/about" className="block py-2 pl-3 pr-4 no-underline rounded sm:bg-transparent sm:p-0 text-dim-grey" aria-current="page">About</a>
+                <a href="/about" className="block py-2 pl-3 pr-4 no-underline sm:bg-transparent sm:p-0 text-dim-grey sm:hover:text-dim-grey" aria-current="page">About</a>
               </li>
               <li>
                 <a href="/directory" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Directory</a>
