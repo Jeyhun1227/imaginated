@@ -540,7 +540,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div> )}
                 <div className="border-t-2 -mt-0.5 border-white">
                   <div className="flex mr-auto truncate lg:w-2/12">
-                    <div onClick={reviewShowMore} className={`"items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-1 border-green-vogue" ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>
+                    <div onClick={reviewShowMore} className={`items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-1 border-green-vogue" ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>
                   </div>
                 </div>
               </div>
