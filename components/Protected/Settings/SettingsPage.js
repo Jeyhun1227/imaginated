@@ -5,7 +5,7 @@ import SettingsSettings from "./SettingsSettings";
 import { Star, Gear, BoxArrowInRight } from 'react-bootstrap-icons';
 import { Tab } from '@headlessui/react'
 
-export default function SettingsPage() {
+export default function SettingsPage(props) {
     
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -44,7 +44,7 @@ export default function SettingsPage() {
                                 <SettingsFollowing/>
                             </Tab.Panel>
                             <Tab.Panel as="div" className="">
-                                <SettingsRatings/>
+                                <SettingsRatings reviews={props.reviews}/>
                             </Tab.Panel>
                             <Tab.Panel as="div" className="">
                                 <SettingsSettings/>

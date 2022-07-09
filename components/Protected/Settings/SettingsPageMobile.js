@@ -95,7 +95,7 @@ export default function SettingsPageMobile() {
                     </>
                 )}
                 </Listbox>
-                <div className="mt-10">
+                <div className="mt-8">
                 {selected.component}
                 </div>
             </div>
