@@ -10,7 +10,7 @@ export default function SettingsRatings() {
     }
     return ( 
         <div className="flex flex-col space-y-6">
-            <Disclosure as="div" className="border-1 border-whisper h-96 lg:h-full">
+            <Disclosure as="div" className="border-1 border-whisper lg:h-full">
             {({ open }) => (
                 <>
                 <div className="p-3">
@@ -108,7 +108,7 @@ export default function SettingsRatings() {
                 </div>
                 </>)}
             </Disclosure>
-            <Disclosure as="div" className="border-1 border-whisper h-96 lg:h-full">
+            <Disclosure as="div" className="border-1 border-whisper lg:h-full">
             {({ open }) => (
                 <>
                 <div className="p-3">

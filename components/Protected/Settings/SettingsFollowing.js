@@ -6,7 +6,7 @@ export default function SettingsFollowing() {
         return classes.filter(Boolean).join(' ')
     }
     return (
-        <div className="border-1 border-whisper h-96 lg:h-full">
+        <div className="border-1 border-whisper lg:h-full">
             <div className="p-3">
                 <div className="flex flex-col">
                     <h4>Following list</h4>
@@ -87,9 +87,9 @@ export default function SettingsFollowing() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div className="text-left">
-                        <button className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Load more</button>
+                        <div className="text-left">
+                            <button className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Load more</button>
+                        </div>
                     </div>
                 </div>
             </div>

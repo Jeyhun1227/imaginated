@@ -331,7 +331,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                             <>
                               <Listbox.Label className="block pb-2.5 text-sm font-medium text-black">What offering would you like to review?</Listbox.Label>
                               <div className="relative mt-1">
-                                <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
                                   <span className="flex items-center">
                                     <span className="block ml-3 truncate text-trolley-grey">{selected.name}</span>
                                   </span>

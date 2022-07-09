@@ -226,12 +226,14 @@ export default function MobileNav() {
                 <div>
                 {(session) ? <>
                   <a
+                    onClick={() => {window.location.href='/login';}}
                     href="#"
                     className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                     Log In/Sign Up
                   </a>
                 </> : <> 
                   <a
+                    onClick={signOut}
                     href="#"
                     className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                     Logout
