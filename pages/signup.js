@@ -1,9 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Apple, Facebook } from 'react-bootstrap-icons';
-import manBehindComputer from '../public/logIn/ManBehindComputer_427x574.png'
+import { Apple, CheckLg } from 'react-bootstrap-icons';
+import womanBehindComputer from '../public/signup/WomanBehindComputer_336x306.png'
 import Image from 'next/image'
 
-export default function Login() {
+export default function Signup() {
     const {data} = useSession()
   return (
     <div>
@@ -11,19 +11,51 @@ export default function Login() {
         <div className="px-4 sm:px-0">
           <div className="py-12 mx-auto sm:my-20 sm:py-0 max-w-7xl">
             <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
-              <div className="items-center hidden sm:flex sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-4">
-                <Image className="object-cover object-center sm:justify-center" src={manBehindComputer} alt="Man behind computer"/>
+              <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-4">
+                <div className="flex flex-col">
+                  <h1 className="flex flex-col text-3xl font-light leading-normal md:text-5xl">
+                    <span>Discover, explore</span>{' '}
+                    <span>and research creators</span>
+                    <span>to learn from</span>
+                  </h1>
+                  <div className="flex flex-col pt-1 pb-4 space-y-3 sm:pt-4 sm:pb-12">
+                    <span className="flex flex-row items-center">
+                      <CheckLg/>
+                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Save and share your favorites</p>
+                    </span>
+                    <span className="flex flex-row items-center">
+                      <CheckLg/>
+                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Get personalized recommendations</p>
+                    </span>
+                    <span className="flex flex-row items-center">
+                      <CheckLg/>
+                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Review creators and give feedback</p>
+                    </span>
+                  </div>
+                  <div className="hidden sm:flex">
+                    <Image className="object-cover object-center sm:justify-center" 
+                    src={womanBehindComputer} 
+                    alt="Woman behind computer"/>
+                  </div>
+                </div>
               </div>
+              
               <div className="items-center mb-auto sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-4">
-                <div className="mb-8">
-                  <h2 className="font-bold">Log In</h2>
-                  <span>
-                    <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                    <a href="/signup" className="inline-block pl-1 no-underline">Sign Up</a>
-                    <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated's</p>
-                    <a href="#" className="no-underline">Terms of Service and Privacy Policy</a>
-                    <a href="#" className="no-underline">Terms of Service and Privacy Policy</a>
-                  </span>
+                <div className="hidden mb-8 sm:block">
+                  <h2 className="font-bold">Sign Up</h2>
+                  <div>
+                    <p className="mb-0 text-dim-grey">By continueing, you agree to Imaginated's</p> 
+                    <div className="flex flex-col">
+                      <span>
+                        <a href="/termsofservice" className="inline-block pr-1 no-underline">Terms of Service</a>
+                        <p className="inline-block mb-0 text-dim-grey">and acknowledge</p>
+                      </span>
+                      <span>
+                      <p className="inline-block mb-0 text-dim-grey">Imaginated's</p>
+                      <a href="/privacypolicy" className="inline-block ml-1 no-underline ">Privacy Policy</a>
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   {!data ? ( <div className="space-y-3">
@@ -61,6 +93,9 @@ export default function Login() {
                         </span>
                         Continue with Facebook
                     </button>
+                    <div className="mt-2 text-center">
+                      <p className="text-sm no-underline text-dim-grey">Don't worry, we never post without your permission</p>
+                    </div>
                   </div>
                   ) : (
                     <div>
@@ -87,6 +122,36 @@ export default function Login() {
                 <form className="mt-8 space-y-6" action="#" method="POST">
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="space-y-3 shadow-sm">
+                    <div className="flex flex-row space-x-3">
+                      <div className="w-full">
+                        <label htmlFor="fname" className="sr-only">
+                          First Name
+                        </label>
+                        <input
+                          id="first-name"
+                          name="fname"
+                          type="text"
+                          autoComplete="given-name"
+                          required
+                          className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                          placeholder="First Name"
+                        />
+                      </div>
+                      <div className="w-full">
+                      <label htmlFor="lname" className="sr-only">
+                        Last Name
+                      </label>
+                      <input
+                        id="email-address"
+                        name="lname"
+                        type="text"
+                        autoComplete="family-name"
+                        required
+                        className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Last Name"
+                      />
+                      </div>
+                    </div>
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Email address
@@ -116,18 +181,14 @@ export default function Login() {
                       />
                     </div>
                   </div>
-                  <div className="text-center">
-                    <a href="#" className="text-sm no-underline">Forgot Password?</a>
+                  <div className="mt-2 text-center">
+                    <p className="pb-4 text-sm no-underline text-dim-grey">Password must be at least 6 characters in length</p>
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 text-white border border-transparent text-med bg-dark-blue group" 
-                      onClick={() => signIn()}>
-                        Log In
+                      onClick={() => Signup()}>
+                        Sign Up
                     </button>
-                    <span>
-                      <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                      <a href="/signup" className="inline-block pl-1 no-underline">Sign Up</a>
-                    </span>
                   </div>
                 </form>
               </div>
