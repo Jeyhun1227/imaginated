@@ -21,8 +21,11 @@ export default function Login() {
                     <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
                     <a href="/signup" className="inline-block pl-1 no-underline">Sign Up</a>
                     <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated's</p>
-                    <a href="#" className="no-underline">Terms of Service and Privacy Policy</a>
-                    <a href="#" className="no-underline">Terms of Service and Privacy Policy</a>
+                    <span className="flex flex-row">
+                      <a href="/termsofservice" className="pr-1 no-underline">Terms of Service</a>
+                      <p className="mb-0 text-dim-grey">and</p>
+                      <a href="/privacypolicy" className="pl-1 no-underline">Privacy Policy</a>
+                    </span>
                   </span>
                 </div>
                 <div>
