@@ -11,7 +11,7 @@ export default function ClaimFormThankYou(props) {
                     <div className="pl-0 divide-y divide-whisper">
                         <div className="pb-6 sm:pb-12">
                             <div className="text-center">
-                                <CheckCircleFill className="mx-auto mb-12 w-36 h-36 fill-green"/>
+                                <CheckCircleFill className="w-20 h-20 mx-auto mb-12 sm:w-36 sm:h-36 fill-green"/>
                                 <h1 className="font-bold">We have received your submission.</h1>
                                 <p className="my-3 text-dim-grey">Our verification team will review your submission and be in touch via email once it is approved.</p>
                             </div>

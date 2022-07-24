@@ -10,7 +10,7 @@ export default function ChoosePlan(props) {
     <div className="w-full bg-white ">
       <div className="">
         <div className="max-w-4xl py-12 mx-auto sm:mx-0">
-          <div className="pb-12 sm:py-12">
+          <div className="pb-6 sm:pb-12">
             <div className="text-center">
                 <h1 className="font-bold"> Choose a Plan </h1>
             </div>

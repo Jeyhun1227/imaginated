@@ -8,7 +8,7 @@ export default function Verification(props) {
             <div className="px-4 sm:px-0">
                 <div className="max-w-4xl py-6 mx-auto sm:py-12 sm:mx-0">
                     <div className="pl-0 divide-y divide-whisper">
-                        <div className="py-6 sm:py-12">
+                        <div className="pb-6 sm:pb-12">
                             <div className="text-center">
                                 <h1 className="font-bold">You have been selected for the Verified Plan ($0/mo)</h1>
                                 <p className="my-3 text-dim-grey">Upload a copy of your driver’s license in your name to help our team verify your profile. Business cards not accepted</p>

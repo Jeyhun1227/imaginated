@@ -11,7 +11,7 @@ export default function ClaimFormStepBar(props) {
         <div className="px-4 sm:px-0">
             <div className="py-6 mx-auto sm:py-12 sm:mx-0 max-w-7xl">
                 <div className="mb-4 text-center">
-                    <h2>Step {props.setStepNum ? props.setStepNum  : stepNum}: {props.setStepText ? props.setStepText  : stepText}</h2>
+                    <h2>{props.setStepText ? props.setStepText  : stepText}</h2>
                 </div>
                 <div className="w-full h-4 mb-4 rounded-full bg-white-smoke">
                     <div className="h-4 rounded-full bg-dark-blue" style={{width: props.setStepPercent ? props.setStepPercent : stepPercent}}>

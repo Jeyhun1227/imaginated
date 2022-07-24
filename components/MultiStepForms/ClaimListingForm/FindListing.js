@@ -12,7 +12,7 @@ export default function FindListing(props) {
             <div className="px-4 sm:px-0">
                 <div className="max-w-4xl py-12 mx-auto sm:mx-0">
                     <div className="pl-0 divide-y divide-whisper">
-                        <div className="pb-12 sm:py-12">
+                        <div className="pb-6 sm:pb-12">
                             <div className="text-center">
                                 <h1 className="font-bold">Find & Claim Your Listing</h1>
                             </div>
@@ -38,7 +38,7 @@ export default function FindListing(props) {
                             <div className="text-center">
                                 <h1 className="font-bold"> Boost Your Brand Image </h1>
                             </div>
-                            <div className="flex items-center justify-center px-8 py-12">
+                            <div className="flex items-center justify-center px-8 pt-12">
                                 <div className="flex items-end justify-around w-full max-w-lg mx-auto space-y-0">
                                     <div className="flex space-x-4">
                                         <div className="relative flex items-center justify-center w-20 h-20 text-sm font-medium uppercase rounded-full group sm:flex-1 sm:py-6 bg-light-yellow">

@@ -10,7 +10,7 @@ export default function ClaimListing(props) {
 
     const [page, setPage] = useState(0)
     
-    const formTitles = ["Find your Listing", "Select a Plan", "Verification", "Thank You!"]
+    const formTitles = ["Step 1: Find your Listing", "Step 2: Select a Plan", "Step 3: Verification", "Thank You!"]
     
     const fromPercent = ["1.3%", "25%", "75%", "100%"]
 
