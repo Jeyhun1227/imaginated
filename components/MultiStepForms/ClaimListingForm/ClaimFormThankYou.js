@@ -31,12 +31,12 @@ export default function ClaimFormThankYou(props) {
                         </div>
                         <div className="flex flex-row-reverse justify-between px-4 py-6 sm:py-12 sm:px-0 md:mx-8">
                             <div className="py-3 text-right ">
-                                <button
-                                type="submit"
-                                className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-16 bg-dark-blue"
+                                <a
+                                href="/"
+                                className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white no-underline border border-transparent sm:px-16 bg-dark-blue"
                                 >
                                 Home
-                                </button>
+                                </a>
                             </div>
                             <div className="py-3 text-left">
                                 <button
