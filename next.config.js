@@ -7,5 +7,5 @@ module.exports = {
         destination: 'http://localhost:5000/graphql/:path*' // Proxy to Backend
       }
     ]
-  }
+  },
 }
