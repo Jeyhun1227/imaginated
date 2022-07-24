@@ -14,7 +14,7 @@ export default function FindListing(props) {
                     <div className="pl-0 divide-y divide-whisper">
                         <div className="pb-12 sm:py-12">
                             <div className="text-center">
-                                <h1 className="font-bold"> Find & Claim Your Listing </h1>
+                                <h1 className="font-bold">Find & Claim Your Listing</h1>
                             </div>
                             <div className="flex items-center justify-between w-full pt-4">
                                 <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" placeholder="Search..." required/>
@@ -24,9 +24,9 @@ export default function FindListing(props) {
                             </div>
                         </div>
                         <div className="py-12">
-                            <div className="text-center">
-                                <h1 className="font-bold"> Find & Claim Your Listing </h1>
-                                <p className="my-3">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <a href="/signup" className="no-underline text-denim">Get started</a> today.</p>
+                            <div className="text-left sm:text-center">
+                                <h1 className="font-bold">Find & Claim Your Listing</h1>
+                                <p className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <a href="/signup" className="no-underline text-denim">Get started</a> today.</p>
                             </div>
                             <div className="flex mx-auto mt-8 place-content-center"> 
                                 <Image className="object-cover object-center sm:justify-center" 
@@ -36,7 +36,7 @@ export default function FindListing(props) {
                         </div>
                         <div className="py-12">
                             <div className="text-center">
-                                <h1 className="font-bold"> Find & Claim Your Listing </h1>
+                                <h1 className="font-bold"> Boost Your Brand Image </h1>
                             </div>
                             <div className="flex items-center justify-center px-8 py-12">
                                 <div className="flex items-end justify-around w-full max-w-lg mx-auto space-y-0">

@@ -9,7 +9,7 @@ export default function ClaimFormStepBar(props) {
     return (
     <div className="w-full bg-light-grey">
         <div className="px-4 sm:px-0">
-            <div className="py-12 mx-auto sm:mx-0 max-w-7xl">
+            <div className="py-6 mx-auto sm:py-12 sm:mx-0 max-w-7xl">
                 <div className="mb-4 text-center">
                     <h2>Step {props.setStepNum ? props.setStepNum  : stepNum}: {props.setStepText ? props.setStepText  : stepText}</h2>
                 </div>

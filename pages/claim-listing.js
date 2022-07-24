@@ -29,10 +29,10 @@ export default function ClaimListing(props) {
             return <ChoosePlan nextPage={increment} previousPage={deincrement}/>
         }
         else if (page === 2) {
-            return <Verification/>
+            return <Verification nextPage={increment} previousPage={deincrement}/>
         }
         else {
-            return <ClaimFormThankYou/>
+            return <ClaimFormThankYou previousPage={deincrement}/>
         }
     }
     
