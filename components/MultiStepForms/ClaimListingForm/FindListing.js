@@ -4,11 +4,11 @@ import placeHolder from "../../../public/place-holder/placeHolder-620x270.jpg"
 
 
 
-export default function FindListing() {
+export default function FindListing(props) {
 
     return (
     <div>
-        <div className="hidden w-full bg-white">
+        <div className="w-full bg-white">
             <div className="px-4 sm:px-0">
                 <div className="max-w-4xl py-12 mx-auto sm:mx-0">
                     <div className="pl-0 divide-y divide-whisper">
@@ -62,6 +62,7 @@ export default function FindListing() {
                                 <button
                                 type="submit"
                                 className="inline-flex justify-center w-full py-2 text-sm font-medium text-white border border-transparent sm:w-auto sm:px-16 bg-dark-blue"
+                                onClick={props.nextPage}
                                 >
                                 Get Started
                                 </button>
