@@ -65,10 +65,10 @@ export default function SettingsSettings() {
                                             <label htmlFor="update email" className="mb-0 font-semibold">Update your email</label>
                                         </div>
                                         <div className="flex items-end justify-between flex-1 text-sm">
-                                            <input type="email" name="email" id="email" className=" bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your email"/>
+                                            <input type="email" name="email" id="email" className="focus:outline-none bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your email"/>
                                         </div>
                                         <div className="relative w-full">
-                                            <input type={emailPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your password"/>
+                                            <input type={emailPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your password"/>
                                             <button onClick={toggleEmailPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                                                 {emailPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
                                             </button>
@@ -86,13 +86,13 @@ export default function SettingsSettings() {
                                             <label htmlFor="Change password" className="mb-0 font-semibold">Change your password</label>
                                         </div>
                                         <div className="relative w-full">
-                                            <input type={newPasswordShown ? "text" : "password"} name="email" id="email" className=" bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your new password"/>
+                                            <input type={newPasswordShown ? "text" : "password"} name="email" id="email" className="focus:outline-none bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your new password"/>
                                             <button onClick={toggleNewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                                                 {newPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
                                             </button>
                                         </div>
                                         <div className="relative w-full">
-                                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password"/>
+                                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password"/>
                                             <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                                                 {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
                                             </button>

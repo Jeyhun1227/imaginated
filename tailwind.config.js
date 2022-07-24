@@ -10,6 +10,8 @@ module.exports = {
       'dodger-blue': '#156ADA',
       'green-vogue': '#214151',
       'sand': '#9DB9E6',
+      'gold': '#E6CA9D',
+      'light-yellow': '#F8DC81',
       'green': '#A2D0C1',
       'sea-green': '#219653',
       'peach': '#DDF2DF',
@@ -26,7 +28,7 @@ module.exports = {
       'white': '#fff',
     },
     fontFamily: {
-      sans: ['"Open Sans"','sans-serif'],
+      sans: ['Open Sans','sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
     extend: {},

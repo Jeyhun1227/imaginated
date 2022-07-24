@@ -453,13 +453,13 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     </div>
                   </div>
                   <div className="py-3 text-left ">
-                  <button
-                    type="submit"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
-                  >
-                    Submit Review
-                  </button>
-                </div>
+                    <button
+                      type="submit"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
+                    >
+                      Submit Review
+                    </button>
+                  </div>
                 </div>
               </form>
               <div className="flex flex-col gap-8 md:flex-row">

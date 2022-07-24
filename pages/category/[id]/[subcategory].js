@@ -88,7 +88,7 @@ export default function SubCategoryPageMain(props) {
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
             <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
               <label htmlFor="search" className="block mb-2 text-2xl sm:text-3xl text-dark-blue">Looking for someone specific?</label>
-              <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a personal brand"/>
+              <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="focus:outline-none shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a personal brand"/>
             </div>
             <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
               <div>

@@ -77,7 +77,7 @@ return (
             <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
               <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
                 <label htmlFor="search" className="block mb-2 text-xl text-dark-blue">What did you want to learn today?</label>
-                <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-white border border-whisper text-whisper text-sm block w-full p-2.5" placeholder="Search for a creator category"/>
+                <input onChange={(e)=> ChangedCategory(e.target.value)} type="text" name="categoryName" id="search" className="shadow-sm bg-white border border-whisper text-whisper text-sm block w-full p-2.5 focus:outline-none" placeholder="Search for a creator category"/>
               </div>
               <div className="items-center sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
                 {Object.keys(CategoryValuesFilterable).map((e) => <CategoryList key={'cat'+e} parent={e} category={CategoryValuesFilterable[e]} subcategory={SubCategoryValues[e]}/>)}
