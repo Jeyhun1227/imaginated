@@ -15,7 +15,7 @@ export default function ChoosePlan(props) {
                 <h1 className="font-bold"> Choose a Plan </h1>
             </div>
             <div className="px-4 pt-8 pb-3 md:px-8 md:rounded-full bg-light-grey">
-              <RadioGroup value={plan} onChange={() => props.formDataChangeFromChild('Verified')} className="flex flex-row items-center justify-center w-full space-x-1 md:space-x-4">
+              <RadioGroup value={plan} onChange={(e) => props.formDataChangeFromChild(e.target.value)} className="flex flex-row items-center justify-center w-full space-x-1 md:space-x-4">
                 <RadioGroup.Label className="mr-auto text-base font-semibold text-left sm:text-xl md:text-3xl">Membership</RadioGroup.Label>
                 <RadioGroup.Option value="Verified">
                   {({ checked }) => (
