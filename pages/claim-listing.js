@@ -20,13 +20,21 @@ export default function ClaimListing(props) {
     const deincrement = () => {
         setPage((currPage) => currPage - 1)
     }
-
+    
+    const [formData, SetFormData] = useState({
+        listing: "",
+        chosenPlan: "Verified",
+        file: ""
+    })
+    const formDataChangeFromChild = (chosenPlan) => {
+        SetFormData({listing: formData.listing, chosenPlan, file: formData.file})
+    }
     const pageDisplay = () => {
         if (page === 0) {
             return <FindListing nextPage={increment}/>
         }
         else if (page === 1) {
-            return <ChoosePlan nextPage={increment} previousPage={deincrement}/>
+            return <ChoosePlan formDataChangeFromChild={formDataChangeFromChild} nextPage={increment} previousPage={deincrement}/>
         }
         else if (page === 2) {
             return <Verification nextPage={increment} previousPage={deincrement}/>
