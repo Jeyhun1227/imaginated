@@ -14,6 +14,13 @@ export default function ClaimListing(props) {
     
     const fromPercent = ["1.3%", "25%", "75%", "100%"]
 
+    const [formData, setFormData] = useState({
+        listing:"",
+        chosenPlan: "Verified",
+        file: "",
+    })
+    console.log(formData)
+
     const increment = () => {
         setPage((currPage) => currPage + 1)
     }
@@ -23,10 +30,10 @@ export default function ClaimListing(props) {
 
     const pageDisplay = () => {
         if (page === 0) {
-            return <FindListing nextPage={increment}/>
+            return <FindListing nextPage={increment} formData={formData} setFormData={setFormData}/>
         }
         else if (page === 1) {
-            return <ChoosePlan nextPage={increment} previousPage={deincrement}/>
+            return <ChoosePlan nextPage={increment} previousPage={deincrement} formData={formData} setFormData={setFormData}/>
         }
         else if (page === 2) {
             return <Verification nextPage={increment} previousPage={deincrement}/>

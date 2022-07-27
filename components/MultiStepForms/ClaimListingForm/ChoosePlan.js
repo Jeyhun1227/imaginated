@@ -5,7 +5,7 @@ import { CheckLg, QuestionCircle } from 'react-bootstrap-icons';
 
 export default function ChoosePlan(props) {
   let [plan, setPlan] = useState('Verified')
-
+  // console.log()
   return (
     <div className="w-full bg-white ">
       <div className="">

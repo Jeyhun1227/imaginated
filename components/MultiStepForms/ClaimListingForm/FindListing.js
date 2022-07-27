@@ -17,7 +17,12 @@ export default function FindListing(props) {
                                 <h1 className="font-bold">Find & Claim Your Listing</h1>
                             </div>
                             <div className="flex items-center justify-between w-full pt-4">
-                                <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" placeholder="Search..." required/>
+                                <input type="text" 
+                                value={props.formData.listing} 
+                                onChange={(event) => props.setFormData({...props.formData, listing: event.target.value})} 
+                                className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" 
+                                placeholder="Search..." 
+                                required/>
                                 <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-6 py-2 ml-4 overflow-hidden text-sm text-white border border-black sm:px-12 bg-dark-blue hover:text-indigo-500">
                                     <span className="text-sm text-white truncate hover:text-indigo-500">Claim</span>
                                 </button>

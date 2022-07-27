@@ -34,7 +34,7 @@ export default function Verification(props) {
                                 className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-16 bg-dark-blue"
                                 onClick={props.nextPage}
                                 >
-                                Next
+                                Submit
                                 </button>
                             </div>
                             <div className="py-3 text-left ">
