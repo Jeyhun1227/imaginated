@@ -28,12 +28,15 @@ export default function ClaimListing(props) {
         setPage((currPage) => currPage - 1)
     }
 
+    const formDataChangeFromChild = (chosenPlan) => {
+        SetFormData({listing: formData.listing, chosenPlan, file: formData.file})
+    }
     const pageDisplay = () => {
         if (page === 0) {
             return <FindListing nextPage={increment} formData={formData} setFormData={setFormData}/>
         }
         else if (page === 1) {
-            return <ChoosePlan nextPage={increment} previousPage={deincrement} formData={formData} setFormData={setFormData}/>
+            return <ChoosePlan formDataChangeFromChild={formDataChangeFromChild} nextPage={increment} previousPage={deincrement}/>
         }
         else if (page === 2) {
             return <Verification nextPage={increment} previousPage={deincrement}/>
