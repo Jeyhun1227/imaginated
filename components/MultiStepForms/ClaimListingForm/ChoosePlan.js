@@ -4,8 +4,8 @@ import { CheckLg, QuestionCircle } from 'react-bootstrap-icons';
 
 
 export default function ChoosePlan(props) {
-  let [plan, setPlan] = useState('Verified')
-  // console.log()
+  let [plan, setPlan] = useState(props.formData.chosenPlan)
+  
   return (
     <div className="w-full bg-white ">
       <div className="">
@@ -15,23 +15,23 @@ export default function ChoosePlan(props) {
                 <h1 className="font-bold"> Choose a Plan </h1>
             </div>
             <div className="px-4 pt-8 pb-3 md:px-8 md:rounded-full bg-light-grey">
-              <RadioGroup value={plan} onChange={(e) => props.formDataChangeFromChild(e.target.value)} className="flex flex-row items-center justify-center w-full space-x-1 md:space-x-4">
+              <RadioGroup value={plan} onChange={setPlan} className="flex flex-row items-center justify-center w-full space-x-1 md:space-x-4">
                 <RadioGroup.Label className="mr-auto text-base font-semibold text-left sm:text-xl md:text-3xl">Membership</RadioGroup.Label>
-                <RadioGroup.Option value="Verified">
+                <RadioGroup.Option value="Verified" onClick={(e) => props.formDataChangeFromChild(e.target.textContent)}>
                   {({ checked }) => (
                     <span className={`cursor-pointer inline-flex justify-center py-1 text-sm font-medium border-1 border-dark-blue rounded-full pl-2 pr-2 md:px-10 ${checked ? 'bg-dark-blue text-white' : ' bg-white text-dark-blue'}`}>
                       Verified
                     </span>
                   )}
                 </RadioGroup.Option>
-                <RadioGroup.Option value="business">
+                <RadioGroup.Option value="Business" onClick={(e) => props.formDataChangeFromChild(e.target.textContent)}>
                   {({ checked }) => (
                     <span className={`cursor-pointer inline-flex justify-center py-1 text-sm font-medium border-1 border-dark-blue rounded-full pl-2 pr-2 md:px-10 ${checked ? 'bg-dark-blue text-white' : ' bg-white text-dark-blue'}`}>
                       Business
                     </span>
                   )}
                 </RadioGroup.Option>
-                <RadioGroup.Option value="enterprise">
+                <RadioGroup.Option value="Enterprise" onClick={(e) => props.formDataChangeFromChild(e.target.textContent)}>
                   {({ checked }) => (
                     <span className={`cursor-pointer inline-flex justify-center py-1 text-sm font-medium border-1 border-dark-blue rounded-full pl-2 pr-2 md:px-10 ${checked ? 'bg-dark-blue text-white' : ' bg-white text-dark-blue'}`}>
                       Enterprise
@@ -99,7 +99,7 @@ export default function ChoosePlan(props) {
               <div className="py-3 text-left ">
                 <button
                 type="submit"
-                className="inline-flex justify-center px-8 py-2 text-sm font-medium bg-white border-1 border-dark-blue text-dark-blue sm:px-16"
+                className="inline-flex justify-center px-8 py-2 text-sm font-medium bg-white border border-dark-blue text-dark-blue sm:px-16"
                 onClick={props.previousPage}
                 >
                 Back

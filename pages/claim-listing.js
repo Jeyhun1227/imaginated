@@ -17,29 +17,36 @@ export default function ClaimListing(props) {
     const [formData, setFormData] = useState({
         listing:"",
         chosenPlan: "Verified",
-        file: "",
+        file: null,
     })
     console.log(formData)
 
     const increment = () => {
-        setPage((currPage) => currPage + 1)
+        setPage(page + 1)
     }
     const deincrement = () => {
-        setPage((currPage) => currPage - 1)
+        setPage(page - 1)
     }
 
     const formDataChangeFromChild = (chosenPlan) => {
-        SetFormData({listing: formData.listing, chosenPlan, file: formData.file})
+        setFormData({listing: formData.listing, chosenPlan, file: formData.file})
     }
+
+    const handleFile = (file) => {
+        setFormData({listing: formData.listing, chosenPlan: formData.chosenPlan, file})
+    }
+
+
+
     const pageDisplay = () => {
         if (page === 0) {
             return <FindListing nextPage={increment} formData={formData} setFormData={setFormData}/>
         }
         else if (page === 1) {
-            return <ChoosePlan formDataChangeFromChild={formDataChangeFromChild} nextPage={increment} previousPage={deincrement}/>
+            return <ChoosePlan formDataChangeFromChild={formDataChangeFromChild} nextPage={increment} previousPage={deincrement} formData={formData} setFormData={setFormData}/>
         }
         else if (page === 2) {
-            return <Verification nextPage={increment} previousPage={deincrement}/>
+            return <Verification handleFile={handleFile} nextPage={increment} previousPage={deincrement} formData={formData} setFormData={setFormData}/>
         }
         else {
             return <ClaimFormThankYou previousPage={deincrement}/>

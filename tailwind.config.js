@@ -17,6 +17,7 @@ module.exports = {
       'peach': '#DDF2DF',
       'yellow': '#F8DC81',
       'saffron': '#F4C839',
+      'crimson': '	#DC143C',
       'dim-grey': '#636363',
       'whisper': '#E5E5E5',
       'light-grey': '#FAFAFA',
