@@ -11,15 +11,18 @@ export default function RequestCategory() {
                 <div className="w-full bg-white">
                     <div className="px-4 sm:px-0">
                         <div className="max-w-5xl py-6 mx-auto sm:py-12 sm:mx-0">
-                            <div className="mt-10 sm:mt-0">
+                            <div className="md:mt-10 sm:mt-0">
                                 <div className="md:grid md:grid-cols-7 md:gap-6">
-                                    <div className="md:col-span-4">
-                                        <div className="px-4 py-5 sm:p-6">
-                                            <div className="px-4 sm:px-0">
-                                                <h3 className="text-lg font-semibold leading-6 text-gray-900">Can't find a category on the directory that you think should be here?</h3>
-                                                <Image className="object-cover object-center sm:justify-center" 
-                                                src={personUsingComputer}
-                                                alt="Person Using Computer"/>
+                                    <div className="md:col-span-4 md:mt-10 sm:mt-0">
+                                        <div className="px-0 py-0 sm:p-6">
+                                            <div className="flex flex-col-reverse items-center justify-center px-4 space-y-8 md:justify-start md:items-start md:flex-col sm:px-0">
+                                                <h3 className="text-lg font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can't find a category on the directory that you think should be here?</h3>
+                                                <div className=''>
+                                                    <Image className="object-cover object-center sm:justify-center" 
+                                                    src={personUsingComputer}
+                                                    layout="intrinsic"
+                                                    alt="Person Using Computer"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

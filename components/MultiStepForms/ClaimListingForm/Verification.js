@@ -13,15 +13,14 @@ export default function Verification(props) {
             let fileMb = fileSize / 1024 ** 2;
             let fileType = props.formData.file.type;
             console.log(fileType)
-            setBtnDisabled = true;
             if (fileMb > 0) {
                 window.alert("File type too large.");
-                setBtnDisabled = true;
+                // setBtnDisabled(true);
                 console.log(btnDisabled) 
             }
             if (fileType != "image/png" || fileType != "image/jpeg" ) {
                 window.alert("File does not support. You must use .png or .jpg ");
-                setBtnDisabled = true;
+                // setBtnDisabled(true);
             }
         }
     }, [props]);
