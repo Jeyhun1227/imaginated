@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const prisma = new PrismaClient();
 
@@ -50,7 +51,7 @@ export default (req, res) =>{
     jwt: {
       secret: process.env.JWT_SECRET,
     },
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
 
   });
 
