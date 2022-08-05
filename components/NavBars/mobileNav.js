@@ -24,7 +24,7 @@ export default function MobileNav() {
     },
     {
       name: 'Claim Listing',
-      href: '#'
+      href: '/claim-listing'
     }
   ]
   
@@ -128,7 +128,7 @@ export default function MobileNav() {
                             <PlayBtn/>
                           </div>
                           <span className='block text-xs font-semibold text-black no-underline'>
-                            Jhon updated their content, go check it out now!
+                            John updated their content, go check it out now!
                           </span>
                         </a>
                         <span className='block pt-2 text-xs text-black no-underline pl-9'>
@@ -180,7 +180,7 @@ export default function MobileNav() {
                     </Popover.Button>
                   </div>
                 </div>
-                {!(session) ? <>
+                {(session) ? <>
                   <div className="border-b border-gainsboro">
                         <a  href="#" className='flex items-center mx-3.5 no-underline '>
                           <div className='pr-2 text-black'>
@@ -189,7 +189,7 @@ export default function MobileNav() {
                             </svg>
                           </div>
                           <span className='block py-3 text-base font-semibold text-black no-underline'>
-                            Name LastName
+                            {session.user.name}
                           </span>
                         </a>
                   </div>
@@ -224,7 +224,7 @@ export default function MobileNav() {
               </div>
               <div className="px-3 py-6 border-0">
                 <div>
-                {(session) ? <>
+                {!(session) ? <>
                   <a
                     onClick={() => {window.location.href='/login';}}
                     href="#"
