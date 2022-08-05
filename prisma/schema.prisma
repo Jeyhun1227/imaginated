@@ -7,6 +7,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  description   String?
+  verified      Boolean?
+  individual    Int?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model all_reviews {
   id            Int       @default(autoincrement())
@@ -54,26 +102,7 @@ model individual {
   @@ignore
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model individual_backup {
-  id          Int?
-  first_name  String?  @db.VarChar(200)
-  last_name   String?  @db.VarChar(200)
-  aka         String?  @db.VarChar(200)
-  description String?
-  feature     String?  @db.VarChar(500)
-  company     String?  @db.VarChar(200)
-  location    String?  @db.VarChar(200)
-  founder     String?  @db.VarChar(200)
-  link        String?  @db.VarChar(200)
-  category    String?  @db.VarChar(200)
-  subcategory String[]
-  verified    Boolean?
-  imagelink   String?  @db.VarChar(500)
-  linkname    String?  @db.VarChar(450)
 
-  @@ignore
-}
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model individual_favorites {
@@ -131,16 +160,4 @@ model subcategory {
   @@ignore
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model users {
-  id          Int     @default(autoincrement())
-  individual  Int?
-  name        String? @db.VarChar(200)
-  description String?
-  password    String? @db.VarChar(200)
-  verified    String? @db.VarChar(200)
-  email       String? @db.VarChar(200)
-  imagelink   String? @db.VarChar(450)
 
-  @@ignore
-}
