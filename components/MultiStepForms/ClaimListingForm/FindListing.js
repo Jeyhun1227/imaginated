@@ -6,6 +6,13 @@ import placeHolder from "../../../public/place-holder/placeHolder-620x270.jpg"
 
 export default function FindListing(props) {
 
+    const scrollToTop = () => {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+        });
+    };
+
     return (
     <div>
         <div className="w-full bg-white">
@@ -23,7 +30,7 @@ export default function FindListing(props) {
                                 className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" 
                                 placeholder="Search..." 
                                 required/>
-                                <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-6 py-2 ml-4 overflow-hidden text-sm text-white border border-black sm:px-12 bg-dark-blue hover:text-indigo-500">
+                                <button onClick={props.nextPage} type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-6 py-2 ml-4 overflow-hidden text-sm text-white border border-black sm:px-12 bg-dark-blue hover:text-indigo-500">
                                     <span className="text-sm text-white truncate hover:text-indigo-500">Claim</span>
                                 </button>
                             </div>
@@ -67,7 +74,7 @@ export default function FindListing(props) {
                                 <button
                                 type="submit"
                                 className="inline-flex justify-center w-full py-2 text-sm font-medium text-white border border-transparent sm:w-auto sm:px-16 bg-dark-blue"
-                                onClick={props.nextPage}
+                                onClick={scrollToTop}
                                 >
                                 Get Started
                                 </button>
