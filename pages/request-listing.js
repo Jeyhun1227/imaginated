@@ -3,8 +3,11 @@ import { Listbox, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import personUsingComputer from '../public/request-category/person-using-computer.png'
 import { ChevronDown, PatchCheckFill } from 'react-bootstrap-icons';
+import client from '../components/GraphQL';
+import { LOAD_CATEGORIES } from "../GraphQL/Queries/Admin";
 
-export default function RequestListing() {
+
+export default function RequestListing(category) {
 
     const select = [
 
@@ -152,67 +155,69 @@ export default function RequestListing() {
                                                                 </>
                                                             )}
                                                             </Listbox>
-                                                            <Listbox value={selectedCategory} onChange={setSelectedCategory}>
-                                                            {({ open }) => (
-                                                                <>
-                                                                <Listbox.Label className="block pb-2 mt-6 text-sm font-medium text-black">What category(ies) would this person be listed under ?</Listbox.Label>
-                                                                <div className="relative mt-1">
-                                                                    <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
-                                                                    <span className="flex items-center">
-                                                                        <span className="block truncate text-trolley-grey">{selectedCategory.name}</span>
-                                                                    </span>
-                                                                    <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
-                                                                        <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
-                                                                    </span>
-                                                                    </Listbox.Button>
+                                                            <ApolloProvider client={client}>
+                                                                <Listbox value={selectedCategory} onChange={setSelectedCategory}>
+                                                                {({ open }) => (
+                                                                    <>
+                                                                    <Listbox.Label className="block pb-2 mt-6 text-sm font-medium text-black">What category(ies) would this person be listed under ?</Listbox.Label>
+                                                                    <div className="relative mt-1">
+                                                                        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
+                                                                        <span className="flex items-center">
+                                                                            <span className="block truncate text-trolley-grey">Choose</span>
+                                                                        </span>
+                                                                        <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
+                                                                            <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
+                                                                        </span>
+                                                                        </Listbox.Button>
 
-                                                                    <Transition
-                                                                    show={open}
-                                                                    leave="transition ease-in duration-100"
-                                                                    leaveFrom="opacity-100"
-                                                                    leaveTo="opacity-0"
-                                                                    >
-                                                                    <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                                                        {select.map((source) => (
-                                                                        <Listbox.Option
-                                                                            key={source.id}
-                                                                            className={({ active }) =>
-                                                                            classNames(
-                                                                                active ? 'text-white bg-whisper' : 'text-black',
-                                                                                'cursor-default select-none relative py-2 pl-3 pr-9'
-                                                                            )
-                                                                            }
-                                                                            value={source}
+                                                                        <Transition
+                                                                        show={open}
+                                                                        leave="transition ease-in duration-100"
+                                                                        leaveFrom="opacity-100"
+                                                                        leaveTo="opacity-0"
                                                                         >
-                                                                            {({ selectedCategory, active }) => (
-                                                                            <>
-                                                                                <div className="flex items-center">
-                                                                                <span
-                                                                                    className={classNames(selectedCategory ? 'font-semibold' : 'font-normal', 'text-trolley-grey ml-3 block truncate')}
-                                                                                >
-                                                                                    {source.name}
-                                                                                </span>
-                                                                                </div>
-                                                                                {selectedCategory ? (
-                                                                                <span
-                                                                                    className={classNames(
-                                                                                    active ? 'text-white' : 'text-indigo-600',
-                                                                                    'absolute inset-y-0 right-0 flex items-center pr-4'
-                                                                                    )}
-                                                                                >
-                                                                                    <CheckIcon className="w-5 h-5" aria-hidden="true" />
-                                                                                </span>
-                                                                                ) : null}
-                                                                            </>
-                                                                            )}
-                                                                        </Listbox.Option>
-                                                                        ))}
-                                                                    </Listbox.Options>
-                                                                    </Transition>
-                                                                </div>
-                                                                </>
-                                                            )}
-                                                            </Listbox>
+                                                                        <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                                            {selectCategory.map((source) => (
+                                                                            <Listbox.Option
+                                                                                key={source.id}
+                                                                                className={({ active }) =>
+                                                                                classNames(
+                                                                                    active ? 'text-white bg-whisper' : 'text-black',
+                                                                                    'cursor-default select-none relative py-2 pl-3 pr-9'
+                                                                                )
+                                                                                }
+                                                                                value={source}
+                                                                            >
+                                                                                {({ selectedCategory, active }) => (
+                                                                                <>
+                                                                                    <div className="flex items-center">
+                                                                                    <span
+                                                                                        className={classNames(selectedCategory ? 'font-semibold' : 'font-normal', 'text-trolley-grey ml-3 block truncate')}
+                                                                                    >
+                                                                                        {source.name}
+                                                                                    </span>
+                                                                                    </div>
+                                                                                    {selectedCategory ? (
+                                                                                    <span
+                                                                                        className={classNames(
+                                                                                        active ? 'text-white' : 'text-indigo-600',
+                                                                                        'absolute inset-y-0 right-0 flex items-center pr-4'
+                                                                                        )}
+                                                                                    >
+                                                                                        <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                                                    </span>
+                                                                                    ) : null}
+                                                                                </>
+                                                                                )}
+                                                                            </Listbox.Option>
+                                                                            ))}
+                                                                        </Listbox.Options>
+                                                                        </Transition>
+                                                                    </div>
+                                                                    </>
+                                                                )}
+                                                                </Listbox>
+                                                            </ApolloProvider>
                                                             <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <a href="/request-category" className='font-semibold text-dark-blue'>Request a category</a> after submitting this request</p>
                                                             <div className="py-3 text-left ">
                                                                 <button
@@ -236,3 +241,16 @@ export default function RequestListing() {
             </div>
         </div>
     )}
+
+    export async function getServerSideProps(){
+        const { data } = await client.query({query:LOAD_CATEGORIES})
+        // const { data } = useQuery(LOAD_CATEGORIES);
+        // const load_subCategories = useQuery(LOAD_SUBCATEGORIES);
+        // const load_subCategories = await client.query({query: LOAD_SUBCATEGORIES})
+        return {
+          props: {
+            // subcategory: load_subCategories.data,
+            category: data
+          }
+        }
+    }
