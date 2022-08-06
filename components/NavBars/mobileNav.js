@@ -189,7 +189,7 @@ export default function MobileNav() {
                             </svg>
                           </div>
                           <span className='block py-3 text-base font-semibold text-black no-underline'>
-                            Name LastName
+                            {session.user.name}
                           </span>
                         </a>
                   </div>
