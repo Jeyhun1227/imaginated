@@ -67,7 +67,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                 <a href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</a>
               </li>
               <li>
-                <a href="#" className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Claim Listing</a>
+                <a href="/claim-listing" className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Claim Listing</a>
               </li>
               {!(session) ? <>
               <li>
