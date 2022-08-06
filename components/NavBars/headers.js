@@ -191,7 +191,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                                 </svg>
                               </div>
                               <span className='block py-3 text-sm text-black no-underline'>
-                                Name LastName
+                                {session.user.name}
                               </span>
                             </a>
                           )}
