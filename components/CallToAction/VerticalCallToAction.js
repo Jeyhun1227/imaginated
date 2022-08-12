@@ -20,7 +20,7 @@ export default function VerticalCallToAction() {
             <div className="w-full shadow bg-dark-blue">
             <a
                 style = {{textDecoration:'none'}}
-                href="#"
+                href="/request-listing"
                 className="flex items-center justify-center w-full px-8 py-2 text-base font-medium text-white border border-transparent md:py-4 md:text-lg md:px-10">
                 {btnText}
             </a>

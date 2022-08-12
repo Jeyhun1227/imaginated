@@ -56,7 +56,7 @@ export default function CategoryPageMain(props) {
                                   <div className="flex items-center flex-1">
                                       <span className="flex items-center">
                                           <a href={ routerID + '/' + e} className="color-none">
-                                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
+                                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
                                                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                               </svg>
                                           </a>
@@ -112,7 +112,7 @@ export async function getServerSideProps({query}){
     const routerID = query.id
 
     const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID }})
-    //console.log(category_values.data.getCategoryPage.rows)
+    console.log(category_values.data.getCategoryPage.rows)
     // let category_values = {}
 
     return {

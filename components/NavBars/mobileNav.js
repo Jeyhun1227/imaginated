@@ -74,7 +74,7 @@ export default function MobileNav() {
             <div className="-py-2 -pr-2 md:hidden">
               <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
                 <span className="sr-only">Open menu</span>
-                <Bell className="w-4 h-4" aria-hidden="true" />
+                {(session) ? <Bell className="w-4 h-4" aria-hidden="true" /> : null}
               </Popover.Button>
             </div>
             <Transition
