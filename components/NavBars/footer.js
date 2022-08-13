@@ -67,7 +67,7 @@ export default function Footer() {
             links: [
                 {
                     name: 'Home',
-                    href: '/home'
+                    href: '/'
                 },
                 {
                     name: 'About',

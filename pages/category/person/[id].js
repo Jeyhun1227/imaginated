@@ -26,10 +26,18 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     seturlType(type)
   }
 
+  const headerSection = useRef(null);
   const aboutSection = useRef(null);
   const offeringsSection = useRef(null);
   const reviewsSection = useRef(null);
   const favoritesSection = useRef(null);
+
+  const sectionRefs = [
+    { section: "about", ref: aboutSection },
+    { section: "offerings", ref: offeringsSection },
+    { section: "reviews", ref: reviewsSection },
+    { section: "favorites", ref: favoritesSection },
+  ];
 
   const handleClick = (ref) => {
     window.scrollTo({
@@ -37,6 +45,44 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       behavior: 'smooth',
     });
   };
+
+  const [visibleSection, setVisibleSection] = useState();
+
+  const getDimensions = ele => {
+    const { height } = ele.getBoundingClientRect();
+    const offsetTop = ele.offsetTop;
+    const offsetBottom = offsetTop + height;
+    return {
+      height,
+      offsetTop,
+      offsetBottom,
+    };
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { height: headerHeight } = getDimensions(headerSection.current);
+      const scrollPosition = window.scrollY + headerHeight;
+      const selected = sectionRefs.find(({ section, ref }) => {
+        const ele = ref.current;
+        if (ele) {
+          const { offsetBottom, offsetTop } = getDimensions(ele);
+          return scrollPosition > offsetTop && scrollPosition < offsetBottom;
+        }
+      });
+      if (selected && selected.section !== visibleSection) {
+        setVisibleSection(selected.section);
+      } 
+      else if (!selected && visibleSection) {
+        setVisibleSection(undefined);
+      }
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [visibleSection]);
 
   let feature = Individual_values.feature? Individual_values.feature.split('||'): [];
   let at_types = ['twitter', 'instagram', 'tiktok']
@@ -209,18 +255,18 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          <div className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
+          <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
             <div>
-              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('');}} className={`cursor-pointer inline-block mt-3.5  ${urlType ? "md:mr-12 mr-8" : "mr-8 md:mr-12 border-b border-black pb-3.5" }`}>
+              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
                 About
               </div>
-              <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'offerings' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "offerings" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
                 Offerings
               </div>
-              <div  onClick={(e) => {handleClick(favoritesSection); chanUrlType('favorites');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'favorites' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(favoritesSection); chanUrlType('favorites');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "favorites" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
                 Favorites
               </div>
-              <div  onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className={`cursor-pointer inline-block mt-3.5 ${urlType === 'reviews' ? "mr-8 md:mr-12 border-b border-black pb-3.5" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "reviews" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
                 Reviews
               </div>
             </div>
