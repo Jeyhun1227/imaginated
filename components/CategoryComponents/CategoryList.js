@@ -27,8 +27,8 @@ export default function CategoryList(props) {
             showSubCategory.push(subCat)
             setshowSubCategory([...showSubCategory])
         }
-    
     }
+
     return (
         <div>
             <div className="mx-auto py-9 max-w-7xl">
