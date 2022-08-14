@@ -70,10 +70,6 @@ export default function SubCategoryPageMain(props) {
       {
         id: 2,
         option: 'Most Popular',
-      },
-      {
-        id: 3,
-        option: 'Most relevant',
       }
     ]
     const [selected, setSelected] = useState(options[0])
