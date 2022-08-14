@@ -16,7 +16,7 @@ export default function MobileNav() {
     },
     {
       name: 'Directory',
-      href: '/directory'
+      href: '/'
     },
     { 
       name: 'Market', 

@@ -61,7 +61,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                 <a href="/about" className="block py-2 pl-3 pr-4 no-underline sm:bg-transparent sm:p-0 text-dim-grey sm:hover:text-dim-grey" aria-current="page">About</a>
               </li>
               <li>
-                <a href="/directory" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Directory</a>
+                <a href="/" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Directory</a>
               </li>
               <li>
                 <a href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</a>

@@ -45,19 +45,19 @@ export default function Footer() {
             links: [
                 {
                     name: 'Art',
-                    href: '/art'
+                    href: 'category/art'
                 },
                 {
                     name: 'Design',
-                    href: '/design'
+                    href: 'category/design'
                 },
                 { 
                     name: 'Photography', 
-                    href: '/photography'
+                    href: 'category/Photography'
                 },
                 {
                     name: 'Writing',
-                    href: '/writing'
+                    href: 'category/writing'
                 }
             ]
         },
@@ -155,7 +155,7 @@ export default function Footer() {
                             <li className="mb-6 text-2xl text-dark-blue">{item.title}</li>
                             {item.links.map((items) => (
                                 <li className="mb-3">
-                                    <a className= "no-underline text-dim-grey" href={`${items.href}-${item.title}`} key={items.name} >{items.name}</a>
+                                    <a className= "no-underline text-dim-grey" href={`${items.href}`} key={items.name} >{items.name}</a>
                                 </li>
                             ))}
                         </ul>
