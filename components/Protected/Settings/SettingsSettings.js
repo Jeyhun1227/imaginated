@@ -22,7 +22,7 @@ export default function SettingsSettings() {
         return classes.filter(Boolean).join(' ')
     }
     return (
-        <div className="border-1 border-whisper lg:h-full">
+        <div className="border border-whisper lg:h-full">
             <div className="p-3">
                 <div className="flex flex-col">
                     <h4 className="mb-0">Settings</h4>
