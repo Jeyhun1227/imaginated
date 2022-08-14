@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import personUsingComputer from '../public/request-category/person-using-computer.png'
 import { ChevronDown, PatchCheckFill } from 'react-bootstrap-icons';
 import client from '../components/GraphQL';
 import { LOAD_CATEGORIES } from "../GraphQL/Queries/Admin";
+import { useQuery, gql, ApolloProvider } from "@apollo/client";
 
 
-export default function RequestListing(category) {
+export default function RequestListing(props) {
 
     const select = [
 
@@ -40,7 +41,23 @@ export default function RequestListing(category) {
     ]
 
     const [selectedCategory, setSelectedCategory] = useState(selectCategory[0])
-
+    
+    
+    const [CategoryValues, setCategoryValues] = useState([]);
+    useEffect(() => {
+        let temp_object_category = {};
+        let temp_category = []
+        if (props.category){
+          temp_category = props.category.getAllCategory.rows.map((e) => {
+            console.log("category:", e.category)
+          })
+        }
+        setCategoryValues(temp_object_category);
+    }, [props.category]);
+    const test = props.category.getAllCategory.rows.map((e, index) => {
+        console.log("category:", e.category, index)
+    });
+    
     return (
         <div>
             <div className="bg-white xl:px-0">
@@ -177,16 +194,16 @@ export default function RequestListing(category) {
                                                                         leaveTo="opacity-0"
                                                                         >
                                                                         <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                                                            {selectCategory.map((source) => (
+                                                                            {props.category.getAllCategory.rows.map((source,index) => (
                                                                             <Listbox.Option
-                                                                                key={source.id}
+                                                                                key={index}
                                                                                 className={({ active }) =>
                                                                                 classNames(
                                                                                     active ? 'text-white bg-whisper' : 'text-black',
                                                                                     'cursor-default select-none relative py-2 pl-3 pr-9'
                                                                                 )
                                                                                 }
-                                                                                value={source}
+                                                                                value={source.category}
                                                                             >
                                                                                 {({ selectedCategory, active }) => (
                                                                                 <>
