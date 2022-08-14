@@ -221,7 +221,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                               <div className='pr-2 text-black no-underline'>
                                 <BoxArrowInRight/>
                               </div>
-                              <span className='block py-2 text-sm text-black no-underline'
+                              <span onClick={signOut} className='block py-2 text-sm text-black no-underline'
                               >
                                 Log out
                               </span>
