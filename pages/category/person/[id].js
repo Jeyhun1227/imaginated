@@ -12,6 +12,11 @@ import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassB
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
   
+  const router = useRouter();
+  const previousRoute = () => {
+    router.back()
+  }
+
   const [urlType, seturlType] = useState();
 
   React.useEffect(() => {
@@ -191,7 +196,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             </div>
-            <a href="#" className="inline-block ml-2 no-underline text-whisper" >Course</a>
+            <a onClick={previousRoute} className="inline-block ml-2 no-underline text-whisper" >Category</a>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
