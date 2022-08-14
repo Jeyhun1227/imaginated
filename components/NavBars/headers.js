@@ -12,11 +12,11 @@ export default function Header({placeholder = 'Search for a creator or category'
   const [notification, setNotification] = useState(false)
 
   const userMenu = [
-    {
-      title: 'Update',
-      href: '/update',
-      svg: <Bell/>
-    },
+    // {
+    //   title: 'Update',
+    //   href: '/update',
+    //   svg: <Bell/>
+    // },
     {
       title: 'Following',
       href: '/following',
