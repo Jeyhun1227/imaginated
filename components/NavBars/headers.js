@@ -74,7 +74,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                 <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login';}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
               </li>
               </> : <> 
-              <li className='flex items-center'>
+              {/* <li className='flex items-center'>
               <Menu as="div" className="relative inline-block">
                   <>
                   <div>
@@ -147,7 +147,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                   </Transition>
                   </>
                 </Menu>
-              </li>
+              </li> */}
               <li className='flex items-center'>
                 <Menu as="div" className="relative inline-block">
                 {({ open }) => (
