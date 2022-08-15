@@ -26,13 +26,13 @@ export default function Header({placeholder = 'Search for a creator or category'
       </svg>
     },
     {
-      title: 'Rating',
-      href: '/rating',
+      title: 'Reviews',
+      href: '/reviews',
       svg: <Star className='fill-black'/>
     },
     {
-      title: 'Setting',
-      href: '/setting',
+      title: 'Settings',
+      href: '/settings',
       svg: <Gear/>
     },
   ]
