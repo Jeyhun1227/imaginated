@@ -18,10 +18,10 @@ export default function CategoryPageSub(props) {
                         <img src={e.imagelink} className="w-8 h-8 rounded-full sm:w-10 sm:h-10"/>
                     </div>
                     <div className="">
-                        <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-nowrap"> 
+                        <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-wrap"> 
                             <a href={'/category/person/' + e.linkname}  className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim">{e.first_name + ' ' + e.last_name} </a>
-                            {(e.aka && e.aka !== '')?<div className="inline-flex items-center justify-center pl-2"> 
-                                <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">A.K.A {e.aka}</span>
+                            {(e.aka && e.aka !== '')?<div className="inline-flex items-center justify-center"> 
+                                <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">({e.aka})</span>
                             </div> :null}
                         </div>
                         <div className="flex space-x-0.5 sm:space-x-1.5 items-center sm:flex-row sm:flex-wrap">
