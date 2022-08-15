@@ -210,7 +210,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
               <div className="flex flex-row space-x-3 flex-nowrap"> 
-                <h2  className="font-semibold md:text-3xl text:xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                <h2  className="font-semibold md:text-3xl text-xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                <h2  className="md:text-lg text-md md:pt-7 truncate text-dim-grey self-end">({Individual_values.aka})</h2>
                 <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                   <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
                 </div> 
@@ -234,7 +235,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
-                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
+                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href='/claim-listing'>
                   <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
                   Claim Profile</button>
               </div>
