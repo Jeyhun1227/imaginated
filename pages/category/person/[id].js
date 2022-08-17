@@ -77,6 +77,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       });
       if (selected && selected.section !== visibleSection) {
         setVisibleSection(selected.section);
+        chanUrlType(selected.section);
       } 
       else if (!selected && visibleSection) {
         setVisibleSection(undefined);
@@ -210,8 +211,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
               <div className="flex flex-row space-x-3 flex-nowrap"> 
-                <h2  className="font-semibold md:text-3xl text-xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
-                <h2  className="md:text-lg text-md md:pt-7 truncate text-dim-grey self-end">({Individual_values.aka})</h2>
+                <h2  className="text-xl font-semibold md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                <h2  className="self-end truncate md:text-lg text-md md:pt-7 text-dim-grey">({Individual_values.aka})</h2>
                 <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                   <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
                 </div> 
@@ -235,9 +236,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
-                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href='/claim-listing'>
-                  <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
-                  Claim Profile</button>
+                <Link href="/claim-listing">
+                  <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
+                    <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                    Claim Profile
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="block col-span-5 md:hidden">
@@ -266,7 +270,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           </div>
           <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
             <div>
-              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
                 About
               </div>
               <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "offerings" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
