@@ -12,11 +12,11 @@ export default function Header({placeholder = 'Search for a creator or category'
   const [notification, setNotification] = useState(false)
 
   const userMenu = [
-    {
-      title: 'Update',
-      href: '/update',
-      svg: <Bell/>
-    },
+    // {
+    //   title: 'Update',
+    //   href: '/update',
+    //   svg: <Bell/>
+    // },
     {
       title: 'Following',
       href: '/following',
@@ -26,13 +26,13 @@ export default function Header({placeholder = 'Search for a creator or category'
       </svg>
     },
     {
-      title: 'Rating',
-      href: '/rating',
+      title: 'Reviews',
+      href: '/reviews',
       svg: <Star className='fill-black'/>
     },
     {
-      title: 'Setting',
-      href: '/setting',
+      title: 'Settings',
+      href: '/settings',
       svg: <Gear/>
     },
   ]
@@ -74,7 +74,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                 <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login';}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
               </li>
               </> : <> 
-              <li className='flex items-center'>
+              {/* <li className='flex items-center'>
               <Menu as="div" className="relative inline-block">
                   <>
                   <div>
@@ -147,7 +147,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                   </Transition>
                   </>
                 </Menu>
-              </li>
+              </li> */}
               <li className='flex items-center'>
                 <Menu as="div" className="relative inline-block">
                 {({ open }) => (
@@ -221,7 +221,7 @@ export default function Header({placeholder = 'Search for a creator or category'
                               <div className='pr-2 text-black no-underline'>
                                 <BoxArrowInRight/>
                               </div>
-                              <span className='block py-2 text-sm text-black no-underline'
+                              <span onClick={signOut} className='block py-2 text-sm text-black no-underline'
                               >
                                 Log out
                               </span>

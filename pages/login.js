@@ -30,7 +30,7 @@ export default function Login() {
                 </div>
                 <div>
                   {!data ? ( <div className="space-y-3">
-                    <button 
+                    {/* <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 font-bold text-white truncate bg-black border border-transparent text-med group" 
                       onClick={() => signIn("apple")}>
@@ -38,7 +38,7 @@ export default function Login() {
                           <Apple className="w-5 h-5 fill-white" aria-hidden="true"/>
                         </span>
                         Continue with Apple
-                    </button>
+                    </button> */}
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 font-bold text-black truncate border border-transparent text-med bg-white-smoke group" 
