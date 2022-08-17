@@ -234,9 +234,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
-                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
-                  <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
-                  Claim Profile</button>
+                <Link href="/claim-listing">
+                  <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
+                    <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                    Claim Profile
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="block col-span-5 md:hidden">
@@ -245,9 +248,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
-                <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href={'/claim-listing'}>
-                  <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
-                  Claim Profile</button>
+                <Link href="/claim-listing">
+                  <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
+                    <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
+                    Claim Profile
+                  </button>
+                </Link>
               </div>
             </div>  
             <div className="col-span-4 sm:col-span-5 md:col-span-2 lg:col-span-2 md:ml-auto">
