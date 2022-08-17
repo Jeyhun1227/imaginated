@@ -40,11 +40,11 @@ export default function CategoryList(props) {
                     {({ open }) => (
                     <>
                         <h3 className="flow-root -my-3">
-                        <Disclosure.Button className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
+                        <div className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
                             <div className="flex flex-wrap items-center justify-between">
                             {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?
                             <div className="flex items-center flex-1 w-0">
-                                <span className="flex items-center">
+                                <Disclosure.Button className="flex items-center">
                                 {open ? (
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -54,14 +54,15 @@ export default function CategoryList(props) {
                                         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                     </svg>
                                 )}
-                                </span>
+                                </Disclosure.Button>
                                 <a href={'category/' + e.category} className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.category}</a>
                             </div>: null}
                             </div>
                             <div className="flex-shrink-0 order-2">
-                            <span className="pl-2 text-lg text-dark-blue">{props.parent}</span>
+                                <span className="pl-2 text-lg text-dark-blue">{props.parent}</span>
                             </div>
-                        </Disclosure.Button>
+                        </div>
+                        
                         </h3>
                         <Disclosure.Panel className="pt-2.5">
                         <div className="space-y-4">
