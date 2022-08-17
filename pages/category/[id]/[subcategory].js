@@ -146,7 +146,7 @@ export default function SubCategoryPageMain(props) {
               </div>
             </div>
             <div className="items-center px-4 sm:bg-white sm:px-0 bg-light-grey sm:col-span-4 xl:ml-28 sm:ml-16">
-              <VerticalCallToAction/>
+              <VerticalCallToAction setBtnText={"Request a Listing"} setLink={"/request-listing"} setLargeTextTop={"Looking for a specific creator but"} setLargeTextBottom={"can't find them? Let us know!"}/>
             </div>
             <div className="items-center px-4 mb-auto sm:px-0 sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
               <div className="mx-auto mt-4 max-w-7xl">
