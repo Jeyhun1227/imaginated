@@ -197,7 +197,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             </div>
-            <a onClick={previousRoute} className="inline-block ml-2 no-underline text-whisper" >Category</a>
+            <a href={'/category/' + Individual_values.category} className="inline-block ml-2 no-underline text-whisper" >{Individual_values.category}</a>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -211,8 +211,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
               <div className="flex flex-row space-x-3 flex-nowrap"> 
-                <h2  className="text-xl font-semibold md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
-                <h2  className="self-end truncate md:text-lg text-md md:pt-7 text-dim-grey">({Individual_values.aka})</h2>
+                <h2  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">({Individual_values.aka})</h2>
                 <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                   <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
                 </div> 

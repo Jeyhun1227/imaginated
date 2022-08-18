@@ -20,7 +20,7 @@ export default function SubCategoryPageSub({values}) {
                     <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-nowrap"> 
                         <a href={'/category/person/' + values.linkname}  className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim">{values.first_name + ' ' + values.last_name} </a>
                         {(values.aka && values.aka !== '')?<div className="inline-flex items-center justify-center pl-2"> 
-                            <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">A.K.A {values.aka}</span>
+                            <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">({values.aka})</span>
                         </div>:null}
                     </div>
                     <div className="flex space-x-0.5 sm:space-x-1.5 items-center sm:flex-row sm:flex-wrap">
