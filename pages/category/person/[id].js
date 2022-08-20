@@ -8,10 +8,10 @@ import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating} from '@mui/material';
 import { Listbox, Transition } from '@headlessui/react'
 import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown } from 'react-bootstrap-icons';
-
+import { signIn, useSession } from "next-auth/react";
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
-  
+  const {data: session} = useSession()
   const router = useRouter();
   const previousRoute = () => {
     router.back()
@@ -261,10 +261,16 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="col-span-4 sm:col-span-5 md:col-span-2 lg:col-span-2 md:ml-auto">
               <div className="flex space-y-3 md:flex-col md:justify-end"> 
                 <button onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className="px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue ">Write a review</button>
-                <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex" href={'#'}>
-                  <Bookmark className="mr-2 fill-dark-blue"/>
-                  <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
-                </button>
+                {!(session) ?
+                  <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex" onClick={() => signIn()}>
+                    <Bookmark className="mr-2 fill-dark-blue"/>
+                    <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
+                  </button>
+                  :
+                  <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex">
+                    <Bookmark className="mr-2 fill-dark-blue"/>
+                    <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
+                  </button>}
               </div>
             </div>
           </div>
