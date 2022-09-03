@@ -3,13 +3,28 @@ import styles from '../../styles/Home.module.css';
 // import mainLogo from '../../public/imaginated_logo.png'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Menu, Transition } from '@headlessui/react'
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } from 'react-bootstrap-icons';
+import GetSearchResults from './headerSearch/HeaderSearch';
 
 
 export default function Header({placeholder = 'Search for a creator or category'}) {
   const {data: session} = useSession()
-  const [notification, setNotification] = useState(false)
+  const [notification, setNotification] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+
+      if(!searchTerm) return;
+      let returnedSearch = await GetSearchResults(searchTerm);
+      setSearchResult(returnedSearch)
+
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
 
   const userMenu = [
     // {
@@ -42,6 +57,7 @@ export default function Header({placeholder = 'Search for a creator or category'
 
   return (
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
+
       <div className="flex items-center justify-between mx-auto flex-nowrap">
           <a href="/" className="flex items-center mr-3">
               <img src="/imaginated_logo.png" className="xl:h-10 sm:h-5 md:h-7" alt="Imaginated Logo" />
@@ -52,8 +68,18 @@ export default function Header({placeholder = 'Search for a creator or category'
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                 </div>
-                <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="block py-2 text-sm text-gray-900 border border-gray-300 text-ellipsis xl:pr-20 sm:pr-10 w-96 pl-11 sm:w-full focus:outline-none" placeholder={placeholder} required/>
+                <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="block py-2 text-sm text-gray-900 border border-gray-300 text-ellipsis xl:pr-20 sm:pr-10 w-96 pl-11 sm:w-full focus:outline-none" placeholder={placeholder} required       onChange={(e) => setSearchTerm(e.target.value)}/>
             </div>
+          </div>
+          <div>
+            {
+              searchResult.map((result) => <div>
+                <div>{result.fullname}</div>
+                <div>{result.subcategory}</div>
+                <div>{result.imagelink}</div>
+
+              </div>)
+            }
           </div>
           <div className="items-center justify-between hidden w-full sm:flex sm:w-auto sm:order-1" id="mobile-menu-4">
             <ul className="flex flex-col mb-0 sm:flex-row xl:space-x-8 sm:space-x-4 sm:mt-0 sm:text-sm sm:font-medium">

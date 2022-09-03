@@ -150,11 +150,11 @@ export default function Footer() {
                 </div>
                 <div className="hidden md:justify-end md:flex">
                     {menu.map((item) => (
-                    <div key={item.title} className="flex w-full pt-2 pl-3 mx-auto sm:mx-0 sm:pl-0">
+                    <div key={item.title + 'name_title'} className="flex w-full pt-2 pl-3 mx-auto sm:mx-0 sm:pl-0">
                         <ul>
                             <li className="mb-6 text-2xl text-dark-blue">{item.title}</li>
                             {item.links.map((items) => (
-                                <li className="mb-3">
+                                <li className="mb-3" key={items.name + 'name'}>
                                     <a className= "no-underline text-dim-grey" href={`${items.href}`} key={items.name} >{items.name}</a>
                                 </li>
                             ))}
@@ -164,7 +164,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col md:hidden">
                     {menu.map((item) => (
-                    <Disclosure as="div" className={`${item.border} border-very-light-grey`}>
+                    <Disclosure as="div" key={item.title + 'name_title'} className={`${item.border} border-very-light-grey`}>
                         {({ open }) => (
                             <>
                             <h3 className="flow-root -my-3">
@@ -194,7 +194,7 @@ export default function Footer() {
                                 <div key={item.title} className="flex justify-start w-full pt-1.5 pl-3 mx-auto sm:mx-0 sm:pl-0">
                                     <ul className="pl-2">   
                                         {item.links.map((items) => (
-                                            <li className="mb-3">
+                                            <li className="mb-3" key={items.name + 'name_link'}>
                                                 <a className= "no-underline text-dim-grey" href={`${items.href}-${item.title}`} key={items.name} >{items.name}</a>
                                             </li>
                                         ))}

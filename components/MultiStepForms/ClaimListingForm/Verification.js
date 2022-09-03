@@ -50,7 +50,6 @@ export default function Verification(props) {
         //     console.log(btnDisabled)
         // }
     };
-    console.log(btnDisabled)
     return (
         
     <div>

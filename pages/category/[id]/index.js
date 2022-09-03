@@ -112,7 +112,7 @@ export async function getServerSideProps({query}){
     const routerID = query.id
 
     const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID }})
-    console.log(category_values.data.getCategoryPage.rows)
+    // console.log(category_values.data.getCategoryPage.rows)
     // let category_values = {}
 
     return {

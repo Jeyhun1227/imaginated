@@ -47,16 +47,10 @@ export default function RequestListing(props) {
     useEffect(() => {
         let temp_object_category = {};
         let temp_category = []
-        if (props.category){
-          temp_category = props.category.getAllCategory.rows.map((e) => {
-            console.log("category:", e.category)
-          })
-        }
+
         setCategoryValues(temp_object_category);
     }, [props.category]);
-    const test = props.category.getAllCategory.rows.map((e, index) => {
-        console.log("category:", e.category, index)
-    });
+
     
     return (
         <div>

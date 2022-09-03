@@ -19,7 +19,6 @@ export default function ClaimListing(props) {
         chosenPlan: "Verified",
         file: null,
     })
-    console.log(formData)
 
     const increment = () => {
         setPage(page + 1)

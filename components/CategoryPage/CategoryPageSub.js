@@ -13,7 +13,7 @@ export default function CategoryPageSub(props) {
         </div>
         <div className="py-6 border-b border-very-light-grey">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                {props.values.map((e) => <div className="flex flex-row items-center flex-shrink-0 truncate">
+                {props.values.map((e) => <div className="flex flex-row items-center flex-shrink-0 truncate" key={e.linkname}>
                     <div className="flex-shrink-0 pr-2.5 overflow-hidden">
                         <img src={e.imagelink} className="w-8 h-8 rounded-full sm:w-10 sm:h-10"/>
                     </div>
