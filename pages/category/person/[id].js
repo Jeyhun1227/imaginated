@@ -568,6 +568,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="my-6">
                 <h5 className="font-bold ">Reviews</h5>
+                {(session) ? <>
                 {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                   <div className="flex flex-row">
                     <div className="pr-4">
@@ -605,9 +606,17 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div> )}
                 <div className="border-t-2 -mt-0.5 border-white">
                   <div className="flex mr-auto truncate lg:w-2/12">
-                    <div onClick={reviewShowMore} className={`items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-1 border-green-vogue ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>
+                    <div onClick={reviewShowMore} className={`items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border border-green-vogue ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>
                   </div>
                 </div>
+                </>:
+                <>
+                <div onClick={() => signIn()} className="flex justify-center px-6 pt-4 pb-6 mt-1 border rounded-md cursor-pointer border-green-vogue">
+                  <div className="space-y-1 text-center">
+                    <h5 className="mb-0 cursor-pointer">Login to See Reviews</h5>
+                  </div>
+                </div>
+                </>}
               </div>
             </div>
           </div>
