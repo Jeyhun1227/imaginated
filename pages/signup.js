@@ -33,8 +33,9 @@ export default function Signup() {
       const fullname = event.target['first-name'].value + ' ' + event.target['last-name'].value;
       const email = event.target['email-address'].value;
       const password = event.target['password'].value;
+      if(password.replace(/\s/g, '').length <= 6) return setFormError('Please Provide a password with 6 characters minimum.');
+
       if(email.length < 4) return setFormError('Please Provide a valid email.')
-      if(password.length < 6) return setFormError('Please Provide a longer password.')
 // // email:  { type: GraphQLString }, password:  { type: GraphQLString }, fullname: {type: GraphQLString}
 
       const newUserCreated = await createUser({
@@ -43,6 +44,8 @@ export default function Signup() {
       if(newUserCreated.data.authenticateCustomUser.errormessage){
         if(newUserCreated.data.authenticateCustomUser.errormessage.length > 0) return setFormError(newUserCreated.data.authenticateCustomUser.errormessage[0])
       }
+      if(newUserCreated.data.authenticateCustomUser.id) return  window.location.href = '/login'
+
       // const newUserCreated = await client.query({query:CREATER_USER_CUSTOM, variables: {fullname, email, password}})
       console.log('newUserCreated: ', newUserCreated);
     }
@@ -85,7 +88,7 @@ export default function Signup() {
                 <div className="hidden mb-8 sm:block">
                   <h2 className="font-bold">Sign Up</h2>
                   <div>
-                    <p className="mb-0 text-dim-grey">By continueing, you agree to Imaginated's</p> 
+                    <p className="mb-0 text-dim-grey">By continuing, you agree to Imaginated's</p> 
                     <div className="flex flex-col">
                       <span>
                         <a href="/termsofservice" className="inline-block pr-1 no-underline">Terms of Service</a>

@@ -11,6 +11,9 @@ getHeaderSearch(
           )
         {
           rows{
+            id
+            linkname
+            type_value
             fullname
             subcategory
             searching

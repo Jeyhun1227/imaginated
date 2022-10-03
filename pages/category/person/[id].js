@@ -5,10 +5,12 @@ import styles from '../../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import client from '../../../components/GraphQL';
-import {Select, MenuItem, Rating} from '@mui/material';
+import {Select, MenuItem, Rating, getListSubheaderUtilityClass} from '@mui/material';
 import { Listbox, Transition } from '@headlessui/react'
-import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown } from 'react-bootstrap-icons';
-import { signIn, useSession } from "next-auth/react";
+import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown, Check, Pen } from 'react-bootstrap-icons';
+import { signIn, useSession, getSession } from "next-auth/react";
+import UserReview from '../../../components/Form/UserReview';
+import axios from 'axios';
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
   const {data: session} = useSession()
@@ -16,8 +18,11 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   const previousRoute = () => {
     router.back()
   }
-
+  const UserReviewSelect = premium_offers.map((e) => {return {name: e.name, id: e.id}})
   const [urlType, seturlType] = useState();
+  const [count_each_rating, setcount_each_rating] = useState({});
+  const [favorites_offers, setfavorites_offers] = useState({})
+  const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
 
   React.useEffect(() => {
     let href_hash = window.location.href;
@@ -114,27 +119,65 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     (premium_offers_types[val_type]) ? premium_offers_types[val_type].push(e): premium_offers_types[val_type]= [e];
   })
 
-  let favorites_offers = {}
-  favorites.map((e) =>{
-    let val_type = (e.category) ? e.category : "Other";
-    let linkName = new URL(e.link).hostname;
-    (favorites_offers[val_type]) ? favorites_offers[val_type].push({...e, linkName}): favorites_offers[val_type]= [{...e, linkName}];
-  })
+
 
   let reviews_free = {1: "YouTube", 2: "Facebook", 3: "Twitter", 4:"TikTok", 5: "Instagram", 6: "Linkedin", 7: "Slack", 8: "Discord"}
-  let count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
   let reviews_category = []
-  reviews = reviews.map((e) => { 
-    let date = new Date(parseInt(e.createdate))
-    let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
-    let premium_name_value = (e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
-    count_each_rating[e.review] += 1
-    if(!reviews_category.includes(premium_name_value))
-      reviews_category.push(premium_name_value)
-    return {...e, createDate_Val, premium_name_value}
-  })
+
+  const userFollow = async () => {
+    let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower`, {IndividualId: Individual_values.id, addIndividual: !getUserFollowingBool, aka: Individual_values.aka, name: Individual_values.first_name + ' ' + Individual_values.last_name, imagelink: Individual_values.imagelink, link: Individual_values.linkname})
+    setgetUserFollowingBool(!getUserFollowingBool)
+  }
+
+  const getUserFollowing = async () => {
+    const getUser = await axios.post(`${window.location.origin}/api/User/GetUser`, {});
+    const getBool = getUser.data.user_follow.find((e) => e.individualid == Individual_values.id) != null;
+    setgetUserFollowingBool(getBool)
+  }
+
+  useEffect(async() => {
+    let temp_count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+    let temp_favorites_offers = {}
+
+    favorites.map((e) =>{
+      let val_type = (e.category) ? e.category : "Other";
+      let linkName = new URL(e.link).hostname;
+      (temp_favorites_offers[val_type]) ? temp_favorites_offers[val_type].push({...e, linkName}): temp_favorites_offers[val_type]= [{...e, linkName}];
+    });
+    setfavorites_offers(temp_favorites_offers)
+    let allreviews = reviews.map((e) => { 
+      let date = new Date(parseInt(e.createdate))
+      let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
+      let premium_name_value = (e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
+      temp_count_each_rating[Math.round(e.review)] += 1
+      if(!reviews_category.includes(premium_name_value))
+        reviews_category.push(premium_name_value)
+      return {...e, createDate_Val, premium_name_value}
+    })
+    setcount_each_rating(temp_count_each_rating)
+    if(session){
+      allreviews = allreviews.reduce((acc, element) => {
+        if (session.id === element.user) {
+          return [element, ...acc];
+        }
+        return [...acc, element];
+      }, []);
+
+      allreviews = allreviews.map((element) => {
+        if (session.id === element.user) element.editable = true;
+        return element
+      })
+      getUserFollowing()
+    }
+    setreviewAll(allreviews)
+
+  }, [session, reviews, favorites]);
+
+
 
   const [reviewAll, setreviewAll] = useState(reviews);
+  // console.log('reviews: ', reviews, reviewAll, session)
+
   const [reviewClickedValue, setreviewClickedValue] = useState();
 
   const reviewClicked = (clickedType) => {
@@ -167,24 +210,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     )
   }
 
-  const select = [
-    {
-      id: 1,
-      name: 'YouTube Channel'
-    },
-    {
-      id: 2,
-      name: 'Facebook Page'
-    },
-    {
-      id: 3,
-      name: 'Udemy'
-    },
-  ]
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+  const editvalue = (id) => {
+    window.open(
+      `${window.location.origin}/settings?type=Ratings&id=${id}`, "_blank");
   }
-  const [selected, setSelected] = useState(select[0])
+
+  
 
   return <div className= "mx-auto max-w-7xl">
         <main className="pt-2 px-2 mt-2.5">
@@ -261,16 +292,11 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="col-span-4 sm:col-span-5 md:col-span-2 lg:col-span-2 md:ml-auto">
               <div className="flex space-y-3 md:flex-col md:justify-end"> 
                 <button onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className="px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue ">Write a review</button>
-                {!(session) ?
-                  <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex" onClick={() => signIn()}>
-                    <Bookmark className="mr-2 fill-dark-blue"/>
-                    <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
+                  <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex" onClick={() => session ? userFollow() : signIn()}>
+                    {(getUserFollowingBool)? <Check className="mr-2 fill-dark-blue"/> : <Bookmark className="mr-2 fill-dark-blue"/>}
+                    <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>{(getUserFollowingBool)? "Profile Saved": "Save this profile"}</span>
                   </button>
-                  :
-                  <button className="flex items-center justify-center px-3 py-2 my-auto text-center bg-white md:inline-flex">
-                    <Bookmark className="mr-2 fill-dark-blue"/>
-                    <span className={`${styles.TextInline} text-dark-blue truncate text-sm`}>Save this profile</span>
-                  </button>}
+
               </div>
             </div>
           </div>
@@ -331,7 +357,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
               <div className="flex justify-between pb-3">
                 <h3 className="">{key}</h3>
-                <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button>
+                {/* <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button> */}
               </div>
               <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
               {premium_offers_types[key].map((value) => <div key={value.name} className="">
@@ -382,151 +408,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           {/* <div className={(urlType === 'reviews')? "my-8" : "hidden" }> */}
           <div className={"my-10"} ref={reviewsSection}>
             <div>
-              <form action="#" method="POST">
-                <div className="p-4 bg-light-grey">
-                  <h5 className="mb-4 font-bold">Student Ratings</h5>
-                  <div className="flex flex-col gap-3 md:gap-8 md:flex-row">
-                    <div className="md:w-1/2">
-                      <div className="mb-4">
-                        {/* <label htmlFor="source" className="block pb-2.5 text-sm font-medium text-black">
-                          What offering would you like to review?
-                        </label> */}
-                        <Listbox value={selected} onChange={setSelected}>
-                          {({ open }) => (
-                            <>
-                              <Listbox.Label className="block pb-2.5 text-sm font-medium text-black">What offering would you like to review?</Listbox.Label>
-                              <div className="relative mt-1">
-                                <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
-                                  <span className="flex items-center">
-                                    <span className="block ml-3 truncate text-trolley-grey">{selected.name}</span>
-                                  </span>
-                                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
-                                    <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
-                                  </span>
-                                </Listbox.Button>
-
-                                <Transition
-                                  show={open}
-                                  leave="transition ease-in duration-100"
-                                  leaveFrom="opacity-100"
-                                  leaveTo="opacity-0"
-                                >
-                                  <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                    {select.map((source) => (
-                                      <Listbox.Option
-                                        key={source.id}
-                                        className={({ active }) =>
-                                          classNames(
-                                            active ? 'text-white bg-whisper' : 'text-black',
-                                            'cursor-default select-none relative py-2 pl-3 pr-9'
-                                          )
-                                        }
-                                        value={source}
-                                      >
-                                        {({ selected, active }) => (
-                                          <>
-                                            <div className="flex items-center">
-                                              <span
-                                                className={classNames(selected ? 'font-semibold' : 'font-normal', 'text-trolley-grey ml-3 block truncate')}
-                                              >
-                                                {source.name}
-                                              </span>
-                                            </div>
-
-                                            {selected ? (
-                                              <span
-                                                className={classNames(
-                                                  active ? 'text-white' : 'text-indigo-600',
-                                                  'absolute inset-y-0 right-0 flex items-center pr-4'
-                                                )}
-                                              >
-                                                <CheckIcon className="w-5 h-5" aria-hidden="true" />
-                                              </span>
-                                            ) : null}
-                                          </>
-                                        )}
-                                      </Listbox.Option>
-                                    ))}
-                                  </Listbox.Options>
-                                </Transition>
-                              </div>
-                            </>
-                          )}
-                        </Listbox>
-                        {/* <select
-                          id="source"
-                          name="source"
-                          autoComplete="source-name"
-                          className="block w-full px-3 py-2 mt-1 bg-white border border-very-light-grey text-trolley-grey sm:text-sm"
-                        >
-                          <option>YouTube Channel</option>
-                          <option>Facebook Page</option>
-                          <option>Udemy</option>
-                        </select> */}
-                      </div>
-                      <div>
-                        <label htmlFor="about" className="pb-2.5 block text-sm font-medium text-gray-700">
-                          How has this offering benefited you?
-                        </label>
-                        <div className="mt-1">
-                          <textarea
-                            id="about"
-                            name="about"
-                            rows={6}
-                            className="block w-full px-3 py-2 mt-1 border border-very-light-grey sm:text-sm"
-                            placeholder="Enter here"
-                            defaultValue={''}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-2.5 md:w-1/2">
-                      <div className="mb-3 md:mb-4">
-                        <label htmlFor="source" className="pb-2.5 block text-sm font-medium text-black">
-                          Your rating of this offering?
-                        </label>
-                        <Rating
-                          name="Form Review"
-                          defaultValue={0}
-                          precision={0.5}
-                          sx={{
-                          color: "yellow",
-                          '& .MuiSvgIcon-root': {
-                            fill: '#F8DC81'
-                          },
-                          '& .css-dqr9h-MuiRating-label': {
-                          display: 'block'
-                          }
-                        }}
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="about" className="pb-2.5 block text-sm font-medium text-gray-700">
-                          What do you think could be better?
-                        </label>
-                        <div className="mt-1">
-                          <textarea
-                            id="about"
-                            name="about"
-                            rows={6}
-                            className="block w-full px-3 py-2 mt-1 border shadow-sm border-very-light-grey sm:text-sm"
-                            placeholder="Enter here"
-                            defaultValue={''}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-3 text-left ">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
-                    >
-                      Submit Review
-                    </button>
-                  </div>
-                </div>
-              </form>
+              <UserReview IndividualId={Individual_values.id} editable={false} UserReviewSelect={UserReviewSelect}/>
               <div className="flex flex-col gap-8 md:flex-row">
                 <div className="md:w-1/2">
                   <h5 className="mb-6 font-bold">Student Ratings</h5>
@@ -579,6 +461,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                       <div className="flex flex-row space-x-4">
                         {(rev.validation === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Validated Review</div></div> : <div className="inline-flex items-center justify-center space-x-2"><HourglassBottom className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Pending Validated</div></div>}
                         {(rev.verified === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Verified User</div></div> : <div className="inline-flex items-center justify-center space-x-2"><PersonXFill className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Unverified User</div></div>}
+                        {(rev.editable) ? <div className="inline-flex items-center justify-center space-x-2 editable" onClick={() => editvalue(rev.id)}><Pen className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Edit</div></div>:null}
                       </div>
                     </div>
                   </div>
@@ -598,7 +481,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
                     <div className="text-dim-grey">Review for {rev.premium_name_value}</div>
                   </div>
-                  <h4 className="font-semibold">"{rev.title}"</h4>
+                  {/* <h4 className="font-semibold">"{rev.title}"</h4> */}
                   <div className="pb-2 mt-4 font-semibold">How has this benefited you?</div>
                   <div>{rev.like}</div>
                   <div className="pb-2 mt-4 font-semibold">What do you think could be better?</div>
@@ -675,10 +558,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
 }
 
-export async function getServerSideProps({query}){
-    const IndividualID = query.id
-    const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID }})
+export async function getServerSideProps(ctx){
+    const IndividualID = ctx.query.id
+    const session_backend = await getSession(ctx);
+    const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend.id }})
     let free_offers = Individual_values.data.getEachIndividual.free_offers;
+
     if(free_offers.length > 0) 
       free_offers = free_offers[0] 
     return {

@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react"
 import Layout from '../components/Layouts/Layout'
 import client from '../components/GraphQL';
 import { ApolloProvider } from "@apollo/client";
-
+import './styles.css';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 

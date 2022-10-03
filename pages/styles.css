@@ -1,0 +1,20 @@
+a{
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+.editable{
+  cursor: pointer;
+}
+
+.editable2{
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.each-results-search{
+  width: 100%;
+}
+.all-results-search{
+  width: 200px;
+}

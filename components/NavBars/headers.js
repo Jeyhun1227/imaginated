@@ -10,7 +10,6 @@ import GetSearchResults from './headerSearch/HeaderSearch';
 
 export default function Header(props) {
   let placeholder = 'Search for a creator or category'
-  console.log('props: ', props)
   const {data: session} = useSession()
   const [notification, setNotification] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +39,7 @@ export default function Header(props) {
     // },
     {
       title: 'Following',
-      href: '/following',
+      href: '/settings?type=Following',
       svg: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
         <path id="Layer" fillRule="evenodd" className="" d="m3.9 7.1c-0.6-0.5-0.9-1.3-0.9-2.1 0-0.8 0.3-1.6 0.9-2.1 0.5-0.6 1.3-0.9 2.1-0.9 0.8 0 1.6 0.3 2.1 0.9 0.6 0.5 0.9 1.3 0.9 2.1 0 0.8-0.3 1.6-0.9 2.1-0.5 0.6-1.3 0.9-2.1 0.9-0.8 0-1.6-0.3-2.1-0.9zm3.5-3.5c-0.4-0.4-0.9-0.6-1.4-0.6-0.5 0-1 0.2-1.4 0.6-0.4 0.4-0.6 0.9-0.6 1.4 0 0.5 0.2 1 0.6 1.4 0.4 0.4 0.9 0.6 1.4 0.6 0.5 0 1-0.2 1.4-0.6 0.4-0.4 0.6-0.9 0.6-1.4 0-0.5-0.2-1-0.6-1.4zm4.6 9.4c0 1-1 1-1 1h-10c0 0-1 0-1-1 0-1 1-4 6-4 5 0 6 3 6 4zm-1 0c0-0.2-0.2-1-0.8-1.7-0.7-0.6-1.9-1.3-4.2-1.3-2.3 0-3.5 0.7-4.2 1.3-0.6 0.7-0.8 1.5-0.8 1.7z"/>
         <path id="Layer" fillRule="evenodd" className="" d="m13.5 4.9c1.4-1.4 4.9 1.1 0 4.3-4.9-3.2-1.4-5.7 0-4.3z"/>
@@ -48,12 +47,12 @@ export default function Header(props) {
     },
     {
       title: 'Reviews',
-      href: '/reviews',
+      href: '/settings?type=Ratings',
       svg: <Star className='fill-black'/>
     },
     {
       title: 'Settings',
-      href: '/settings',
+      href: '/settings?type=Settings',
       svg: <Gear/>
     },
   ]
@@ -190,7 +189,7 @@ export default function Header(props) {
                     <Menu.Button className="inline-flex items-center content-center justify-center pt-1">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div> 
                       <span className="flex items-center">

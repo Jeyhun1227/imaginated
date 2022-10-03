@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import HeroNoBtn from "../../Hero/HeroNoBtn";
 import SettingsFollowing from "./SettingsFollowing"
@@ -7,8 +7,19 @@ import SettingsSettings from "./SettingsSettings";
 import { Star, Gear, BoxArrowInRight, ChevronDown, CheckIcon } from 'react-bootstrap-icons';
 import { Listbox, Transition } from '@headlessui/react'
 
-export default function SettingsPageMobile(user) {
+export default function SettingsPageMobile(props) {
+    const [userFollow, setUserFollow] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const [user, setUser] = useState([]);
+    const [type, setType] = useState(0);
 
+    useEffect(async () => {
+        setUserFollow(props.userFollow)
+        setReviews(props.reviews)
+        setUser(props.user)
+        setType(props.type)
+        setSelected(menuTitles[props.type])
+      }, [props]);
     const menuTitles = [
         {   
             id: 1, 
@@ -17,22 +28,22 @@ export default function SettingsPageMobile(user) {
                     <path id="Layer" fillRule="evenodd" className="" d="m3.9 7.1c-0.6-0.5-0.9-1.3-0.9-2.1 0-0.8 0.3-1.6 0.9-2.1 0.5-0.6 1.3-0.9 2.1-0.9 0.8 0 1.6 0.3 2.1 0.9 0.6 0.5 0.9 1.3 0.9 2.1 0 0.8-0.3 1.6-0.9 2.1-0.5 0.6-1.3 0.9-2.1 0.9-0.8 0-1.6-0.3-2.1-0.9zm3.5-3.5c-0.4-0.4-0.9-0.6-1.4-0.6-0.5 0-1 0.2-1.4 0.6-0.4 0.4-0.6 0.9-0.6 1.4 0 0.5 0.2 1 0.6 1.4 0.4 0.4 0.9 0.6 1.4 0.6 0.5 0 1-0.2 1.4-0.6 0.4-0.4 0.6-0.9 0.6-1.4 0-0.5-0.2-1-0.6-1.4zm4.6 9.4c0 1-1 1-1 1h-10c0 0-1 0-1-1 0-1 1-4 6-4 5 0 6 3 6 4zm-1 0c0-0.2-0.2-1-0.8-1.7-0.7-0.6-1.9-1.3-4.2-1.3-2.3 0-3.5 0.7-4.2 1.3-0.6 0.7-0.8 1.5-0.8 1.7z"/>
                     <path id="Layer" fillRule="evenodd" className="" d="m13.5 4.9c1.4-1.4 4.9 1.1 0 4.3-4.9-3.2-1.4-5.7 0-4.3z"/>
                 </svg> , 
-            component:<SettingsFollowing user={user}/>
+            component:<SettingsFollowing userFollow={userFollow}/>
         },
         {   
             id: 2, 
             title: 'Ratings', 
             icon: <Star className="hover:fill-black"/>, 
-            component:<SettingsRatings user={user}/>
+            component:<SettingsRatings reviews={props.reviews}/>
         },
         { 
             id: 3,
             title: 'Settings', 
             icon: <Gear/>, 
-            component:<SettingsSettings user={user}/>},
+            component:<SettingsSettings userFollow={userFollow} user={props.user}/>},
     ]
     
-    const [selected, setSelected] = useState(menuTitles[0])
+    const [selected, setSelected] = useState(menuTitles[type])
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -41,7 +52,7 @@ export default function SettingsPageMobile(user) {
     <div className="">
         <section className="block px-4 sm:hidden sm:px-0">
             <div className="pt-6 mx-auto max-w-7xl">
-                <Listbox value={selected} onChange={setSelected}>
+                <Listbox selected={selected} onChange={setSelected}>
                 {({ open }) => (
                     <>
                     <div className="relative mt-1">

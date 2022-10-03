@@ -6,24 +6,24 @@ export default function Verification(props) {
 
     const hiddenFileInput = useRef(null);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (props.formData.file != null) {
-            let fileSize = props.formData.file.size;
-            let fileMb = fileSize / 1024 ** 2;
-            let fileType = props.formData.file.type;
-            console.log(fileType)
-            if (fileMb > 0) {
-                window.alert("File type too large.");
-                // setBtnDisabled(true);
-                console.log(btnDisabled) 
-            }
-            if (fileType != "image/png" || fileType != "image/jpeg" ) {
-                window.alert("File does not support. You must use .png or .jpg ");
-                // setBtnDisabled(true);
-            }
-        }
-    }, [props]);
+    //     if (props.formData.file != null) {
+    //         let fileSize = props.formData.file.size;
+    //         let fileMb = fileSize / 1024 ** 2;
+    //         let fileType = props.formData.file.type;
+    //         console.log(fileType)
+    //         if (fileMb > 0) {
+    //             window.alert("File type too large.");
+    //             // setBtnDisabled(true);
+    //             console.log(btnDisabled) 
+    //         }
+    //         if (fileType != "image/png" || fileType != "image/jpeg" ) {
+    //             window.alert("File does not support. You must use .png or .jpg ");
+    //             // setBtnDisabled(true);
+    //         }
+    //     }
+    // }, [props]);
     
     const handleClick = event => {
         hiddenFileInput.current.click();
@@ -67,7 +67,7 @@ export default function Verification(props) {
                             <div className="flex flex-col py-3 text-center ">
                                 <label className="pb-1 mb-0 text-sm text-dim-grey">Driver's License in Your Name (JPG, PNG, GIF, BMP or PDF) format only.</label>
                                 <input className="sr-only" type="file" name="file" 
-                                accept=".jpg,.png,.pdf,.gif,.bmp"
+                                accept=".jpg,.png,.pdf"
                                 ref={hiddenFileInput} 
                                 onChange={handleChange}/>
                                 <button
@@ -86,11 +86,12 @@ export default function Verification(props) {
                                 <button
                                 type="submit"
                                 className= "inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-16 bg-dark-blue"
-                                onClick={props.nextPage}
+                                onClick={props.submitForm}
                                 disabled={btnDisabled}
                                 >
                                 Submit
                                 </button>
+                                {(props.formError)? <div>{props.formError}</div>:null}
                             </div>
                             <div className="py-3 text-left ">
                                 <button

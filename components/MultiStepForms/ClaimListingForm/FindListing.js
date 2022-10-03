@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from 'next/image'
 import placeHolder from "../../../public/place-holder/placeHolder-620x270.jpg"
-
+import GetSearchResults from '../../NavBars/headerSearch/HeaderSearch';
+import { Menu, Transition, Combobox  } from '@headlessui/react'
 
 
 export default function FindListing(props) {
@@ -12,6 +13,26 @@ export default function FindListing(props) {
         behavior: 'smooth'
         });
     };
+    const [searchTerm, setsearchTerm] = useState('');
+    const [searchResult, setSearchResult] = useState([]);
+    // const [searchClickedResult, setSearchClickedResult] = useState([]);
+    const SearchIndividual = (each) => {
+        console.log('each: ', each)
+        props.setFormData({...props.formData, listing: each.fullname, individual: each.id})
+        props.nextPage()
+    }
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(async () => {
+          if(!searchTerm) return;
+          let returnedSearch = await GetSearchResults(searchTerm);
+          let cleanedNames = returnedSearch.filter((e) => e.type_value === 'Individual')
+          setSearchResult(cleanedNames)
+    
+        }, 1000)
+    
+        return () => clearTimeout(delayDebounceFn)
+      }, [searchTerm])
 
     return (
     <div>
@@ -25,15 +46,26 @@ export default function FindListing(props) {
                             </div>
                             <div className="flex items-center justify-between w-full pt-4">
                                 <input type="text" 
-                                value={props.formData.listing} 
-                                onChange={(event) => props.setFormData({...props.formData, listing: event.target.value})} 
+                                value={searchTerm} 
+                                // onChange={(event) => props.setFormData({...props.formData, listing: event.target.value})} 
+                                onChange={(event) => setsearchTerm(event.target.value)}
                                 className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" 
                                 placeholder="Search..." 
                                 required/>
-                                <button onClick={props.nextPage} type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-6 py-2 ml-4 overflow-hidden text-sm text-white border border-black sm:px-12 bg-dark-blue hover:text-indigo-500">
+                                <button className="inline-flex items-center justify-end flex-shrink-0 order-2 px-6 py-2 ml-4 overflow-hidden text-sm text-white border border-black sm:px-12 bg-dark-blue hover:text-indigo-500">
                                     <span className="text-sm text-white truncate hover:text-indigo-500">Claim</span>
                                 </button>
                             </div>
+                            <div>
+
+                            <div className='all-results-search'>{searchResult.map((result) => <div className='each-results-search' key={result.id} onClick={() => SearchIndividual(result)}>
+                                <div>{result.fullname}</div>
+                                <div>{result.subcategory}</div>
+                                <div>{result.imagelink}</div>
+                            </div>)}
+                            </div>
+                            </div>
+
                         </div>
                         <div className="py-12">
                             <div className="text-left sm:text-center">

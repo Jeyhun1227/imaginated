@@ -4,13 +4,16 @@ const LOAD_INDIVIDUAL_PAGE = gql`
 query
 getEachIndividual(
       $linkname: String 
+      $session: String
       )
       {
         getEachIndividual(
             linkname: $linkname 
+            session: $session
           )
         {
           rows{
+            id
             first_name
             last_name
             linkname
@@ -38,6 +41,7 @@ getEachIndividual(
             discord
           }
           premium_offers{
+            id
             name
             description
             subheader

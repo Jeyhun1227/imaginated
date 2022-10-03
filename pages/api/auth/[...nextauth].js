@@ -36,7 +36,7 @@ export default (req, res) =>{
             const user_all = user_custom.rows[0];
             const match = await bcrypt.compare(credentials.password, user_all.password);
             // console.log(user_all, match)
-            if(match) return {userid: user_all.userid, verified: user_all.verified, email: user_all.email, name: user_all.name}
+            if(match) return {id: user_all.userid, verified: user_all.verified, email: user_all.email, name: user_all.name}
           }
           return null
 
