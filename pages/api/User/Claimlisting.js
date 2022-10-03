@@ -25,8 +25,8 @@ const handler = nc({  onError: (err, req, res, next) => {
 let S3 = new S3Client({
     region: 'us-east-1', 
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
     },
     sslEnabled: false,
     s3ForcePathStyle: true,
