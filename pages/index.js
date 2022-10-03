@@ -19,7 +19,9 @@ export async function getServerSideProps(){
   const { data } = await client.query({query:LOAD_CATEGORIES})
   // const { data } = useQuery(LOAD_CATEGORIES);
   // const load_subCategories = useQuery(LOAD_SUBCATEGORIES);
+  
   const load_subCategories = await client.query({query: LOAD_SUBCATEGORIES})
+
   return {
     props: {
       subcategory: load_subCategories.data,

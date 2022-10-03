@@ -7,7 +7,7 @@ import SettingsSettings from "./SettingsSettings";
 import { Star, Gear, BoxArrowInRight, ChevronDown, CheckIcon } from 'react-bootstrap-icons';
 import { Listbox, Transition } from '@headlessui/react'
 
-export default function SettingsPageMobile() {
+export default function SettingsPageMobile(user) {
 
     const menuTitles = [
         {   
@@ -17,19 +17,19 @@ export default function SettingsPageMobile() {
                     <path id="Layer" fillRule="evenodd" className="" d="m3.9 7.1c-0.6-0.5-0.9-1.3-0.9-2.1 0-0.8 0.3-1.6 0.9-2.1 0.5-0.6 1.3-0.9 2.1-0.9 0.8 0 1.6 0.3 2.1 0.9 0.6 0.5 0.9 1.3 0.9 2.1 0 0.8-0.3 1.6-0.9 2.1-0.5 0.6-1.3 0.9-2.1 0.9-0.8 0-1.6-0.3-2.1-0.9zm3.5-3.5c-0.4-0.4-0.9-0.6-1.4-0.6-0.5 0-1 0.2-1.4 0.6-0.4 0.4-0.6 0.9-0.6 1.4 0 0.5 0.2 1 0.6 1.4 0.4 0.4 0.9 0.6 1.4 0.6 0.5 0 1-0.2 1.4-0.6 0.4-0.4 0.6-0.9 0.6-1.4 0-0.5-0.2-1-0.6-1.4zm4.6 9.4c0 1-1 1-1 1h-10c0 0-1 0-1-1 0-1 1-4 6-4 5 0 6 3 6 4zm-1 0c0-0.2-0.2-1-0.8-1.7-0.7-0.6-1.9-1.3-4.2-1.3-2.3 0-3.5 0.7-4.2 1.3-0.6 0.7-0.8 1.5-0.8 1.7z"/>
                     <path id="Layer" fillRule="evenodd" className="" d="m13.5 4.9c1.4-1.4 4.9 1.1 0 4.3-4.9-3.2-1.4-5.7 0-4.3z"/>
                 </svg> , 
-            component:<SettingsFollowing/>
+            component:<SettingsFollowing user={user}/>
         },
         {   
             id: 2, 
             title: 'Ratings', 
             icon: <Star className="hover:fill-black"/>, 
-            component:<SettingsRatings/>
+            component:<SettingsRatings user={user}/>
         },
         { 
             id: 3,
             title: 'Settings', 
             icon: <Gear/>, 
-            component:<SettingsSettings/>},
+            component:<SettingsSettings user={user}/>},
     ]
     
     const [selected, setSelected] = useState(menuTitles[0])

@@ -1,10 +1,51 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Apple, CheckLg } from 'react-bootstrap-icons';
-import womanBehindComputer from '../public/signup/WomanBehindComputer_336x306.png'
+import womanBehindComputer from '../public/signup/WomanBehindComputer_336x306.png';
+import {CREATER_USER_CUSTOM} from '../GraphQL/Mutations/Auth'
 import Image from 'next/image'
+import client from '../components/GraphQL';
+import { useMutation } from "@apollo/client";
+
+import { useEffect, useState } from "react";
 
 export default function Signup() {
+
+    const [createUser, { mutation_error_create }] = useMutation(CREATER_USER_CUSTOM);
     const {data} = useSession()
+    useEffect(() => {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const return_url = urlParams.get('return_url') ? urlParams.get('return_url') : '/'
+      if (data) {
+  
+          window.location.href = return_url
+  
+      }
+    }, [data]);
+    const [FormError, setFormError] = useState();
+    
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const firstName = event.target['first-name'].value
+      const lastName = event.target['last-name'].value
+      if(firstName.length < 2) return setFormError('Please Provide your first name.')
+      if(lastName.length < 2) return setFormError('Please Provide your last name.')
+      const fullname = event.target['first-name'].value + ' ' + event.target['last-name'].value;
+      const email = event.target['email-address'].value;
+      const password = event.target['password'].value;
+      if(email.length < 4) return setFormError('Please Provide a valid email.')
+      if(password.length < 6) return setFormError('Please Provide a longer password.')
+// // email:  { type: GraphQLString }, password:  { type: GraphQLString }, fullname: {type: GraphQLString}
+
+      const newUserCreated = await createUser({
+        variables: {fullname, email, password},
+      });
+      if(newUserCreated.data.authenticateCustomUser.errormessage){
+        if(newUserCreated.data.authenticateCustomUser.errormessage.length > 0) return setFormError(newUserCreated.data.authenticateCustomUser.errormessage[0])
+      }
+      // const newUserCreated = await client.query({query:CREATER_USER_CUSTOM, variables: {fullname, email, password}})
+      console.log('newUserCreated: ', newUserCreated);
+    }
   return (
     <div>
       <div className="bg-white xl:px-0">
@@ -119,7 +160,7 @@ export default function Signup() {
                     </span>
                   </h4>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="space-y-3 shadow-sm">
                     <div className="flex flex-row space-x-3">
@@ -142,7 +183,7 @@ export default function Signup() {
                         Last Name
                       </label>
                       <input
-                        id="email-address"
+                        id="last-name"
                         name="lname"
                         type="text"
                         autoComplete="family-name"
@@ -183,10 +224,11 @@ export default function Signup() {
                   </div>
                   <div className="mt-2 text-center">
                     <p className="pb-4 text-sm no-underline text-dim-grey">Password must be at least 6 characters in length</p>
+                    {FormError ? <div className="FormErrorSubmission">{FormError}</div>: null}
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 text-white border border-transparent text-med bg-dark-blue group" 
-                      onClick={() => Signup()}>
+                      >
                         Sign Up
                     </button>
                   </div>

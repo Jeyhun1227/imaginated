@@ -20,3 +20,12 @@ export default function Layout({ children }) {
     
   )
 }
+
+export async function getServerSideProps(ctx){
+  console.log('testtest')
+  const user = await getSession(ctx)
+  console.log("user: ", user)
+  return {    props: {
+    user}
+  }
+}

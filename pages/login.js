@@ -1,10 +1,33 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+
 import { Apple, Facebook } from 'react-bootstrap-icons';
 import manBehindComputer from '../public/logIn/ManBehindComputer_427x574.png'
 import Image from 'next/image'
 
-export default function Login() {
-    const {data} = useSession()
+export default function Login({return_url}) {
+  const {data} = useSession()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [FormError, setFormError] = useState();
+
+  useEffect(() => {
+    if (data) {
+
+        window.location.href = return_url
+
+    }
+  }, [data]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const signedin = await signIn('credentials', {      redirect: false,
+      password: password,
+      email: email})
+    if(!signedin.ok) return setFormError('Incorrect Email or Password')
+    window.location.href = return_url
+  }
+
   return (
     <div>
       <div className="bg-white xl:px-0">
@@ -19,7 +42,7 @@ export default function Login() {
                   <h2 className="font-bold">Log In</h2>
                   <span>
                     <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                    <a href="/signup" className="inline-block pl-1 no-underline">Sign Up</a>
+                    <a href={`/signup?return_url=${return_url}`} className="inline-block pl-1 no-underline">Sign Up</a>
                     <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated's</p>
                     <span className="flex flex-row">
                       <a href="/termsofservice" className="pr-1 no-underline">Terms of Service</a>
@@ -87,11 +110,11 @@ export default function Login() {
                     </span>
                   </h4>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="space-y-3 shadow-sm">
                     <div>
-                      <label htmlFor="email-address" className="sr-only">
+                      <label htmlFor="email-address" className="sr-only" >
                         Email address
                       </label>
                       <input
@@ -99,13 +122,14 @@ export default function Login() {
                         name="email"
                         type="email"
                         autoComplete="email"
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         placeholder="Email address"
                       />
                     </div>
                     <div>
-                      <label htmlFor="password" className="sr-only">
+                      <label htmlFor="password" className="sr-only" >
                         Password
                       </label>
                       <input
@@ -113,6 +137,7 @@ export default function Login() {
                         name="password"
                         type="password"
                         autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         placeholder="Password"
@@ -121,15 +146,16 @@ export default function Login() {
                   </div>
                   <div className="text-center">
                     <a href="#" className="text-sm no-underline">Forgot Password?</a>
+                    {FormError ? <div className="FormErrorSubmission">{FormError}</div>: null}
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 text-white border border-transparent text-med bg-dark-blue group" 
-                      onClick={() => signIn()}>
+                      >
                         Log In
                     </button>
                     <span>
                       <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                      <a href="/signup" className="inline-block pl-1 no-underline">Sign Up</a>
+                      <a href={`/signup?return_url=${return_url}`} className="inline-block pl-1 no-underline">Sign Up</a>
                     </span>
                   </div>
                 </form>
@@ -141,4 +167,14 @@ export default function Login() {
     </div>
   );
   
+}
+export async function getServerSideProps({query}){
+
+  const return_url = query.return_url ? query.return_url : '/'
+
+  return {
+    props: {
+      return_url    
+    }
+  }
 }

@@ -2,12 +2,12 @@ import {useState} from "react";
 import { useSession } from "next-auth/react";
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 
-export default function SettingsSettings() {
+export default function SettingsSettings(user) {
     
     const [emailPasswordShown, setEmailPasswordShown] = useState(false);
     const [newPasswordShown, setNewPasswordShown] = useState(false);
     const [renewPasswordShown, setRenewPasswordShown] = useState(false);
-
+    console.log('SettingsSettings, user: ', user)
     const toggleEmailPassword = () => {
         setEmailPasswordShown(!emailPasswordShown);
     };

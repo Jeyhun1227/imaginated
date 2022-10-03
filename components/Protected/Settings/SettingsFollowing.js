@@ -31,60 +31,6 @@ export default function SettingsFollowing() {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="flex py-3">
-                                    <div className="flex-shrink-0 w-8 h-8 overflow-hidden border rounded-full sm:w-10 sm:h-10 border-whisper">
-                                        <img src="" className="object-cover object-center w-full h-full"/>
-                                    </div>
-                                    <div className="flex items-center justify-between w-full ml-4">
-                                        <div className="flex flex-col flex-1">
-                                            <h5>name name</h5>
-                                            <div className="flex items-end justify-between flex-1 text-sm">
-                                                <p className="mb-0 text-dim-grey ">A.K.A test</p>
-                                            </div>
-                                        </div>
-                                        <div className="">
-                                            <button className="hover:bg-dark-blue hover:text-white items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-2 border-green-vogue">
-                                                Unfollow
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="flex py-3">
-                                    <div className="flex-shrink-0 w-8 h-8 overflow-hidden border rounded-full sm:w-10 sm:h-10 border-whisper">
-                                        <img src="" className="object-cover object-center w-full h-full"/>
-                                    </div>
-                                    <div className="flex items-center justify-between w-full ml-4">
-                                        <div className="flex flex-col flex-1">
-                                            <h5>name name</h5>
-                                            <div className="flex items-end justify-between flex-1 text-sm">
-                                                <p className="mb-0 text-dim-grey ">A.K.A test</p>
-                                            </div>
-                                        </div>
-                                        <div className="">
-                                            <button className="hover:bg-dark-blue hover:text-white items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-2 border-green-vogue">
-                                                Unfollow
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="flex py-3">
-                                    <div className="flex-shrink-0 w-8 h-8 overflow-hidden border rounded-full sm:w-10 sm:h-10 border-whisper">
-                                        <img src="" className="object-cover object-center w-full h-full"/>
-                                    </div>
-                                    <div className="flex items-center justify-between w-full ml-4">
-                                        <div className="flex flex-col flex-1">
-                                            <h5>name name</h5>
-                                            <div className="flex items-end justify-between flex-1 text-sm">
-                                                <p className="mb-0 text-dim-grey ">A.K.A test</p>
-                                            </div>
-                                        </div>
-                                        <div className="">
-                                            <button className="hover:bg-dark-blue hover:text-white items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border-2 border-green-vogue">
-                                                Unfollow
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <div className="text-left">

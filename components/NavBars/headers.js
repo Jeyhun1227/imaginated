@@ -8,15 +8,16 @@ import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } fr
 import GetSearchResults from './headerSearch/HeaderSearch';
 
 
-export default function Header({placeholder = 'Search for a creator or category'}) {
+export default function Header(props) {
+  let placeholder = 'Search for a creator or category'
+  console.log('props: ', props)
   const {data: session} = useSession()
   const [notification, setNotification] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-
+  var location_href = null;
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
-
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
       setSearchResult(returnedSearch)
@@ -25,6 +26,11 @@ export default function Header({placeholder = 'Search for a creator or category'
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
+
+  useEffect(() => {
+    location_href = window.location.pathname;
+
+  })
 
   const userMenu = [
     // {
@@ -117,7 +123,7 @@ export default function Header({placeholder = 'Search for a creator or category'
               </li>
               {!(session) ? <>
               <li>
-                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login';}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
+                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
               </li>
               </> : <> 
               {/* <li className='flex items-center'>
@@ -328,3 +334,7 @@ export default function Header({placeholder = 'Search for a creator or category'
     // </div>
   )
 }
+
+
+
+
