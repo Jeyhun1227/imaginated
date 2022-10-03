@@ -5,11 +5,14 @@ query
     getCategoryPage(
       $categoryName: String 
       $subcategory: String
+      $offset: Int
       )
       {
         getCategoryPage(
           categoryName: $categoryName 
-          subcategory: $subcategory)
+          subcategory: $subcategory
+          offset: $offset
+          )
         {
           rows{
             id

@@ -4,6 +4,9 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from 'bcrypt';
+const PoolConnection = require('../postgressql')
 
 const prisma = new PrismaClient();
 
@@ -19,38 +22,59 @@ export default (req, res) =>{
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       }),
       CredentialsProvider({
-        // The name to display on the sign in form (e.g. "Sign in with...")
         name: "Credentials",
-        // The credentials is used to generate a suitable form on the sign in page.
-        // You can specify whatever fields you are expecting to be submitted.
-        // e.g. domain, username, password, 2FA token, etc.
-        // You can pass any HTML attribute to the <input> tag through the object.
+
         credentials: {
-          username: { label: "Username", type: "text", placeholder: "jsmith" },
+          username: { label: "Email", type: "text", placeholder: "email" },
           password: {  label: "Password", type: "password" }
         },
         async authorize(credentials, req) {
-          // Add logic here to look up the user from the credentials supplied
-          const user = { id: 1, name: "J Smith", email: "jsmith@example.com" }
-    
-          if (user) {
-            // Any object returned will be saved in `user` property of the JWT
-            return user
-          } else {
-            // If you return null then an error will be displayed advising the user to check their details.
-            return null
-    
-            // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          // console.log('credentials: ', credentials.email, credentials.password)
+          const user_custom = await PoolConnection.query('SELECT DISTINCT * FROM "USER_CUSTOM" WHERE EMAIL = $1', [credentials.email])
+          if(user_custom.rows.length > 0) {
+            // console.log('customer', user_custom.rows)
+            const user_all = user_custom.rows[0];
+            const match = await bcrypt.compare(credentials.password, user_all.password);
+            // console.log(user_all, match)
+            if(match) return {id: user_all.userid, verified: user_all.verified, email: user_all.email, name: user_all.name}
           }
+          return null
+
         }
       })
     ],
     debug: process.env.NODE_ENV === "development",
     secret: process.env.AUTH_SECRET,
+    callbacks: {
+      jwt: ({ token, user }) => {
+        // first time jwt callback is run, user object is available
+        // console.log("JWT: ", 'token: ', token, 'user: ', user)
+        if (user) {
+          token.id = user.id;
+        }
+  
+        return token;
+      },
+      session: ({ session, token }) => {
+        // console.log('SESSION: ','session: ', session, 'token: ', token)
+        if (token) {
+          session.id = token.id;
+        }
+  
+        return session;
+      },
+    },
+    session: {
+      strategy: 'jwt',
+    },
     jwt: {
       secret: process.env.JWT_SECRET,
     },
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
+    pages: {
+      signIn: '/login',
+      newUser: '/' // New users will be directed here on first sign in (leave the property out if not of interest)
+    }
 
   });
 

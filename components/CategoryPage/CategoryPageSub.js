@@ -7,26 +7,38 @@ import Link from 'next/link';
 
 export default function CategoryPageSub(props) {
 
-  return  <div>
-        <h5><Link href={props.category + '/' + props.subcategory} className={styles.CategoryMainTitle} >{props.subcategory}
-        </Link>
-        </h5>
-        <div>
-            <div className={styles.CategoryEachContainer}>
-                {props.values.map((e) => <div>
-                    {/* <div className={styles.CategoryImageDiv}>
-                        <img src={e.imagelink} className={styles.CategoryImage}/>
-                    </div> */}
-                    <Col className={styles.displayInlineWidth40}><img src={e.imagelink} className={styles.CategoryImage}/></Col>
-                    <div className={styles.CategoryEachMainContainer}><Col>
-                    <div>
-                    <div className={styles.inlin_block_margin_right}>{e.first_name}</div>
-                    <div className={styles.inline_block}>{e.last_name}</div>
-                    {(e.aka && e.aka !== '')?<div className={styles.inlin_block_margin_left}>A.K.A {e.aka}</div>:null}
+  return  <div className="mb-12">
+        <div className="relative flex items-baseline justify-between pb-3 border-b border-very-light-grey">
+            <a href={props.category + '/' + props.subcategory} className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-dark-blue">{props.subcategory}</a>
+        </div>
+        <div className="py-6 border-b border-very-light-grey">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                {props.values.map((e) => <div className="flex flex-row items-center flex-shrink-0 truncate" key={e.linkname}>
+                    <div className="flex-shrink-0 pr-2.5 overflow-hidden">
+                        <img src={e.imagelink} className="w-8 h-8 rounded-full sm:w-10 sm:h-10"/>
                     </div>
-                    <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} readOnly/>
-                    <div className={styles.inline_block}>{e.avg}</div>
-                    <div className={styles.inline_block}>({e.count})</div></Col></div>
+                    <div className="">
+                        <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-wrap"> 
+                            <a href={'/category/person/' + e.linkname}  className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim">{e.first_name + ' ' + e.last_name} </a>
+                            {(e.aka && e.aka !== '')?<div className="inline-flex items-center justify-center"> 
+                                <span className="text-[9px] sm:text-sm text-ellipsis text-dim-grey">({e.aka})</span>
+                            </div> :null}
+                        </div>
+                        <div className="flex space-x-0.5 sm:space-x-1.5 items-center sm:flex-row sm:flex-wrap">
+                            <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} size="small" sx={{
+                                    color: "yellow",
+                                    borderRadius: '10px',
+                                    '& .MuiSvgIcon-root': {
+                                        fill: '#F8DC81',
+                                    },
+                                    '& .css-dqr9h-MuiRating-label': {
+                                    display: 'block'
+                                    }                        
+                                    }} readOnly/>
+                            <div className={`{styles.inline_block} text-denim sm:text-sm text-xs`}>{e.avg}</div>
+                            <div className={`{styles.inline_block} text-denim sm:text-sm text-xs`}>({e.count})</div>
+                        </div>
+                    </div>
                 </div>)}
             </div>
         </div>
