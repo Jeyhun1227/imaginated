@@ -117,7 +117,7 @@ return (
             <div className={styles.CategoryLearnMore}>
               <div>What is Imaginated?</div>
               <div>Imaginated is a directory of personal brands. Here you can find the top creators in any given category.
-              <a href='/about'>Learn more</a>
+              <Link href='/about'>Learn more</Link>
             </div>
             </div>
           </div>

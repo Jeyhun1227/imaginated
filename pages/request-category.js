@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image'
 import personUsingComputer from '../public/request-category/person-using-computer.png'
+import Link from 'next/link';
 
 
 export default function RequestCategory() {
@@ -16,7 +17,7 @@ export default function RequestCategory() {
                                     <div className="md:col-span-4 md:mt-10 sm:mt-0">
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center justify-center px-4 space-y-8 md:justify-start md:items-start md:flex-col sm:px-0">
-                                                <h3 className="text-lg font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can't find a category on the directory that you think should be here?</h3>
+                                                <h3 className="text-lg font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                 <div className=''>
                                                     <Image className="object-cover object-center sm:justify-center" 
                                                     src={personUsingComputer}
@@ -43,7 +44,7 @@ export default function RequestCategory() {
                                                                 placeholder="Enter here"
                                                                 className="items-center justify-start order-1 block w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none"
                                                             />
-                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <a href="/request-listing" className='font-semibold text-dark-blue'>Request a listing</a> after submitting this request</p>
+                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</p>
                                                             <div className="py-3 text-left ">
                                                                 <button
                                                                 type="submit"

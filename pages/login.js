@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Apple, Facebook } from 'react-bootstrap-icons';
 import manBehindComputer from '../public/logIn/ManBehindComputer_427x574.png'
 import Image from 'next/image'
+import Link from 'next/link';
 
 export default function Login({return_url}) {
   const {data} = useSession()
@@ -42,12 +43,12 @@ export default function Login({return_url}) {
                   <h2 className="font-bold">Log In</h2>
                   <span>
                     <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                    <a href={`/signup?return_url=${return_url}`} className="inline-block pl-1 no-underline">Sign Up</a>
-                    <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated's</p>
+                    <div className="inline-block pl-1 no-underline"><Link href={`/signup?return_url=${return_url}`} >Sign Up</Link></div>
+                    <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated&apos;s</p>
                     <span className="flex flex-row">
-                      <a href="/termsofservice" className="pr-1 no-underline">Terms of Service</a>
+                      <div className="pr-1 no-underline"><Link href="/termsofservice" >Terms of Service</Link></div>
                       <p className="mb-0 text-dim-grey">and</p>
-                      <a href="/privacypolicy" className="pl-1 no-underline">Privacy Policy</a>
+                      <div className="pl-1 no-underline"><Link href="/privacypolicy" >Privacy Policy</Link></div>
                     </span>
                   </span>
                 </div>
@@ -145,7 +146,7 @@ export default function Login({return_url}) {
                     </div>
                   </div>
                   <div className="text-center">
-                    <a href="#" className="text-sm no-underline">Forgot Password?</a>
+                    <div className="text-sm no-underline"><Link href="#" >Forgot Password?</Link></div>
                     {FormError ? <div className="FormErrorSubmission">{FormError}</div>: null}
                     <button 
                       type="submit"
@@ -155,7 +156,7 @@ export default function Login({return_url}) {
                     </button>
                     <span>
                       <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                      <a href={`/signup?return_url=${return_url}`} className="inline-block pl-1 no-underline">Sign Up</a>
+                      <div className="inline-block pl-1 no-underline"><Link href={`/signup?return_url=${return_url}`} >Sign Up</Link></div>
                     </span>
                   </div>
                 </form>

@@ -166,7 +166,7 @@ export default function SettingsRatings(props) {
                                         }} readOnly/>
                                         </div>
                                         <div className="flex items-end justify-between flex-1 text-sm">
-                                            <p className="mb-0">"{rev.title}"</p>
+                                            {/* <p className="mb-0">"{rev.title}"</p> */}
                                         </div>
                                     </div>
                                 </li>)}

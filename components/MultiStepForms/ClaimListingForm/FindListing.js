@@ -3,6 +3,7 @@ import Image from 'next/image'
 import placeHolder from "../../../public/place-holder/placeHolder-620x270.jpg"
 import GetSearchResults from '../../NavBars/headerSearch/HeaderSearch';
 import { Menu, Transition, Combobox  } from '@headlessui/react'
+import Link from 'next/link';
 
 
 export default function FindListing(props) {
@@ -70,7 +71,7 @@ export default function FindListing(props) {
                         <div className="py-12">
                             <div className="text-left sm:text-center">
                                 <h1 className="font-bold">Find & Claim Your Listing</h1>
-                                <p className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <a href="/signup" className="no-underline text-denim">Get started</a> today.</p>
+                                <p className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/signup">Get started</Link></div> today.</p>
                             </div>
                             <div className="flex mx-auto mt-8 place-content-center"> 
                                 <Image className="object-cover object-center sm:justify-center" 

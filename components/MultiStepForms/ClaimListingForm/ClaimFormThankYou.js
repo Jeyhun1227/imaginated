@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CheckCircleFill } from 'react-bootstrap-icons';
+import Link from 'next/link';
 
 export default function ClaimFormThankYou(props) {
 
@@ -17,12 +18,16 @@ export default function ClaimFormThankYou(props) {
                     </div>
                     <div className="pb-12">
                         <div className="py-3 text-center ">
-                            <a
+                        <div className="inline-flex justify-center w-full py-2 text-sm font-medium text-white no-underline border border-transparent sm:w-auto sm:px-16 bg-dark-blue">
+                        <Link>
+                            <Link
                             href="/"
-                            className="inline-flex justify-center w-full py-2 text-sm font-medium text-white no-underline border border-transparent sm:w-auto sm:px-16 bg-dark-blue"
+                            
                             >
                             Home
-                            </a>
+                            </Link>
+                        </Link>
+                        </div>
                         </div>
                     </div>
                 </div>

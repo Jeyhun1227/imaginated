@@ -1,4 +1,5 @@
 import {useState} from "react";
+import Link from 'next/link';
 
 export default function QASingle() {
     const varLargeText = "What is Imaginated?" 
@@ -17,11 +18,13 @@ export default function QASingle() {
         </div>
         <p className="pt-2 mt-2 mb-0 text-base text-dim-grey">{smallText}</p>
         <div>
-            <a
+            <div className="text-base font-medium no-underline justify-left text-denim">
+            <Link
                 href="#"
-                className="text-base font-medium no-underline justify-left text-denim">
+                >
                 {linkText}
-            </a>
+            </Link>
+            </div>
         </div>
     </div>
     

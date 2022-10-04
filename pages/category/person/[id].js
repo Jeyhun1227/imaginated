@@ -11,6 +11,7 @@ import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassB
 import { signIn, useSession, getSession } from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
+import Link from 'next/link';
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
   const {data: session} = useSession()
@@ -220,15 +221,17 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   return <div className= "mx-auto max-w-7xl">
         <main className="pt-2 px-2 mt-2.5">
           <div className="flex flex-row flex-wrap space-x-3">
-            <a href="/" className="inline-flex items-center justify-center">  
+            <div className="inline-flex items-center justify-center">
+            <Link href="/" >  
               <img className="content-center h-4" src='/home.svg'/>
-            </a>
+            </Link>
+            </div>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             </div>
-            <a href={'/category/' + Individual_values.category} className="inline-block ml-2 no-underline text-whisper" >{Individual_values.category}</a>
+            <div className="inline-block ml-2 no-underline text-whisper" ><Link href={'/category/' + Individual_values.category}>{Individual_values.category}</Link></div>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -263,7 +266,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className={styles.inline_block}>({Individual_values.count})</div>
               </div>
               <div className="hidden space-y-3 sm:space-x-3 md:flex">
-                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
@@ -277,7 +280,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="block col-span-5 md:hidden">
               <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
-              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
                 <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
@@ -330,7 +333,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <ul className="pl-0.5 list-outside">{feature.map((url) => 
                   <li className="" key={url}>
                     <Dot className="inline-flex items-center justify-center fill-dim-grey"/>
-                    <a  href={url} className="pl-1 no-underline text-dim-grey">{new URL(url).hostname}</a>
+                    <Link  href={url} ><div className="pl-1 no-underline text-dim-grey">{new URL(url).hostname}</div></Link>
                   </li>)}
                 </ul>
               </div>
@@ -339,7 +342,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
                   {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
                   {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><a href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</a></div>:null}
+                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><Link href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</Link></div>:null}
               </div>
             </div>
           </div>
@@ -349,10 +352,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <h3>Free Offerings</h3>
             </div>
             <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
-              {free_offers_array.map((e) => <a key={e.name} href={e.link} className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim">
-              <div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-              {e.name}
-              </a>)}
+              {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim"><Link key={e.name} href={e.link} >
+              <><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+              {e.name}</>
+              </Link></div>)}
             </div>
             <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
               <div className="flex justify-between pb-3">
@@ -399,7 +402,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <div className="text-lg text-black ">{value.name}</div>
                     <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                     <div className="pt-2">
-                      <a href={value.link} className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue" target="_blank">See Price {value.linkName}</a>
+                      <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noreferrer">See Price {value.linkName}</Link></div>
                     </div>
                 </div>)}
                 </div>

@@ -9,7 +9,7 @@ export default function CategoryPageSub(props) {
 
   return  <div className="mb-12">
         <div className="relative flex items-baseline justify-between pb-3 border-b border-very-light-grey">
-            <a href={props.category + '/' + props.subcategory} className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-dark-blue">{props.subcategory}</a>
+            <div className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-dark-blue"><Link href={props.category + '/' + props.subcategory}>{props.subcategory}</Link></div>
         </div>
         <div className="py-6 border-b border-very-light-grey">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
@@ -19,7 +19,7 @@ export default function CategoryPageSub(props) {
                     </div>
                     <div className="">
                         <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-wrap"> 
-                            <a href={'/category/person/' + e.linkname}  className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim">{e.first_name + ' ' + e.last_name} </a>
+                            <div className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim"><Link href={'/category/person/' + e.linkname}  >{e.first_name + ' ' + e.last_name} </Link></div>
                             {(e.aka && e.aka !== '')?<div className="inline-flex items-center justify-center"> 
                                 <span className="text-[9px] sm:text-sm text-ellipsis text-dim-grey">({e.aka})</span>
                             </div> :null}

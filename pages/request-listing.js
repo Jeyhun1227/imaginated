@@ -6,6 +6,7 @@ import { ChevronDown, PatchCheckFill } from 'react-bootstrap-icons';
 import client from '../components/GraphQL';
 import { LOAD_CATEGORIES } from "../GraphQL/Queries/Admin";
 import { useQuery, gql, ApolloProvider } from "@apollo/client";
+import Link from 'next/link';
 
 
 export default function RequestListing(props) {
@@ -64,7 +65,7 @@ export default function RequestListing(props) {
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center px-4 space-y-8 md:items-start md:flex-col sm:px-0">
                                                 <div>   
-                                                    <h3 className="text-lg font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can't find a category on the directory that you think should be here?</h3>
+                                                    <h3 className="text-lg font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                     <div>
                                                         <h3 className='mb-3 text-lg text-left text-dark-blue md:text-xl'>Requirements to get listed</h3>
                                                         <div className='flex flex-col space-y-4'>
@@ -153,7 +154,7 @@ export default function RequestListing(props) {
                                                                                     'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                     )}
                                                                                 >
-                                                                                    <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                                                    {/* <CheckIcon className="w-5 h-5" aria-hidden="true" /> */}
                                                                                 </span>
                                                                                 ) : null}
                                                                             </>
@@ -215,7 +216,7 @@ export default function RequestListing(props) {
                                                                                         'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                         )}
                                                                                     >
-                                                                                        <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                                                        {/* <CheckIcon className="w-5 h-5" aria-hidden="true" /> */}
                                                                                     </span>
                                                                                     ) : null}
                                                                                 </>
@@ -229,7 +230,7 @@ export default function RequestListing(props) {
                                                                 )}
                                                                 </Listbox>
                                                             </ApolloProvider>
-                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <a href="/request-category" className='font-semibold text-dark-blue'>Request a category</a> after submitting this request</p>
+                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-category" >Request a category</Link></div> after submitting this request</p>
                                                             <div className="py-3 text-left ">
                                                                 <button
                                                                 type="submit"

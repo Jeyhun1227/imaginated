@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import Link from 'next/link';
 
 
 export default function SettingsFollowing(props) {
@@ -39,7 +40,7 @@ export default function SettingsFollowing(props) {
                                     </div>
                                     <div className="flex items-center justify-between w-full ml-4">
                                         <div className="flex flex-col flex-1">
-                                            <h5> <a href={`${window.location.origin}/category/person/${e.link}`} target="_blank" >{e.name}</a></h5>
+                                            <h5> <Link href={`${window.location.origin}/category/person/${e.link}`} target="_blank" rel="noreferrer">{e.name}</Link></h5>
                                             <div className="flex items-end justify-between flex-1 text-sm">
                                                 {e.aka ?<p className="mb-0 text-dim-grey ">A.K.A {e.aka}</p>: null}
                                             </div>
