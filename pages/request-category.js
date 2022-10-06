@@ -5,7 +5,19 @@ import Link from 'next/link';
 
 
 export default function RequestCategory() {
-    
+    const SubmitCategory = async () => {
+        if(submited) return;
+        
+        e.preventDefault();
+        setSubmited(true);
+        let addListing = await axios.post('api/User/addListing', {category})
+        
+        window.location.href = "/"   
+     }
+    const [category, setCategory] = useState("")
+    const [submited, setSubmited] = useState(false);
+
+
     return (
         <div>
             <div className="bg-white xl:px-0">
@@ -28,7 +40,7 @@ export default function RequestCategory() {
                                         </div>
                                     </div>
                                     <div className="mt-5 md:mt-0 md:col-span-3">
-                                        <form action="#" method="POST">
+                                        <form onSubmit={SubmitCategory}>
                                             <div className="overflow-hidden">
                                                 <div className="px-4 py-4 bg-light-grey sm:p-6">
                                                     <div className="grid grid-cols-6 gap-6">
@@ -41,13 +53,13 @@ export default function RequestCategory() {
                                                                 type="text"
                                                                 name="request-category"
                                                                 autoComplete=""
+                                                                onChange={(e)=> setCategory(e.target.value)}
                                                                 placeholder="Enter here"
                                                                 className="items-center justify-start order-1 block w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none"
                                                             />
                                                             <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</p>
                                                             <div className="py-3 text-left ">
                                                                 <button
-                                                                type="submit"
                                                                 className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-10 bg-dark-blue"
                                                                 >
                                                                 Submit

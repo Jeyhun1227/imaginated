@@ -2,7 +2,7 @@ import { getSession } from "next-auth/react";
 const PoolConnection = require('../postgressql')
 import PasswordChanged from './Email/PasswordChanged';
 import NewEmailUser from './Email/NewEmailUser';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 const yup =  require('yup');
 var jwt = require('jsonwebtoken');
 

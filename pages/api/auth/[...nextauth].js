@@ -5,7 +5,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 const PoolConnection = require('../postgressql')
 
 const prisma = new PrismaClient();

@@ -228,7 +228,7 @@ export default function MobileNav() {
                 <div className="pt-3">
                   <nav className="grid gap-y-4">
                     {links.map((item) => (
-                      <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50">
+                      <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" key={item.href}>
                       <Link
                         key={item.name}
                         href={item.href}

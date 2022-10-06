@@ -8,8 +8,9 @@ export default async (req, res) => {
   const session = await getSession({ req })
     if (req.method === 'POST') {
         if (session) {
+            // DELETE REVIEWS
             if(req.body.delete){
-              // all_reviews_deleted
+              
               let insert_deleted = await PoolConnection.query('INSERT INTO all_reviews_deleted SELECT * FROM WHERE "user" = $1 AND individual = $2 AND premium_offer = $3;', [session.id, req.body.Individual, req.body.premium_offer]);
               let deleted = await PoolConnection.query('DELETE FROM all_reviews WHERE "user" = $1 AND individual = $2 AND premium_offer = $3;', [session.id, req.body.Individual, req.body.premium_offer]);
               deleted = deleted.rowCount + insert_deleted.rowCount
@@ -41,7 +42,7 @@ export default async (req, res) => {
             let userLikeXSS = xss(req.body.UserLike);
 
             let countReviews = await PoolConnection.query('SELECT * FROM all_reviews WHERE "user" = $1 AND individual = $2 AND premium_offer = $3;', [session.id, req.body.Individual, req.body.premium_offer])
-            
+            // UPDATE AN EXISTING REVIEW EDIT
             if(countReviews.rows.length > 0 && req.body.editable){
               let updateReviews = await PoolConnection.query('UPDATE all_reviews SET review= $4, "like" = $5, dislike = $6 WHERE "user" = $1 AND individual = $2 AND premium_offer = $3;', [session.id, req.body.Individual, req.body.premium_offer, req.body.UserRating, userLikeXSS, userDisXSS])
               updateReviews = updateReviews.rowCount
@@ -52,7 +53,12 @@ export default async (req, res) => {
             if(countReviews.rows.length > 0) return res.status(200).json({error: 'You have already reviewed this course'});
             let review_add = await PoolConnection.query('INSERT INTO all_reviews("user", individual, review, "like", dislike, premium_offer, "type", createdate) VALUES($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP);', [session.id, req.body.Individual, req.body.UserRating, userLikeXSS, userDisXSS, req.body.premium_offer, 'Paid'])
             let reviewed = review_add.rowCount
-            return res.status(200).json(reviewed)
+            let user_custom = await PoolConnection.query('SELECT verified FROM "USER_CUSTOM" WHERE userid = $1;', [session.id])
+            let verified = true;
+            if(user_custom.rows.length > 0){
+              verified = user_custom.rows[0]['verified']
+            } 
+            return res.status(200).json({reviewed, verified})
         }
     }
     return res.status(403).json({

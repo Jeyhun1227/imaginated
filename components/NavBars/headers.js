@@ -65,7 +65,7 @@ export default function Header(props) {
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
 
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7"><Link href="/">
+          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
               <img src="/imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
           </Link></div></div>
           <Combobox as="li" value={searchTerm} onChange={setSearchTerm} className="relative list-none">
@@ -86,12 +86,12 @@ export default function Header(props) {
                   <Combobox.Option>
                     <div className="flex flex-row">
                       <div className="pr-4">
-                        <img className="w-8 h-8 rounded-full" src={result.imagelink ? result.imagelink : "/user.png"}/>
+                        <img className="w-8 h-8 rounded-full cursor-point" src={result.imagelink ? result.imagelink : "/user.png"}/>
                       </div>
                       <div>
                         <div className="mb-1 font-semibold">{result.fullname}</div>
                         <div className="flex flex-row space-x-4">
-                          <div className="inline-flex items-center justify-center space-x-2">{result.subcategory.map((e) => <div className="truncate text-xSsm text-dim-grey">{e}</div>)}</div>
+                          <div className="inline-flex items-center justify-center space-x-2">{result.subcategory.map((e) => <div className="truncate text-xSsm text-dim-grey" key={e}>{e}</div>)}</div>
                         </div>
                       </div>
                     </div>

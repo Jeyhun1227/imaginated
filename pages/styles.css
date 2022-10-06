@@ -40,3 +40,15 @@ a{
   cursor: pointer;
   margin: 4px 0;
 }
+
+.cursor-point{
+  cursor: pointer;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.margin-bottom-15 {
+  margin-bottom: 1.5rem;
+}

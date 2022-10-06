@@ -4,7 +4,7 @@ import {Rating} from '@mui/material';
 import styles from  '../../styles/Home.module.css';
 import Link from 'next/link';
 import axios from 'axios';
-
+import ImageWithFallback from '../Image/Image'
 
 
 export default function SubCategoryPageSub({values, selected}) {
@@ -23,11 +23,15 @@ export default function SubCategoryPageSub({values, selected}) {
         <div className="flex flex-row items-center justify-between flex-shrink-0 truncate">
             <div className="flex flex-wrap items-center justify-between">
                 <div className="flex-shrink-0 pr-2.5 overflow-hidden">
-                    <img src={values.imagelink} className="w-8 h-8 rounded-full sm:w-10 sm:h-10"/>
+                <ImageWithFallback src={values.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
                 </div>
                 <div className="">
                     <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-nowrap"> 
-                        <div className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim"><Link href={'/category/person/' + values.linkname}  >{values.first_name + ' ' + values.last_name} </Link></div>
+                        <div className="mb-0 text-sm no-underline truncate sm:text-base md:text-lg text-denim cursor-point">
+                            <Link href={'/category/person/' + values.linkname}>
+                                <div>{values.first_name + ' ' + values.last_name}</div>
+                            </Link>
+                        </div>
                         {(values.aka && values.aka !== '')?<div className="inline-flex items-center justify-center pl-2"> 
                             <span className="text-xs truncate sm:text-sm text-ellipsis text-dim-grey">({values.aka})</span>
                         </div>:null}
@@ -59,33 +63,11 @@ export default function SubCategoryPageSub({values, selected}) {
             {values.description}
             <div className="pl-1.5 no-underline text-denim">
             <Link href={'/category/person/' + values.linkname}>
-                Learn more about {values.first_name} {values.last_name}
+                <div>Learn more about {values.first_name} {values.last_name}</div>
             </Link>
             </div>
         </div>
-        {/* <h5><Link href={values.category + '/' + values.subcategory} className={styles.CategoryMainTitle} >{values.subcategory}
-        </Link>
-        </h5> */}
-        {/* <div>
-            <div className={styles.CategoryEachContainer}>
-                <div>
-                    <Col className={styles.displayInlineWidth40}><img src={values.imagelink} className={styles.CategoryImage}/></Col>
-                    <div className={styles.CategoryEachMainContainer}><Col>
-                    <div>
-                    <Link href={'/category/person/' + values.linkname}><div>
-                    <div className={styles.inlin_block_margin_right}>{values.first_name}</div>
-                    <div className={styles.inline_block}>{values.last_name}</div>
-                    {(values.aka && values.aka !== '')?<div className={styles.inlin_block_margin_left}>A.K.A {values.aka}</div>:null}
-                    </div>
-                    </Link>
-                    </div>
-                    <Rating name={values.first_name + values.last_name} value={parseFloat(values.avg)} precision={0.5} readOnly/>
-                    <div className={styles.inline_block}>{values.avg}</div>
-                    <div className={styles.inline_block}>({values.count})</div></Col></div>
-                    <div>{values.description}</div>
-                </div>
-            </div>
-        </div> */}
+
     </div>
 
 }

@@ -10,7 +10,7 @@ export default function HeadBar() {
     
       closeHeadBar && <div className="flex items-center justify-center h-10 bg-dark-blue">
       <div className="text-center">
-        <div className="text-xs text-white sm:text-base ">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div className="text-xs text-white sm:text-base ">Sign up for free to see and leave reviews!</div>
       </div>
       <div className="absolute ml-auto top-1 right-2">
         <button onClick={() => {
