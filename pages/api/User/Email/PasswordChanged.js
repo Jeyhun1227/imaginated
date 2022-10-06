@@ -2,8 +2,8 @@ import { compileFile } from 'pug';
 const PasswordChanged = compileFile('pages/api/User/Email/PasswordChanged.pug');
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
-  accessKeyId: process.env.AWS_SECRET_KEY,
-  accessSecretKey: process.env.AWS_SECRET_KEY
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  accessSecretKey: process.env.SECRET_ACCESS_KEY
 });
 async function SentPasswordChange(name, email, verficationLink){
     // Create sendEmail params 

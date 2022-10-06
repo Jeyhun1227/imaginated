@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Disclosure} from '@headlessui/react'
 import { Linkedin, Facebook, Twitter, Instagram } from 'react-bootstrap-icons';
+import Link from 'next/link';
 
 export default function Footer() {
 
@@ -97,24 +98,24 @@ export default function Footer() {
                     <div className="pt-3 mx-auto mb-6 md:pt-20 md:mt-0 md:mx-0 md:mb-0">
                         <div className="flex justify-center pr-2 space-x-6 md:justify-start xl:pr-0 sm:pr-0">
                             <div>
-                                <a href="#">
+                                <Link href="#">
                                     <Linkedin color="#636363" size={15} />
-                                </a>
+                                </Link>
                             </div>
                             <div>
-                                <a href="#">
+                                <Link href="#">
                                     <Facebook color="#636363" size={15} />
-                                </a>
+                                </Link>
                             </div>
                             <div>
-                                <a href="#">
+                                <Link href="#">
                                     <Twitter color="#636363" size={15} />
-                                </a>
+                                </Link>
                             </div>
                             <div>
-                                <a href="#">
+                                <Link href="#">
                                     <Instagram color="#636363" size={15} />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -123,20 +124,20 @@ export default function Footer() {
                             <div className="md:mt-32 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pr-2 text-xs border-r sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="#">Privacy Policy</a>
+                                        <Link className= "no-underline truncate text-dim-grey" href="#">Privacy Policy</Link>
                                     </li>
                                     <li className="px-2 text-xs border-r sm:text-base md:border-r-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="#">Terms of Service</a>
+                                        <Link className= "no-underline truncate text-dim-grey" href="#">Terms of Service</Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="md:mb-6 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pl-2 pr-2 mb-4 text-xs border-r sm:text-base md:pl-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="#">Site/Affiliate Disclaimer</a>
+                                        <Link className= "no-underline truncate text-dim-grey" href="#">Site/Affiliate Disclaimer</Link>
                                     </li>
                                     <li className="pl-2 mb-4 text-xs sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <a className= "no-underline truncate text-dim-grey" href="#">Sitemap</a>
+                                        <Link className= "no-underline truncate text-dim-grey" href="#">Sitemap</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -155,7 +156,7 @@ export default function Footer() {
                             <li className="mb-6 text-2xl text-dark-blue">{item.title}</li>
                             {item.links.map((items) => (
                                 <li className="mb-3" key={items.name + 'name'}>
-                                    <a className= "no-underline text-dim-grey" href={`${items.href}`} key={items.name} >{items.name}</a>
+                                    <Link className= "no-underline text-dim-grey" href={`${items.href}`} key={items.name} >{items.name}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -195,7 +196,7 @@ export default function Footer() {
                                     <ul className="pl-2">   
                                         {item.links.map((items) => (
                                             <li className="mb-3" key={items.name + 'name_link'}>
-                                                <a className= "no-underline text-dim-grey" href={`${items.href}-${item.title}`} key={items.name} >{items.name}</a>
+                                                <div className= "no-underline text-dim-grey"><Link href={`${items.href}-${item.title}`} key={items.name} >{items.name}</Link></div>
                                             </li>
                                         ))}
                                     </ul> 

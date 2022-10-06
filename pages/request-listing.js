@@ -6,6 +6,8 @@ import { ChevronDown, PatchCheckFill } from 'react-bootstrap-icons';
 import client from '../components/GraphQL';
 import { LOAD_CATEGORIES } from "../GraphQL/Queries/Admin";
 import { useQuery, gql, ApolloProvider } from "@apollo/client";
+import Link from 'next/link';
+import axios from 'axios';
 
 
 export default function RequestListing(props) {
@@ -21,12 +23,27 @@ export default function RequestListing(props) {
         name: 'No'
         },
     ]
+    const [submited, setSubmited] = useState(false);
+
+    const SubmitListing = async (e) => {
+        if(submited) return;
+        
+        e.preventDefault();
+        setSubmited(true);
+        // listing, selected: selected.name, category: selectedCategory.category
+        let you = selected.name === 'Yes' ? true : false;
+        let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+
+        window.location.href = "/"
+
+    }
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
 
-    const [selected, setSelected] = useState(select[0])
+    const [selected, setSelected] = useState(select[0]);
+    const [listing, setListing] = useState(select[0]);
 
     const selectCategory = [
         
@@ -64,7 +81,7 @@ export default function RequestListing(props) {
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center px-4 space-y-8 md:items-start md:flex-col sm:px-0">
                                                 <div>   
-                                                    <h3 className="text-lg font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can't find a category on the directory that you think should be here?</h3>
+                                                    <h3 className="text-lg font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                     <div>
                                                         <h3 className='mb-3 text-lg text-left text-dark-blue md:text-xl'>Requirements to get listed</h3>
                                                         <div className='flex flex-col space-y-4'>
@@ -89,19 +106,20 @@ export default function RequestListing(props) {
                                         </div>
                                     </div>
                                     <div className="mt-5 md:mt-0 md:col-span-3">
-                                        <form action="#" method="POST">
+                                        <form onSubmit={SubmitListing}>
                                             <div className="overflow-hidden">
                                                 <div className="px-4 py-4 bg-light-grey sm:p-6">
                                                     <div className="grid grid-cols-6 gap-6">
                                                         <div className="col-span-6">
                                                             <h4 className='mb-4'>Request a listing</h4>
                                                             <label htmlFor="street-address" className="block mb-2 text-sm font-medium">
-                                                                Name of the category you would like to be listed                                                            
+                                                                Name of the creator you would like to be listed                                                            
                                                             </label>
                                                             <input
                                                                 type="text"
                                                                 name="request-category"
                                                                 autoComplete=""
+                                                                onChange={(e) => setListing(e.target.value)}
                                                                 placeholder="Enter here"
                                                                 className="items-center justify-start order-1 block w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none"
                                                             />
@@ -153,7 +171,7 @@ export default function RequestListing(props) {
                                                                                     'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                     )}
                                                                                 >
-                                                                                    <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                                                    {/* <CheckIcon className="w-5 h-5" aria-hidden="true" /> */}
                                                                                 </span>
                                                                                 ) : null}
                                                                             </>
@@ -170,7 +188,7 @@ export default function RequestListing(props) {
                                                                 <Listbox value={selectedCategory} onChange={setSelectedCategory}>
                                                                 {({ open }) => (
                                                                     <>
-                                                                    <Listbox.Label className="block pb-2 mt-6 text-sm font-medium text-black">What category(ies) would this person be listed under ?</Listbox.Label>
+                                                                    <Listbox.Label className="block pb-2 mt-6 text-sm font-medium text-black">What category would this person be listed under ?</Listbox.Label>
                                                                     <div className="relative mt-1">
                                                                         <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
                                                                         <span className="flex items-center">
@@ -190,14 +208,14 @@ export default function RequestListing(props) {
                                                                         <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                                             {props.category.getAllCategory.rows.map((source,index) => (
                                                                             <Listbox.Option
-                                                                                key={index}
+                                                                                key={source.id}
                                                                                 className={({ active }) =>
                                                                                 classNames(
                                                                                     active ? 'text-white bg-whisper' : 'text-black',
                                                                                     'cursor-default select-none relative py-2 pl-3 pr-9'
                                                                                 )
                                                                                 }
-                                                                                value={source.category}
+                                                                                value={source}
                                                                             >
                                                                                 {({ selectedCategory, active }) => (
                                                                                 <>
@@ -205,7 +223,7 @@ export default function RequestListing(props) {
                                                                                     <span
                                                                                         className={classNames(selectedCategory ? 'font-semibold' : 'font-normal', 'text-trolley-grey ml-3 block truncate')}
                                                                                     >
-                                                                                        {source.name}
+                                                                                        {source.category}
                                                                                     </span>
                                                                                     </div>
                                                                                     {selectedCategory ? (
@@ -215,7 +233,7 @@ export default function RequestListing(props) {
                                                                                         'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                         )}
                                                                                     >
-                                                                                        <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                                                        {/* <CheckIcon className="w-5 h-5" aria-hidden="true" /> */}
                                                                                     </span>
                                                                                     ) : null}
                                                                                 </>
@@ -229,10 +247,9 @@ export default function RequestListing(props) {
                                                                 )}
                                                                 </Listbox>
                                                             </ApolloProvider>
-                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <a href="/request-category" className='font-semibold text-dark-blue'>Request a category</a> after submitting this request</p>
+                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-category" >Request a category</Link></div> after submitting this request</p>
                                                             <div className="py-3 text-left ">
                                                                 <button
-                                                                type="submit"
                                                                 className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-10 bg-dark-blue"
                                                                 >
                                                                 Submit

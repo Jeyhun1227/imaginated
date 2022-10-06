@@ -220,15 +220,17 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   return <div className= "mx-auto max-w-7xl">
         <main className="pt-2 px-2 mt-2.5">
           <div className="flex flex-row flex-wrap space-x-3">
-            <a href="/" className="inline-flex items-center justify-center">  
+            <div className="inline-flex items-center justify-center cursor-point">
+            <Link href="/" >  
               <img className="content-center h-4" src='/home.svg'/>
-            </a>
+            </Link>
+            </div>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             </div>
-            <a href={'/category/' + Individual_values.category} className="inline-block ml-2 no-underline text-whisper" >{Individual_values.category}</a>
+            <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/category/' + Individual_values.category}><div>{Individual_values.category}</div></Link></div>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -263,29 +265,33 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className={styles.inline_block}>({Individual_values.count})</div>
               </div>
               <div className="hidden space-y-3 sm:space-x-3 md:flex">
-                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
                 <Link href="/claim-listing">
+                  <>
                   <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
                     <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
                     Claim Profile
                   </button>
+                  </>
                 </Link>
               </div>
             </div>
             <div className="block col-span-5 md:hidden">
               <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
-              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <a href={'/category/' + Individual_values.category + '/' + e} key={e} className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a>)}
+              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
                 <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
                 <Link href="/claim-listing">
+                  <>
                   <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
                     <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
                     Claim Profile
                   </button>
+                  </>
                 </Link>
               </div>
             </div>  
@@ -329,8 +335,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <h2>Featured In</h2>
                 <ul className="pl-0.5 list-outside">{feature.map((url) => 
                   <li className="" key={url}>
-                    <Dot className="inline-flex items-center justify-center fill-dim-grey"/>
-                    <a  href={url} className="pl-1 no-underline text-dim-grey">{new URL(url).hostname}</a>
+                    <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
+                    <Link  href={url} ><a target="_blank" rel="noopener noreferrer" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
                   </li>)}
                 </ul>
               </div>
@@ -339,7 +345,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
                   {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
                   {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><a href={Individual_values.link} className="flex-initial overflow-hidden no-underline break-words text-dim-grey" > {Individual_values.link}</a></div>:null}
+                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a href={Individual_values.link} target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
               </div>
             </div>
           </div>
@@ -349,10 +355,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <h3>Free Offerings</h3>
             </div>
             <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
-              {free_offers_array.map((e) => <a key={e.name} href={e.link} className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim">
-              <div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-              {e.name}
-              </a>)}
+              {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.name}><Link key={e.name} href={e.link} >
+              <><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+              {e.name}</>
+              </Link></div>)}
             </div>
             <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
               <div className="flex justify-between pb-3">
@@ -399,7 +405,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <div className="text-lg text-black ">{value.name}</div>
                     <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                     <div className="pt-2">
-                      <a href={value.link} className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue" target="_blank">See Price {value.linkName}</a>
+                      <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer"><div>See Price {value.linkName}</div></Link></div>
                     </div>
                 </div>)}
                 </div>
@@ -503,56 +509,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          {/* <div className={(urlType === 'reviews')? "my-8" : "hidden" }>
-            <div>
-              <div className={styles.DisplayInlineBlock}>
-                <h4>Ratings</h4>
-                <div className={styles.DisplayInlineBlock}>
-                  <h3>{Individual_values.avg}</h3>
-                  <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} readOnly/>
-                  <div>{Individual_values.count} Reviews</div>
-                </div>
-                <div className={styles.DisplayInlineBlock}>
-                    {Object.keys(count_each_rating).reverse().map((e) => <div key={e}>
-                      <div className={styles.IndividualReviewEachMain}>
-                        <div style={{width: Math.round((count_each_rating[e] / reviews.length) * 100) + '%'}} className={styles.IndividualReviewEach}></div>
-                      </div>
-                        <div className={styles.DisplayInlineBlock}>
-                        <div className={styles.DisplayInlineBlock}>{e}</div>
-                        <img src='/star.svg'/>
-                        </div>
-                      </div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.DisplayInlineBlock}>
-                  <h4>Offerings</h4>
-                  <div>
-                    {reviews_category.map((e) => <div key={e} className={(reviewClickedValue === e)? styles.IndividualReviewOfferingsSelected : styles.IndividualReviewOfferings} onClick={()=> reviewClicked(e)}>{e}</div>)}
-                  </div>
-              </div>
-              {reviewAll.map((rev) =><div key={rev.id} className={styles.IndividualReviewMain}>
-                <div>
-                <div className={styles.IndividualReviewInlineBlock}>
-                  <img className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"}/>
-                </div>
-                <div className={styles.IndividualReviewInlineBlock}>
-                  <div className={styles.IndividualReviewName}>{rev.name}</div>
-                  <div className={styles.IndividualReviewValidation}>
-                  {(rev.validation === 'Y')? <div className={styles.DisplayInlineBlock}>Validated Review</div>: null}
-                  {(rev.verified === 'Y')? <div className={styles.DisplayInlineBlock}>Verified User</div>: null}
-                  </div>
-                </div>
-                </div>
-                <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} readOnly/>
-                <div>{rev.createDate_Val}</div>
-                <div>{rev.premium_name_value}</div>
-                <h4>{rev.title}</h4>
-                <div>{rev.like}</div>
-                <div>{rev.dislike}</div>
-              </div> )}
-            </div>
-          </div> */}
         </main>
     </div>
 
@@ -560,8 +516,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
 export async function getServerSideProps(ctx){
     const IndividualID = ctx.query.id
-    const session_backend = await getSession(ctx);
-    const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend.id }})
+    let session_backend = await getSession(ctx);
+    session_backend = session_backend ? session_backend.id :  null;
+    const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend }})
     let free_offers = Individual_values.data.getEachIndividual.free_offers;
 
     if(free_offers.length > 0) 

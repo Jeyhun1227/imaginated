@@ -6,6 +6,7 @@ import { Menu, Transition, Combobox  } from '@headlessui/react'
 import React, {useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } from 'react-bootstrap-icons';
 import GetSearchResults from './headerSearch/HeaderSearch';
+import Link from 'next/link';
 
 
 export default function Header(props) {
@@ -64,9 +65,9 @@ export default function Header(props) {
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
 
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          <a href="/" className="flex items-center mr-3">
-              <img src="/imaginated_logo.png" className="xl:h-10 sm:h-5 md:h-7" alt="Imaginated Logo" />
-          </a>
+          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
+              <img src="/imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
+          </Link></div></div>
           <Combobox as="li" value={searchTerm} onChange={setSearchTerm} className="relative list-none">
             <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
               <label htmlFor="simple-search" className="sr-only">Search</label>
@@ -80,17 +81,17 @@ export default function Header(props) {
             <Combobox.Options className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg w-96 top-10 max-h-56 focus:outline-none sm:text-sm">
               {
                 searchResult.filter(result => result.subcategory == subcategory).map((result, i) => (
-                <div className='my-2'>
+                <div className='my-2' key={i}>
                   {result.subcategory ?
                   <Combobox.Option>
                     <div className="flex flex-row">
                       <div className="pr-4">
-                        <img className="w-8 h-8 rounded-full" src={result.imagelink ? result.imagelink : "/user.png"}/>
+                        <img className="w-8 h-8 rounded-full cursor-point" src={result.imagelink ? result.imagelink : "/user.png"}/>
                       </div>
                       <div>
                         <div className="mb-1 font-semibold">{result.fullname}</div>
                         <div className="flex flex-row space-x-4">
-                          <div className="inline-flex items-center justify-center space-x-2">{result.subcategory.map((e) => <div className="truncate text-xSsm text-dim-grey">{e}</div>)}</div>
+                          <div className="inline-flex items-center justify-center space-x-2">{result.subcategory.map((e) => <div className="truncate text-xSsm text-dim-grey" key={e}>{e}</div>)}</div>
                         </div>
                       </div>
                     </div>
@@ -109,16 +110,16 @@ export default function Header(props) {
           <div className="items-center justify-between hidden w-full sm:flex sm:w-auto sm:order-1" id="mobile-menu-4">
             <ul className="flex flex-col mb-0 sm:flex-row xl:space-x-8 sm:space-x-4 sm:mt-0 sm:text-sm sm:font-medium">
               <li>
-                <a href="/about" className="block py-2 pl-3 pr-4 no-underline sm:bg-transparent sm:p-0 text-dim-grey sm:hover:text-dim-grey" aria-current="page">About</a>
+                <div className="block py-2 pl-3 pr-4 no-underline sm:bg-transparent sm:p-0 text-dim-grey sm:hover:text-dim-grey" ><Link href="/about" aria-current="page">About</Link></div>
               </li>
               <li>
-                <a href="/" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Directory</a>
+                <div className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/" >Directory</Link></div>
               </li>
               {/* <li>
-                <a href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</a>
+                <Link href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</Link>
               </li> */}
               <li>
-                <a href="/claim-listing" className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Claim Listing</a>
+                <div className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/claim-listing" >Claim Listing</Link></div>
               </li>
               {!(session) ? <>
               <li>
@@ -153,9 +154,9 @@ export default function Header(props) {
                               <span className='block py-2.5 text-sm font-semibold text-black no-underline'>
                                 Notifications
                               </span>
-                              <a href="#" className='flex ml-auto text-black'>
+                              <Link href="#" className='flex ml-auto text-black'>
                                 See All
-                              </a>
+                              </Link>
                             </div>
                           )}
                         </Menu.Item>
@@ -163,7 +164,7 @@ export default function Header(props) {
                       <div className='my-2'>
                         <Menu.Item>
                           <div className='py-2 hover:bg-white-smoke'>
-                            <a href="#" className='flex items-center px-3.5 no-underline'>
+                            <Link href="#" className='flex items-center px-3.5 no-underline'>
                               <div className='pr-2 text-black no-underline'>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
@@ -172,7 +173,7 @@ export default function Header(props) {
                               <span className='block text-xs font-semibold text-black no-underline'> 
                                 SANJ replied to your comment
                               </span>
-                            </a>
+                            </Link>
                             <span className='block pt-2 text-xs text-black no-underline pl-9'>
                               5:00 pm
                             </span>
@@ -180,14 +181,14 @@ export default function Header(props) {
                         </Menu.Item>
                         <Menu.Item>
                           <div className='py-2 hover:bg-white-smoke'>
-                            <a href="#" className='flex items-center px-3.5 no-underline'>
+                            <Link href="#" className='flex items-center px-3.5 no-underline'>
                               <div className='pr-2 text-black no-underline'>
                                 <PlayBtn/>
                               </div>
                               <span className='block text-xs font-semibold text-black no-underline'>
                                 Jhon updated their content, go check it out now!
                               </span>
-                            </a>
+                            </Link>
                             <span className='block pt-2 text-xs text-black no-underline pl-9'>
                               Yesterday
                             </span>
@@ -207,7 +208,7 @@ export default function Header(props) {
                     <Menu.Button className="inline-flex items-center content-center justify-center pt-1">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path stroke-linecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div> 
                       <span className="flex items-center">
@@ -233,50 +234,62 @@ export default function Header(props) {
                       <div className="hover:bg-white-smoke">
                         <Menu.Item>
                           {({ active }) => (
-                            <a  href="#" className={classNames(
+                            <div   className={classNames(
                               active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
-                              'flex items-center mx-3.5 no-underline border-b border-gainsboro')}>
-                              <div className='pr-2 text-black'>
+                              'flex items-center no-underline border-b border-gainsboro')}>
+                                <div className='margin-top-bottom-user'>
+                              <div className='pr-2 text-black display-menu'>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
                                   <path fillRule="evenodd" className='fill-black' d="m49.5 4.1c5.7-0.1 9.7 0.5 14 1.9 3.3 1.2 7.8 3.1 10 4.4 2.2 1.3 6.2 4.5 8.8 7.2 2.7 2.7 6 6.9 7.4 9.4 1.5 2.5 3.5 7.2 4.5 10.5 1 3.3 1.8 8.7 1.8 12 0 3.3-0.7 8.7-1.6 12-0.9 3.3-2.8 8.3-4.4 11-1.6 2.7-5 7.2-7.7 9.9-2.6 2.7-6.6 5.9-8.8 7.2-2.2 1.3-6.7 3.2-10 4.4-4 1.4-8.5 2-13.5 2-4.5 0-9.7-0.8-13-1.9-3-1-7.5-3-10-4.4-2.5-1.4-6.7-4.7-9.3-7.4-2.7-2.6-6-6.8-7.4-9.3-1.5-2.5-3.5-7.2-4.5-10.5-1-3.3-1.8-8.7-1.8-12 0-3.3 0.7-8.7 1.6-12 0.8-3.3 2.7-8.2 4.2-10.9 1.5-2.6 5-7 7.7-9.7 2.8-2.7 6.6-5.9 8.5-7.1 1.9-1.2 6.2-3.2 9.5-4.4 4.2-1.5 8.4-2.2 14-2.3zm-11.5 57.6c1.1 1.8 3.6 4 5.5 4.8 1.9 0.8 4.9 1.5 6.5 1.5 1.6 0 4.6-0.7 6.5-1.5 1.9-0.8 4.4-3 5.5-4.8 1.7-2.8 2-5 2-16.4 0-12.6-0.1-13.3-2-13.3-1.9 0-2 0.7-2 11.8 0 9.1-0.4 12.5-1.8 15.2-1.1 2.2-2.8 3.8-4.7 4.4-1.8 0.5-4.4 0.5-6.5 0-2.5-0.7-4-1.9-5.2-4.4-1.4-2.7-1.8-6.1-1.8-15.3 0-11-0.1-11.7-2-11.7-1.9 0-2 0.7-2 13.3 0 11.4 0.3 13.6 2 16.4z"/>
                                 </svg>
                               </div>
-                              <span className='block py-3 text-sm text-black no-underline'>
+                              <span className='block text-sm text-black no-underline display-menu-title'>
                                 {session.user.name}
                               </span>
-                            </a>
+                              </div>
+                            </div>
                           )}
                         </Menu.Item>
                       </div>
                       {userMenu.map((menu) => (
-                        <Menu.Item> 
+                        <Menu.Item key={menu.title}> 
                           {({ active }) => (
+                          <Link key={menu.title} href={menu.href} >
                             <>
-                            <a key={menu.title} href={menu.href} className='hover:bg-white-smoke no-underline px-3.5 flex items-center'>
-                              <div className='pr-2 text-black'>
+                            <div className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom' onClick={() => window.location.href = menu.href}>
+
+                              <>
+                              <div>
+                              <div className='pr-2 text-black display-menu'>
                                 {menu.svg}
                               </div>
-                              <span className='block py-2 text-sm text-black no-underline'>
+                              <span className='block text-sm text-black no-underline display-menu-title'>
                                 {menu.title}
                               </span>
-                            </a>
+                              </div>
+                              </>
+                            
+                            </div>
                             </>
+                            </Link>
                           )}
                         </Menu.Item>
                         ))}
                         <Menu.Item>
                           {({ active }) => (
-                            <a href="#" className={classNames(
+                            <div onClick={signOut} className={classNames(
                               active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
-                              'flex items-center px-3.5 no-underline')}>
-                              <div className='pr-2 text-black no-underline'>
+                              'flex items-center no-underline margin-top-bottom')}>
+                              <div >
+                              <div className='pr-2 text-black no-underline display-menu'>
                                 <BoxArrowInRight/>
                               </div>
-                              <span onClick={signOut} className='block py-2 text-sm text-black no-underline'
+                              <span className='block text-sm text-black no-underline  display-menu-title'
                               >
                                 Log out
                               </span>
-                            </a>
+                              </div>
+                            </div>
                           )}
                         </Menu.Item>
                     </Menu.Items>

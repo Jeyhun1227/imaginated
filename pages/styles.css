@@ -18,3 +18,37 @@ a{
 .all-results-search{
   width: 200px;
 }
+
+.display-menu{
+  display: inline-block;
+  
+}
+
+.display-menu-title{
+  display: inline-block;
+  position: absolute;
+  padding-top: 0px !important;
+  margin-top: -1px;
+}
+
+.margin-top-bottom{
+  padding: 7px 10px;
+    cursor: pointer;
+}
+.margin-top-bottom-user{
+  padding: 5.5px 10px;
+  cursor: pointer;
+  margin: 4px 0;
+}
+
+.cursor-point{
+  cursor: pointer;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.margin-bottom-15 {
+  margin-bottom: 1.5rem;
+}

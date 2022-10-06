@@ -13,7 +13,7 @@ export default async (req, res) => {
             if(user_found.rows.length > 0){
                 let diff = user_found.rows[0]['difference']
                 console.log('diff: ', diff, user_found.rows)
-                if(diff < 6 && diff) return res.status(200).json({error: 'Already sent'})
+                if(diff < 2 && diff) return res.status(200).json({error: 'Already sent'})
                 if(user_found.rows[0]['email_sent'] > 6) return res.status(200).json({error: 'Too many emails'})
             }
             // var user_custom = await PoolConnection.query('SELECT DISTINCT * FROM "User" WHERE ID = $1', [session.id])

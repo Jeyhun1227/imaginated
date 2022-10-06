@@ -55,7 +55,7 @@ export default function CategoryList(props) {
                                     </svg>
                                 )}
                                 </Disclosure.Button>
-                                <a href={'category/' + e.category} className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.category}</a>
+                                <div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap"><Link href={'category/' + e.category} >{e.category}</Link></div>
                             </div>: null}
                             </div>
                             <div className="flex-shrink-0 order-2">
@@ -68,9 +68,9 @@ export default function CategoryList(props) {
                         <div className="space-y-4">
                             {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <a href={'category/' + e.category + '/' + sub.subcategory} className="pl-4 ml-3 text-sm no-underline text-denim">
+                                <div className="pl-4 ml-3 text-sm no-underline text-denim"><Link href={'category/' + e.category + '/' + sub.subcategory}>
                                     {sub.subcategory}
-                                </a>
+                                </Link></div>
                                 <label className="pl-10 ml-3 text-sm text-dim-grey">
                                 Photographers
                                 </label>

@@ -5,6 +5,7 @@ import {CREATER_USER_CUSTOM} from '../GraphQL/Mutations/Auth'
 import Image from 'next/image'
 import client from '../components/GraphQL';
 import { useMutation } from "@apollo/client";
+import Link from 'next/link';
 
 import { useEffect, useState } from "react";
 
@@ -88,15 +89,16 @@ export default function Signup() {
                 <div className="hidden mb-8 sm:block">
                   <h2 className="font-bold">Sign Up</h2>
                   <div>
-                    <p className="mb-0 text-dim-grey">By continuing, you agree to Imaginated's</p> 
+                    <p className="mb-0 text-dim-grey">By continuing, you agree to Imaginated&apos;s</p> 
                     <div className="flex flex-col">
                       <span>
-                        <a href="/termsofservice" className="inline-block pr-1 no-underline">Terms of Service</a>
+                        <div className="inline-block pr-1 no-underline">
+                        <Link href="/termsofservice" >Terms of Service</Link></div>
                         <p className="inline-block mb-0 text-dim-grey">and acknowledge</p>
                       </span>
                       <span>
-                      <p className="inline-block mb-0 text-dim-grey">Imaginated's</p>
-                      <a href="/privacypolicy" className="inline-block ml-1 no-underline ">Privacy Policy</a>
+                      <p className="inline-block mb-0 text-dim-grey">Imaginated&apos;s</p>
+                      <div className="inline-block ml-1 no-underline "><Link href="/privacypolicy" >Privacy Policy</Link></div>
                       </span>
                     </div>
                   </div>
@@ -138,7 +140,7 @@ export default function Signup() {
                         Continue with Facebook
                     </button>
                     <div className="mt-2 text-center">
-                      <p className="text-sm no-underline text-dim-grey">Don't worry, we never post without your permission</p>
+                      <p className="text-sm no-underline text-dim-grey">Don&apos;t worry, we never post without your permission</p>
                     </div>
                   </div>
                   ) : (

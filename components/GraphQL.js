@@ -19,7 +19,7 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
   
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://localhost:5000/graphql" }),
+    new HttpLink({ uri: "http://imaginatedbackend-env.eba-w8ecy5pn.us-east-1.elasticbeanstalk.com/graphql" }),
   ]);
   
   const client = new ApolloClient({

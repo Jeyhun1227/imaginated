@@ -2,7 +2,7 @@ const PoolConnection = require('../postgressql')
 import SendInitialEmail from './Email/CreateEmail';
 var jwt = require('jsonwebtoken');
 const yup =  require('yup');
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default async (req, res) => {

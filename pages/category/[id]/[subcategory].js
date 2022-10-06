@@ -177,16 +177,18 @@ export default function SubCategoryPageMain(props) {
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <a href={ e.subcategory } className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.subcategory}</a>
+                                  <Link href={ e.subcategory } ><div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.subcategory}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">
                                       <span className="flex items-center">
-                                          <a href={ e.subcategory } className="color-none">
-                                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
+                                          <div className="color-none">
+                                          <Link href={ e.subcategory } >
+                                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
                                                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                               </svg>
-                                          </a>
+                                          </Link>
+                                          </div>
                                       </span>   
                                   </div>
                               </div>

@@ -60,12 +60,12 @@ export default function Verification(props) {
                         <div className="pb-6 sm:pb-12">
                             <div className="text-center">
                                 <h1 className="font-bold">You have been selected for the Verified Plan ($0/mo)</h1>
-                                <p className="my-3 text-dim-grey">Upload a copy of your driver's license in your name to help our team verify your profile. Business cards not accepted</p>
+                                <p className="my-3 text-dim-grey">Upload a copy of your driver&apos;s license in your name to help our team verify your profile. Business cards not accepted</p>
                             </div>
                         </div>
                         <div className="py-6 sm:py-12">
                             <div className="flex flex-col py-3 text-center ">
-                                <label className="pb-1 mb-0 text-sm text-dim-grey">Driver's License in Your Name (JPG, PNG, GIF, BMP or PDF) format only.</label>
+                                <label className="pb-1 mb-0 text-sm text-dim-grey">Driver&apos;s License in Your Name (JPG, PNG, GIF, BMP or PDF) format only.</label>
                                 <input className="sr-only" type="file" name="file" 
                                 accept=".jpg,.png,.pdf"
                                 ref={hiddenFileInput} 

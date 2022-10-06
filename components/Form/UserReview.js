@@ -34,7 +34,9 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
       setUserDislike('')
       setUserLike('')
       setSelected(UserReviewSelect[0])
+      if(!SendingReview.data.verified) return setUserReviewError('Your review has not been posted yet! To post it you must first confirm your email address.');
       setUserReviewError('Review Submitted!');
+
       
     }
     
@@ -55,7 +57,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
                     <div className="relative mt-1">
                         <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
                         <span className="flex items-center">
-                            <span className="block ml-3 truncate text-trolley-grey">{selected.name}</span>
+                            <span className="block ml-3 truncate text-trolley-grey">{selected ? selected.name : null}</span>
                         </span>
                         <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
                             <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
@@ -140,7 +142,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
             </div>
             </div>
             <div className="mt-2.5 md:w-1/2">
-            <div className="mb-3 md:mb-4">
+            <div className="margin-bottom-15 md:mb-4">
                 <label htmlFor="source" className="pb-2.5 block text-sm font-medium text-black">
                 Your rating of this offering?
                 </label>

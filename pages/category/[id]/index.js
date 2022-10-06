@@ -50,16 +50,18 @@ export default function CategoryPageMain(props) {
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <a href={ routerID + '/' + e} className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e}</a>
+                                  <Link href={ routerID + '/' + e}><div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">
                                       <span className="flex items-center">
-                                          <a href={ routerID + '/' + e} className="color-none">
+                                          <div className="color-none">
+                                          <Link href={ routerID + '/' + e} >
                                               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
                                                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                               </svg>
-                                          </a>
+                                          </Link>
+                                          </div>
                                       </span>   
                                   </div>
                               </div>
@@ -72,39 +74,6 @@ export default function CategoryPageMain(props) {
         </div>
       </div>
       
-        {/* <div className={styles.container}>
-            <div className={styles.HeaderLocation}>
-            <Container className={styles.MainRowNav}>
-            <Row>
-            <h1  className={styles.MainHeaderName}>{routerID}</h1>
-            </Row>
-            <Row>
-                <div className={styles.MainSubHeaderName}>Discover the best {routerID} to learn from. Compare reviews and explore their offferings.</div>
-            </Row>
-            </Container>
-            </div>
-            <Container>
-            <Row>
-            <Col className={styles.CategoryLeftCol}>
-            <div className={styles.BrandTagLine}>Popular {routerID} Category</div>
-            <div>
-              <div>
-                  {subcategory.map((e) => <CategoryPageSub key={e} subcategory={e} category={routerID} values={props.category_values.filter((f) => f.subcategory === e)}/>)}
-              </div>
-            </div>
-            </Col>
-            <Col>
-              <div>
-                <h4>Looking for a category but can’t find it? Let us know!</h4>
-                <button className={styles.CategoryPageButton}>Request a Category</button>
-                <div>It takes less than 30 seconds</div>
-                <h4>{routerID} Categories</h4>
-                {subcategory.map((e) => <div key={e}>{e}</div>)}
-              </div>
-            </Col>
-            </Row>
-            </Container>
-          </div> */}
         </div>
 }
 

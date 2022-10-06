@@ -2,8 +2,8 @@ import { compileFile } from 'pug';
 const CreateUserEmail = compileFile('pages/api/User/Email/CreateUser.pug');
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
-  accessKeyId: process.env.AWS_SECRET_KEY,
-  accessSecretKey: process.env.AWS_SECRET_KEY
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 async function SendInitialEmail(name, email, verficationLink){
     // Create sendEmail params 
