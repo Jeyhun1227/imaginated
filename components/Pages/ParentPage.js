@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CategoryList from "../CategoryComponents/CategoryList"
-import Header from '../NavBars/Headers';
-import Footer from '../NavBars/Footer';
 import VerticalCallToAction from '../CallToAction/VerticalCallToAction'
 import QASingle from "../CallToAction/QASingle";
 import HeroNoBtn from "../Hero/HeroNoBtn";
@@ -12,7 +10,6 @@ import {Container, Row, Col} from 'react-bootstrap';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
 import { useQuery, gql } from "@apollo/client";
 import { MenuButtonWide, BsChevronDown } from 'react-bootstrap-icons';
-import MobileNav from "../NavBars/mobileNav";
 
 
 export default function MainParent(props) {
