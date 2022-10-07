@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from "@apollo/client";
-import GetCategoryList from "../Components/Admin/GetCategoryList";
+import GetCategoryList from "../components/Admin/GetCategoryList";
 import GetSubCategoryList from '../components/Admin/GetSubCategoryList';
 import GetIndividualList from '../components/Admin/GetIndividual';
 import GetIndividualFreeOffers from '../components/Admin/GetIndividualFreeOffers';

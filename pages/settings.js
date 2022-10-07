@@ -1,8 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import HeroNoBtn from "../components/Hero/HeroNoBtn";
-import SettingsPage from "../components/Protected/settings/SettingsPage";
-import SettingsPageMobile from "../components/Protected/settings/SettingsPageMobile";
-import {LOAD_INDIVIDUAL_PAGE} from '../GraphQL/Queries/Individual';
+import SettingsPage from "../components/Protected/Settings/SettingsPage";
+import SettingsPageMobile from "../components/Protected/Settings/SettingsPageMobile";
 import { useEffect, useState } from "react";
 // import { getSession } from "next-auth/react";
 
