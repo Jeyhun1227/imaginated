@@ -1,8 +1,8 @@
 import {useState} from "react";
 import MobileNav from '../NavBars/mobileNav';
-import Header from '../NavBars/Headers';
-import Footer from '../NavBars/Footer';
-import HeadBar from '../NavBars/HeadBar';
+import Header from '../NavBars/headers';
+import Footer from '../NavBars/footer';
+import HeadBar from '../NavBars/headBar';
 
 export default function Layout({ children }) {
 
