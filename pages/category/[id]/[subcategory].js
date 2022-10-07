@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
-import styles from '../../../styles/Home.module.css';
-import Header from '../../../components/NavBars/headers';
-import {Container, Row, Col} from 'react-bootstrap';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
 import client from '../../../components/GraphQL';
 import SubCategoryPageSub from '../../../components/SubCategoryPage/SubCategoryPage';
