@@ -66,7 +66,7 @@ export default function Header(props) {
 
       <div className="flex items-center justify-between mx-auto flex-nowrap">
           <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
-              <img src="/imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
+              <img src="/Imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
           </Link></div></div>
           <Combobox as="li" value={searchTerm} onChange={setSearchTerm} className="relative list-none">
             <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
