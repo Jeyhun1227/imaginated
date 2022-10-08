@@ -3,7 +3,9 @@ const webpack = require('webpack');
 module.exports = {
   reactStrictMode: true,
   plugins: [
-    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
+    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ }),
+    new webpack.IgnorePlugin(/^pg-native$/ )
+
   ],
   async rewrites() {
     return [
