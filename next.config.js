@@ -4,7 +4,7 @@ module.exports = {
     return [
       {
         source: '/graphql',
-        destination: 'http://imaginatedbackend-env.eba-w8ecy5pn.us-east-1.elasticbeanstalk.com/graphql/:path*' // Proxy to Backend
+        destination: 'https://api.imaginated.com/graphql/:path*' // Proxy to Backend
       }
     ]
   },
