@@ -55,7 +55,7 @@ export default function CategoryList(props) {
                                     </svg>
                                 )}
                                 </Disclosure.Button>
-                                <div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap"><Link href={'category/' + e.category} >{e.category}</Link></div>
+                                <div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap"><Link href={'directory/' + e.category} >{e.category}</Link></div>
                             </div>: null}
                             </div>
                             <div className="flex-shrink-0 order-2">
@@ -68,7 +68,7 @@ export default function CategoryList(props) {
                         <div className="space-y-4">
                             {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <div className="pl-4 ml-3 text-sm no-underline text-denim"><Link href={'category/' + e.category + '/' + sub.subcategory}>
+                                <div className="pl-4 ml-3 text-sm no-underline text-denim"><Link href={'directory/' + e.category + '/' + sub.subcategory}>
                                     {sub.subcategory}
                                 </Link></div>
                                 <label className="pl-10 ml-3 text-sm text-dim-grey">

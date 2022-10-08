@@ -46,19 +46,19 @@ export default function Footer() {
             links: [
                 {
                     name: 'Art',
-                    href: 'category/art'
+                    href: 'directory/art'
                 },
                 {
                     name: 'Design',
-                    href: 'category/design'
+                    href: 'directory/design'
                 },
                 { 
                     name: 'Photography', 
-                    href: 'category/Photography'
+                    href: 'directory/Photography'
                 },
                 {
                     name: 'Writing',
-                    href: 'category/writing'
+                    href: 'directory/writing'
                 }
             ]
         },
@@ -93,7 +93,7 @@ export default function Footer() {
             <div className="flex flex-col-reverse md:flex-row">
                 <div className="pt-8 md:pt-2 md:w-2/5 md:mr-auto">
                     <div className="flex items-center mb-6 xl:mb-0 sm:mb-0">
-                        <img src="/imaginated_logo.png" className="h-6 mt-1 ml-auto mr-auto md:ml-0 md:mr-3 sm:h-9" alt="Imaginated Logo" />
+                        <img src="/Imaginated_logo.png" className="h-6 mt-1 ml-auto mr-auto md:ml-0 md:mr-3 sm:h-9" alt="Imaginated Logo" />
                     </div>
                     <div className="pt-3 mx-auto mb-6 md:pt-20 md:mt-0 md:mx-0 md:mb-0">
                         <div className="flex justify-center pr-2 space-x-6 md:justify-start xl:pr-0 sm:pr-0">

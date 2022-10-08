@@ -230,7 +230,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             </div>
-            <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/category/' + Individual_values.category}><div>{Individual_values.category}</div></Link></div>
+            <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/directory/' + Individual_values.category}><div>{Individual_values.category}</div></Link></div>
             <div className="inline-flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -265,7 +265,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className={styles.inline_block}>({Individual_values.count})</div>
               </div>
               <div className="hidden space-y-3 sm:space-x-3 md:flex">
-                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
+                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/' + e} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                 <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="hidden md:flex">
@@ -281,7 +281,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="block col-span-5 md:hidden">
               <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
-              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/category/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
+              {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
                 <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
               </div>
               <div className="flex mt-4 md:hidden">
