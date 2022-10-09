@@ -22,12 +22,18 @@ export default function MainParent(props) {
     useEffect(() => {
       let temp_object_category = {};
       let temp_category = []
+      let subcategory = props.subcategory.getAllSubCategory.rows;
       if (props.category){
         temp_category = props.category.getAllCategory.rows.map((e) => {
-          if(temp_object_category[e.parent])
-          temp_object_category[e.parent].push(e)
-          else
-          temp_object_category[e.parent] = [e]
+          // FILTERING SUBCATEGORY TO MATCH PARENT AND CATEGORY
+          let current_sub = subcategory.filter((s) => e.category === s.categoryname)
+          current_sub = current_sub.map((s) => s.subcategory.toLowerCase())
+          if(temp_object_category[e.parent]){
+            temp_object_category[e.parent].push({...e, subcategory: current_sub})
+          }
+          else{
+            temp_object_category[e.parent] = [{...e, subcategory: current_sub}]
+          }
           return {parent : e.parent, category: e.category}
         })
       }
@@ -39,7 +45,7 @@ export default function MainParent(props) {
         setCategoryRank(CategoryRank);
         let temp_object_subcategory = {}
         if(props.subcategory){
-          props.subcategory.getAllSubCategory.rows.map((e) =>{
+          subcategory.map((e) =>{
             let temp_category_filtered = temp_category.filter((f) => f.category === e.categoryname)
             temp_category_filtered.map((tm) => {
               if(temp_object_subcategory[tm.parent])
@@ -54,9 +60,14 @@ export default function MainParent(props) {
     }, [props.category, props.subcategory]);
 
     let ChangedCategory = (value) => {
+      let value_lower = value.toLowerCase();
       let temp_category_filtered = {}
+      // console.log('CategoryValues: ', CategoryValues)
       Object.keys(CategoryValues).map((f) => {
-      let temp_CategoryFiltered = CategoryValues[f].filter((e) => e.category.toLowerCase().includes(value.toLowerCase()))
+      let temp_CategoryFiltered = CategoryValues[f].filter((e) => {
+        if(e.category.toLowerCase().includes(value_lower)) return true
+        return e.subcategory.find((s) => s.includes(value_lower))
+      })
       if(temp_CategoryFiltered.length > 0)
         temp_category_filtered[f] = temp_CategoryFiltered
       }

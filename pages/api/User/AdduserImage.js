@@ -3,9 +3,9 @@ const PoolConnection = require('../postgressql')
 import nc from "next-connect";
 const path = require('path');
 const { S3Client } = require('@aws-sdk/client-s3');
-
 const multer = require('multer'),
 multerS3 = require('multer-s3')
+
 const handler = nc({  onError: (err, req, res, next) => {
 
   if(err.stack) return   res.status(200).send({error: err.stack});
@@ -40,20 +40,16 @@ var upload = multer({
     storage: multerS3({
         s3: S3,
         // acl: 'public-read',
-        bucket: 'imaginated-identification-request',
+        bucket: 'imaginated-user-images-public',
         // META DATA FOR PUTTING FIELD NAME
         metadata: function (req, file, cb) {
             cb(null, { fieldName: file.fieldname });
         },
         // SET / MODIFY ORIGINAL FILE NAME
         key: async function (req, file, cb) {
-
+// path.extname(file.originalname).toLowerCase()
             const session = await getSession({ req })
-            cb(null, 'ID-' + req.body.individual + '-' + session.user.email + '-' + new Date().toISOString() + '-' + file.originalname); //set unique file name if you wise using Date.toISOString()
-            // EXAMPLE 1
-            // cb(null, Date.now() + '-' + file.originalname);
-            // EXAMPLE 2
-            // cb(null, new Date().toISOString() + '-' + file.originalname);
+            cb(null, 'user-' + session.id + path.extname(file.originalname)); //set unique file name if you wise using Date.toISOString()
 
         }
     }),
@@ -81,9 +77,12 @@ var upload = multer({
 let uploadFile = upload.single("Image");
 handler.use(uploadFile);
 handler.post(async (req, res) => {
+    const session = await getSession({ req })
 
+    var user_updated = await PoolConnection.query('UPDATE "User" SET image = $1 WHERE id = $2', ['https://imaginated-user-images-public.s3.amazonaws.com/user-' + session.id + path.extname(req.file.originalname), session.id])
+// https://imaginated-user-images-public.s3.amazonaws.com/ID-32220502-d874-4bda-bb95-34c1cf232885
   // console.log("req.individual: ", req.body.individual);
-
+// 
 //   let url = "http://" + req.headers.host;
 //   let filename = req.file.filename;
 

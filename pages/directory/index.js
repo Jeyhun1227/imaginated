@@ -1,8 +1,8 @@
 
-import MainParent from "../components/Pages/ParentPage"
+import MainParent from "../../components/Pages/ParentPage"
 import { ApolloProvider } from "@apollo/client";
-import client from '../components/GraphQL';
-import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../GraphQL/Queries/Admin";
+import client from '../../components/GraphQL';
+import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
 
 
 

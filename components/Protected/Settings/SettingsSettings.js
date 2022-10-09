@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
 import { useSession } from "next-auth/react";
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import axios from 'axios';
@@ -18,7 +18,7 @@ export default function SettingsSettings(props) {
     const [ErrorEmail, setErrorEmail] = useState(null);
     const [ChangePasswordFunc, setChangePasswordFunc] = useState(false);
     const [ChangeEmailFunc, setChangeEmailFunc] = useState(false);
-
+    const [formData, setFormData] = useState();
 
 
     const ChangePassword = async () => {
@@ -69,6 +69,19 @@ export default function SettingsSettings(props) {
         }
         
     }
+    const handleChange = async (event) => {
+        let fileUploaded = event.target.files[0];
+        setFormData(fileUploaded)
+        console.log(fileUploaded)
+        let formDataVal = new FormData();
+        formDataVal.append('Image', fileUploaded);
+        let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage`, formDataVal)
+
+    };
+    const hiddenFileInput = useRef(null);
+    const handleClick = event => {
+        hiddenFileInput.current.click();
+    };
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -88,6 +101,22 @@ export default function SettingsSettings(props) {
                                         </div>
                                         <div className="flex items-end justify-between flex-1 text-sm">
                                             <p className="mb-0">{props.user.email}</p>
+                                        </div>
+                                        <div className="flex flex-col">
+                                        <p className="mb-0 font-semibold">Image profile</p>
+                                            <input className="sr-only" type="file" name="file" 
+                                            accept=".jpg,.png,.pdf"
+                                            ref={hiddenFileInput} 
+                                            onChange={handleChange}/>
+                                            <button
+                                            type="submit"
+                                            className="inline-flex justify-center w-full py-2 text-sm font-semibold border border-transparent text-dim-grey sm:w-1/4 sm:px-16 bg-whisper"
+                                            onClick={handleClick}
+                                            >
+                                            {formData === null ? "Choose File" : "Update File"}
+                                            </button>
+                                            <p className="pt-1 mb-0 text-sm text-dim-grey">{formData ? formData.name: "No File Chosen" }</p>
+                                            {/* <p className="pt-1 mb-0 text-sm text-crimson">{btnDisabled}</p> */}
                                         </div>
                                     </div>
                                 </li>

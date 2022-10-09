@@ -32,23 +32,7 @@ export default function Verification(props) {
     const handleChange = (event) => {
         let fileUploaded = event.target.files[0];
         props.handleFile(fileUploaded); 
-        // let fileSize = fileUploaded.size;
-        // let fileMb = fileSize / 1024 ** 2;
-        // let fileType = fileUploaded.type;
-        // console.log(fileMb)
-        // console.log(fileType)
-        // setBtnDisabled = true;
-        // console.log(btnDisabled)
-        // if (fileMb < 50000) {
-        //     window.alert("File type too large.");
-        //     setBtnDisabled = true;
-        //     console.log(btnDisabled)
-        // }
-        // if (fileType != "image/png" || fileType != "image/jpg" ) {
-        //     window.alert("File does not support. You must use .png or .jpg ");
-        //     setBtnDisabled = true;
-        //     console.log(btnDisabled)
-        // }
+
     };
     return (
         
