@@ -65,7 +65,7 @@ export default function MobileNav() {
                 <span className="sr-only">Imaginated</span>
                 <img
                   className="w-auto h-8 sm:h-10"
-                  src="\Imaginated_logo.png"
+                  src="/Imaginated_logo.png"
                   alt="Imaginated Logo"
                 />
               </div>

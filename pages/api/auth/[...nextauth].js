@@ -35,8 +35,12 @@ export default (req, res) =>{
             // console.log('customer', user_custom.rows)
             const user_all = user_custom.rows[0];
             const match = await bcrypt.compare(credentials.password, user_all.password);
-            // console.log(user_all, match)
-            if(match) return {id: user_all.userid, verified: user_all.verified, email: user_all.email, name: user_all.name}
+
+            if(match){
+              const user_image = await PoolConnection.query('SELECT DISTINCT * FROM "User" WHERE id = $1', [user_all.userid])
+
+              return {id: user_all.userid, verified: user_all.verified, email: user_all.email, name: user_all.name, image: user_image.rows[0].image}
+            } 
           }
           return null
 
