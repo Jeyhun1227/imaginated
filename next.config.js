@@ -5,7 +5,7 @@ module.exports = {
   // plugins: [
   //   new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
   // ],
-  // target: 'experimental-serverless-trace',
+  target: 'experimental-serverless-trace',
 
   webpack: (config) => {
     config.plugins.push(
@@ -13,7 +13,7 @@ module.exports = {
         resourceRegExp: /^pg-native$/,
       })
     );
-    config.externals.push('util/types');
+    // config.externals.push('util/types');
 
     return config;
   }
