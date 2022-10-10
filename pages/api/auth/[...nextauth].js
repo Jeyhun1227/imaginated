@@ -7,10 +7,10 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 const PoolConnection = require('../postgressql')
+const prisma = new PrismaClient();
 
 
 export default (req, res) =>{
-  const prisma = new PrismaClient();
 
   return NextAuth(req, res, {
     providers: [

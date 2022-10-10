@@ -8,20 +8,19 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -57,16 +56,16 @@ model VerificationToken {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model all_reviews {
-  id            Int       @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   individual    Int?
-  user          Int?
+  user          String?
   premium_offer Int?
   description   String?
   like          String?
   dislike       String?
   benefit       String?
   type          String?   @db.VarChar(100)
-  review        Int?
+  review        Float?
   title         String?   @db.VarChar(400)
   validation    String?   @db.VarChar(400)
   createdate    DateTime? @db.Timestamp(6)
@@ -98,11 +97,11 @@ model individual {
   verified    Boolean?
   imagelink   String?  @db.VarChar(500)
   linkname    String?  @db.VarChar(450)
+  ranking     Int?
+  user        String?  @db.VarChar(250)
 
   @@ignore
 }
-
-
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model individual_favorites {
@@ -160,4 +159,58 @@ model subcategory {
   @@ignore
 }
 
+model USER_CUSTOM {
+  userid             String    @id(map: "USERIDCUSTOM")
+  verified           Boolean?
+  type               String?   @db.VarChar(100)
+  password           String?   @db.VarChar(100)
+  email              String?
+  name               String?   @db.VarChar(255)
+  email_sent         Int?
+  last_sent          DateTime? @db.Timestamp(6)
+  previous_emails    String[]
+  last_email_changed DateTime? @db.Timestamp(6)
+}
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model add_category {
+  userid   String?  @db.VarChar(200)
+  category String?  @db.VarChar(500)
+  listing  String?  @db.VarChar(500)
+  you      Boolean?
+  extra    String?  @db.VarChar(500)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model all_reviews_deleted {
+  id            Int       @default(autoincrement())
+  individual    Int?
+  user          String?
+  premium_offer Int?
+  description   String?
+  like          String?
+  dislike       String?
+  benefit       String?
+  type          String?   @db.VarChar(100)
+  review        Float?
+  title         String?   @db.VarChar(400)
+  validation    String?   @db.VarChar(400)
+  createdate    DateTime? @db.Timestamp(6)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model user_follow {
+  userid       String?   @db.VarChar(150)
+  follow_date  DateTime? @default(now()) @db.Timestamp(6)
+  individualid String?   @db.VarChar(150)
+  name         String?   @db.VarChar(500)
+  aka          String?   @db.VarChar(200)
+  imagelink    String?   @db.VarChar(500)
+  link         String?   @db.VarChar(200)
+
+  @@ignore
+}
