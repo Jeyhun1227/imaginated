@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function SettingsFollowing(props) {
     const [showMore, setShowMore] = useState(false);
     const [userFollow, setUserFollow] = useState([]);
-    useEffect(async () => {
+    useEffect( () => {
         setUserFollow(props.userFollow.slice(0, 10))
         setShowMore(props.userFollow.length <= 10)
       }, [props]);

@@ -13,7 +13,7 @@ export default function Settings() {
   const [windowType, setWindowType] = useState(0);
   const [reviews, setReviews] = useState([]);
 
-  useEffect(async () => {
+  const get_setup = async () => {
     if(data === null) return window.location.href = "/login";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -26,14 +26,17 @@ export default function Settings() {
         setWindowType(type);  
     }
     let UserChanges = await axios.post('api/User/GetUser', {})
-    reviews = reviews.map((e) => {
-      let date = new Date(e.createdate)
-      e.formatedDate = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
-      return e
-    })
+    // reviews = reviews.map((e) => {
+    //   let date = new Date(e.createdate)
+    //   e.formatedDate = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
+    //   return e
+    // })
     setUserFollow(UserChanges.data.user_follow) 
     setUser(UserChanges.data.user)
     setReviews(UserChanges.data.reviews)
+  }
+  useEffect( () => {
+    get_setup()
   }, [data]);
   // if(!data){
   //   console.log('user not found: ', data)

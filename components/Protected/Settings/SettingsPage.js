@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function SettingsPage(props) {
 
     const [type, setType] = useState(props.type);
-    useEffect(async () => {
+    useEffect(() => {
         setType(props.type)
       }, [props]);
     

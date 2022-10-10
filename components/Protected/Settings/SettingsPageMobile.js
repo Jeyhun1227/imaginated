@@ -13,7 +13,7 @@ export default function SettingsPageMobile(props) {
     const [user, setUser] = useState([]);
     const [type, setType] = useState(0);
 
-    useEffect(async () => {
+    useEffect( () => {
         setUserFollow(props.userFollow)
         setReviews(props.reviews)
         setUser(props.user)
