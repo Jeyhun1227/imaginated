@@ -2,10 +2,10 @@ const webpack = require('webpack');
 
 module.exports = {
   reactStrictMode: true,
-  plugins: [
-    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
-  ],
-  target: 'experimental-serverless-trace',
+  // plugins: [
+  //   new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
+  // ],
+  // target: 'experimental-serverless-trace',
 
   webpack: (config) => {
     config.plugins.push(

@@ -3,11 +3,11 @@ import Providers from "next-auth/react";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 // import { PrismaClient } from "@prisma/client";
-// import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 const PoolConnection = require('../postgressql')
-const prisma = require('../../../lib/prisma');
+import prisma from '../../../lib/prisma.ts';
 // const prisma = new PrismaClient();
 
 
