@@ -21,7 +21,7 @@ export default function ClaimFormThankYou(props) {
                         <div className="inline-flex justify-center w-full py-2 text-sm font-medium text-white no-underline border border-transparent sm:w-auto sm:px-16 bg-dark-blue">
                         <Link>
                             <Link
-                            href="/"
+                            href="/directory"
                             
                             >
                             Home

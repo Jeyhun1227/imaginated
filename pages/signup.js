@@ -16,7 +16,7 @@ export default function Signup() {
     useEffect(() => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const return_url = urlParams.get('return_url') ? urlParams.get('return_url') : '/'
+      const return_url = urlParams.get('return_url') ? urlParams.get('return_url') : '/directory'
       if (data) {
   
           window.location.href = return_url

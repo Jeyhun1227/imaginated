@@ -17,7 +17,7 @@ export default function MobileNav() {
     },
     {
       name: 'Directory',
-      href: '/'
+      href: '/directory'
     },
     { 
       name: 'Market', 
@@ -61,7 +61,7 @@ export default function MobileNav() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <div href="/">
+              <div href="/directory">
                 <span className="sr-only">Imaginated</span>
                 <img
                   className="w-auto h-8 sm:h-10"
@@ -173,7 +173,7 @@ export default function MobileNav() {
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-4 border-b border-gainsboro">
                   <div>
-                    <div href="/">
+                    <div href="/directory">
                       <span className="sr-only">Imaginated</span>
                       <img
                         className="w-auto h-8 sm:h-10"

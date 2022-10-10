@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function QASingle() {
     const varLargeText = "What is Imaginated?" 
     const varLinkText = "Learn more" 
-    const varLink = "/"
+    const varLink = "/directory"
     const varSmallText = "Imaginated is a directory of personal brands. Here you can find the top creators in any given category."
     const [largeText, setLargeText] = useState(varLargeText);
     const [linkText, setLinkText] = useState(varLinkText);
