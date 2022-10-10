@@ -24,7 +24,7 @@ export default function SubCategoryPageMain(props) {
         }
     })
     
-    useEffect(async () => {
+    const getStartedValue = async () => {
       try{
         const getUser = await axios.post(`${window.location.origin}/api/User/GetUser`, {});
         // console.log('getUser: ', getUser);
@@ -33,7 +33,9 @@ export default function SubCategoryPageMain(props) {
       }catch(e){
         setUser(false);
       }
-      
+    }
+    useEffect( () => {
+      getStartedValue()
     }, [props]);
 
     const [searchedValue, setsearchedValue] = useState("");

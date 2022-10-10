@@ -135,7 +135,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     setgetUserFollowingBool(getBool)
   }
 
-  useEffect(async() => {
+  const getUseStart = async () => {
     let temp_count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
     let temp_favorites_offers = {}
 
@@ -171,6 +171,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     }
     setreviewAll(allreviews)
 
+  }
+
+  useEffect(() => {
+    getUseStart()
   }, [session, reviews, favorites]);
 
 
