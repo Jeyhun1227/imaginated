@@ -171,7 +171,7 @@ export default function Login({return_url}) {
 }
 export async function getServerSideProps({query}){
 
-  const return_url = query.return_url ? query.return_url : '/'
+  const return_url = query.return_url ? query.return_url : '/directory'
 
   return {
     props: {

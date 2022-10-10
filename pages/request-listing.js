@@ -34,7 +34,7 @@ export default function RequestListing(props) {
         let you = selected.name === 'Yes' ? true : false;
         let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
 
-        window.location.href = "/"
+        window.location.href = "/directory"
 
     }
 

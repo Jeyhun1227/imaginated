@@ -12,7 +12,7 @@ export default function RequestCategory() {
         setSubmited(true);
         let addListing = await axios.post('api/User/addListing', {category})
         
-        window.location.href = "/"   
+        window.location.href = "/directory"   
      }
     const [category, setCategory] = useState("")
     const [submited, setSubmited] = useState(false);

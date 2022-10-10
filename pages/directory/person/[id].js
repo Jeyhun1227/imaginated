@@ -221,7 +221,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
         <main className="pt-2 px-2 mt-2.5">
           <div className="flex flex-row flex-wrap space-x-3">
             <div className="inline-flex items-center justify-center cursor-point">
-            <Link href="/" >  
+            <Link href="/directory" >  
               <img className="content-center h-4" src='/home.svg'/>
             </Link>
             </div>
