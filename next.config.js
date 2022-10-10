@@ -11,6 +11,8 @@ module.exports = {
         resourceRegExp: /^pg-native$/,
       })
     );
+    config.externals.push('util/types');
+
     return config;
   }
   // async rewrites() {
