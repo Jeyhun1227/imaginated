@@ -2,13 +2,13 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/react";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { PrismaClient } from "@prisma/client";
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
+// import { PrismaClient } from "@prisma/client";
+// import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 const PoolConnection = require('../postgressql')
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export default (req, res) =>{
     return NextAuth(req, res, {
@@ -74,7 +74,7 @@ export default (req, res) =>{
     jwt: {
       secret: process.env.JWT_SECRET,
     },
-    adapter: PrismaAdapter(prisma),
+    // adapter: PrismaAdapter(prisma),
     pages: {
       signIn: '/login',
       newUser: '/directory' // New users will be directed here on first sign in (leave the property out if not of interest)
