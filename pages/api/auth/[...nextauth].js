@@ -76,7 +76,7 @@ export default (req, res) =>{
     jwt: {
       secret: process.env.JWT_SECRET,
     },
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     pages: {
       signIn: '/login',
       newUser: '/directory' // New users will be directed here on first sign in (leave the property out if not of interest)
