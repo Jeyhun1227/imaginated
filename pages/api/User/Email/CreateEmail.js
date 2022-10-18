@@ -1,16 +1,17 @@
 import { compile } from 'pug';
-var CreateUser = `<!DOCTYPE html>
-                    <html>
-                    <body>
+var CreateUser = `
+<!DOCTYPE html>
+<html>
+<body>
 
-                    <div>Hi #{full_name},</div>
-                    <p>Thank you for signing up to Imaginated!</p>
-                    <p>To complete your registration, please verify your email:</p>
-                    <p><a href="#{link}" target="_blank">Verify your email address</a></p>
-                    <p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
+<div>Hi #{full_name},</div>
+<p>Thank you for signing up to Imaginated!</p>
+<p>To complete your registration, please verify your email:</p>
+<p><a href="#{link}" target="_blank">Verify your email address</a></p>
+<p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
 
-                    </body>
-                  </html>`;
+</body>
+</html>`;
 const CreateUserEmail = compile(CreateUser);
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     

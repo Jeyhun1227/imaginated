@@ -1,15 +1,16 @@
 import { compile } from 'pug';
 
-const PasswordEmail = `<!DOCTYPE html>
-                      <html>
-                        <body>
-                        <h4>Hi #{name}</h4>
-                        <h5>Your password has been changed for Imaginated.</h5>
-                        <p>If this wasn’t you, please reset your password immediately.</p>
-                        <p><a href="#{link}" target="_blank">Click Here To Reset Your Password</a></p>
-                        <p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
-                        </body>
-                      </html>`
+const PasswordEmail = `
+<!DOCTYPE html>
+<html>
+<body>
+<h4>Hi #{name}</h4>
+<h5>Your password has been changed for Imaginated.</h5>
+<p>If this wasn’t you, please reset your password immediately.</p>
+<p><a href="#{link}" target="_blank">Click Here To Reset Your Password</a></p>
+<p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
+</body>
+</html>`
 const PasswordChanged = compile(PasswordEmail);
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
