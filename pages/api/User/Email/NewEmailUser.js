@@ -1,6 +1,19 @@
-import { compileFile } from 'pug';
+import { compile } from 'pug';
 import path from 'path';
-const NewEmailUser = compileFile(path.resolve(__dirname, 'NewEmailUser.pug'));
+
+const NewEmail = `<!DOCTYPE html>
+                  <html>
+                        <body>
+
+                        <div>Hi #{full_name},</div>
+                        <p>Your Email has changed for Imaginated!</p>
+                        <p>To verify your email, please use the link below:</p>
+                        <p><a href="#{link}" target="_blank">Verify your email address</a></p>
+                        <p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
+
+                        </body>
+                  </html>`;
+const NewEmailUser = compile(NewEmail);
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
   accessKeyId: process.env.ACCESS_KEY_ID,

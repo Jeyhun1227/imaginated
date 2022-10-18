@@ -57,7 +57,7 @@ export default function RequestCategory() {
                                                                 placeholder="Enter here"
                                                                 className="items-center justify-start order-1 block w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none"
                                                             />
-                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</p>
+                                                            <div className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</div>
                                                             <div className="py-3 text-left ">
                                                                 <button
                                                                 className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-10 bg-dark-blue"
