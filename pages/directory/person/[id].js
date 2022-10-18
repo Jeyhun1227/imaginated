@@ -244,7 +244,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           <div className="flex flex-row flex-wrap space-x-3">
             <div className="inline-flex items-center justify-center cursor-point">
             <Link href="/directory" >  
-              <a href="/directory"><img className="content-center h-4" src='/home.svg'/></a>
+              <a ><img className="content-center h-4" src='/home.svg'/></a>
             </Link>
             </div>
             <div className="inline-flex items-center justify-center">
@@ -292,12 +292,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="hidden md:flex">
                 <Link href="/claim-listing">
-                  <>
-                  <a className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href="/claim-listing">
+                  <a className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" >
                     <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
                     Claim Profile
                   </a>
-                  </>
                 </Link>
               </div>
             </div>
@@ -360,7 +358,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <ul className="pl-0.5 list-outside">{feature.map((url) => 
                   <li className="" key={url}>
                     <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
-                    <Link  href={url} ><a target="_blank" rel="noopener noreferrer" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
+                    <Link  href={url} ><a  target="_blank" rel="noopener noreferrer" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
                   </li>)}
                 </ul>
               </div>
@@ -369,7 +367,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
                   {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
                   {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a href={Individual_values.link} target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
+                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
               </div>
             </div>
           </div>
@@ -380,8 +378,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
               {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
-              <><a href={e.link} target="_blank" rel="noopener noreferrer" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-              {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a></>
+              <a target="_blank" rel="noopener noreferrer" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+              {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a>
               </Link></div>)}
             </div>
             <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
