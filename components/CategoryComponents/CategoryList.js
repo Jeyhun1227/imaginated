@@ -40,7 +40,7 @@ export default function CategoryList(props) {
                     {({ open }) => (
                     <>
                         <h3 className="flow-root -my-3">
-                        <div className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-sm text-gray-400 bg-white hover:text-gray-500">
+                        <div className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-small text-gray-400 bg-white hover:text-gray-500">
                             <div className="flex flex-wrap items-center justify-between">
                             {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?
                             <div className="flex items-center flex-1 w-0">
@@ -55,11 +55,11 @@ export default function CategoryList(props) {
                                     </svg>
                                 )}
                                 </Disclosure.Button>
-                                <div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap"><Link href={'directory/' + e.category} >{e.category}</Link></div>
+                                <div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point"><Link href={'directory/' + e.category} >{e.category}</Link></div>
                             </div>: null}
                             </div>
                             <div className="flex-shrink-0 order-2">
-                                <span className="pl-2 text-lg text-dark-blue">{props.parent}</span>
+                                <span className="pl-2 text-large text-dark-blue">{props.parent}</span>
                             </div>
                         </div>
                         
@@ -68,11 +68,11 @@ export default function CategoryList(props) {
                         <div className="space-y-4">
                             {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <div className="pl-4 ml-3 text-sm no-underline text-denim"><Link href={'directory/' + e.category + '/' + sub.subcategory}>
+                                <div className="pl-4 ml-3 text-small no-underline text-denim"><Link href={'directory/' + e.category + '/' + sub.subcategory}>
                                     {sub.subcategory}
                                 </Link></div>
-                                <label className="pl-10 ml-3 text-sm text-dim-grey">
-                                Photographers
+                                <label className="pl-10 ml-3 text-small text-dim-grey">
+                                {e.category}
                                 </label>
                             </div>):null}
                         </div>

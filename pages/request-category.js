@@ -29,7 +29,7 @@ export default function RequestCategory() {
                                     <div className="md:col-span-4 md:mt-10 sm:mt-0">
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center justify-center px-4 space-y-8 md:justify-start md:items-start md:flex-col sm:px-0">
-                                                <h3 className="text-lg font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
+                                                <h3 className="text-large font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                 <div className=''>
                                                     <Image className="object-cover object-center sm:justify-center" 
                                                     src={personUsingComputer}

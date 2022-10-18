@@ -66,15 +66,15 @@ export default function Signup() {
                   <div className="flex flex-col pt-1 pb-4 space-y-3 sm:pt-4 sm:pb-12">
                     <span className="flex flex-row items-center">
                       <CheckLg/>
-                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Save and share your favorites</p>
+                      <p className="mb-0 ml-4 text-large md:text-xl text-dark-blue">Save and share your favorites</p>
                     </span>
                     <span className="flex flex-row items-center">
                       <CheckLg/>
-                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Get personalized recommendations</p>
+                      <p className="mb-0 ml-4 text-large md:text-xl text-dark-blue">Get personalized recommendations</p>
                     </span>
                     <span className="flex flex-row items-center">
                       <CheckLg/>
-                      <p className="mb-0 ml-4 text-lg md:text-xl text-dark-blue">Review creators and give feedback</p>
+                      <p className="mb-0 ml-4 text-large md:text-xl text-dark-blue">Review creators and give feedback</p>
                     </span>
                   </div>
                   <div className="hidden sm:flex">

@@ -71,7 +71,7 @@ export default function FindListing(props) {
                         <div className="py-12">
                             <div className="text-left sm:text-center">
                                 <h1 className="font-bold">Find & Claim Your Listing</h1>
-                                <p className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/signup">Get started</Link></div> today.</p>
+                                <div className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/signup"><a href="/signup">Get started</a></Link></div> today.</div>
                             </div>
                             <div className="flex mx-auto mt-8 place-content-center"> 
                                 <Image className="object-cover object-center sm:justify-center" 
@@ -83,7 +83,7 @@ export default function FindListing(props) {
                             <div className="text-center">
                                 <h1 className="font-bold"> Boost Your Brand Image </h1>
                             </div>
-                            <div className="flex items-center justify-center px-8 pt-12">
+                            {/* <div className="flex items-center justify-center px-8 pt-12">
                                 <div className="flex items-end justify-around w-full max-w-lg mx-auto space-y-0">
                                     <div className="flex space-x-4">
                                         <div className="relative flex items-center justify-center w-20 h-20 text-sm font-medium uppercase rounded-full group sm:flex-1 sm:py-6 bg-light-yellow">
@@ -100,7 +100,7 @@ export default function FindListing(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="py-12">
                             <div className="py-3 text-center ">

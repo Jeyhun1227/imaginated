@@ -27,7 +27,9 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
       if(!UserLike) return setUserReviewError('Please provide your thoughts on how has this offering benefited you?');
       if(UserDislike.split(' ').length < 10) return setUserReviewError('Please provide a longer description of your thoughts on how this course could have been better (minimum 10 words)')
       if(UserLike.split(' ').length < 10) return setUserReviewError('Please provide a longer description of your thoughts on how has this offering benefited you (minimum 10 words)');
-      let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded`, {UserRating, UserDislike, UserLike, selected: selected.name, Individual: IndividualId, premium_offer: selected.id, editable})
+      let premium_offer = selected.type === 'Paid' ? selected.id : null;
+      let free_offer = selected.type === 'Free' ? selected.id.charAt(0).toUpperCase() + selected.id.slice(1) : null;
+      let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded`, {UserRating, UserDislike: UserDislike.trim(), UserLike: UserLike.trim(), type: selected.type, selected: selected.name, Individual: IndividualId, premium_offer, free_offer, editable})
       if(SendingReview.data.error) return setUserReviewError(SendingReview.data.error);
       if(editable) return editableClose(UserRating, UserLike, UserDislike);
       setUserRating(0)
@@ -46,7 +48,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
 
     return <form>
         <div className="p-4 bg-light-grey">
-        <h5 className="mb-4 font-bold">Student Ratings</h5>
+        <h5 className="mb-4 font-bold">Leave a review on their offerings</h5>
         <div className="flex flex-col gap-3 md:gap-8 md:flex-row">
             <div className="md:w-1/2">
             <div className="mb-4">

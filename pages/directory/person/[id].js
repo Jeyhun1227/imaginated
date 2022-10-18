@@ -18,17 +18,50 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   const previousRoute = () => {
     router.back()
   }
-  const UserReviewSelect = premium_offers.map((e) => {return {name: e.name, id: e.id}})
+  let at_types = ['twitter', 'instagram', 'tiktok']
+  let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
+  'instagram': ['/Instagram.svg', 'Instagram'],
+  'slack': ['/Slack.svg', 'Slack'],
+  'facebook': ['/Facebook.svg', 'Facebook'],
+  'tiktok': ['/Tiktok.svg', 'TikTok'],
+  'linkedin': ['/Linkedin.svg', 'Linkedin'],
+  'discord': ['/Discord.svg', 'Discord'],
+  }
+  const freeOfferFunc = () => {
+    let temp_free_offers_array = Object.keys(free_offers).map((key) => {
+      let o_val = free_offers[key].split('/')
+      let images_name = images[key]
+      let name = (o_val[o_val.length - 1] === '' || o_val[o_val.length - 1] === 'feature')? o_val[o_val.length - 2] : o_val[o_val.length - 1];
+      name = (at_types.includes(key))? '@' + name: name;
+      return {name, link: free_offers[key], type: key, images_name}
+    })
+    temp_free_offers_array = temp_free_offers_array.filter((e) => e.link != '' && e.name !== "IndividualFreeOffers")
+    return temp_free_offers_array
+  }
+
+  const concatUserReview = (temp_free_offers) => {
+    let premiumTempUserReview = premium_offers.map((e) => {return {name: e.name, id: e.id, type: 'Paid'}});
+    let freeTempUserReview = temp_free_offers.map((e) => {return {name: e.type.charAt(0).toUpperCase() + e.type.slice(1), id: e.type, type: 'Free'}});
+    return premiumTempUserReview.concat(freeTempUserReview)
+  }
+
+  const [UserReviewSelect, setUserReviewSelect] = useState(() => concatUserReview(freeOfferFunc()));
   const [urlType, seturlType] = useState();
   const [count_each_rating, setcount_each_rating] = useState({});
   const [favorites_offers, setfavorites_offers] = useState({})
   const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
+  const [free_offers_array, setFree_offers_array] = useState([]);
 
-  React.useEffect(() => {
+
+  useEffect(() => {
     let href_hash = window.location.href;
     let href_value = (href_hash.split("#").length > 1) ? href_hash.split("#")[1].toLowerCase() : null;
     seturlType(href_value);
-    // setreviewAll(reviews);
+    
+    let temp_free_offers = freeOfferFunc();
+    setFree_offers_array(temp_free_offers)
+
+    setUserReviewSelect(concatUserReview(temp_free_offers))
   }, []);  
   
   let chanUrlType = (type) => {
@@ -96,23 +129,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }, [visibleSection]);
 
   let feature = Individual_values.feature? Individual_values.feature.split('||'): [];
-  let at_types = ['twitter', 'instagram', 'tiktok']
-  let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
-  'instagram': ['/Instagram.svg', 'Instagram'],
-  'slack': ['/Slack.svg', 'Slack'],
-  'facebook': ['/Facebook.svg', 'Facebook'],
-  'tiktok': ['/Tiktok.svg', 'TikTok'],
-  'linkedin': ['/Linkedin.svg', 'Linkedin'],
-  'discord': ['/Discord.svg', 'Discord'],
-  }
-  let free_offers_array = Object.keys(free_offers).map((key) => {
-    let o_val = free_offers[key].split('/')
-    let images_name = images[key]
-    let name = (o_val[o_val.length - 1] === '' || o_val[o_val.length - 1] === 'feature')? o_val[o_val.length - 2] : o_val[o_val.length - 1];
-    name = (at_types.includes(key))? '@' + name: name;
-    return {name, link: free_offers[key], type: key, images_name}
-  })
-  free_offers_array = free_offers_array.filter((e) => e.link != '' && e.name !== "IndividualFreeOffers")
+
+
   let premium_offers_types = {}
   premium_offers.map((e) =>{
     let val_type = (e.type) ? e.type : "Other";
@@ -148,7 +166,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     let allreviews = reviews.map((e) => { 
       let date = new Date(parseInt(e.createdate))
       let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
-      let premium_name_value = (e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
+      let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
       temp_count_each_rating[Math.round(e.review)] += 1
       if(!reviews_category.includes(premium_name_value))
         reviews_category.push(premium_name_value)
@@ -226,7 +244,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           <div className="flex flex-row flex-wrap space-x-3">
             <div className="inline-flex items-center justify-center cursor-point">
             <Link href="/directory" >  
-              <img className="content-center h-4" src='/home.svg'/>
+              <a href="/directory"><img className="content-center h-4" src='/home.svg'/></a>
             </Link>
             </div>
             <div className="inline-flex items-center justify-center">
@@ -275,10 +293,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <div className="hidden md:flex">
                 <Link href="/claim-listing">
                   <>
-                  <button className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey">
+                  <a className="inline-flex items-center px-2 py-1 underline text-dark-blue bg-light-grey" href="/claim-listing">
                     <ExclamationCircle className="w-3.5 h-3.5 mr-2 "/>
                     Claim Profile
-                  </button>
+                  </a>
                   </>
                 </Link>
               </div>
@@ -310,22 +328,24 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
           </div>
-          <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey">
+          </main>
+          <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20">
             <div>
-              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                 About
               </div>
-              <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "offerings" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(offeringsSection); chanUrlType('offerings');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "offerings" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                 Offerings
               </div>
-              <div  onClick={(e) => {handleClick(favoritesSection); chanUrlType('favorites');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "favorites" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(favoritesSection); chanUrlType('favorites');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "favorites" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                 Favorites
               </div>
-              <div  onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "reviews" ? "mr-8 md:mr-12 border-b border-black" : "md:mr-12 mr-8" }`}>
+              <div  onClick={(e) => {handleClick(reviewsSection); chanUrlType('reviews');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "reviews" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                 Reviews
               </div>
             </div>
           </div>
+          <main className="pt-2 px-2 mt-2.5">
           {/* <div className={(!urlType) ? "my-8" : "hidden"}> */}
           <div className={"my-10"} ref={aboutSection}>
             <div className="pb-12 border-b border-very-light-grey">
@@ -359,9 +379,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <h3>Free Offerings</h3>
             </div>
             <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
-              {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.name}><Link key={e.name} href={e.link} >
-              <><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-              {e.name}</>
+              {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
+              <><a href={e.link} target="_blank" rel="noopener noreferrer" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+              {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a></>
               </Link></div>)}
             </div>
             <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
@@ -375,7 +395,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     currentTarget.onerror = null; 
                     currentTarget.src="/No-image.png";
                   }} />
-                    <div className="pt-3 text-lg text-denim">{value.name}</div>
+                    <div className="pt-3 text-large text-denim">{value.name}</div>
                     <div className="flex flex-row flex-wrap items-center space-x-2">
                       <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
                             color: "yellow",
@@ -406,7 +426,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     currentTarget.onerror = null; 
                     currentTarget.src="/No-image.png";
                   }} />
-                    <div className="text-lg text-black ">{value.name}</div>
+                    <div className="text-large text-black ">{value.name}</div>
                     <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                     <div className="pt-2">
                       <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer"><div>See Price {value.linkName}</div></Link></div>
@@ -418,10 +438,19 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           {/* <div className={(urlType === 'reviews')? "my-8" : "hidden" }> */}
           <div className={"my-10"} ref={reviewsSection}>
             <div>
+              {(session)?
               <UserReview IndividualId={Individual_values.id} editable={false} UserReviewSelect={UserReviewSelect}/>
+              :     <div className="p-4 bg-light-grey marginb-50">
+              <h5 className="mb-4 font-bold">Leave a review on their offerings</h5>    <button
+              onClick={()=> window.location.href='/login'}
+              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
+              >
+              Sign in to leave a review!
+              </button></div>
+              }
               <div className="flex flex-col gap-8 md:flex-row">
                 <div className="md:w-1/2">
-                  <h5 className="mb-6 font-bold">Student Ratings</h5>
+                  <h5 className="mb-6 font-bold">All Reviews</h5>
                   <div className="flex flex-row">
                     <div className="flex flex-col items-center justify-center w-1/4 mx-auto">
                       <h1 className="font-bold">{Individual_values.avg}</h1>

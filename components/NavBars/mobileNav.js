@@ -92,7 +92,7 @@ export default function MobileNav() {
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-2.5 border-b border-gainsboro">
                   <div>
-                    <span className="text-lg">
+                    <span className="text-large">
                       Notification
                     </span>
                   </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Dot, ChevronDown, ChevronUp, Pen } from 'react-bootstrap-icons';
+import { Dot, ChevronDown, ChevronUp, Pen, Trash } from 'react-bootstrap-icons';
 import { Rating} from '@mui/material';
 import { Disclosure, Transition } from '@headlessui/react'
 import UserReview from '../../Form/UserReview';
+import axios from 'axios';
 
 export default function SettingsRatings(props) {
     let reviews = props.reviews ? props.reviews : [];
@@ -17,7 +18,7 @@ export default function SettingsRatings(props) {
         reviews = reviews.map((e) => { 
             let date = new Date(e.createdate)
             let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
-            let premium_name_value = (e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
+            let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
             count_each_rating[e.review] += 1
             if(!reviews_category.includes(premium_name_value))
                 reviews_category.push(premium_name_value)
@@ -43,6 +44,11 @@ export default function SettingsRatings(props) {
         setUserReviewSelect([{name: rev.premium_name, id: rev.premium_offer}])
     }
 
+    const deleteReviewFunc = async (rev) => {
+        let id = rev.premium_offer ? rev.premium_offer : rev.premium_name;
+        let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded`, {id, Individual: rev.individual, delete: true, type: rev.type})
+
+    }
 
     const [showMoreReview, setShowMoreReview] = useState({itemsToShow: 3, expanded: false});
     
@@ -69,6 +75,8 @@ export default function SettingsRatings(props) {
         setUserReviewSelect([])
         setEditReview({})
     }
+
+
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -102,6 +110,7 @@ export default function SettingsRatings(props) {
                                             <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
                                             <p className="mb-0 font-semibold">Offering {rev.premium_name}</p>
                                             <div className="inline-flex items-center justify-center space-x-2 editable2" onClick={() => editReviewFunc(rev)}><Pen className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Edit</div></div>
+                                            <div className="inline-flex items-center justify-center space-x-2 editable2" onClick={() => deleteReviewFunc(rev)}><Trash className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Delete</div></div>
                                         </div>
                                         <div>
                                         <Rating name="name" value={rev.review} precision={0.5} sx={{

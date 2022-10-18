@@ -1,5 +1,5 @@
 import { compileFile } from 'pug';
-const PasswordChanged = compileFile('pages/api/User/Email/PasswordChanged.pug');
+const PasswordChanged = compileFile(path.resolve(__dirname, 'PasswordChanged.pug'));
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
   accessKeyId: process.env.ACCESS_KEY_ID,

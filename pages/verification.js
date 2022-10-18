@@ -14,7 +14,7 @@ export default function VerificationEmail({authenticateEmailUser}) {
       }, [authenticateEmailUser]);
 
     return (
-        <div className='mb-0 ml-4 text-lg md:text-xl text-dark-blue'>{FormError ? FormError : 'Your Email has been registered successfully!'}
+        <div className='mb-0 ml-4 text-large md:text-xl text-dark-blue'>{FormError ? FormError : 'Your Email has been registered successfully!'}
         </div>
     )
 }

@@ -42,7 +42,7 @@ export default function PopularCategories(props) {
                 <h3 className="flow-root -my-3">
                     <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                         <div className="flex flex-wrap items-center justify-between">
-                            <div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap"><Link href={'directory/' + e.category}>{e.category}</Link></div>
+                            <div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point"><Link href={'directory/' + e.category}>{e.category}</Link></div>
                         </div>
                         <div className="flex-shrink-0 order-2">
                             <div className="flex items-center flex-1">

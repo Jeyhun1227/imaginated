@@ -1,5 +1,5 @@
 import { compileFile } from 'pug';
-const CreateUserEmail = compileFile('pages/api/User/Email/CreateUser.pug');
+const CreateUserEmail = compileFile(path.resolve(__dirname, 'CreateUser.pug'));
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,

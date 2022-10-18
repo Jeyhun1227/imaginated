@@ -27,10 +27,27 @@ export default function Header(props) {
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
 
+
+
+  const getWindowDimensions = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  }
+  const [windowDimensions, setWindowDimensions] = useState({});
+
   useEffect(() => {
     location_href = window.location.pathname;
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    setWindowDimensions(getWindowDimensions());
 
-  })
+    window.addEventListener('resize', handleResize);
+    () => window.removeEventListener('resize', handleResize);
+  }, [])
 
   const userMenu = [
     // {
@@ -65,9 +82,9 @@ export default function Header(props) {
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
 
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
+          {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
               <img src="/Imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
-          </Link></div></div>
+          </Link></div></div>: null}
           <Combobox as="li" value={searchTerm} onChange={setSearchTerm} className="relative list-none">
             <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
               <label htmlFor="simple-search" className="sr-only">Search</label>
@@ -123,7 +140,7 @@ export default function Header(props) {
               </li>
               {!(session) ? <>
               <li>
-                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
+                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
               </li>
               </> : <> 
               {/* <li className='flex items-center'>
