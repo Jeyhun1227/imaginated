@@ -1,4 +1,5 @@
 import { compileFile } from 'pug';
+import path from 'path';
 const CreateUserEmail = compileFile(path.resolve(__dirname, 'CreateUser.pug'));
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
