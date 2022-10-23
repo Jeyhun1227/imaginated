@@ -17,6 +17,7 @@ export default function SubCategoryPageMain(props) {
     const [userFollow, setUserFollow] = useState([])
     const [user, setUser] = useState();
     const routerID = props.routerID;
+
     let subcategory = [];
     props.Subcategory_values.map((e) => {
         if(!subcategory.includes(e.subcategory)){

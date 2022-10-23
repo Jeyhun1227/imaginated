@@ -32,7 +32,18 @@ export default function RequestListing(props) {
         setSubmited(true);
         // listing, selected: selected.name, category: selectedCategory.category
         let you = selected.name === 'Yes' ? true : false;
-        let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+        try{
+            let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+
+        }catch(error){
+            if (error.response) {
+                // Request made and server responded
+                setError("Please Sign up to submit your request")
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+        }
 
         window.location.href = "/directory"
 
@@ -44,6 +55,7 @@ export default function RequestListing(props) {
 
     const [selected, setSelected] = useState(select[0]);
     const [listing, setListing] = useState(select[0]);
+    const [Errors, setError] = useState("");
 
     const selectCategory = [
         
@@ -254,6 +266,7 @@ export default function RequestListing(props) {
                                                                 >
                                                                 Submit
                                                                 </button>
+                                                                <div>{Errors}</div>
                                                             </div>
                                                         </div>
                                                     </div>

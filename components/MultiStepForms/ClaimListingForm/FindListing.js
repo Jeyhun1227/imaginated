@@ -4,6 +4,9 @@ import placeHolder from "../../../public/place-holder/placeHolder-620x270.jpg"
 import GetSearchResults from '../../NavBars/headerSearch/HeaderSearch';
 import { Menu, Transition, Combobox  } from '@headlessui/react'
 import Link from 'next/link';
+import ImageWithFallback from '../../Image/Image'
+import OutsideClickHandler from 'react-outside-click-handler';
+
 
 
 export default function FindListing(props) {
@@ -16,9 +19,11 @@ export default function FindListing(props) {
     };
     const [searchTerm, setsearchTerm] = useState('');
     const [searchResult, setSearchResult] = useState([]);
+    const [ShowResults, setShowResults] = useState(true);
+
+    
     // const [searchClickedResult, setSearchClickedResult] = useState([]);
     const SearchIndividual = (each) => {
-        console.log('each: ', each)
         props.setFormData({...props.formData, listing: each.fullname, individual: each.id})
         props.nextPage()
     }
@@ -28,6 +33,7 @@ export default function FindListing(props) {
           if(!searchTerm) return;
           let returnedSearch = await GetSearchResults(searchTerm);
           let cleanedNames = returnedSearch.filter((e) => e.type_value === 'Individual')
+          setShowResults(true)
           setSearchResult(cleanedNames)
     
         }, 1000)
@@ -48,6 +54,7 @@ export default function FindListing(props) {
                             <div className="flex items-center justify-between w-full pt-4">
                                 <input type="text" 
                                 value={searchTerm} 
+                                onClick={() => setShowResults(true)}
                                 // onChange={(event) => props.setFormData({...props.formData, listing: event.target.value})} 
                                 onChange={(event) => setsearchTerm(event.target.value)}
                                 className="inline-flex items-center justify-start order-1 w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none" 
@@ -57,16 +64,23 @@ export default function FindListing(props) {
                                     <span className="text-sm text-white truncate hover:text-indigo-500">Claim</span>
                                 </button>
                             </div>
-                            <div>
-
-                            <div className='all-results-search'>{searchResult.map((result) => <div className='each-results-search' key={result.id} onClick={() => SearchIndividual(result)}>
-                                <div>{result.fullname}</div>
-                                <div>{result.subcategory}</div>
-                                <div>{result.imagelink}</div>
-                            </div>)}
+                            <OutsideClickHandler
+                                onOutsideClick={() => {
+                                    setShowResults(false)
+                                }}
+                            >
+                            <div className={(ShowResults) ?'all-results-search ' : 'display-none'} >{searchResult.map((result) => <div className='each-results-search cursor-point' key={result.id} onClick={() => SearchIndividual(result)}>
+                                    <div className="each-results-image" >
+                                    <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                                    </div>
+                                    <div>
+                                    <div className="each-results-fullname">{result.fullname}</div>
+                                    <div className="each-results-subcategory">{result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>
+                                    )}</div>
+                                    </div>
+                                    </div>)}
                             </div>
-                            </div>
-
+                            </OutsideClickHandler>
                         </div>
                         <div className="py-12">
                             <div className="text-left sm:text-center">
@@ -74,9 +88,9 @@ export default function FindListing(props) {
                                 <div className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/signup"><a>Get started</a></Link></div> today.</div>
                             </div>
                             <div className="flex mx-auto mt-8 place-content-center"> 
-                                <Image className="object-cover object-center sm:justify-center" 
+                                {/* <Image className="object-cover object-center sm:justify-center" 
                                 src={placeHolder}
-                                alt="place Holder"/>
+                                alt="place Holder"/> */}
                             </div>
                         </div>
                         <div className="py-12">

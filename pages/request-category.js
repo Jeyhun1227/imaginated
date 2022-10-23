@@ -2,21 +2,33 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import personUsingComputer from '../public/request-category/person-using-computer.png'
 import Link from 'next/link';
-
+import axios from 'axios';
 
 export default function RequestCategory() {
-    const SubmitCategory = async () => {
+    const SubmitCategory = async (e) => {
+        e.preventDefault();
+
         if(submited) return;
         
-        e.preventDefault();
         setSubmited(true);
-        let addListing = await axios.post('api/User/addListing', {category})
+        try{
+            let addListing = await axios.post('api/User/addListing', {category})
+            window.location.href = "/directory"   
+
+        }catch(error){
+            if (error.response) {
+                // Request made and server responded
+                setError("Please Sign up to submit your request")
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+        }
         
-        window.location.href = "/directory"   
      }
     const [category, setCategory] = useState("")
     const [submited, setSubmited] = useState(false);
-
+    const [Errors, setError] = useState("");
 
     return (
         <div>
@@ -64,6 +76,7 @@ export default function RequestCategory() {
                                                                 >
                                                                 Submit
                                                                 </button>
+                                                                <div>{Errors}</div>
                                                             </div>
                                                         </div>
                                                     </div>
