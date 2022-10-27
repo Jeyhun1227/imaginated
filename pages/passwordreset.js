@@ -44,7 +44,7 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
 
 
     return (
-        <div className='mb-0 ml-4 text-lg md:text-xl text-dark-blue'>{FormError ? FormError: 
+        <div className='mb-0 ml-4 text-large md:text-xl text-dark-blue'>{FormError ? FormError: 
         <div>
             <ul className="pl-0 divide-y divide-whisper">
                 <li className="flex py-3">

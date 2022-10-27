@@ -39,23 +39,24 @@ export default function ChoosePlan(props) {
                   )}
                 </RadioGroup.Option>
               </RadioGroup>
-              <div className="flex flex-row items-center justify-center w-full space-x-6 md:space-x-24">
-                <span className="ml-auto text-sm sm:text-base text-dark-blue ">
+              <div className="grid-layour-one-fr">
+                <div></div>
+                <span className="text-sm sm:text-base text-dark-blue ">
                   $0/Mo
                 </span>
                 <span className="text-sm sm:text-base text-dark-blue">
-                  $20/Mo
+                  $20/Mo Coming Soon
                 </span>
                 <span className="pr-2 text-sm sm:text-base md:pr-8 text-dark-blue">
-                  $100/Mo
+                  Custom Coming Soon
                 </span>
               </div>
             </div>
             <div className="flex flex-col px-4 mt-12 space-y-10 md:mx-8 sm:px-0">
               <div className="flex flex-row items-center justify-center w-full pb-2 border-b-2 border-whisper">
                 <span className="flex items-center justify-center mr-auto text-base sm:text-lg flex-inline">
-                  Manage your profile
-                  <QuestionCircle className="ml-2 fill-denim"/>
+                  Profile Analytics
+                  {/* <QuestionCircle className="ml-2 fill-denim"/> */}
                 </span>
                 <div className="flex flex-row space-x-8 md:space-x-28">
                   <span className="pr-3"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
@@ -66,7 +67,7 @@ export default function ChoosePlan(props) {
               <div className="flex flex-row items-center justify-center w-full pb-2 border-b-2 border-whisper">
                 <span className="flex items-center justify-center mr-auto text-base sm:text-lg flex-inline">
                   Manage your profile
-                  <QuestionCircle className="ml-2 fill-denim"/>
+                  {/* <QuestionCircle className="ml-2 fill-denim"/> */}
                 </span>
                 <div className="flex flex-row space-x-8 md:space-x-28">
                   <span className="pr-3"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
@@ -76,12 +77,23 @@ export default function ChoosePlan(props) {
               </div>
               <div className="flex flex-row items-center justify-center w-full pb-2 border-b-2 border-whisper">
                 <span className="flex items-center justify-center mr-auto text-base sm:text-lg flex-inline">
-                  Manage your profile
-                  <QuestionCircle className="ml-2 fill-denim"/>
+                  Custom Posts
+                  {/* <QuestionCircle className="ml-2 fill-denim"/> */}
                 </span>
                 <div className="flex flex-row space-x-8 md:space-x-28">
-                  <span className="pr-3"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
+                  {/* <span className="pr-3"><CheckLg className="w-6 h-6 fill-dark-blue"/></span> */}
                   <span className="pr-4"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
+                  <span className="pr-8 md:pr-16"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center justify-center w-full pb-2 border-b-2 border-whisper">
+                <span className="flex items-center justify-center mr-auto text-base sm:text-lg flex-inline">
+                  Sponsored Ranking
+                  {/* <QuestionCircle className="ml-2 fill-denim"/> */}
+                </span>
+                <div className="flex flex-row space-x-8 md:space-x-28">
+                  {/* <span className="pr-3"><CheckLg className="w-6 h-6 fill-dark-blue"/></span> */}
+                  {/* <span className="pr-4"><CheckLg className="w-6 h-6 fill-dark-blue"/></span> */}
                   <span className="pr-8 md:pr-16"><CheckLg className="w-6 h-6 fill-dark-blue"/></span>
                 </div>
               </div>

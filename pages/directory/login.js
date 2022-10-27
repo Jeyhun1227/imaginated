@@ -1,8 +1,6 @@
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-
-import { Apple, Facebook } from 'react-bootstrap-icons';
-import manBehindComputer from '../public/logIn/ManBehindComputer_427x574.png'
+import manBehindComputer from '../../public/logIn/ManBehindComputer_427x574.png'
 import Image from 'next/image'
 import Link from 'next/link';
 

@@ -1,9 +1,7 @@
 
-import { useSession } from "next-auth/react";
 import {useState} from "react";
 
 export default function HeadBar() {
-    const {data} = useSession()
     const [closeHeadBar, setCloseHeadBar] = useState(true);
 
   return (

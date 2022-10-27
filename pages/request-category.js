@@ -2,21 +2,33 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import personUsingComputer from '../public/request-category/person-using-computer.png'
 import Link from 'next/link';
-
+import axios from 'axios';
 
 export default function RequestCategory() {
-    const SubmitCategory = async () => {
+    const SubmitCategory = async (e) => {
+        e.preventDefault();
+
         if(submited) return;
         
-        e.preventDefault();
         setSubmited(true);
-        let addListing = await axios.post('api/User/addListing', {category})
+        try{
+            let addListing = await axios.post('api/User/addListing', {category})
+            window.location.href = "/directory"   
+
+        }catch(error){
+            if (error.response) {
+                // Request made and server responded
+                setError("Please Sign up to submit your request")
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+        }
         
-        window.location.href = "/directory"   
      }
     const [category, setCategory] = useState("")
     const [submited, setSubmited] = useState(false);
-
+    const [Errors, setError] = useState("");
 
     return (
         <div>
@@ -29,7 +41,7 @@ export default function RequestCategory() {
                                     <div className="md:col-span-4 md:mt-10 sm:mt-0">
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center justify-center px-4 space-y-8 md:justify-start md:items-start md:flex-col sm:px-0">
-                                                <h3 className="text-lg font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
+                                                <h3 className="text-large font-semibold leading-6 text-center md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                 <div className=''>
                                                     <Image className="object-cover object-center sm:justify-center" 
                                                     src={personUsingComputer}
@@ -57,13 +69,14 @@ export default function RequestCategory() {
                                                                 placeholder="Enter here"
                                                                 className="items-center justify-start order-1 block w-full px-2 py-2 text-sm text-gray-900 border text-ellipsis border-very-light-grey focus:outline-none"
                                                             />
-                                                            <p className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</p>
+                                                            <div className="block mt-2 text-sm font-medium">Are you looking to be listed? <div className='font-semibold text-dark-blue'><Link href="/request-listing" >Request a listing</Link></div> after submitting this request</div>
                                                             <div className="py-3 text-left ">
                                                                 <button
                                                                 className="inline-flex justify-center px-8 py-2 text-sm font-medium text-white border border-transparent sm:px-10 bg-dark-blue"
                                                                 >
                                                                 Submit
                                                                 </button>
+                                                                <div>{Errors}</div>
                                                             </div>
                                                         </div>
                                                     </div>

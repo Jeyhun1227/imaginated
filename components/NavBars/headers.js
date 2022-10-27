@@ -7,6 +7,9 @@ import React, {useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } from 'react-bootstrap-icons';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import Link from 'next/link';
+import ImageWithFallback from '../Image/Image'
+import Imaginated_logo from '../../public/Imaginated_logo.png';
+import Image from 'next/image'
 
 
 export default function Header(props) {
@@ -14,23 +17,50 @@ export default function Header(props) {
   const {data: session} = useSession()
   const [notification, setNotification] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
+  const [ShowResults, setShowResults] = useState(true);
+
   var location_href = null;
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
-      setSearchResult(returnedSearch)
+      console.log(returnedSearch)
+
+      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: []}
+      returnedSearch.map((e) => {
+        if(e.type_value === 'Individual') return returnedSearchClean.Individual.push(e)
+        if(e.type_value === 'Subcategory') return returnedSearchClean.Subcategory.push(e)
+        if(e.type_value === 'Offering') return returnedSearchClean.Offering.push(e)
+      })
+      setSearchResult(returnedSearchClean)
 
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
 
+
+
+  const getWindowDimensions = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  }
+  const [windowDimensions, setWindowDimensions] = useState({});
+
   useEffect(() => {
     location_href = window.location.pathname;
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    setWindowDimensions(getWindowDimensions());
 
-  })
+    window.addEventListener('resize', handleResize);
+    () => window.removeEventListener('resize', handleResize);
+  }, [])
 
   const userMenu = [
     // {
@@ -65,10 +95,10 @@ export default function Header(props) {
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
 
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
-              <img src="/Imaginated_logo.png"  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
-          </Link></div></div>
-          <Combobox as="li" value={searchTerm} onChange={setSearchTerm} className="relative list-none">
+          {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
+              <img src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
+          </Link></div></div>: null}
+          <Combobox as="li" value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} className="relative list-none">
             <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
               <label htmlFor="simple-search" className="sr-only">Search</label>
               <div className="relative w-full">
@@ -78,33 +108,55 @@ export default function Header(props) {
                   <Combobox.Input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="block py-2 text-sm border text-ellipsis xl:pr-20 sm:pr-10 w-96 pl-11 sm:w-96 focus:outline-none" placeholder={placeholder} required onChange={(e) => setSearchTerm(e.target.value)}/>
               </div>
             </div>
-            <Combobox.Options className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg w-96 top-10 max-h-56 focus:outline-none sm:text-sm">
-              {
-                searchResult.filter(result => result.subcategory == subcategory).map((result, i) => (
-                <div className='my-2' key={i}>
-                  {result.subcategory ?
-                  <Combobox.Option>
-                    <div className="flex flex-row">
-                      <div className="pr-4">
-                        <img className="w-8 h-8 rounded-full cursor-point" src={result.imagelink ? result.imagelink : "/user.png"}/>
-                      </div>
-                      <div>
-                        <div className="mb-1 font-semibold">{result.fullname}</div>
-                        <div className="flex flex-row space-x-4">
-                          <div className="inline-flex items-center justify-center space-x-2">{result.subcategory.map((e) => <div className="truncate text-xSsm text-dim-grey" key={e}>{e}</div>)}</div>
+            <Combobox.Options className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg w-96 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
+
+
+              <div className={(ShowResults) ?'' : 'display-none'} >
+              {searchResult.Subcategory.length > 0 ?<div>
+                        <div className="each-result-name">Top Categories</div>
+                  </div>:null}
+                  {searchResult.Subcategory.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/${result.linkname}`}>
+                        <div className='each-results-cat-menu cursor-point' >
+                          <div className="each-results-fullname">{result.fullname}</div>
                         </div>
-                      </div>
-                    </div>
-                  </Combobox.Option>
-                  : <Combobox.Option>
-                  <div className="flex flex-row">
-                    <div>
-                      <div className="font-semibold">{result.fullname}</div>
-                    </div>
+                    
                   </div>
-                </Combobox.Option>}
-                </div>
-              ))}
+                  )}
+
+                  {searchResult.Individual.length > 0 ?<div>
+                        <div className="each-result-name">Top Creators</div>
+                  </div>:null}
+                  {searchResult.Individual.map( (result) =>  <div key={result.id}>
+                        <div className='each-results-search cursor-point'  onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                          <div className="each-results-image" >
+                          <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                          </div>
+                          <div>
+                          <div className="each-results-fullname">{result.fullname}</div>
+                          <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                          </div>
+                        </div>
+                    
+                  </div>
+                  )}
+                  {searchResult.Offering.length > 0 ?<div>
+                        <div className="each-result-name">Top Market</div>
+                  </div>:null}
+                  {searchResult.Offering.map( (result) =>  <div  key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                        <div className='each-results-search cursor-point' >
+                          <div className="each-results-image" >
+                          <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                          </div>
+                          <div>
+                          <div className="each-results-fullname">{result.fullname}</div>
+                          <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                          </div>
+                        </div>
+                    
+                  </div>
+
+                  )}
+              </div>
             </Combobox.Options>
           </Combobox>
           <div className="items-center justify-between hidden w-full sm:flex sm:w-auto sm:order-1" id="mobile-menu-4">
@@ -118,12 +170,13 @@ export default function Header(props) {
               {/* <li>
                 <Link href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</Link>
               </li> */}
+              {session?
               <li>
                 <div className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/claim-listing" >Claim Listing</Link></div>
-              </li>
+              </li>:null}
               {!(session) ? <>
               <li>
-                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">Log In/Sign Up</button>
+                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
               </li>
               </> : <> 
               {/* <li className='flex items-center'>

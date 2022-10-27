@@ -1,5 +1,18 @@
-import { compileFile } from 'pug';
-const CreateUserEmail = compileFile('pages/api/User/Email/CreateUser.pug');
+import { compile } from 'pug';
+var CreateUser = `
+<!DOCTYPE html>
+<html>
+<body>
+
+<div>Hi #{full_name},</div>
+<p>Thank you for signing up to Imaginated!</p>
+<p>To complete your registration, please verify your email:</p>
+<p><a href="#{link}" target="_blank">Verify your email address</a></p>
+<p>Or simply copy this link and paste it in your browser: <a href="#{link}" target="_blank" rel="noreferrer">#{link}</a></p>
+
+</body>
+</html>`;
+const CreateUserEmail = compile(CreateUser);
 import { config, SES } from 'aws-sdk';
 config.update({region: 'us-east-1',     
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -16,7 +29,7 @@ async function SendInitialEmail(name, email, verficationLink){
         Body: { 
           Html: {
           Charset: "UTF-8",
-          Data: CreateUserEmail({name, link: verficationLink})
+          Data: CreateUserEmail({full_name: name, link: verficationLink})
           },
           Text: {
           Charset: "UTF-8",

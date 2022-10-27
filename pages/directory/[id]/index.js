@@ -22,7 +22,7 @@ export default function CategoryPageMain(props) {
 
 
     return <div>
-      <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Discover the best ${routerID} to learn from. Compare reviews and explore their offerings.`}/>
+      <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings.`}/>
       <div className="px-4 bg-white sm:px-0">
         <div className="py-12 mx-auto sm:px-0 max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -48,7 +48,7 @@ export default function CategoryPageMain(props) {
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <Link href={ routerID + '/' + e}><div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e}</div></Link>
+                                  <Link href={ routerID + '/' + e}><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point">{e}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">

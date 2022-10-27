@@ -15,7 +15,7 @@ export default function HeroNoBtn(props) {
             <div className="py-12 mx-auto sm:mx-0 max-w-7xl">
                 <div className="text-left">
                     <h1 className="text-4xl font-bold tracking-tight text-black">
-                        <span className="block sm:inline">{props.setLargeTextTop ? props.setLargeTextTop : largeTextTop}</span>{' '}
+                        <span className="block sm:inline">{props.setLargeTextTop ? 'Learn ' + props.setLargeTextTop : largeTextTop}</span>{' '}
                         <span className="block text-black sm:inline">{props.setLargeTextBottom ? props.setLargeTextBottom : largeTextBottom}</span>
                     </h1>
                     <p className="mt-3 text-base text-dim-gray sm:mt-5 sm:mx-0">

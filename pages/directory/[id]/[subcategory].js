@@ -17,6 +17,7 @@ export default function SubCategoryPageMain(props) {
     const [userFollow, setUserFollow] = useState([])
     const [user, setUser] = useState();
     const routerID = props.routerID;
+
     let subcategory = [];
     props.Subcategory_values.map((e) => {
         if(!subcategory.includes(e.subcategory)){
@@ -48,7 +49,7 @@ export default function SubCategoryPageMain(props) {
     // const [filterSelect] = ["Sponsored", "Highest Rated", "Most Reviews", "Alphabetical"]
     let searchedValueFunction = (searched) => {
       let temp = searched
-      let temp_individual = props.Subcategory_values.filter((e) => e.first_name.toLowerCase().includes(temp) || e.last_name.toLowerCase().includes(temp))
+      let temp_individual = props.Subcategory_values.filter((e) => (e.first_name.toLowerCase() + ' ' + e.last_name.toLowerCase()).includes(temp))
       setIndividualEach(temp_individual)
       setsearchedValue(temp)
     }
@@ -99,7 +100,7 @@ export default function SubCategoryPageMain(props) {
 
 
     return <div >
-      <HeroNoBtn setLargeTextTop={props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Discover the best ${props.subcategoryName} to learn from. Compare reviews and explore their offerings.`}/>
+      <HeroNoBtn setLargeTextTop={props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings.`}/>
       <div className="">
         <div className="py-12 mx-auto max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -112,7 +113,7 @@ export default function SubCategoryPageMain(props) {
               {IndividualEach.map((e) => <SubCategoryPageSub key={e.id} values={e} selected={userFollow.find((u) => u.individualid === e.id)} />)}
               </div>
             </div>
-            <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 sm:ml-16">
+            <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 margin-left-16">
               <div className="flex flex-row items-center pb-5 space-x-4 sm:border-b sm:border-very-light-grey">
                 <Listbox value={selected} onChange={filterChange}>
                   {({ open }) => (
@@ -162,27 +163,27 @@ export default function SubCategoryPageMain(props) {
                 </Listbox>
               </div>
             </div>
-            <div className="items-center px-4 sm:bg-white sm:px-0 bg-light-grey sm:col-span-4 xl:ml-28 sm:ml-16">
+            <div className="items-center padding-left-right-15 sm:bg-white sm:px-0 bg-light-grey sm:col-span-4 xl:ml-28 margin-left-16">
               <VerticalCallToAction setBtnText={"Request a Listing"} setLink={"/request-listing"} setLargeTextTop={"Looking for a specific creator but"} setLargeTextBottom={"can't find them? Let us know!"}/>
             </div>
-            <div className="items-center px-4 mb-auto sm:px-0 sm:row-span-3 sm:col-span-4 xl:ml-28 sm:ml-16">
+            <div className="items-center px-4 mb-auto sm:px-0 sm:row-span-3 sm:col-span-4 xl:ml-28 margin-left-16">
               <div className="mx-auto mt-4 max-w-7xl">
                   <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
                       <div className="pl-2 text-2xl tracking-tight text-dark-blue">Related Categories</div>
                   </div>
               </div>
               {(props.subcategory.length > 0)? props.subcategory.filter((e) => e.subcategory !== props.subcategoryName).slice(0, 5).map((e) =>
-              <div key={e.id} className="py-6 border-b border-very-light-grey">
+              <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/${e.subcategory}`}>
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <Link href={ e.subcategory } ><div className="flex pl-2 text-lg no-underline text-denim whitespace-nowrap">{e.subcategory}</div></Link>
+                                  <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } ><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">
                                       <span className="flex items-center">
                                           <div className="color-none">
-                                          <Link href={ e.subcategory } >
+                                          <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } >
                                               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
                                                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                               </svg>
@@ -200,53 +201,6 @@ export default function SubCategoryPageMain(props) {
         </div>
       </div>
       <InView onChange={(inView, entry) => inView && getNewSubcategoryBool ? getNewSubcategory(inView): null}/>
-      {/* <div className={styles.container}>
-        <div className={styles.HeaderLocation}>
-        <Container className={styles.MainRowNav}>
-        <Row>
-        <h1  className={styles.MainHeaderName}>{props.subcategoryName}</h1>
-        </Row>
-        <Row>
-            <div className={styles.MainSubHeaderName}>Discover the best {props.subcategoryName} to learn from. Compare reviews and explore their offerings.</div>
-        </Row>
-        </Container>
-        </div>
-        <Container>
-        <Row>
-        <Col className={styles.CategoryLeftCol}>
-        <div className={styles.MainHeaderSubcategory}>Looking for someone specific?</div>
-        <div><input placeholder="Search for an individual" className={styles.SubcategoryInput} value={searchedValue} onChange={(e) => searchedValueFunction(e)}/></div>
-        <div>
-          <div>
-              {IndividualEach.map((e) => <SubCategoryPageSub key={e.id} values={e}/>)}
-          </div>
-        </div>
-        </Col>
-        <Col>
-          <div>
-            <div>
-            <Select 
-            labelId="filter-subcategory-labelid"
-            id="filter-subcategory"
-            value={filterSelect}
-            label="Most Reviews"
-            onChange={filterChange}>
-              <MenuItem value={"Sponsored"}>Sponsored</MenuItem>
-              <MenuItem value={"Highest Rated"}>Highest Rated</MenuItem>
-              <MenuItem value={"Most Reviews"}>Most Reviews</MenuItem>
-              <MenuItem value={"Alphabetical"}>Alphabetical</MenuItem>
-            </Select>
-            </div>
-            <h4>Looking for a category but can’t find it? Let us know!</h4>
-            <button className={styles.CategoryPageButton}>Request a Category</button>
-            <div>It takes less than 30 seconds</div>
-            <h4>{routerID} Categories</h4>
-            {(props.subcategory.length > 0)? props.subcategory.slice(0, 4).map((e) => <div key={e.id}>{e.subcategory}</div>):null}
-          </div>
-        </Col>
-        </Row>
-        </Container>
-      </div> */}
 </div>
 }
 

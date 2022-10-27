@@ -1,14 +1,40 @@
 
-import React, { Fragment } from "react";   
+import React, { Fragment, useState, useEffect  } from "react";  
 import { Popover, Transition } from '@headlessui/react'   
 import { List, X } from 'react-bootstrap-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Bell, Star, Gear, PlayBtn } from 'react-bootstrap-icons';
 import Link from 'next/link';
+import GetSearchResults from './headerSearch/HeaderSearch';
+import ImageWithFallback from '../Image/Image'
+import Imaginated_logo from '../../public/Imaginated_logo.png';
 
 export default function MobileNav() {
 
   const {data: session} = useSession()
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
+  const [ShowResults, setShowResults] = useState(true);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if(!searchTerm) return;
+      let returnedSearch = await GetSearchResults(searchTerm);
+
+      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: []}
+      returnedSearch.map((e) => {
+        if(e.type_value === 'Individual') return returnedSearchClean.Individual.push(e)
+        if(e.type_value === 'Subcategory') return returnedSearchClean.Subcategory.push(e)
+        if(e.type_value === 'Offering') return returnedSearchClean.Offering.push(e)
+      })
+      setSearchResult(returnedSearchClean)
+
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
+
+
 
   const links = [
     {
@@ -65,7 +91,7 @@ export default function MobileNav() {
                 <span className="sr-only">Imaginated</span>
                 <img
                   className="w-auto h-8 sm:h-10"
-                  src="/Imaginated_logo.png"
+                  src={Imaginated_logo.src}
                   alt="Imaginated Logo"
                 />
               </div>
@@ -92,7 +118,7 @@ export default function MobileNav() {
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-2.5 border-b border-gainsboro">
                   <div>
-                    <span className="text-lg">
+                    <span className="text-large">
                       Notification
                     </span>
                   </div>
@@ -116,13 +142,11 @@ export default function MobileNav() {
                             </svg>
                           </div>
                           <span className='block text-xs font-semibold text-black no-underline'> 
-                            SANJ replied to your comment
                           </span>
                           </>
                         </Link>
                         </div>
                         <span className='block pt-2 text-xs text-black no-underline pl-9'>
-                          5:00 pm
                         </span>
                       </div>
                     </div>
@@ -177,7 +201,7 @@ export default function MobileNav() {
                       <span className="sr-only">Imaginated</span>
                       <img
                         className="w-auto h-8 sm:h-10"
-                        src="\Imaginated_logo.png"
+                        src={Imaginated_logo.src}
                         alt="Imaginated Logo"
                       />
                     </div>
@@ -241,15 +265,14 @@ export default function MobileNav() {
                   </nav>
                 </div>
               </div>
-              <div className="px-3 py-6 border-0">
+              <div className="px-3 py-6 border-0 overflow-hidden">
                 <div>
                 {!(session) ? <>
                   <div className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                   <Link
-                    onClick={() => {window.location.href='/login';}}
-                    href="#"
+                    href="/login"
                     >
-                    Log In/Sign Up
+                      <a href={'/login'}>Log In/Sign Up</a>
                   </Link>
                   </div>
                 </> : <> 
@@ -267,12 +290,58 @@ export default function MobileNav() {
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                     </div>
                     <div className="flex items-center justify-between w-full pt-4">
-                      <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-8/12 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-11" placeholder="Search for a creator or category" required       onChange={(e) => setSearchTerm(e.target.value)}/>
+                      <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-flex items-center justify-start order-1 w-8/12 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-11" placeholder="Search for a creator or category" required       onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} />
                       <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 overflow-hidden text-sm border border-black text-dark-blue hover:text-indigo-500">
                         <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
                       </button>
                     </div>
                   </div>
+                  <div className={(ShowResults) ?'' : 'display-none'} >
+                    {searchResult.Subcategory.length > 0 ?<div>
+                              <div className="each-result-name">Top Categories</div>
+                        </div>:null}
+                        {searchResult.Subcategory.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/${result.linkname}`}>
+                              <div className='each-results-cat-menu cursor-point' >
+                                <div className="each-results-fullname">{result.fullname}</div>
+                              </div>
+                          
+                        </div>
+                        )}
+
+                        {searchResult.Individual.length > 0 ?<div>
+                              <div className="each-result-name">Top Creators</div>
+                        </div>:null}
+                        {searchResult.Individual.map( (result) =>  <div key={result.id}>
+                              <div className='each-results-search cursor-point'  onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                                <div className="each-results-image" >
+                                <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                                </div>
+                                <div>
+                                <div className="each-results-fullname">{result.fullname}</div>
+                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                                </div>
+                              </div>
+                          
+                        </div>
+                        )}
+                        {searchResult.Offering.length > 0 ?<div>
+                              <div className="each-result-name">Top Market</div>
+                        </div>:null}
+                        {searchResult.Offering.map( (result) =>  <div  key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                              <div className='each-results-search cursor-point' >
+                                <div className="each-results-image" >
+                                <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                                </div>
+                                <div>
+                                <div className="each-results-fullname">{result.fullname}</div>
+                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                                </div>
+                              </div>
+                          
+                        </div>
+
+                        )}
+              </div>
                 </div>
               </div>
             </div>

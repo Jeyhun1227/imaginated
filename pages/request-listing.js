@@ -32,7 +32,18 @@ export default function RequestListing(props) {
         setSubmited(true);
         // listing, selected: selected.name, category: selectedCategory.category
         let you = selected.name === 'Yes' ? true : false;
-        let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+        try{
+            let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+
+        }catch(error){
+            if (error.response) {
+                // Request made and server responded
+                setError("Please Sign up to submit your request")
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            }
+        }
 
         window.location.href = "/directory"
 
@@ -44,6 +55,7 @@ export default function RequestListing(props) {
 
     const [selected, setSelected] = useState(select[0]);
     const [listing, setListing] = useState(select[0]);
+    const [Errors, setError] = useState("");
 
     const selectCategory = [
         
@@ -57,7 +69,7 @@ export default function RequestListing(props) {
         },
     ]
 
-    const [selectedCategory, setSelectedCategory] = useState(selectCategory[0])
+    const [selectedCategory, setSelectedCategory] = useState()
     
     
     const [CategoryValues, setCategoryValues] = useState([]);
@@ -81,9 +93,9 @@ export default function RequestListing(props) {
                                         <div className="px-0 py-0 sm:p-6">
                                             <div className="flex flex-col-reverse items-center px-4 space-y-8 md:items-start md:flex-col sm:px-0">
                                                 <div>   
-                                                    <h3 className="text-lg font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
+                                                    <h3 className="text-large font-semibold leading-6 md:text-left text-dark-blue md:text-xl">Can&apos;t find a category on the directory that you think should be here?</h3>
                                                     <div>
-                                                        <h3 className='mb-3 text-lg text-left text-dark-blue md:text-xl'>Requirements to get listed</h3>
+                                                        <h3 className='mb-3 text-large text-left text-dark-blue md:text-xl'>Requirements to get listed</h3>
                                                         <div className='flex flex-col space-y-4'>
                                                             <div className='flex flex-row items-center space-x-3'>
                                                                 <PatchCheckFill />
@@ -192,7 +204,7 @@ export default function RequestListing(props) {
                                                                     <div className="relative mt-1">
                                                                         <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border cursor-default border-very-light-grey focus:outline-none focus:ring-1 focus:ring-denim focus:border-denim sm:text-sm">
                                                                         <span className="flex items-center">
-                                                                            <span className="block truncate text-trolley-grey">Choose</span>
+                                                                            <span className="block truncate text-trolley-grey">{selectedCategory ? selectedCategory.category : 'Choose'}</span>
                                                                         </span>
                                                                         <span className="absolute inset-y-0 right-0 flex items-center pr-4 ml-3 pointer-events-none">
                                                                             <ChevronDown className="w-3 h-3 text-black" aria-hidden="true" />
@@ -254,6 +266,7 @@ export default function RequestListing(props) {
                                                                 >
                                                                 Submit
                                                                 </button>
+                                                                <div>{Errors}</div>
                                                             </div>
                                                         </div>
                                                     </div>
