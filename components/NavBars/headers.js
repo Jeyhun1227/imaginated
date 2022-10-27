@@ -20,7 +20,7 @@ export default function Header(props) {
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
   const [ShowResults, setShowResults] = useState(true);
 
-  var location_href = null;
+  var location_href = '';
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if(!searchTerm) return;
@@ -176,7 +176,7 @@ export default function Header(props) {
               </li>:null}
               {!(session) ? <>
               <li>
-                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
+                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/directory/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
               </li>
               </> : <> 
               {/* <li className='flex items-center'>

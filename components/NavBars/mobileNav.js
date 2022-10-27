@@ -270,9 +270,9 @@ export default function MobileNav() {
                 {!(session) ? <>
                   <div className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                   <Link
-                    href="/login"
+                    href="/directory/login"
                     >
-                      <a href={'/login'}>Log In/Sign Up</a>
+                      <a href={'/directory/login'}>Log In/Sign Up</a>
                   </Link>
                   </div>
                 </> : <> 

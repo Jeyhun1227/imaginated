@@ -448,7 +448,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <UserReview IndividualId={Individual_values.id} editable={false} UserReviewSelect={UserReviewSelect}/>
               :     <div className="p-4 bg-light-grey marginb-50">
               <h5 className="mb-4 font-bold">Leave a review on their offerings</h5>    <button
-              onClick={()=> window.location.href='/login'}
+              onClick={()=> window.location.href='/directory/login'}
               className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent bg-dark-blue"
               >
               Sign in to leave a review!
