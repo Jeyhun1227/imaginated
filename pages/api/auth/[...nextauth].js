@@ -80,7 +80,7 @@ export default (req, res) =>{
     },
     adapter: PrismaAdapter(prisma),
     pages: {
-      signIn: '/login',
+      signIn: '/directory/login',
       newUser: '/directory' // New users will be directed here on first sign in (leave the property out if not of interest)
     }
 

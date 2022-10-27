@@ -11,6 +11,14 @@ import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassB
 import { signIn, useSession, getSession } from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
+import home from '../../../public/home.svg'
+import star from '../../../public/star.svg'
+import No_image from '../../../public/No-image.png'
+import Company_Image from '../../../public/company.svg'
+import Location_Image from '../../../public/location.svg'
+import Founded_image from '../../../public/founded.svg'
+import Link_image from '../../../public/link.svg'
+
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
   const {data: session} = useSession()
@@ -244,7 +252,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
           <div className="flex flex-row flex-wrap space-x-3">
             <div className="inline-flex items-center justify-center cursor-point">
             <Link href="/directory" >  
-              <a ><img className="content-center h-4" src='/home.svg'/></a>
+              <a ><img className="content-center h-4" src={home.src}/></a>
             </Link>
             </div>
             <div className="inline-flex items-center justify-center">
@@ -364,10 +372,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="">
                 <h2>Contact Details</h2>
-                  {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/company.svg'}/> {Individual_values.company}</div>:null}
-                  {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/location.svg'}/> Located in {Individual_values.location}</div>:null}
-                  {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={'/founded.svg'}/> Founded in {Individual_values.founder}</div>:null}
-                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={'/link.svg'}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
+                  {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Company_Image.src}/> {Individual_values.company}</div>:null}
+                  {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Location_Image.src}/> Located in {Individual_values.location}</div>:null}
+                  {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Founded_image.src}/> Founded in {Individual_values.founder}</div>:null}
+                  {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={Link_image.src}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
               </div>
             </div>
           </div>
@@ -389,9 +397,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
               {premium_offers_types[key].map((value) => <div key={value.name} className="">
-                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
+                  <img src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; 
-                    currentTarget.src="/No-image.png";
+                    currentTarget.src=No_image.src;
                   }} />
                     <div className="pt-3 text-large text-denim">{value.name}</div>
                     <div className="flex flex-row flex-wrap items-center space-x-2">
@@ -420,9 +428,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <h3 className="pb-3">{key}</h3>
               <div className="grid grid-cols-2 mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
               {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3">
-                  <img src={value.imagelink? value.imagelink: "/No-image.png"} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
+                  <img src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; 
-                    currentTarget.src="/No-image.png";
+                    currentTarget.src=No_image.src;
                   }} />
                     <div className="text-large text-black ">{value.name}</div>
                     <div className="w-48 text-sm text-dim-grey">{value.description}</div>
@@ -471,7 +479,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                           </div>
                             <div className="flex flex-row-reverse pl-3">
                               <div className="pl-1">{e}</div>
-                              <img src='/star.svg'/>
+                              <img src={star.src}/>
                             </div>
                           </div>
                       )}

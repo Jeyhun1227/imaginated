@@ -7,6 +7,7 @@ import { Bell, Star, Gear, PlayBtn } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import ImageWithFallback from '../Image/Image'
+import Imaginated_logo from '../../public/Imaginated_logo.png';
 
 export default function MobileNav() {
 
@@ -90,7 +91,7 @@ export default function MobileNav() {
                 <span className="sr-only">Imaginated</span>
                 <img
                   className="w-auto h-8 sm:h-10"
-                  src="/Imaginated_logo.png"
+                  src={Imaginated_logo.src}
                   alt="Imaginated Logo"
                 />
               </div>
@@ -200,7 +201,7 @@ export default function MobileNav() {
                       <span className="sr-only">Imaginated</span>
                       <img
                         className="w-auto h-8 sm:h-10"
-                        src="\Imaginated_logo.png"
+                        src={Imaginated_logo.src}
                         alt="Imaginated Logo"
                       />
                     </div>
