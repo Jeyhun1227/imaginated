@@ -275,7 +275,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
               <div className="flex flex-row space-x-3 flex-nowrap"> 
                 <h2  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
-                <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">({Individual_values.aka})</h2>
+                <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">{Individual_values.aka ? `(${Individual_values.aka})`:null}</h2>
                 <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                   <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
                 </div> 
