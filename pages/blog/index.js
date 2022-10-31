@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useState, useRef } from "react";
-import home from '../../../public/home.svg';
+import home from '../../public/home.svg';
 
 
 
@@ -34,8 +34,8 @@ export async function getStaticProps(context) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             query: `
-            query SinglePost($id: String!) {
-                posts(where: {categoryName: $id}) {
+            query SinglePost{
+                posts{
                   nodes {
                     id
                     title
@@ -48,10 +48,7 @@ export async function getStaticProps(context) {
                   }
                 }
               }
-            `,
-            variables: {
-                id: context.params.Parent            
-            }
+            `
         })
     })
 
@@ -64,37 +61,37 @@ export async function getStaticProps(context) {
 
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-    const res = await fetch('https://www.imaginated.com/index.php?graphql', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            query: `
-            query SinglePost {
-                categories {
-                  nodes {
-                    slug
-                    children {
-                      nodes {
-                        slug
-                      }
-                    }
-                  }
-                }
-            }
-        `})
-    })
+//     const res = await fetch('https://www.imaginated.com/index.php?graphql', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//             query: `
+//             query SinglePost {
+//                 categories {
+//                   nodes {
+//                     slug
+//                     children {
+//                       nodes {
+//                         slug
+//                       }
+//                     }
+//                   }
+//                 }
+//             }
+//         `})
+//     })
 
-    const json = await res.json()
-    const categories = json.data.categories.nodes;
-    var paths = []
-    categories.map((parent) => {
-        paths.push({params: {Parent: parent.slug}})
+//     const json = await res.json()
+//     const categories = json.data.categories.nodes;
+//     var paths = []
+//     categories.map((parent) => {
+//         paths.push({params: {Parent: parent.slug}})
 
-    })
+//     })
 
 
-    return { paths, fallback: false }
+//     return { paths, fallback: false }
 
-}
+// }
