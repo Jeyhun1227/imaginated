@@ -26,7 +26,7 @@ export default function Post( data ){
 
     const post = data.post;
     const categories = post.categories.nodes[0]
-    var category_all = categories.ancestors.nodes.filter((e) => e.uri);
+    var category_all = categories.ancestors ? categories.ancestors.nodes.filter((e) => e.uri):[];
     category_all.push({name: categories.name, uri: categories.uri})
     const author = post.author.node;
     const date = post.modified;
@@ -73,7 +73,7 @@ export default function Post( data ){
 
       
     return (
-        <div className="grid-container">
+        <div>{(post.content)? <div className="grid-container">
             <div className="site-content">
             <div className="content-area" ref={ref}>
             <div className="flex flex-row flex-wrap space-x-3">
@@ -94,7 +94,7 @@ export default function Post( data ){
             <h1 className="blog-header">{post.title}</h1>
             <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}><a>{author.name}</a></Link></div>
             </div>
-            <Image width="640" height="426" src={post.featuredImage.node.sourceUrl} />
+            {(post.featuredImage)? <Image width="640" height="426" src={post.featuredImage.node.sourceUrl} />:null}
             <div className='margin-bottom-two'>
                 <div className='share-button'>Sharing is caring!</div>
                 <div>
@@ -121,7 +121,7 @@ export default function Post( data ){
             <article>{content}</article>
             </div>
             </div>
-        </div>
+        </div>:<h1>Post Not Found</h1>}</div>
     )
 
 }
