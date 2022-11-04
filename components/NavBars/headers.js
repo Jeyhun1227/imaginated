@@ -12,6 +12,7 @@ import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
 import Image from 'next/image'
 import BlogMenu from './BlogMenu.json';
+import MarketMenu from './MarketMenu.json';
 
 export default function Header(props) {
   let placeholder = 'Search for a creator or category'
@@ -91,11 +92,17 @@ export default function Header(props) {
   }
 
   const buttonRef = useRef(null)
+  const buttonRefMarket = useRef(null)
+
   const dropdownRef = useRef(null)
+  const dropdownRefMarket = useRef(null)
+
   const timeoutDuration = 200
   let timeout
 
   const openMenu = () => buttonRef.current.click();
+  const openMenuMarket = () => buttonRefMarket.current.click();
+
   const closeMenu = () =>
     {
       if(dropdownRef.current)
@@ -107,12 +114,33 @@ export default function Header(props) {
           })
         )
     }
+
+    const closeMenuMarket = () =>
+    {
+      if(dropdownRefMarket.current)
+        dropdownRefMarket.current.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Escape',
+            bubbles: true,
+            cancelable: true,
+          })
+        )
+    }
+
   const onMouseEnter = closed => {
     clearTimeout(timeout)
     closed && openMenu()
   }
   const onMouseLeave = open => {
     open && (timeout = setTimeout(() => closeMenu(), timeoutDuration))
+  }
+
+  const onMouseEnterMarket = closed => {
+    clearTimeout(timeout)
+    closed && openMenuMarket()
+  }
+  const onMouseLeaveMarket = open => {
+    open && (timeout = setTimeout(() => closeMenuMarket(), timeoutDuration))
   }
   const useHover = true;
 
@@ -192,6 +220,70 @@ export default function Header(props) {
               <li>
                 <div className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/directory" >Directory</Link></div>
               </li>
+
+
+              <li className='flex items-center'>
+                <Menu as="div" className="relative inline-block">
+
+                {({ open }) => (
+                    <>
+                     <div>
+                     <div
+                        onMouseEnter={() => useHover && onMouseEnterMarket(!open)}
+                        onMouseLeave={() => useHover && onMouseLeaveMarket(open)}
+                        onClick={openMenuMarket}
+                      >
+                        <Menu.Button               ref={buttonRefMarket}  className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"
+                        >Market</Menu.Button>
+                      </div>
+                  </div>
+                    <Menu.Items ref={dropdownRefMarket}
+                        onMouseEnter={() => useHover && onMouseEnterMarket()}
+                        onMouseLeave={() => useHover && onMouseLeaveMarket(open)}
+                        className="z-index-five absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Transition
+                        show={true}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                      {MarketMenu.map((menu) => (
+                        <Menu.Item key={menu.title}> 
+                        {({ active }) => (
+                          <div>
+                            <Link key={menu.title} href={menu.href} >
+                              <a>
+
+                              <div className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom' >
+
+                                <>
+                                <div>
+                                <div className='pr-2 text-black display-menu'>
+                                  {/* {menu.svg} */}
+                                </div>
+                                <span className='block text-sm text-black no-underline display-menu-title'>
+                                  {menu.title}
+                                </span>
+                                </div>
+                                </>
+                              
+                              </div>
+                              </a>
+                              </Link></div>
+                        )}
+                      </Menu.Item>))}
+                      </Transition>
+                    </Menu.Items>
+                    </>
+
+                )}
+                </Menu>
+              </li>
+
+
               <li className='flex items-center'>
                 <Menu as="div" className="relative inline-block">
 

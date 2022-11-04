@@ -48,10 +48,10 @@ export default function MobileNav() {
       name: 'Directory',
       href: '/directory'
     },
-    // { 
-    //   name: 'Market', 
-    //   href: '/market'
-    // },
+    { 
+      name: 'Market', 
+      href: '/shop'
+    },
     // {
     //   name: 'Claim Listing',
     //   href: '/claim-listing'
