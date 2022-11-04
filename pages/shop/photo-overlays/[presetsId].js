@@ -22,6 +22,7 @@ import {
   } from "react-share";
 import parse, { domToReact } from 'html-react-parser';
 import axios from 'axios';
+import Head from 'next/head';
 
 
 export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
