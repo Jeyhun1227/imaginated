@@ -47,7 +47,7 @@ export async function getStaticProps(context) {
         body: JSON.stringify({
             query: `
             query SinglePost($id: String!) {
-                posts(where: {authorName: $id}) {
+                posts(where: {authorName: $id}, first: 500)  {
                     nodes {
                         id
                         title

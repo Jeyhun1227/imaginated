@@ -3,12 +3,17 @@ import Link from 'next/link';
 import React, { useEffect, useState, useRef } from "react";
 import home from '../../../../public/home.svg';
 import { ChevronRight } from 'react-bootstrap-icons';
+import axios from 'axios';
+import Head from 'next/head';
+import parse, { domToReact } from 'html-react-parser';
 
-
-export default function SubCategoryBlogMain( {post, category_all} ){
+export default function SubCategoryBlogMain( {post, category_all, metadata} ){
 
       
     return (<div>
+                <Head>
+                    {parse(metadata)}
+                </Head>
                 <div className="flex flex-row flex-wrap space-x-3 margin-left-top">
                 <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/" >  
@@ -18,7 +23,7 @@ export default function SubCategoryBlogMain( {post, category_all} ){
 
                 </div>
                 {category_all.map((e, i) => <div key={e.uri}>
-                    <div className={(i == category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={`/blog/category/${e.uri}`}><div>{e.name}</div></Link></div>
+                    <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={`/blog/category/${e.uri}`}><div>{e.name}</div></Link></div>
                     
                     {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
                     </div>:null}
@@ -71,9 +76,14 @@ export async function getStaticProps(context) {
 
 
     const json = await res.json()
+
+    let metadata_raw = await axios.get(`https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/blog/category/${context.params.Parent}/${context.params.Subcategory}`)
+    let metadata = metadata_raw.data.head;
+
     return {
         props: {
             post: json.data.posts.nodes,
+            metadata,
             category_all: [{uri: context.params.Parent, name: capitalizeFirstLetterAll(context.params.Parent)}, {uri: `${context.params.Parent}/${context.params.Subcategory}`, name: capitalizeFirstLetterAll(context.params.Subcategory)}]
         },
     }
@@ -88,10 +98,10 @@ export async function getStaticPaths() {
         body: JSON.stringify({
             query: `
             query SinglePost {
-                categories {
+                categories(first: 500) {
                   nodes {
                     slug
-                    children {
+                    children(first: 100){
                       nodes {
                         slug
                       }

@@ -5,7 +5,7 @@ import { ChevronRight } from 'react-bootstrap-icons';
 import React, { useEffect, useState, useRef } from "react";
 import parse, { domToReact } from 'html-react-parser';
 import YouTube from 'react-youtube';
-
+import Head from 'next/head';
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -20,6 +20,7 @@ import {
     RedditIcon,
     TwitterIcon
   } from "react-share";
+import axios from 'axios';
 
 
 export default function Post( data ){
@@ -34,7 +35,7 @@ export default function Post( data ){
     var month = today.toLocaleString('default', { month: 'long' });
     const full_year = month + ' ' + today.getDate() + ', ' + today.getFullYear();
     const [shareUrl, setShareUrl] = useState('');
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(post.content);
 
     const _onReady = (event) =>  {
         // access to player in all event handlers via event.target
@@ -73,7 +74,11 @@ export default function Post( data ){
 
       
     return (
-        <div>{(post.content)? <div className="grid-container">
+        <div>
+        <Head>
+          {parse(data.metadata)}
+        </Head>
+        {(post.content)? <div className="grid-container">
             <div className="site-content">
             <div className="content-area" ref={ref}>
             <div className="flex flex-row flex-wrap space-x-3">
@@ -85,7 +90,7 @@ export default function Post( data ){
 
                 </div>
                 {category_all.map((e, i) => <div key={e.uri}>
-                    <div className={(i == category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri}><div>{e.name}</div></Link></div>
+                    <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri}><div>{e.name}</div></Link></div>
                     
                     {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
                     </div>:null}
@@ -94,7 +99,8 @@ export default function Post( data ){
             <h1 className="blog-header">{post.title}</h1>
             <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}><a>{author.name}</a></Link></div>
             </div>
-            {(post.featuredImage)? <Image width="640" height="426" src={post.featuredImage.node.sourceUrl} />:null}
+            {(post.featuredImage)? <div className='Blog-Main-Image'><Image     layout='fill'
+             src={post.featuredImage.node.sourceUrl} /></div>:null}
             <div className='margin-bottom-two'>
                 <div className='share-button'>Sharing is caring!</div>
                 <div>
@@ -180,11 +186,14 @@ export async function getStaticProps(context) {
         })
     })
 
+    let metadata_raw = await axios.get('https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/blog/' + context.params.id)
+    let metadata = metadata_raw.data.head;
     const json = await res.json()
 
     return {
         props: {
             post: json.data.post,
+            metadata: metadata
         },
     }
 

@@ -8,58 +8,38 @@ export default function Footer() {
 
     const menu = [
         {
-            title: "Content",
+            title: "Directory",
             border: "border-t",
             links: [
                 {
-                    name: 'Photography',
-                    href: '/photography'
+                    name: 'Directory',
+                    href: '/directory'
                 },
                 {
-                    name: 'Post-Production',
-                    href: '/post-production'
-                },
-                { 
-                    name: 'Marketing', 
-                    href: '/marketing'
-                },
-                {
-                    name: 'Case Studies',
-                    href: '/case studies'
-                },
-                {
-                    name: 'Mind',
-                    href: '/mind'
-                },
-                {
-                    name: 'Social Media',
-                    href: '/social media'
-                },
-                { 
-                    name: 'Reviews', 
-                    href: '/reviews'
+                    name: 'Market',
+                    href: '/shop'
                 }
             ]
         },
         {
-            title: "Glossary",
+            title: "Content",
             border: "border-y",
             links: [
                 {
-                    name: 'Art',
-                    href: 'directory/art'
+                    name: 'Business',
+                    href: '/blog/category/business'
                 },
                 {
-                    name: 'Design',
-                    href: 'directory/design'
+                    name: 'Art',
+                    href: '/blog/category/art'
                 },
                 { 
-                    name: 'Photography', 
-                    href: 'directory/Photography'
+                    name: 'Mind', 
+                    href: '/blog/category/mind'
                 },
                 {
-                    name: 'Writing',
-                    href: 'directory/writing'
+                    name: 'All Resources',
+                    href: '/blog'
                 }
             ]
         },
@@ -75,14 +55,10 @@ export default function Footer() {
                     name: 'About',
                     href: '/about'
                 },
-                { 
-                    name: 'Contact', 
-                    href: '/contact'
-                },
-                {
-                    name: 'Resources',
-                    href: '/resources'
-                }
+                // { 
+                //     name: 'Contact', 
+                //     href: '/contact'
+                // },
             ]
         },
     ]
@@ -99,22 +75,22 @@ export default function Footer() {
                     <div className="pt-3 mx-auto mb-6 md:pt-20 md:mt-0 md:mx-0 md:mb-0">
                         <div className="flex justify-center pr-2 space-x-6 md:justify-start xl:pr-0 sm:pr-0">
                             <div>
-                                <Link href="#">
+                                <Link href="https://www.linkedin.com/company/72624145/">
                                     <Linkedin color="#636363" size={15} />
                                 </Link>
                             </div>
                             <div>
-                                <Link href="#">
+                                <Link href="https://www.facebook.com/iiimaginated">
                                     <Facebook color="#636363" size={15} />
                                 </Link>
                             </div>
-                            <div>
+                            {/* <div>
                                 <Link href="#">
                                     <Twitter color="#636363" size={15} />
                                 </Link>
-                            </div>
+                            </div> */}
                             <div>
-                                <Link href="#">
+                                <Link href="https://www.instagram.com/iiimaginated/">
                                     <Instagram color="#636363" size={15} />
                                 </Link>
                             </div>
@@ -125,17 +101,17 @@ export default function Footer() {
                             <div className="md:mt-32 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pr-2 text-xs border-r sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <Link className= "no-underline truncate text-dim-grey" href="#">Privacy Policy</Link>
+                                        <Link className= "no-underline truncate text-dim-grey" href="/privacy-policy"><a>Privacy Policy</a></Link>
                                     </li>
                                     <li className="px-2 text-xs border-r sm:text-base md:border-r-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <Link className= "no-underline truncate text-dim-grey" href="#">Terms of Service</Link>
+                                        <Link className= "no-underline truncate text-dim-grey" href="/terms-of-service"><a>Terms of Service</a></Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="md:mb-6 sm:mx-0 sm:mb-0">
                                 <ul className="flex justify-start pl-0 mb-0">
                                     <li className="pl-2 pr-2 mb-4 text-xs border-r sm:text-base md:pl-0 text-dim-grey hover:text-gray-900 sm:mb-0">
-                                        <Link className= "no-underline truncate text-dim-grey" href="#">Site/Affiliate Disclaimer</Link>
+                                        <Link className= "no-underline truncate text-dim-grey" href="/disclaimer">Site/Affiliate Disclaimer</Link>
                                     </li>
                                     <li className="pl-2 mb-4 text-xs sm:text-base text-dim-grey hover:text-gray-900 sm:mb-0">
                                         <Link className= "no-underline truncate text-dim-grey" href="#">Sitemap</Link>

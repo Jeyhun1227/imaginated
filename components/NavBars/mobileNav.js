@@ -3,11 +3,12 @@ import React, { Fragment, useState, useEffect  } from "react";
 import { Popover, Transition } from '@headlessui/react'   
 import { List, X } from 'react-bootstrap-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Bell, Star, Gear, PlayBtn } from 'react-bootstrap-icons';
+import { Bell, Star, Gear, PlayBtn, ChevronRight, ChevronDown } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
+import BlogMenu from './BlogMenu.json';
 
 export default function MobileNav() {
 
@@ -15,6 +16,8 @@ export default function MobileNav() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
   const [ShowResults, setShowResults] = useState(true);
+  const [clickedBlog, setClickedBlog] = useState('');
+  const [ClickedMainBlog, setClickedMainBlog] = useState(false);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -45,14 +48,14 @@ export default function MobileNav() {
       name: 'Directory',
       href: '/directory'
     },
-    { 
-      name: 'Market', 
-      href: '/market'
-    },
-    {
-      name: 'Claim Listing',
-      href: '/claim-listing'
-    }
+    // { 
+    //   name: 'Market', 
+    //   href: '/market'
+    // },
+    // {
+    //   name: 'Claim Listing',
+    //   href: '/claim-listing'
+    // }
   ]
   
   const userMenu = [
@@ -234,7 +237,7 @@ export default function MobileNav() {
                   {userMenu.map((menu) => (
                     <div key={menu.title} className=""> 
                         <Link  href={menu.href} >
-                          <>
+                          <a>
                           <div className=' no-underline px-3.5 flex items-center'>
                           <div className='pr-2 text-black'>
                             {menu.svg}
@@ -243,7 +246,7 @@ export default function MobileNav() {
                             {menu.title}
                           </span>
                           </div>
-                          </>
+                          </a>
                         </Link>
                     </div>
                     ))}
@@ -251,8 +254,7 @@ export default function MobileNav() {
                   </> : null}
                 <div className="pt-3">
                   <nav className="grid gap-y-4">
-                    {links.map((item) => (
-                      <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" key={item.href}>
+                    {links.map((item) => <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" key={item.href}>
                       <Link
                         key={item.name}
                         href={item.href}
@@ -260,8 +262,34 @@ export default function MobileNav() {
                       >
                         <span className="ml-3 text-sm font-medium text-dim-grey">{item.name}</span>
                       </Link>
+                    </div>)}
+                    <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" >
+                      <Link
+                        href={'/blog'} 
+                      >
+                        <span className="ml-3 text-sm font-medium text-dim-grey">Blog</span>
+                    </Link>
+                    <div className='openRightBlog' onClick={() => setClickedMainBlog(!ClickedMainBlog)}>{(ClickedMainBlog)?<ChevronDown/>:<ChevronRight/>}</div>
+                    </div>
+                    {ClickedMainBlog ? BlogMenu.map((item) => (
+                      <div className="items-center p-left-ten no-underline hover:bg-gray-50" key={item.href}>
+                        {(item.right)?<div className='openRightBlog' onClick={() => setClickedBlog(item.title)}>{(clickedBlog === item.title)?<ChevronDown/>:<ChevronRight/>}</div>:null}
+                      <div><Link
+                        href={item.href}
+                      >
+                        <span className="ml-3 text-sm font-medium text-dim-grey">{item.title}</span>
+                      </Link></div>
+                      {(clickedBlog === item.title) ? item.children.map((child) => 
+                      <div className='flex items-center p-top-left-ten no-underline hover:bg-gray-50' key={child.href}>
+                        <Link
+                          href={child.href}
+                        >
+                          <span className="ml-3 text-sm font-medium text-dim-grey">{child.title}</span>
+                        </Link>
+                        </div>
+                      ):null}
                       </div>
-                    ))}
+                    )): null}
                   </nav>
                 </div>
               </div>

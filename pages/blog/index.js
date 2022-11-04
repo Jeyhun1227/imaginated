@@ -2,10 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useState, useRef } from "react";
 import home from '../../public/home.svg';
+import Head from 'next/head';
+import parse, { domToReact } from 'html-react-parser';
+import axios from 'axios';
 
 
-
-export default function SubCategoryBlogMain( {post} ){
+export default function SubCategoryBlogMain( {post, metadata} ){
 
       
     return (
@@ -51,11 +53,13 @@ export async function getStaticProps(context) {
             `
         })
     })
-
+    let metadata_raw = await axios.get('https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/blog')
+    let metadata = metadata_raw.data.head;
     const json = await res.json()
     return {
         props: {
             post: json.data.posts.nodes,
+            metadata
         },
     }
 
