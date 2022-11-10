@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import home from '../../public/home.svg';
-import { ChevronRight } from 'react-bootstrap-icons';
 import React, { useEffect, useState, useRef } from "react";
 import parse, { domToReact } from 'html-react-parser';
 import YouTube from 'react-youtube';
 import Head from 'next/head';
+import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn, ChevronRight } from 'react-bootstrap-icons';
+
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -36,39 +37,63 @@ export default function Post( data ){
     const full_year = month + ' ' + today.getDate() + ', ' + today.getFullYear();
     const [shareUrl, setShareUrl] = useState('');
     const [content, setContent] = useState(post.content);
+    const [showGlossary, setShowGlossary] = useState(false);
 
     const _onReady = (event) =>  {
         // access to player in all event handlers via event.target
         event.target.pauseVideo();
     }
+
+    const change_glossary = (current_glossary) => {
+
+      setShowGlossary(current_glossary)
+
+      get_react_Parser(current_glossary)
+
+    }
+
+    const get_react_Parser = (showGlossary) => {
+      const options = {
+        replace: ({ attribs, children }) => {
+            if (!attribs) return;
+
+            if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){
+                var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
+                var video_id = child.children[0].attribs.id
+                video_id = video_id.split('_')[1]
+                const width = ref.current.offsetWidth;
+                width = width > 850 ? Math.round(width * .7): width;
+
+                const opts = {
+                    height: Math.round(width * .6),
+                    width: width,
+                    playerVars: {
+                      autoplay: 0,
+                    },
+                  };
+              
+                  return <YouTube videoId={video_id} opts={opts} onReady={_onReady} className="margin-bottom-two"/>;
+            }
+            if(attribs.id === 'ez-toc-container'){
+              console.log('showGlossary: ', showGlossary)
+              if(showGlossary){
+                return <div  className='ez-toc-v2_0_36_1 counter-hierarchy ez-toc-counter ez-toc-grey ez-toc-container-direction' id='ez-toc-container' ><div className='glossary-DropDownOpen'><ChevronDown onClick={() => change_glossary(false)} /></div>{domToReact(children, options)}</div>
+              }else{
+                return <div className='ez-toc-v2_0_36_1 counter-hierarchy ez-toc-counter ez-toc-grey ez-toc-container-direction' id='ez-toc-container'><div className='glossary-DropDown' onClick={() => change_glossary(true)}><div className='glossary-title'>Table of Contents</div> <div className='glossary-open'><ChevronRight /></div></div></div>
+
+              }
+
+            }
+
+        }
+      };
+      setContent(parse(post.content, options));
+    }
+
     useEffect(() => {
         setShareUrl(window.location.href)
-        const options = {
-            replace: ({ attribs, children }) => {
-                if (!attribs) return;
-    
-                if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){
-                    var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
-                    var video_id = child.children[0].attribs.id
-                    video_id = video_id.split('_')[1]
-                    const width = ref.current.offsetWidth;
-                    width = width > 850 ? Math.round(width * .7): width;
-
-                    const opts = {
-                        height: Math.round(width * .6),
-                        width: width,
-                        playerVars: {
-                          autoplay: 0,
-                        },
-                      };
-                  
-                      return <YouTube videoId={video_id} opts={opts} onReady={_onReady} className="margin-bottom-two"/>;
-                }
-    
-            }
-          };
-          setContent(parse(post.content, options));
         //   console.log('ref.current.offsetWidth: ', ref.current.offsetWidth)
+        get_react_Parser(showGlossary);
       }, []); 
       const ref = useRef(null);
 

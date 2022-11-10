@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
+import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import SubCategoryPageSub from '../../../components/SubCategoryPage/SubCategoryPage';
 import {Select, MenuItem} from '@mui/material';
@@ -226,13 +227,10 @@ export async function getStaticProps({params}){
 
 export async function getStaticPaths() {
 
-  const siteUrl =  process.env.SITE_URL || 'http://localhost:3000';
-  let GetAllIndividuals = await axios.post(`${siteUrl}/api/GetAllDirectory/GetAllDirectory`, {})
-  const json = await GetAllIndividuals.data;
-  const subcategory = json.subcategory;
-  console.log('subcategory: ', subcategory)
-  var paths = []
-  subcategory.map((parent) => paths.push({params: {id: parent.categoryname, subcategory: parent.subcategory}}))
+  const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'subcategory' }})
+  const subcategory = all_values.data.getEachStaticPathDirectory.subcategory
+  var paths = subcategory.map((parent) => ({params: {id: parent.categoryname, subcategory: parent.subcategory}}))
+  console.log('subcategory: ', paths)
 
 
   return { paths, fallback: false }

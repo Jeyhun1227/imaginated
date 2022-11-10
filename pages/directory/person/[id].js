@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
+import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating, getListSubheaderUtilityClass} from '@mui/material';
 import { Listbox, Transition } from '@headlessui/react'
@@ -579,20 +580,18 @@ export async function getStaticProps(ctx) {
       free_offers,
       favorites: Individual_values.data.getEachIndividual.favorites,
       IndividualID
-    }
+    },
+    revalidate: 1200, // In seconds
   }
 
 }
 
 export async function getStaticPaths() {
-  const siteUrl =  process.env.SITE_URL || 'http://localhost:3000';
 
-
-  let GetAllIndividuals = await axios.post(`${siteUrl}/api/GetAllDirectory/GetAllDirectory`, {})
-  const json = await GetAllIndividuals.data;
-  const individual = json.individual;
-  var paths = []
-  individual.map((parent) => paths.push({params: {id: parent.linkname}}))
+  const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'individual' }})
+  const individual = all_values.data.getEachStaticPathDirectory.individual
+  var paths = individual.map((parent) => ({params: {id: parent}}))
+  console.log('individual: ', paths)
 
 
   return { paths, fallback: false }

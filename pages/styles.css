@@ -51,6 +51,28 @@ a{
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.glossary-DropDownOpen{
+  position: absolute;
+  right: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.glossary-title{
+  font-weight: 500;
+    font-size: 80%;
+    display: inline-block;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+.glossary-open{
+  display: inline-block;
+  margin-left: -5px;
+  margin-top: 9px;
+  position: absolute;
+  cursor: pointer;
+}
 
 .display-menu{
   display: inline-block;

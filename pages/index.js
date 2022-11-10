@@ -10,7 +10,7 @@ export default function MainParentPage({category, subcategory}) {
   return (
     <div>
       <title>Imaginated – Creators educating creators.</title>
-      <meta name="description">Helping creators grow personally and professionally. Providing in-depth articles, guides, and videos made by credible educational creators.</meta>
+      {/* <meta name="description">Helping creators grow personally and professionally. Providing in-depth articles, guides, and videos made by credible educational creators.</meta> */}
       <ApolloProvider client={client}>
         <MainParent category={category} subcategory={subcategory}/>
       </ApolloProvider>

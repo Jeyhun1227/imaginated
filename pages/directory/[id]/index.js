@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
+import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import CategoryPageSub from '../../../components/CategoryPage/CategoryPageSub';
 import VerticalCallToAction from '../../../components/CallToAction/VerticalCallToAction';
@@ -87,18 +88,16 @@ export async function getStaticProps({params}){
       props: {
         category_values: category_values.data.getCategoryPage.rows,
         routerID
-      }
+      },
+      revalidate: 1200, // In seconds
     }
 }
 
 export async function getStaticPaths() {
-
-  const siteUrl =  process.env.SITE_URL || 'http://localhost:3000';
-  let GetAllIndividuals = await axios.post(`${siteUrl}/api/GetAllDirectory/GetAllDirectory`, {})
-  const json = await GetAllIndividuals.data;
-  const category = json.category;
-  var paths = []
-  category.map((parent) => paths.push({params: {id: parent.category}}))
+  const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'category' }})
+  const category = all_values.data.getEachStaticPathDirectory.category
+  var paths = category.map((parent) => ({params: {id: parent}}))
+  console.log('category: ', paths)
 
 
   return { paths, fallback: false }
