@@ -3,12 +3,17 @@ import MainParent from "../../components/Pages/ParentPage"
 import { ApolloProvider } from "@apollo/client";
 import client from '../../components/GraphQL';
 import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
+import Head from 'next/head';
 
 
 
 export default function MainParentPage({category, subcategory}) {
   return (
     <div>
+      <Head>
+          <title>Imaginated – directory for creators.</title>
+          <meta name="description">Helping students match with educators and creators grow personally and professionally. Providing in-depth articles, guides, and videos made by credible educational creators.</meta>
+      </Head>
       <ApolloProvider client={client}>
         <MainParent category={category} subcategory={subcategory}/>
       </ApolloProvider>

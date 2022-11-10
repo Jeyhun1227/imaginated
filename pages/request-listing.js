@@ -38,7 +38,7 @@ export default function RequestListing(props) {
         }catch(error){
             if (error.response) {
                 // Request made and server responded
-                setError("Please Sign up to submit your request")
+                setError("Please Sign up/Login to submit your request")
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);

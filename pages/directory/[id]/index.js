@@ -9,9 +9,10 @@ import CategoryPageSub from '../../../components/CategoryPage/CategoryPageSub';
 import VerticalCallToAction from '../../../components/CallToAction/VerticalCallToAction';
 import QASingle from "../../../components/CallToAction/QASingle";
 import HeroNoBtn from "../../../components/Hero/HeroNoBtn";
+import axios from 'axios';
+
 
 export default function CategoryPageMain(props) {
-    // const router = useRouter();
     const routerID = props.routerID;
     let subcategory = [];
     props.category_values.map((e) => {
@@ -75,8 +76,8 @@ export default function CategoryPageMain(props) {
         </div>
 }
 
-export async function getServerSideProps({query}){
-    const routerID = query.id
+export async function getStaticProps({params}){
+    const routerID = params.id
 
     const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID }})
     // console.log(category_values.data.getCategoryPage.rows)
@@ -88,4 +89,18 @@ export async function getServerSideProps({query}){
         routerID
       }
     }
+}
+
+export async function getStaticPaths() {
+
+  const siteUrl =  process.env.SITE_URL || 'http://localhost:3000';
+  let GetAllIndividuals = await axios.post(`${siteUrl}/api/GetAllDirectory/GetAllDirectory`, {})
+  const json = await GetAllIndividuals.data;
+  const category = json.category;
+  var paths = []
+  category.map((parent) => paths.push({params: {id: parent.category}}))
+
+
+  return { paths, fallback: false }
+
 }

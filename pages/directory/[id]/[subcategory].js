@@ -204,9 +204,9 @@ export default function SubCategoryPageMain(props) {
 </div>
 }
 
-export async function getServerSideProps({query}){
-    const routerID = query.id
-    const subcategory = query.subcategory
+export async function getStaticProps({params}){
+    const routerID = params.id
+    const subcategory = params.subcategory
     const Subcategory_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID, subcategory, offset: 0}})
 // 
     // console.log('category_values.error:', category_values.error)
@@ -219,6 +219,22 @@ export async function getServerSideProps({query}){
         subcategory: Subcategory_values.data.getCategoryPage.subcategory,
         subcategoryName: subcategory,
         routerID
-      }
+      },
+      revalidate: 1200, // In seconds
     }
+}
+
+export async function getStaticPaths() {
+
+  const siteUrl =  process.env.SITE_URL || 'http://localhost:3000';
+  let GetAllIndividuals = await axios.post(`${siteUrl}/api/GetAllDirectory/GetAllDirectory`, {})
+  const json = await GetAllIndividuals.data;
+  const subcategory = json.subcategory;
+  console.log('subcategory: ', subcategory)
+  var paths = []
+  subcategory.map((parent) => paths.push({params: {id: parent.categoryname, subcategory: parent.subcategory}}))
+
+
+  return { paths, fallback: false }
+
 }
