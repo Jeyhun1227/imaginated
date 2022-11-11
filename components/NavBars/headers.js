@@ -13,6 +13,7 @@ import Imaginated_logo from '../../public/Imaginated_logo.png';
 import Image from 'next/image'
 import BlogMenu from './BlogMenu.json';
 import MarketMenu from './MarketMenu.json';
+import Head from 'next/head';
 
 export default function Header(props) {
   let placeholder = 'Search for a creator or category'
@@ -146,7 +147,21 @@ export default function Header(props) {
 
   return (
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
-
+      <Head>
+      <script
+          dangerouslySetInnerHTML={{
+            __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-PZPQDSJ');`
+            }}  />
+        <script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"></script>
+      </Head>
+      <div>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPQDSJ"
+        height="0" width="0" style={{"display":"none", "visibility":"hidden"}}></iframe></noscript>
+      </div>
       <div className="flex items-center justify-between mx-auto flex-nowrap">
           {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
               <img src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
