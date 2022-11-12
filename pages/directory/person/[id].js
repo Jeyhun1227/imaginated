@@ -591,7 +591,6 @@ export async function getStaticPaths() {
   const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'individual' }})
   const individual = all_values.data.getEachStaticPathDirectory.individual
   var paths = individual.map((parent) => ({params: {id: parent}}))
-  console.log('individual: ', paths)
 
 
   return { paths, fallback: false }

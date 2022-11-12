@@ -200,7 +200,7 @@ export default function MobileNav() {
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-4 border-b border-gainsboro">
                   <div>
-                    <div href="/directory">
+                    <div href="/">
                       <span className="sr-only">Imaginated</span>
                       <img
                         className="w-auto h-8 sm:h-10"

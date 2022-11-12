@@ -220,6 +220,7 @@ export async function getStaticProps(context) {
             post: json.data.post,
             metadata: metadata
         },
+        revalidate: 1200, // In seconds
     }
 
 }
