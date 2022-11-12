@@ -1,0 +1,54 @@
+[
+    {
+      "title": "Business",
+      "right": true,
+      "href": "/blog/category/business",
+      "children": [
+          {"title": "Freelancing", "href": "/blog/category/business/freelancing"},
+          {"title": "Marketing", "href": "/blog/category/business/marketing"},
+          {"title": "Personal Branding", "href": "/blog/category/business/personal-branding"},
+          {"title": "Social Media", "href": "/blog/category/business/social-media"}
+        ]
+    },
+    {
+      "title": "Art",
+      "right": true,
+      "href": "/blog/category/art",
+      "children": [
+          {"title": "Design", "href": "/blog/category/art/design"},
+          {"title": "Drawing", "href": "/blog/category/art/drawing"},
+          {"title": "Painting", "href": "/blog/category/art/painting"},
+          {"title": "Photography", "href": "/blog/category/art/photography"},
+          {"title": "Post-Production", "href": "/blog/category/art/post-production"},
+          {"title": "Sculpture", "href": "/blog/category/art/sculpture"},
+          {"title": "Sewing", "href": "/blog/category/art/sewing"},
+          {"title": "Writing", "href": "/blog/category/art/writing"}
+        ]
+
+    },
+    {
+      "title": "Mind",
+      "right": true,
+      "href": "/blog/category/mind",
+      "children": [
+        {"title": "Creativity", "href": "/blog/category/mind/creativity"},
+        {"title": "Gratitude", "href": "/blog/category/mind/gratitude"},
+        {"title": "Mental Fitness", "href": "/blog/category/mind/mental-fitness"},
+        {"title": "Motivation", "href": "/blog/category/mind/motivation"}
+      ]
+    },
+    {
+      "title": "Opinion",
+      "right": false,
+      "href": "/blog/category/opinion",
+      "children": []
+
+    },
+    {
+      "title": "All Resources",
+      "right": false,
+      "href": "/blog",
+      "children": []
+
+    }
+  ]

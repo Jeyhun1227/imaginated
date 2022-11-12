@@ -22,7 +22,7 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
             setChangePasswordFunc(false)
             return setError(Password.data.error)
         }
-        return window.location.href = '/login';
+        return window.location.href = '/directory/login';
 
     }
 
@@ -35,7 +35,7 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
     useEffect(() => {
         if(authenticateEmailUser.errormessage){
             if(authenticateEmailUser.errormessage.length > 0) setFormError(authenticateEmailUser.errormessage[0])
-            let forwardPage = () => window.location.href = '/login'
+            let forwardPage = () => window.location.href = '/directory/login'
             setTimeout(forwardPage, 500);
         }
 

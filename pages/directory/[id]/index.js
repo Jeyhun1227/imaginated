@@ -4,14 +4,16 @@ import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
+import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import CategoryPageSub from '../../../components/CategoryPage/CategoryPageSub';
 import VerticalCallToAction from '../../../components/CallToAction/VerticalCallToAction';
 import QASingle from "../../../components/CallToAction/QASingle";
 import HeroNoBtn from "../../../components/Hero/HeroNoBtn";
+import axios from 'axios';
+
 
 export default function CategoryPageMain(props) {
-    // const router = useRouter();
     const routerID = props.routerID;
     let subcategory = [];
     props.category_values.map((e) => {
@@ -75,8 +77,8 @@ export default function CategoryPageMain(props) {
         </div>
 }
 
-export async function getServerSideProps({query}){
-    const routerID = query.id
+export async function getStaticProps({params}){
+    const routerID = params.id
 
     const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID }})
     // console.log(category_values.data.getCategoryPage.rows)
@@ -86,6 +88,18 @@ export async function getServerSideProps({query}){
       props: {
         category_values: category_values.data.getCategoryPage.rows,
         routerID
-      }
+      },
+      revalidate: 1200, // In seconds
     }
+}
+
+export async function getStaticPaths() {
+  const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'category' }})
+  const category = all_values.data.getEachStaticPathDirectory.category
+  var paths = category.map((parent) => ({params: {id: parent}}))
+  console.log('category: ', paths)
+
+
+  return { paths, fallback: false }
+
 }

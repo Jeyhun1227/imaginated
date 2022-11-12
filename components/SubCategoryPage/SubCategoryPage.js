@@ -31,7 +31,7 @@ export default function SubCategoryPageSub({values, selected}) {
                 <div className="">
                     <div className="mb-0 text-sm no-underline sm:text-base md:text-lg text-denim cursor-point inline-block">
                             <Link href={'/directory/person/' + values.linkname}>
-                                <div>{values.first_name + ' ' + values.last_name}</div>
+                                <a href={'/directory/person/' + values.linkname}>{values.first_name + ' ' + values.last_name}</a>
                             </Link>
                     </div>
                     <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-nowrap inline-block-block"> 
@@ -67,7 +67,7 @@ export default function SubCategoryPageSub({values, selected}) {
             {values.description}
             <div className="pl-1.5 no-underline text-denim cursor-point">
             <Link href={'/directory/person/' + values.linkname}>
-                <div>Learn more about {values.first_name} {values.last_name}</div>
+                <a href={'/directory/person/' + values.linkname}>Learn more about {values.first_name} {values.last_name}</a>
             </Link>
             </div>
         </div>

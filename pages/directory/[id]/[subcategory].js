@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
+import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import SubCategoryPageSub from '../../../components/SubCategoryPage/SubCategoryPage';
 import {Select, MenuItem} from '@mui/material';
@@ -204,9 +205,9 @@ export default function SubCategoryPageMain(props) {
 </div>
 }
 
-export async function getServerSideProps({query}){
-    const routerID = query.id
-    const subcategory = query.subcategory
+export async function getStaticProps({params}){
+    const routerID = params.id
+    const subcategory = params.subcategory
     const Subcategory_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID, subcategory, offset: 0}})
 // 
     // console.log('category_values.error:', category_values.error)
@@ -219,6 +220,19 @@ export async function getServerSideProps({query}){
         subcategory: Subcategory_values.data.getCategoryPage.subcategory,
         subcategoryName: subcategory,
         routerID
-      }
+      },
+      revalidate: 1200, // In seconds
     }
+}
+
+export async function getStaticPaths() {
+
+  const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'subcategory' }})
+  const subcategory = all_values.data.getEachStaticPathDirectory.subcategory
+  var paths = subcategory.map((parent) => ({params: {id: parent.categoryname, subcategory: parent.subcategory}}))
+  console.log('subcategory: ', paths)
+
+
+  return { paths, fallback: false }
+
 }

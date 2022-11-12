@@ -14,7 +14,7 @@ export default function Settings() {
   const [reviews, setReviews] = useState([]);
 
   const get_setup = async () => {
-    if(data === null) return window.location.href = "/login";
+    if(data === null) return window.location.href = "/directory/login";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     var type = 0;

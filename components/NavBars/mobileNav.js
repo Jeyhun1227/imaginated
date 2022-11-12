@@ -3,11 +3,12 @@ import React, { Fragment, useState, useEffect  } from "react";
 import { Popover, Transition } from '@headlessui/react'   
 import { List, X } from 'react-bootstrap-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Bell, Star, Gear, PlayBtn } from 'react-bootstrap-icons';
+import { Bell, Star, Gear, PlayBtn, ChevronRight, ChevronDown } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
+import BlogMenu from './BlogMenu.json';
 
 export default function MobileNav() {
 
@@ -15,6 +16,8 @@ export default function MobileNav() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
   const [ShowResults, setShowResults] = useState(true);
+  const [clickedBlog, setClickedBlog] = useState('');
+  const [ClickedMainBlog, setClickedMainBlog] = useState(false);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -47,12 +50,12 @@ export default function MobileNav() {
     },
     { 
       name: 'Market', 
-      href: '/market'
+      href: '/shop'
     },
-    {
-      name: 'Claim Listing',
-      href: '/claim-listing'
-    }
+    // {
+    //   name: 'Claim Listing',
+    //   href: '/claim-listing'
+    // }
   ]
   
   const userMenu = [
@@ -87,17 +90,17 @@ export default function MobileNav() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <div href="/directory">
+              <Link href="/"><a >
                 <span className="sr-only">Imaginated</span>
                 <img
                   className="w-auto h-8 sm:h-10"
                   src={Imaginated_logo.src}
                   alt="Imaginated Logo"
                 />
-              </div>
+              </a></Link>
             </div>
             <div className="inline-flex">
-            <Popover className="flex items-center">
+            {/* <Popover className="flex items-center">
             <div className="-py-2 -pr-2 md:hidden">
               <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
                 <span className="sr-only">Open menu</span>
@@ -175,7 +178,7 @@ export default function MobileNav() {
             </div>
           </Popover.Panel>
         </Transition>
-        </Popover>
+        </Popover> */}
             <Popover className="flex justify-end">
             <div className="flex justify-end -my-2 -mr-2 md:hidden">
               <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
@@ -197,7 +200,7 @@ export default function MobileNav() {
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-4 border-b border-gainsboro">
                   <div>
-                    <div href="/directory">
+                    <div href="/">
                       <span className="sr-only">Imaginated</span>
                       <img
                         className="w-auto h-8 sm:h-10"
@@ -216,7 +219,7 @@ export default function MobileNav() {
                 {(session) ? <>
                   <div className="border-b border-gainsboro">
                         <Link  href="#" >
-                          <>
+                          <a>
                           <div className='flex items-center mx-3.5 no-underline '>
                           <div className='pr-2 text-black'>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
@@ -227,41 +230,60 @@ export default function MobileNav() {
                             {session.user.name}
                           </span>
                           </div>
-                          </>
+                          </a>
                         </Link>
                   </div>
                   <div className="border-b border-gainsboro">
                   {userMenu.map((menu) => (
                     <div key={menu.title} className=""> 
-                        <Link  href={menu.href} >
-                          <>
-                          <div className=' no-underline px-3.5 flex items-center'>
-                          <div className='pr-2 text-black'>
-                            {menu.svg}
+                        <Popover.Button>
+                          <div  onClick={() => window.location.href=menu.href}>
+                            <div>
+                            <div className=' no-underline px-3.5 flex items-center'>
+                            <div className='pr-2 text-black'>
+                              {menu.svg}
+                            </div>
+                            <span className='block py-3 text-sm text-black no-underline'>
+                              {menu.title}
+                            </span>
+                            </div>
+                            </div>
                           </div>
-                          <span className='block py-3 text-sm text-black no-underline'>
-                            {menu.title}
-                          </span>
-                          </div>
-                          </>
-                        </Link>
+                        </Popover.Button>
                     </div>
                     ))}
                   </div>
                   </> : null}
                 <div className="pt-3">
                   <nav className="grid gap-y-4">
-                    {links.map((item) => (
-                      <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" key={item.href}>
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        
-                      >
-                        <span className="ml-3 text-sm font-medium text-dim-grey">{item.name}</span>
-                      </Link>
+                    {links.map((item) => <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" key={item.href}>
+                    <Popover.Button>
+                        <button onClick={() => window.location.href=item.href} className="ml-3 text-sm font-medium text-dim-grey">{item.name}</button>
+                    </Popover.Button>
+                    </div>)}
+                    <div className="flex items-center p-3 -m-3 no-underline hover:bg-gray-50" >
+                      <Popover.Button>
+                          <button onClick={() => window.location.href='/blog'} className="ml-3 text-sm font-medium text-dim-grey">Blog</button>
+                      </Popover.Button>
+                    <div className='openRightBlog' onClick={() => setClickedMainBlog(!ClickedMainBlog)}>{(ClickedMainBlog)?<ChevronDown/>:<ChevronRight/>}</div>
+                    </div>
+                    {ClickedMainBlog ? BlogMenu.map((item) => (
+                      <div className="items-center p-left-ten no-underline hover:bg-gray-50" key={item.href}>
+                        {(item.right)?<div className='openRightBlog' onClick={() => setClickedBlog(item.title)}>{(clickedBlog === item.title)?<ChevronDown/>:<ChevronRight/>}</div>:null}
+                      <div>
+                        <Popover.Button>
+                            <button onClick={() => window.location.href=item.href} className="ml-3 text-sm font-medium text-dim-grey">{item.title}</button>
+                        </Popover.Button>
                       </div>
-                    ))}
+                      {(clickedBlog === item.title) ? item.children.map((child) => 
+                      <div className='flex items-center p-top-left-ten no-underline hover:bg-gray-50' key={child.href}>
+                          <Popover.Button>
+                            <button onClick={() => window.location.href=child.href} className="ml-3 text-sm font-medium text-dim-grey">{child.title}</button>
+                        </Popover.Button>
+                        </div>
+                      ):null}
+                      </div>
+                    )): null}
                   </nav>
                 </div>
               </div>
@@ -269,20 +291,17 @@ export default function MobileNav() {
                 <div>
                 {!(session) ? <>
                   <div className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
-                  <Link
-                    href="/login"
-                    >
-                      <a href={'/login'}>Log In/Sign Up</a>
-                  </Link>
+                  <Popover.Button>
+                    <div onClick={() => window.location.href='/directory/login'}>Log In/Sign Up</div>
+                  </Popover.Button>
                   </div>
                 </> : <> 
                   <div className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
-                  <Link
+                  <button
                     onClick={signOut}
-                    href="#"
                     >
                     Logout
-                  </Link>
+                  </button>
                   </div>
                 </>}
                   <div className="relative">

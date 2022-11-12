@@ -2,30 +2,33 @@ import styles from '../../styles/Home.module.css';
 // import {Container, Row, Col} from 'react-bootstrap';
 // import mainLogo from '../../public/imaginated_logo.png'
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Menu, Transition, Combobox  } from '@headlessui/react'
-import React, {useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn } from 'react-bootstrap-icons';
+import { Menu, Transition, Combobox  } from '@headlessui/react';
+// import {Menu, MenuItem} from '@mui/material';
+import React, {useState, useEffect, useRef } from "react";
+import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn, ChevronRight } from 'react-bootstrap-icons';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import Link from 'next/link';
 import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
 import Image from 'next/image'
-
+import BlogMenu from './BlogMenu.json';
+import MarketMenu from './MarketMenu.json';
+import Head from 'next/head';
 
 export default function Header(props) {
   let placeholder = 'Search for a creator or category'
   const {data: session} = useSession()
-  const [notification, setNotification] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
   const [ShowResults, setShowResults] = useState(true);
+  const [SubMenuHover, setSubMenuHover] = useState('');
 
-  var location_href = null;
+
+  var location_href = '';
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
-      console.log(returnedSearch)
 
       let returnedSearchClean = {Individual: [], Subcategory: [], Offering: []}
       returnedSearch.map((e) => {
@@ -62,12 +65,8 @@ export default function Header(props) {
     () => window.removeEventListener('resize', handleResize);
   }, [])
 
+
   const userMenu = [
-    // {
-    //   title: 'Update',
-    //   href: '/update',
-    //   svg: <Bell/>
-    // },
     {
       title: 'Following',
       href: '/settings?type=Following',
@@ -87,15 +86,84 @@ export default function Header(props) {
       svg: <Gear/>
     },
   ]
+
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
+  const buttonRef = useRef(null)
+  const buttonRefMarket = useRef(null)
+
+  const dropdownRef = useRef(null)
+  const dropdownRefMarket = useRef(null)
+
+  const timeoutDuration = 200
+  let timeout
+
+  const openMenu = () => buttonRef.current.click();
+  const openMenuMarket = () => buttonRefMarket.current.click();
+
+  const closeMenu = () =>
+    {
+      if(dropdownRef.current)
+        dropdownRef.current.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Escape',
+            bubbles: true,
+            cancelable: true,
+          })
+        )
+    }
+
+    const closeMenuMarket = () =>
+    {
+      if(dropdownRefMarket.current)
+        dropdownRefMarket.current.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Escape',
+            bubbles: true,
+            cancelable: true,
+          })
+        )
+    }
+
+  const onMouseEnter = closed => {
+    clearTimeout(timeout)
+    closed && openMenu()
+  }
+  const onMouseLeave = open => {
+    open && (timeout = setTimeout(() => closeMenu(), timeoutDuration))
+  }
+
+  const onMouseEnterMarket = closed => {
+    clearTimeout(timeout)
+    closed && openMenuMarket()
+  }
+  const onMouseLeaveMarket = open => {
+    open && (timeout = setTimeout(() => closeMenuMarket(), timeoutDuration))
+  }
+  const useHover = true;
+
   return (
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
-
+      <Head>
+      <script
+          dangerouslySetInnerHTML={{
+            __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-PZPQDSJ');`
+            }}  />
+        <script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"></script>
+      </Head>
+      <div>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPQDSJ"
+        height="0" width="0" style={{"display":"none", "visibility":"hidden"}}></iframe></noscript>
+      </div>
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/directory">
+          {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
               <img src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7"/>
           </Link></div></div>: null}
           <Combobox as="li" value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} className="relative list-none">
@@ -167,92 +235,150 @@ export default function Header(props) {
               <li>
                 <div className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/directory" >Directory</Link></div>
               </li>
-              {/* <li>
-                <Link href="/market" className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey">Market</Link>
-              </li> */}
+
+
+              <li className='flex items-center'>
+                <Menu as="div" className="relative inline-block">
+
+                {({ open }) => (
+                    <>
+                     <div>
+                     <div
+                        onMouseEnter={() => useHover && onMouseEnterMarket(!open)}
+                        onMouseLeave={() => useHover && onMouseLeaveMarket(open)}
+                        onClick={openMenuMarket}
+                      >
+                        <Menu.Button               ref={buttonRefMarket}  className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"
+                        >Market</Menu.Button>
+                      </div>
+                  </div>
+                    <Menu.Items ref={dropdownRefMarket}
+                        onMouseEnter={() => useHover && onMouseEnterMarket()}
+                        onMouseLeave={() => useHover && onMouseLeaveMarket(open)}
+                        className="z-index-five absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Transition
+                        show={true}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                      {MarketMenu.map((menu) => (
+                        <Menu.Item key={menu.title}> 
+                        {({ active }) => (
+                          <div>
+                            <Link key={menu.title} href={menu.href} >
+                              <a>
+
+                              <div className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom' >
+
+                                <>
+                                <div>
+                                <div className='pr-2 text-black display-menu'>
+                                  {/* {menu.svg} */}
+                                </div>
+                                <span className='block text-sm text-black no-underline display-menu-title'>
+                                  {menu.title}
+                                </span>
+                                </div>
+                                </>
+                              
+                              </div>
+                              </a>
+                              </Link></div>
+                        )}
+                      </Menu.Item>))}
+                      </Transition>
+                    </Menu.Items>
+                    </>
+
+                )}
+                </Menu>
+              </li>
+
+
+              <li className='flex items-center'>
+                <Menu as="div" className="relative inline-block">
+
+                {({ open }) => (
+                    <>
+                     <div>
+                     <div
+                        onMouseEnter={() => useHover && onMouseEnter(!open)}
+                        onMouseLeave={() => useHover && onMouseLeave(open)}
+                        onClick={openMenu}
+                      >
+                        <Menu.Button               ref={buttonRef}  className="block py-2 pl-3 pr-4 no-underline border-b border-gray-100 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"
+                        >Blog</Menu.Button>
+                      </div>
+                  </div>
+                    <Menu.Items ref={dropdownRef}
+                        onMouseEnter={() => useHover && onMouseEnter()}
+                        onMouseLeave={() => useHover && onMouseLeave(open)}
+                        className="z-index-five absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Transition
+                        show={true}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                      {BlogMenu.map((menu) => (
+                        <Menu.Item key={menu.title}> 
+                        {({ active }) => (
+                          <div onMouseEnter={() => setSubMenuHover(menu.title)} onMouseLeave={() => setSubMenuHover('')}>
+                            <div className="main-secondary-menu z-index-five absolute right-0 w-56 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                
+                            {SubMenuHover === menu.title ? menu.children.map((m) => <Link key={m.title} href={m.href}><a className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom'>
+                              <div className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom'>
+                              <span className='block text-sm text-black no-underline display-menu-title'>
+                                {m.title}
+                              </span>
+                            </div></a></Link>):null
+                            }
+                            </div>
+                            <Link key={menu.title} href={menu.href} >
+                              <a>
+
+                              <div className='hover:bg-white-smoke no-underline px-3.5 flex items-center margin-top-bottom' >
+
+                                <>
+                                <div>
+                                <div className='pr-2 text-black display-menu'>
+                                  {/* {menu.svg} */}
+                                </div>
+                                <span className='block text-sm text-black no-underline display-menu-title'>
+                                  {menu.title}
+                                </span>
+                                </div>
+                                </>
+                              
+                              </div>
+                              {(menu.right)?<div className='openRight'><ChevronRight/></div>:null}
+                              </a>
+                              </Link></div>
+                        )}
+                      </Menu.Item>))}
+                      </Transition>
+                    </Menu.Items>
+                    </>
+
+                )}
+                </Menu>
+              </li>
               {session?
               <li>
                 <div className="block py-2 pl-3 pr-4 no-underline truncate border-b border-gray-100 mr-15 sm:border-0 sm:hover:text-dim-grey sm:p-0 text-dim-grey"><Link href="/claim-listing" >Claim Listing</Link></div>
               </li>:null}
               {!(session) ? <>
               <li>
-                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
+                <button type="button" onClick={(e) => {e.preventDefault();window.location.href='/directory/login?return_url=' + location_href;}} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 sm:mr-0">{(windowDimensions.width > 800)?"Log In/Sign Up": "Log In"}</button>
               </li>
               </> : <> 
-              {/* <li className='flex items-center'>
-              <Menu as="div" className="relative inline-block">
-                  <>
-                  <div>
-                    <Menu.Button onClick={() => {setNotification(prevNotification => !prevNotification);}} className="inline-flex items-center content-center justify-center pt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="13" height="13">
-                      <path fillRule="evenodd" style={{fill: '#000000'}} d="m7.2 15.8q-0.3-0.1-0.6-0.4-0.3-0.3-0.4-0.6-0.2-0.4-0.2-0.8h4q0 0.4-0.2 0.8-0.1 0.3-0.4 0.6-0.3 0.3-0.6 0.4-0.4 0.2-0.8 0.2-0.4 0-0.8-0.2zm7-3.8q0.4 0.7 0.8 1h-14q0.4-0.3 0.8-1c0.9-1.8 1.2-5.1 1.2-6 0-2.4 1.7-4.4 4-4.9 0-0.3 0.1-0.6 0.3-0.8 0.1-0.2 0.4-0.3 0.7-0.3 0.3 0 0.6 0.1 0.7 0.3 0.2 0.2 0.3 0.5 0.3 0.8q0.8 0.2 1.6 0.6 0.7 0.5 1.3 1.1 0.5 0.7 0.8 1.5 0.3 0.8 0.3 1.7c0 0.9 0.3 4.2 1.2 6zm-6.2-10.1l-0.8 0.2q-0.7 0.1-1.3 0.5-0.6 0.3-1 0.9-0.4 0.5-0.7 1.2-0.2 0.6-0.2 1.3c0 0.6-0.1 2.2-0.5 3.7-0.1 0.8-0.3 1.6-0.6 2.3h10.2c-0.3-0.7-0.5-1.5-0.6-2.3-0.4-1.5-0.5-3.1-0.5-3.7q0-0.7-0.2-1.3-0.3-0.7-0.7-1.2-0.4-0.6-1-0.9-0.6-0.4-1.3-0.5c0 0-0.8-0.2-0.8-0.2z"/>
-                      <path style={{fill: notification ?  "#93bdb0" : '#000000'}} d="m13.3 0.2c1.6 0.2 2.2 1 2.2 2.8 0 1.9-0.6 2.6-2.3 2.8-1.4 0.1-2.4-0.5-2.8-1.5-0.3-1-0.3-2.4 0-3.1 0.4-0.7 1.7-1.2 2.9-1z"/>
-                    </svg>
-                    </Menu.Button>
-                  </div>
-
-                  <Transition
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="hover:bg-white-smoke">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <div className='flex items-center mx-3.5 no-underline border-b border-gainsboro'>
-                              <span className='block py-2.5 text-sm font-semibold text-black no-underline'>
-                                Notifications
-                              </span>
-                              <Link href="#" className='flex ml-auto text-black'>
-                                See All
-                              </Link>
-                            </div>
-                          )}
-                        </Menu.Item>
-                      </div>
-                      <div className='my-2'>
-                        <Menu.Item>
-                          <div className='py-2 hover:bg-white-smoke'>
-                            <Link href="#" className='flex items-center px-3.5 no-underline'>
-                              <div className='pr-2 text-black no-underline'>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                                </svg>
-                              </div>
-                              <span className='block text-xs font-semibold text-black no-underline'> 
-                                SANJ replied to your comment
-                              </span>
-                            </Link>
-                            <span className='block pt-2 text-xs text-black no-underline pl-9'>
-                              5:00 pm
-                            </span>
-                          </div>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <div className='py-2 hover:bg-white-smoke'>
-                            <Link href="#" className='flex items-center px-3.5 no-underline'>
-                              <div className='pr-2 text-black no-underline'>
-                                <PlayBtn/>
-                              </div>
-                              <span className='block text-xs font-semibold text-black no-underline'>
-                                Jhon updated their content, go check it out now!
-                              </span>
-                            </Link>
-                            <span className='block pt-2 text-xs text-black no-underline pl-9'>
-                              Yesterday
-                            </span>
-                          </div>
-                        </Menu.Item>
-                      </div>  
-                    </Menu.Items>
-                  </Transition>
-                  </>
-                </Menu>
-              </li> */}
               <li className='flex items-center'>
                 <Menu as="div" className="relative inline-block">
                 {({ open }) => (
@@ -357,46 +483,6 @@ export default function Header(props) {
       </div>
     </nav>
     
-    // <div className={styles.headerContainer}>
-    //     <Container className={styles.MainRowNav}>
-    //     <Row>
-    //     <Col>
-    //     <img className={styles.MainImage} src='/imaginated_logo.png'/>
-    //         </Col>
-
-    //         <Col className={styles.directoryNameEach}>
-    //             About
-    //         </Col>
-    //         <Col className={styles.directoryNameEach}>
-    //             Directory
-    //         </Col>
-    //         <Col className={styles.directoryNameEach}>
-    //             Market
-    //         </Col>
-    //         <Col className={styles.directoryNameEach}>
-    //             Claim Listing
-    //         </Col>
-    //         <Col>
-    //         {!data ? (<div className={styles.directoryNameEach}>
-    //         <button onClick={() => location.href = "/login"}>Login</button>
-    //         </div>
-    //         ): (<div className={styles.directoryNameEach}>
-    //         {/* <span>{data.user.email}</span> */}
-
-    //         {data.user.image && (
-    //           <img
-    //             src={data.user.image}
-    //             style={{ width: "25px", borderRadius: "50%" }}
-    //           />
-    //         )}
-    //         <span>{data.user.name}</span>
-    //         {/* <button onClick={() => location.href = "/login"}>Login</button> */}
-    //         {/* <button onClick={signOut}>Sign Out</button> */}
-    //         </div>)}
-    //         </Col>
-    //     </Row>
-    //     </Container>
-    // </div>
   )
 }
 

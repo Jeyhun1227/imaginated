@@ -45,10 +45,9 @@ export default function Signup() {
       if(newUserCreated.data.authenticateCustomUser.errormessage){
         if(newUserCreated.data.authenticateCustomUser.errormessage.length > 0) return setFormError(newUserCreated.data.authenticateCustomUser.errormessage[0])
       }
-      if(newUserCreated.data.authenticateCustomUser.id) return  window.location.href = '/login'
+      if(newUserCreated.data.authenticateCustomUser.id) return  window.location.href = '/directory/login'
 
       // const newUserCreated = await client.query({query:CREATER_USER_CUSTOM, variables: {fullname, email, password}})
-      console.log('newUserCreated: ', newUserCreated);
     }
   return (
     <div>
