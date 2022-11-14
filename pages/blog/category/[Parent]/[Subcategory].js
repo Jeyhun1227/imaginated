@@ -43,7 +43,7 @@ export default function SubCategoryBlogMain( {post, category_all, metadata} ){
 }
 
 export async function getStaticProps(context) {
-    const res = await fetch('https://www.imaginated.com/index.php?graphql', {
+    const res = await fetch('https://wordpress.imaginated.com/index.php?graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -77,7 +77,7 @@ export async function getStaticProps(context) {
 
     const json = await res.json()
 
-    let metadata_raw = await axios.get(`https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/blog/category/${context.params.Parent}/${context.params.Subcategory}`)
+    let metadata_raw = await axios.get(`https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/blog/category/${context.params.Parent}/${context.params.Subcategory}`)
     let metadata = metadata_raw.data.head;
 
     return {
@@ -92,7 +92,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
 
-    const res = await fetch('https://www.imaginated.com/index.php?graphql', {
+    const res = await fetch('https://wordpress.imaginated.com/index.php?graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

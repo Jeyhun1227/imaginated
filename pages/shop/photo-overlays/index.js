@@ -39,7 +39,7 @@ export default function photo_overlays_function( {photo_overlays, metadata} ){
 }
 
 export async function getStaticProps() {
-    let metadata_raw = await axios.get(`https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/shop/photo-overlays`)
+    let metadata_raw = await axios.get(`https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/shop/photo-overlays`)
     let metadata = metadata_raw.data.head;
     let shopKeys = Object.keys(Shop);
     let photo_overlays = shopKeys.map((e) => e.includes('photo-overlays') ? Shop[e] : null)
