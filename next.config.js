@@ -5,6 +5,7 @@ module.exports = {
   // plugins: [
   //   new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
   // ],
+  trailingSlash: true,
   images: { domains: ['www.imaginated.com', 'secure.gravatar.com'], formats: ['image/avif', 'image/webp'], },
   webpack: (config) => {
     config.plugins.push(

@@ -16,7 +16,7 @@ export default function CategoryPageSub(props) {
 
   return  <div className="mb-12">
         <div className="relative flex items-baseline justify-between pb-3 border-b border-very-light-grey">
-            <div className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-denim"><Link href={props.category + '/' + props.subcategory}>{props.subcategory}</Link></div>
+            <div className="text-xl font-medium tracking-tight no-underline sm:text-2xl text-denim"><Link href={props.category + '/Learn-' + props.subcategory.replace(' ', '-')}>{props.subcategory}</Link></div>
         </div>
         <div className="py-6 border-b border-very-light-grey">
             <div className="grid grid-custom-cols-2 gap-4 sm:gap-6 lg:gap-8">

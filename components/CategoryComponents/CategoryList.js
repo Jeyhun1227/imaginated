@@ -39,7 +39,7 @@ export default function CategoryList(props) {
                 <Disclosure as="div" key={'category_'+e.id} className="py-6 border-b border-very-light-grey">
                     {({ open }) => (
                     <>
-                        <h3 className="flow-root -my-3">
+                        <p className="flow-root -my-3 font-twofour">
                         <div className="flex flex-wrap items-center justify-between w-full py-3 mx-auto text-small text-gray-400 bg-white hover:text-gray-500">
                             <div className="flex flex-wrap items-center justify-between">
                             {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?
@@ -63,12 +63,12 @@ export default function CategoryList(props) {
                             </div>
                         </div>
                         
-                        </h3>
+                        </p>
                         <Disclosure.Panel className="pt-2.5">
                         <div className="space-y-4">
                             {Object.keys(categorySubValues).length > 0 ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <div className="pl-4 ml-3 text-small no-underline text-denim"><Link href={'directory/' + e.category + '/' + sub.subcategory}>
+                                <div className="pl-4 ml-3 text-small no-underline text-denim"><Link href={'directory/' + e.category + '/Learn-' + sub.subcategory.replace(' ', '-')}>
                                     {sub.subcategory}
                                 </Link></div>
                                 <label className="pl-10 ml-3 text-small text-dim-grey">

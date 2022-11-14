@@ -101,7 +101,7 @@ export default function SubCategoryPageMain(props) {
 
 
     return <div >
-      <HeroNoBtn setLargeTextTop={props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings.`}/>
+      <HeroNoBtn setLargeTextTop={'Learn ' + props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings.`}/>
       <div className="">
         <div className="py-12 mx-auto max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -111,7 +111,11 @@ export default function SubCategoryPageMain(props) {
             </div>
             <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
               <div>
-              {IndividualEach.map((e) => <SubCategoryPageSub key={e.id} values={e} selected={userFollow.find((u) => u.individualid === e.id)} />)}
+                {IndividualEach.map((e) => {
+                  let id = e.id.toLowerCase().split(/[a-z](.*)/s)[0];
+                  return <SubCategoryPageSub key={e.id} values={e} selected={userFollow.find((u) => u.individualid === id)} />
+                }
+                  )}
               </div>
             </div>
             <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 margin-left-16">
@@ -175,7 +179,7 @@ export default function SubCategoryPageMain(props) {
               </div>
               {(props.subcategory.length > 0)? props.subcategory.filter((e) => e.subcategory !== props.subcategoryName).slice(0, 5).map((e) =>
               <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/${e.subcategory}`}>
-                      <h3 className="flow-root -my-3">
+                      <p className="flow-root -my-3 font-twofour">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
                                   <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } ><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
@@ -194,7 +198,7 @@ export default function SubCategoryPageMain(props) {
                                   </div>
                               </div>
                           </div>
-                      </h3>
+                      </p>
               </div>
               ):null}
             </div>
@@ -207,7 +211,7 @@ export default function SubCategoryPageMain(props) {
 
 export async function getStaticProps({params}){
     const routerID = params.id
-    const subcategory = params.subcategory
+    const subcategory = params.subcategory.replace('Learn-', '').replace('-', ' ')
     const Subcategory_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID, subcategory, offset: 0}})
 // 
     // console.log('category_values.error:', category_values.error)
@@ -229,9 +233,7 @@ export async function getStaticPaths() {
 
   const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'subcategory' }})
   const subcategory = all_values.data.getEachStaticPathDirectory.subcategory
-  var paths = subcategory.map((parent) => ({params: {id: parent.categoryname, subcategory: parent.subcategory}}))
-  console.log('subcategory: ', paths)
-
+  var paths = subcategory.map((parent) => ({params: {id: parent.categoryname, subcategory: 'Learn-' + parent.subcategory.replace(' ', '-')}}))
 
   return { paths, fallback: false }
 
