@@ -17,7 +17,8 @@ export default function SubCategoryPageSub({values, selected}) {
     const [notification, setNotification] = useState(select)
     const setLikeIndividual = async () => {
         setNotification(prevNotification => !prevNotification);
-        let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower`, {IndividualId: values.id, addIndividual: !notification, aka: values.aka, name: values.first_name + ' ' + values.last_name, imagelink: values.imagelink, link: values.linkname})
+        let id = parseInt(values.id.toLowerCase().split(/[a-z](.*)/s)[0])
+        let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower`, {IndividualId: id, addIndividual: !notification, aka: values.aka, name: values.first_name + ' ' + values.last_name, imagelink: values.imagelink, link: values.linkname})
 
     }
 

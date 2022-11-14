@@ -24,7 +24,7 @@ import Head from 'next/head';
 
 
 
-export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews, favorites}) {
+export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites}) {
   const {data: session} = useSession()
   const router = useRouter();
   const previousRoute = () => {
@@ -57,23 +57,31 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     return premiumTempUserReview.concat(freeTempUserReview)
   }
 
+  const [reviews, setReviews] = useState([]);
   const [UserReviewSelect, setUserReviewSelect] = useState(() => concatUserReview(freeOfferFunc()));
   const [urlType, seturlType] = useState();
   const [count_each_rating, setcount_each_rating] = useState({});
   const [favorites_offers, setfavorites_offers] = useState({})
   const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
   const [free_offers_array, setFree_offers_array] = useState([]);
+  const [reviews_category, set_reviews_category] = useState([]);
+  const getSessionData = () => {
 
+  }
 
   useEffect(() => {
     let href_hash = window.location.href;
     let href_value = (href_hash.split("#").length > 1) ? href_hash.split("#")[1].toLowerCase() : null;
     seturlType(href_value);
-    
+    getUseStart()
+
     let temp_free_offers = freeOfferFunc();
     setFree_offers_array(temp_free_offers)
 
-    setUserReviewSelect(concatUserReview(temp_free_offers))
+    setUserReviewSelect(concatUserReview(temp_free_offers));
+    if(session){
+      getSessionData();
+    }
   }, []);  
   
   let chanUrlType = (type) => {
@@ -152,15 +160,14 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
 
   let reviews_free = {1: "YouTube", 2: "Facebook", 3: "Twitter", 4:"TikTok", 5: "Instagram", 6: "Linkedin", 7: "Slack", 8: "Discord"}
-  let reviews_category = []
 
   const userFollow = async () => {
-    let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower`, {IndividualId: Individual_values.id, addIndividual: !getUserFollowingBool, aka: Individual_values.aka, name: Individual_values.first_name + ' ' + Individual_values.last_name, imagelink: Individual_values.imagelink, link: Individual_values.linkname})
+    let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower/`, {IndividualId: Individual_values.id, addIndividual: !getUserFollowingBool, aka: Individual_values.aka, name: Individual_values.first_name + ' ' + Individual_values.last_name, imagelink: Individual_values.imagelink, link: Individual_values.linkname})
     setgetUserFollowingBool(!getUserFollowingBool)
   }
 
   const getUserFollowing = async () => {
-    const getUser = await axios.post(`${window.location.origin}/api/User/GetUser`, {});
+    const getUser = await axios.post(`${window.location.origin}/api/User/GetUser/`, {});
     const getBool = getUser.data.user_follow.find((e) => e.individualid == Individual_values.id) != null;
     setgetUserFollowingBool(getBool)
   }
@@ -168,22 +175,26 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   const getUseStart = async () => {
     let temp_count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
     let temp_favorites_offers = {}
-
+    const getReviews = await axios.post(`${window.location.origin}/api/User/GetReviews/`, {Individual: Individual_values.id});
+    let temp_reviews = getReviews.data.rows
     favorites.map((e) =>{
       let val_type = (e.category) ? e.category : "Other";
       let linkName = new URL(e.link).hostname;
       (temp_favorites_offers[val_type]) ? temp_favorites_offers[val_type].push({...e, linkName}): temp_favorites_offers[val_type]= [{...e, linkName}];
     });
     setfavorites_offers(temp_favorites_offers)
-    let allreviews = reviews.map((e) => { 
+
+    var getCats = []
+    let allreviews = temp_reviews.map((e) => { 
       let date = new Date(parseInt(e.createdate))
       let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
       let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
       temp_count_each_rating[Math.round(e.review)] += 1
-      if(!reviews_category.includes(premium_name_value))
-        reviews_category.push(premium_name_value)
+      if(!getCats.includes(premium_name_value)) getCats.push(premium_name_value)
       return {...e, createDate_Val, premium_name_value}
     })
+    setReviews(allreviews)
+    set_reviews_category(getCats)
     setcount_each_rating(temp_count_each_rating)
     if(session){
       allreviews = allreviews.reduce((acc, element) => {
@@ -203,9 +214,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   }
 
-  useEffect(() => {
-    getUseStart()
-  }, [session, reviews, favorites]);
 
 
 
@@ -268,7 +276,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/directory/' + Individual_values.category}><div>{Individual_values.category}</div></Link></div>
+              <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/directory/' + Individual_values.category}><a>{Individual_values.category}</a></Link></div>
               <div className="inline-flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -375,7 +383,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <ul className="pl-0.5 list-outside">{feature.map((url) => 
                     <li className="" key={url}>
                       <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
-                      <Link  href={url} ><a  target="_blank" rel="noopener noreferrer" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
+                      <Link  href={url} ><a  target="_blank" rel="noopener noreferrer nofollow" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
                     </li>)}
                   </ul>
                 </div>
@@ -384,7 +392,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Company_Image.src}/> {Individual_values.company}</div>:null}
                     {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Location_Image.src}/> Located in {Individual_values.location}</div>:null}
                     {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Founded_image.src}/> Founded in {Individual_values.founder}</div>:null}
-                    {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={Link_image.src}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer">{Individual_values.link}</a></Link></div></div>:null}
+                    {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={Link_image.src}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
                 </div>
               </div>
             </div>
@@ -395,7 +403,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
                 {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
-                <a target="_blank" rel="noopener noreferrer" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+                <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
                 {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a>
                 </Link></div>)}
               </div>
@@ -444,7 +452,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                       <div className="text-large text-black ">{value.name}</div>
                       <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                       <div className="pt-2">
-                        <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer"><div>See Price {value.linkName}</div></Link></div>
+                        <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer nofollow"><div>See Price {value.linkName}</div></Link></div>
                       </div>
                   </div>)}
                   </div>
@@ -576,7 +584,6 @@ export async function getStaticProps(ctx) {
     props: {
       Individual_values: Individual_values.data.getEachIndividual.rows[0],
       premium_offers: Individual_values.data.getEachIndividual.premium_offers,
-      reviews: Individual_values.data.getEachIndividual.reviews,
       free_offers,
       favorites: Individual_values.data.getEachIndividual.favorites,
       IndividualID

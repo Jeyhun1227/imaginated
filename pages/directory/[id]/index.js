@@ -24,7 +24,7 @@ export default function CategoryPageMain(props) {
 
 
     return <div>
-      <HeroNoBtn setLargeTextTop={routerID} setLargeTextBottom={" "} setSmallText={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings.`}/>
+      <HeroNoBtn setLargeTextTop={'Learn ' + routerID} setLargeTextBottom={" "} setSmallText={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings.`}/>
       <div className="px-4 bg-white sm:px-0">
         <div className="py-12 mx-auto sm:px-0 max-w-7xl">
           <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
@@ -97,7 +97,6 @@ export async function getStaticPaths() {
   const all_values = await client.query({query:LOAD_STATIC_DIRECTORY, variables: { types: 'category' }})
   const category = all_values.data.getEachStaticPathDirectory.category
   var paths = category.map((parent) => ({params: {id: parent}}))
-  console.log('category: ', paths)
 
 
   return { paths, fallback: false }

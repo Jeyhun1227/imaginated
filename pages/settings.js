@@ -25,7 +25,7 @@ export default function Settings() {
         type = type ? type: 0;
         setWindowType(type);  
     }
-    let UserChanges = await axios.post('api/User/GetUser', {})
+    let UserChanges = await axios.post('/api/User/GetUser', {})
     // reviews = reviews.map((e) => {
     //   let date = new Date(e.createdate)
     //   e.formatedDate = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()

@@ -39,7 +39,7 @@ export default function PopularCategories(props) {
         </div>
         {category.map((e) =>
         <div key={'category_'+e.id} className="py-6 border-b border-very-light-grey">
-                <h3 className="flow-root -my-3">
+                <p className="flow-root -my-3 font-twofour">
                     <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                         <div className="flex flex-wrap items-center justify-between">
                             <div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point"><Link href={'directory/' + e.category}>{e.category}</Link></div>
@@ -58,7 +58,7 @@ export default function PopularCategories(props) {
                             </div>
                         </div>
                     </div>
-                </h3>
+                </p>
         </div>
         )}
     </div>

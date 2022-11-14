@@ -211,6 +211,13 @@ a{
   margin-left: 4px;
 }
 
+
+.font-twofour{
+  font-size: 24px;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
 .grid-container {
   margin-left: auto;
   margin-right: auto;
@@ -228,6 +235,7 @@ a{
 #wtr-content p strong{
   font-family: Roboto, sans-serif;
   font-size: 24px;
+  margin-bottom: 36px;
 }
 
 #wtr-content li{
