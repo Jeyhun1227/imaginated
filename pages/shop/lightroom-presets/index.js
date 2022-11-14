@@ -43,16 +43,16 @@ export default function lightroom_presets( {post, metadata} ){
 
 export async function getStaticProps(context) {
     
-    let metadata_raw = await axios.get(`https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/shop/lightroom-presets`)
+    let metadata_raw = await axios.get(`https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/shop/lightroom-presets`)
     let metadata = metadata_raw.data.head;
     
     return {
         props: {
             metadata,
             post: [
-                {id: 1, uri: '/shop/lightroom-presets/free-mobile-presets', title: 'Free Mobile Presets', featuredImage: 'https://www.imaginated.com/wp-content/uploads/2022/07/coolfantasy1.jpg.webp'},
-                {id: 2, uri: '/shop/lightroom-presets/free-desktop-lightroom-presets', title: 'Free Desktop Lightroom Presets', featuredImage: 'https://www.imaginated.com/wp-content/uploads/2022/07/warmenrich1.jpg.webp'},
-                // {id: 1, uri: '/shop/lightroom-presets/premium-desktop-presets', title: 'Premium Desktop Presets', featuredImage: 'https://www.imaginated.com/wp-content/uploads/2022/07/done-cover.jpg.webp'}
+                {id: 1, uri: '/shop/lightroom-presets/free-mobile-presets', title: 'Free Mobile Presets', featuredImage: 'https://wordpress.imaginated.com/wp-content/uploads/2022/07/coolfantasy1.jpg.webp'},
+                {id: 2, uri: '/shop/lightroom-presets/free-desktop-lightroom-presets', title: 'Free Desktop Lightroom Presets', featuredImage: 'https://wordpress.imaginated.com/wp-content/uploads/2022/07/warmenrich1.jpg.webp'},
+                // {id: 1, uri: '/shop/lightroom-presets/premium-desktop-presets', title: 'Premium Desktop Presets', featuredImage: 'https://wordpress.imaginated.com/wp-content/uploads/2022/07/done-cover.jpg.webp'}
             
         ],
         },

@@ -43,7 +43,7 @@ export default function photoshop_actions_function( {photoshop_actions, metadata
 }
 
 export async function getStaticProps() {
-    let metadata_raw = await axios.get(`https://www.imaginated.com/wp-json/rankmath/v1/getHead?url=https://www.imaginated.com/shop/photoshop-actions`)
+    let metadata_raw = await axios.get(`https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/shop/photoshop-actions`)
     let metadata = metadata_raw.data.head;
 
     let shopKeys = Object.keys(Shop);
