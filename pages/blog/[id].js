@@ -157,7 +157,7 @@ export default function Post( data ){
 
 }
 export async function getStaticProps(context) {
-    const res = await fetch('https://wordpress.imaginated.com/index.php?graphql', {
+    const res = await fetch('https://www.imaginated.com/index.php?graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -227,7 +227,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
 
-    const res = await fetch('https://wordpress.imaginated.com/index.php?graphql', {
+    const res = await fetch('https://www.imaginated.com/index.php?graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
