@@ -573,8 +573,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
 export async function getStaticProps(ctx) {
   const IndividualID = ctx.params.id
-  let session_backend = await getSession(ctx);
-  session_backend = session_backend ? session_backend.id :  null;
+  // let session_backend = await getSession(ctx);
+  var session_backend =  null;
   const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend }})
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
 

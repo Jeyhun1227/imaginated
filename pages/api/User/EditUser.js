@@ -55,7 +55,7 @@ export default async (req, res) => {
                     userid: session.id
                   }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
 
-                NewEmailUser(session.user.name, req.body.email, `localhost:3000/verification?token=${signed_url}`)
+                NewEmailUser(session.user.name, req.body.email, `www.imaginated.com/verification?token=${signed_url}`)
                 var user_changed = await PoolConnection.query('UPDATE "User" SET email = $1, VERIFIED = TRUE WHERE id = $2', [req.body.email, session.id]);
                 var user_changed_custom = await PoolConnection.query('UPDATE "USER_CUSTOM" SET email = $1, previous_emails = array_append(previous_emails, email), last_email_changed= CURRENT_TIMESTAMP, VERIFIED = TRUE WHERE userid = $2', [req.body.email, session.id]);
                 var sum = user_changed.rowCount + user_changed_custom.rowCount;
@@ -90,7 +90,7 @@ export default async (req, res) => {
                 const hashedPassword = bcrypt.hashSync(req.body.passwordnew, 10);
                 // const match = await bcrypt.compare(req.body.passwordnew, hashedPassword);
                 // console.log(match, req.body.passwordnew, hashedPassword)
-                await PasswordChanged(session.user.name, session.user.email, `localhost:3000/passwordreset?token=${signed_url}`)
+                await PasswordChanged(session.user.name, session.user.email, `www.imaginated.com/passwordreset?token=${signed_url}`)
 
                 var user_changed_custom = await PoolConnection.query('UPDATE "USER_CUSTOM" SET password = $1 WHERE userid = $2', [hashedPassword, session.id]);
                 var sum = user_changed_custom.rowCount;
