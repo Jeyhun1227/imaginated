@@ -22,7 +22,7 @@ export default async (req, res) => {
                 userid: session.id
               }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
             // console.log(session)
-            SendInitialEmail(session.user.name, session.user.email, `localhost:3000/verification?token=${signed_url}`)
+            SendInitialEmail(session.user.name, session.user.email, `www.imaginated.com/verification?token=${signed_url}`)
             let user_sent = await PoolConnection.query('UPDATE "USER_CUSTOM" SET email_sent = email_sent + 1, last_sent = CURRENT_TIMESTAMP WHERE userid = $1;', [session.id])
 
             return res.status(200).json({sent: user_sent.rowCount})
