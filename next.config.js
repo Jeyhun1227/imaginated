@@ -1,10 +1,15 @@
 const webpack = require('webpack');
+const redirects = require('./public/redirects.json')
 
 module.exports = {
   reactStrictMode: true,
   // plugins: [
   //   new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
   // ],
+  async redirects(){
+    return redirects
+  },
+  
   trailingSlash: true,
   images: { domains: ['wordpress.imaginated.com', 'secure.gravatar.com'], formats: ['image/avif', 'image/webp'], },
   webpack: (config) => {
