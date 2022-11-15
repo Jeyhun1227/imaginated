@@ -33,8 +33,9 @@ export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
         const options = {
             replace: ({ attribs, children }) => {
                 if (!attribs) return;
-                console.log(attribs)
-                
+                // if(attribs.src && attribs.srcset){
+                //     return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
+                //   }                
     
             }
           };
@@ -58,7 +59,7 @@ export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
                         <div className="flex flex-row flex-wrap space-x-3">
                                 <div className="inline-flex items-center justify-center cursor-point">
                                 <Link href="/" >  
-                                <a ><img className="content-center h-4" src={home.src}/></a>
+                                <a ><Image className="content-center h-4"  width={20} height={20} src={home.src}/></a>
                                 </Link>
                                 <div className="inline-flex pointing-right"><ChevronRight/></div>
 

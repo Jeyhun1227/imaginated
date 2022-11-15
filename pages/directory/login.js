@@ -93,8 +93,9 @@ export default function Login({return_url}) {
                       <span>{data.user.email}</span>
 
                       {data.user.image && (
-                        <img
+                        <Image
                           src={data.user.image}
+                          width={25} height={25}
                           style={{ width: "25px", borderRadius: "50%" }}
                         />
                       )}

@@ -20,7 +20,7 @@ export default function SubCategoryBlogMain( {post, category_all, metadata} ){
             <div className="flex flex-row flex-wrap space-x-3 margin-left-top">
                 <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/" >  
-                <a ><img className="content-center h-4" src={home.src}/></a>
+                <a ><Image width={18} height={18} className="content-center h-4" src={home.src}/></a>
                 </Link>
                 <div className="inline-flex pointing-right"><ChevronRight/></div>
 

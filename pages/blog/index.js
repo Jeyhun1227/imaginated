@@ -14,7 +14,7 @@ export default function SubCategoryBlogMain( {post, metadata} ){
         <div><div className="flex flex-row flex-wrap space-x-3 margin-left-top">
         <div className="inline-flex items-center justify-center cursor-point">
         <Link href="/" >  
-        <a ><img className="content-center h-4" src={home.src}/></a>
+        <a ><Image width={20} height={20} className="content-center h-4" src={home.src}/></a>
         </Link>
         </div>
 

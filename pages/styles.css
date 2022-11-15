@@ -269,6 +269,21 @@ a{
     margin-left: auto;
 }
 
+.margin-right-five{
+  margin-right: 5px;
+}
+
+.right-sidebar .sidebar {
+  min-width: 300px !important;
+}
+.is-right-sidebar {
+  width: 30%;
+}
+
+.site-content{
+  display: flex
+}
+
 .about-width-two-five{
   width: 250px;
   height: 250px;
@@ -653,6 +668,9 @@ div#ez-toc-container p.ez-toc-title {
 .margin-top-forty{
   margin-top: 40px;
 }
+.margin-bottom-threeem{
+  margin-bottom: 2em;
+}
 .shop-post-image{
   width: 100%;
     position: relative;
@@ -753,6 +771,9 @@ div#ez-toc-container p.ez-toc-title {
 }
 
 @media screen and (max-width: 600px) {
+  .is-right-sidebar {
+    display: none;
+  }
   .person-flex{
     display: block;
   }

@@ -148,7 +148,9 @@ export default function Signup() {
                       <span>{data.user.email}</span>
 
                       {data.user.image && (
-                        <img
+                        <Image
+                          width={25}
+                          height={25}
                           src={data.user.image}
                           style={{ width: "25px", borderRadius: "50%" }}
                         />

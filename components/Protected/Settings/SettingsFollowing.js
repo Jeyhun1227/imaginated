@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Link from 'next/link';
-
+import Image from 'next/image';
 
 export default function SettingsFollowing(props) {
     const [showMore, setShowMore] = useState(false);
@@ -36,7 +36,7 @@ export default function SettingsFollowing(props) {
                                 {userFollow.map((e) => 
                                 <li className="flex py-3" key={e.individualid}>
                                     <div className="flex-shrink-0 w-8 h-8 overflow-hidden border rounded-full sm:w-10 sm:h-10 border-whisper">
-                                        <img src={e.imagelink} className="object-cover object-center w-full h-full"/>
+                                        <Image src={e.imagelink} width={50} height={50} className="object-cover object-center w-full h-full"/>
                                     </div>
                                     <div className="flex items-center justify-between w-full ml-4">
                                         <div className="flex flex-col flex-1">

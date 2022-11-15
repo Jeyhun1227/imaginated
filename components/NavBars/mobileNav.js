@@ -5,6 +5,7 @@ import { List, X } from 'react-bootstrap-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Bell, Star, Gear, PlayBtn, ChevronRight, ChevronDown } from 'react-bootstrap-icons';
 import Link from 'next/link';
+import Image from 'next/image';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
@@ -92,9 +93,11 @@ export default function MobileNav() {
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/"><a >
                 <span className="sr-only">Imaginated</span>
-                <img
+                <Image
                   className="w-auto h-8 sm:h-10"
                   src={Imaginated_logo.src}
+                  width={120}
+                  height={35}
                   alt="Imaginated Logo"
                 />
               </a></Link>
@@ -202,9 +205,11 @@ export default function MobileNav() {
                   <div>
                     <div href="/">
                       <span className="sr-only">Imaginated</span>
-                      <img
+                      <Image
                         className="w-auto h-8 sm:h-10"
                         src={Imaginated_logo.src}
+                        width={120}
+                        height={35}
                         alt="Imaginated Logo"
                       />
                     </div>

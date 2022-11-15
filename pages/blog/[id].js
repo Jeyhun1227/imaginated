@@ -38,7 +38,9 @@ export default function Post( data ){
     const [shareUrl, setShareUrl] = useState('');
     const [content, setContent] = useState(post.content);
     const [showGlossary, setShowGlossary] = useState(false);
+    const [showDesktopImage, setShowDesktopImage] = useState(false);
 
+    
     const _onReady = (event) =>  {
         // access to player in all event handlers via event.target
         event.target.pauseVideo();
@@ -56,7 +58,9 @@ export default function Post( data ){
       const options = {
         replace: ({ attribs, children }) => {
             if (!attribs) return;
-
+            if(attribs.src && attribs.srcset){
+              return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
+            }
             if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){
                 var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
                 var video_id = child.children[0].attribs.id
@@ -75,7 +79,6 @@ export default function Post( data ){
                   return <YouTube videoId={video_id} opts={opts} onReady={_onReady} className="margin-bottom-two"/>;
             }
             if(attribs.id === 'ez-toc-container'){
-              console.log('showGlossary: ', showGlossary)
               if(showGlossary){
                 return <div  className='ez-toc-v2_0_36_1 counter-hierarchy ez-toc-counter ez-toc-grey ez-toc-container-direction' id='ez-toc-container' ><div className='glossary-DropDownOpen'><ChevronDown onClick={() => change_glossary(false)} /></div>{domToReact(children, options)}</div>
               }else{
@@ -94,6 +97,8 @@ export default function Post( data ){
         setShareUrl(window.location.href)
         //   console.log('ref.current.offsetWidth: ', ref.current.offsetWidth)
         get_react_Parser(showGlossary);
+        if(window.innerWidth > 650) setShowDesktopImage(true)
+
       }, []); 
       const ref = useRef(null);
 
@@ -105,52 +110,57 @@ export default function Post( data ){
         </Head>
         {(post.content)? <div className="grid-container">
             <div className="site-content">
-            <div className="content-area" ref={ref}>
-            <div className="flex flex-row flex-wrap space-x-3">
-                <div className="inline-flex items-center justify-center cursor-point">
-                <Link href="/" >  
-                <a ><img className="content-center h-4" src={home.src}/></a>
-                </Link>
-                <div className="inline-flex pointing-right"><ChevronRight/></div>
+              <div className="content-area" ref={ref}>
+              <div className="flex flex-row flex-wrap space-x-3">
+                  <div className="inline-flex items-center justify-center cursor-point">
+                  <Link href="/" >  
+                  <a ><Image width={18} height={18} className="content-center h-4" src={home.src}/></a>
+                  </Link>
+                  <div className="inline-flex pointing-right"><ChevronRight/></div>
 
+                  </div>
+                  {category_all.map((e, i) => <div key={e.uri}>
+                      <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri}><div>{e.name}</div></Link></div>
+                      
+                      {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
+                      </div>:null}
+                  </div>)}
+              </div>
+              <h1 className="blog-header">{post.title}</h1>
+              <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}><a>{author.name}</a></Link></div>
+              </div>
+              {(showDesktopImage)?<div className='Blog-main-images-desktop'>
+                {(post.featuredImage)? <div className='Blog-Main-Image'><Image     layout='fill'
+                src={post.featuredImage.node.sourceUrl} /></div>:null}
+                <div className='margin-bottom-two'>
+                    <div className='share-button'>Sharing is caring!</div>
+                    <div>
+                        <EmailShareButton url={shareUrl} className='margin-right-two'>
+                            <EmailIcon size={40} round={false}/>
+                        </EmailShareButton>
+                        <FacebookShareButton url={shareUrl} className='margin-right-two'>
+                            <FacebookIcon size={40} round={false}/>
+                        </FacebookShareButton>
+                        <LinkedinShareButton url={shareUrl} className='margin-right-two'>
+                            <LinkedinIcon size={40} round={false}/>
+                        </LinkedinShareButton>
+                        <PinterestShareButton url={shareUrl} className='margin-right-two'>
+                            <PinterestIcon size={40} round={false}/>
+                        </PinterestShareButton>
+                        <RedditShareButton url={shareUrl} className='margin-right-two'>
+                            <RedditIcon size={40} round={false}/>
+                        </RedditShareButton >
+                        <TwitterShareButton url={shareUrl} className='margin-right-two'>
+                            <TwitterIcon size={40} round={false}/>
+                        </TwitterShareButton>
+                    </div>
                 </div>
-                {category_all.map((e, i) => <div key={e.uri}>
-                    <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri}><div>{e.name}</div></Link></div>
-                    
-                    {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
-                    </div>:null}
-                </div>)}
-            </div>
-            <h1 className="blog-header">{post.title}</h1>
-            <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}><a>{author.name}</a></Link></div>
-            </div>
-            {(post.featuredImage)? <div className='Blog-Main-Image'><Image     layout='fill'
-             src={post.featuredImage.node.sourceUrl} /></div>:null}
-            <div className='margin-bottom-two'>
-                <div className='share-button'>Sharing is caring!</div>
-                <div>
-                    <EmailShareButton url={shareUrl} className='margin-right-two'>
-                        <EmailIcon size={40} round={false}/>
-                    </EmailShareButton>
-                    <FacebookShareButton url={shareUrl} className='margin-right-two'>
-                        <FacebookIcon size={40} round={false}/>
-                    </FacebookShareButton>
-                    <LinkedinShareButton url={shareUrl} className='margin-right-two'>
-                        <LinkedinIcon size={40} round={false}/>
-                    </LinkedinShareButton>
-                    <PinterestShareButton url={shareUrl} className='margin-right-two'>
-                        <PinterestIcon size={40} round={false}/>
-                    </PinterestShareButton>
-                    <RedditShareButton url={shareUrl} className='margin-right-two'>
-                        <RedditIcon size={40} round={false}/>
-                    </RedditShareButton >
-                    <TwitterShareButton url={shareUrl} className='margin-right-two'>
-                        <TwitterIcon size={40} round={false}/>
-                    </TwitterShareButton>
-                </div>
-            </div>
-            <article>{content}</article>
-            </div>
+              </div>:<div className='margin-bottom-threeem'></div>}
+              <article>{content}</article>
+              </div>
+              <div className="widget-area sidebar is-right-sidebar" id="right-sidebar">
+                <div className="inside-right-sidebar"></div>
+              </div>
             </div>
         </div>:<h1>Post Not Found</h1>}</div>
     )
