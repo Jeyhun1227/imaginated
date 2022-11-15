@@ -25,7 +25,7 @@ import Image from 'next/image';
 
 
 
-export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites}) {
+export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites, IndividualID}) {
   const {data: session} = useSession()
   const router = useRouter();
   const previousRoute = () => {
@@ -261,9 +261,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   
 
   return <div>
-          {/* <Head>
+          <Head>
             <title>{Individual_values.first_name + ' ' + Individual_values.last_name} | Imaginated</title>
-          </Head> */}
+            <meta name="description" content={Individual_values.description}/>
+            <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
+            <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+          </Head>
           <div className= "mx-auto max-w-7xl">
           <main className="pt-2 px-2 mt-2.5">
             <div className="flex flex-row flex-wrap space-x-3">

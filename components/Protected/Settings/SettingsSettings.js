@@ -102,7 +102,8 @@ export default function SettingsSettings(props) {
                                         <div className="flex items-end justify-between flex-1 text-sm">
                                             <p className="mb-0">{props.user.email}</p>
                                         </div>
-                                        <div className="flex flex-col">
+                                        {/* <div></div> */}
+                                        {(!props.user.provider)?<div className="flex flex-col">
                                         <p className="mb-0 font-semibold">Image profile</p>
                                             <input className="sr-only" type="file" name="file" 
                                             accept=".jpg,.png,.pdf"
@@ -117,7 +118,7 @@ export default function SettingsSettings(props) {
                                             </button>
                                             <p className="pt-1 mb-0 text-sm text-dim-grey">{formData ? formData.name: "No File Chosen" }</p>
                                             {/* <p className="pt-1 mb-0 text-sm text-crimson">{btnDisabled}</p> */}
-                                        </div>
+                                        </div>:null}
                                     </div>
                                 </li>
                                 {(!props.user.verified && !props.user.provider)? <li className="flex py-3" >
@@ -151,6 +152,7 @@ export default function SettingsSettings(props) {
                                         </div>
                                     </div>
                                 </li> */}
+                                {(!props.user.provider)?<div>
                                 <li className="flex py-3">
                                     <div className="flex flex-col flex-1 space-y-4">
                                         <div className="flex flex-row flex-wrap">
@@ -203,7 +205,7 @@ export default function SettingsSettings(props) {
                                             <div>{ErrorPassword}</div>
                                         </div>
                                     </div>
-                                </li>
+                                </li></div>:null}
                             </ul>
                         </div>
                     </div>
