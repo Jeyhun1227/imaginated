@@ -3,6 +3,7 @@ import {Disclosure} from '@headlessui/react'
 import { Linkedin, Facebook, Twitter, Instagram } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import Imaginated_logo from '../../public/Imaginated_logo.png';
+import Image from 'next/image';
 
 export default function Footer() {
 
@@ -70,7 +71,7 @@ export default function Footer() {
             <div className="flex flex-col-reverse md:flex-row">
                 <div className="pt-8 md:pt-2 md:w-2/5 md:mr-auto">
                     <div className="flex items-center mb-6 xl:mb-0 sm:mb-0">
-                        <img src={Imaginated_logo.src} className="h-6 mt-1 ml-auto mr-auto md:ml-0 md:mr-3 sm:h-9" alt="Imaginated Logo" />
+                        <Image src={Imaginated_logo.src} className="" alt="Imaginated Logo" width={120} height={50} />
                     </div>
                     <div className="pt-3 mx-auto mb-6 md:pt-20 md:mt-0 md:mx-0 md:mb-0">
                         <div className="flex justify-center pr-2 space-x-6 md:justify-start xl:pr-0 sm:pr-0">

@@ -22,10 +22,10 @@ export default function AuthorBlogMain( {post, author} ){
                                     <h3 className='main-author-authorname'>{author_value.name}</h3>
                                     <div className='main-author-desc' dangerouslySetInnerHTML={{__html: author_value.description}}/>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div className="grid-container-blog">
                 {post.map((e) => <div key={e.id} className="blog-each-post">

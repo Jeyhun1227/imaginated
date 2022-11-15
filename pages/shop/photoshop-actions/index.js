@@ -18,12 +18,12 @@ export default function photoshop_actions_function( {photoshop_actions, metadata
               {parse(metadata)}
             </Head>
             <div className="flex flex-row flex-wrap space-x-3 margin-left-top">
-                <div className="inline-flex items-center justify-center cursor-point">
+                {/* <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/" >  
-                <a ><img className="content-center h-4" src={home.src}/></a>
+                <a ><Image className="content-center h-4" src={home.src} width={20} height={20}/></a>
                 </Link>
 
-                </div>
+                </div> */}
             </div>
         <div className="grid-container-blog">
             <div className='shop-title'>

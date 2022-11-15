@@ -11,7 +11,7 @@ module.exports = {
   },
   
   trailingSlash: true,
-  images: { domains: ['wordpress.imaginated.com', 'secure.gravatar.com'], formats: ['image/avif', 'image/webp'], },
+  images: { domains: ['wordpress.imaginated.com', 'secure.gravatar.com', 'm.media-amazon.com', 'valiantceo.com', 'image.shutterstock.com', 'static.showit.co'], formats: ['image/avif', 'image/webp'], },
   webpack: (config) => {
     config.plugins.push(
       new webpack.IgnorePlugin({

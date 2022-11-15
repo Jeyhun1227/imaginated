@@ -21,6 +21,7 @@ import Founded_image from '../../../public/founded.svg'
 import Link_image from '../../../public/link.svg'
 import ImageWithFallback from '../../../components/Image/Image'
 import Head from 'next/head';
+import Image from 'next/image';
 
 
 
@@ -268,7 +269,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             <div className="flex flex-row flex-wrap space-x-3">
               <div className="inline-flex items-center justify-center cursor-point">
               <Link href="/directory" >  
-                <a ><img className="content-center h-4" src={home.src}/></a>
+                <a ><Image className="content-center h-4" src={home.src} width={20} height={20}/></a>
               </Link>
               </div>
               <div className="inline-flex items-center justify-center">
@@ -286,7 +287,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             <div className="grid items-center grid-cols-4 mb-6 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
               <div className="self-start mt-6">
-                {/* <img src={Individual_values.imagelink} className={styles.IndividualImage}/> */}
+                {/* <Image src={Individual_values.imagelink} className={styles.IndividualImage}/> */}
                 <ImageWithFallback src={Individual_values.imagelink} className={styles.IndividualImage} width={80} height={80} fallbackSrc={"/fallbackimage.svg"}/>
               </div>
               <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
@@ -389,10 +390,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div>
                 <div className="">
                   <h2>Contact Details</h2>
-                    {(Individual_values.company)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Company_Image.src}/> {Individual_values.company}</div>:null}
-                    {(Individual_values.location)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Location_Image.src}/> Located in {Individual_values.location}</div>:null}
-                    {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><img className="inline-flex items-center justify-center pr-2 mb-1 flex-nowrap" src={Founded_image.src}/> Founded in {Individual_values.founder}</div>:null}
-                    {(Individual_values.link)?<div className="flex pl-2 text-dim-grey"><img className="inline-flex flex-nowrap self-start md:content-center md:items-center justify-center pt-1.5 pr-2 mb-1" src={Link_image.src}/><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
+                    {(Individual_values.company)?<div className="pl-2 text-dim-grey"><Image className="" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
+                    {(Individual_values.location)?<div className="pl-2 text-dim-grey"><Image className="" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
+                    {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder}</div>:null}
+                    {(Individual_values.link)?<div className="flex pl-2 text-dim-grey "><div className="margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
                 </div>
               </div>
             </div>
@@ -403,7 +404,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
                 {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
-                <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><img src={e.images_name[0]}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
+                <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><Image src={e.images_name[0]} width={13} height={15}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
                 {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a>
                 </Link></div>)}
               </div>
@@ -414,7 +415,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div>
                 <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
                 {premium_offers_types[key].map((value) => <div key={value.name} className="">
-                    <img src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
+                    <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
                       currentTarget.onerror = null; 
                       currentTarget.src=No_image.src;
                     }} />
@@ -445,14 +446,14 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <h3 className="pb-3">{key}</h3>
                 <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
                 {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3 margin-bottom-mobile align-center-mobile">
-                    <img src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"   onError={({ currentTarget }) => {
+                    <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224}  onError={({ currentTarget }) => {
                       currentTarget.onerror = null; 
                       currentTarget.src=No_image.src;
                     }} />
                       <div className="text-large text-black ">{value.name}</div>
                       <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                       <div className="pt-2">
-                        <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer nofollow"><div>See Price {value.linkName}</div></Link></div>
+                        <div className="px-2 py-2 text-xs text-center text-white no-underline truncate sm:px-4 sm:py-2 sm:text-sm bg-dark-blue"><Link href={value.link}  target="_blank" rel="noopener noreferrer nofollow"><a>See Price {value.linkName}</a></Link></div>
                       </div>
                   </div>)}
                   </div>
@@ -496,7 +497,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                             </div>
                               <div className="flex flex-row-reverse pl-3">
                                 <div className="pl-1">{e}</div>
-                                <img src={star.src}/>
+                                <Image src={star.src} width={25} height={25}/>
                               </div>
                             </div>
                         )}
@@ -516,7 +517,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                     <div className="flex flex-row">
                       <div className="pr-4">
-                        <img className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"}/>
+                        <Image className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"} width={55} height={55}/>
                       </div>
                       <div className="">
                         <div className="mb-2 font-semibold">{rev.name}</div>
