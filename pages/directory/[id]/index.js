@@ -11,7 +11,7 @@ import VerticalCallToAction from '../../../components/CallToAction/VerticalCallT
 import QASingle from "../../../components/CallToAction/QASingle";
 import HeroNoBtn from "../../../components/Hero/HeroNoBtn";
 import axios from 'axios';
-
+import Head from 'next/head'
 
 export default function CategoryPageMain(props) {
     const routerID = props.routerID;
@@ -24,6 +24,12 @@ export default function CategoryPageMain(props) {
 
 
     return <div>
+      <Head>
+        <title>Learn {routerID} from Experts | Imaginated</title>
+        <meta name="description" content={`Learn ${routerID} from Experts | Imaginated`}/>
+        <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/`} />
+        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+      </Head>
       <HeroNoBtn setLargeTextTop={'Learn ' + routerID} setLargeTextBottom={" "} setSmallText={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings.`}/>
       <div className="px-4 bg-white sm:px-0">
         <div className="py-12 mx-auto sm:px-0 max-w-7xl">
