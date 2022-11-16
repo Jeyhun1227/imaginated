@@ -105,7 +105,7 @@ export default function SubCategoryPageMain(props) {
     return <div >
       <Head>
         <title>Learn {props.subcategoryName} from Experts | Imaginated</title>
-        <meta name="description" content={`Learn ${props.subcategoryName} from Experts | Imaginated`}/>
+        <meta name="description" content={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
         <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/Learn-${props.subcategoryName.replace(' ', '-')}/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>

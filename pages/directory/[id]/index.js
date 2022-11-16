@@ -26,7 +26,7 @@ export default function CategoryPageMain(props) {
     return <div>
       <Head>
         <title>Learn {routerID} from Experts | Imaginated</title>
-        <meta name="description" content={`Learn ${routerID} from Experts | Imaginated`}/>
+        <meta name="description" content={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
         <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>

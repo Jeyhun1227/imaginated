@@ -11,10 +11,10 @@ export default function MainParentPage({category, subcategory}) {
   return (
     <div>
       <Head>
-          <title>Imaginated – directory for creators.</title>
+          {/* <title>Imaginated – directory for creators.</title>
           <meta name="description">Helping students match with educators and creators grow personally and professionally. Providing in-depth articles, guides, and videos made by credible educational creators.</meta>
           <link rel="canonical" href="https://www.imaginated.com/directory/" />
-          <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+          <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/> */}
 
       </Head>
       <ApolloProvider client={client}>
