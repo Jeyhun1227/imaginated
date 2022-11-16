@@ -11,7 +11,7 @@ export default function MainParentPage({category, subcategory}) {
     <div>
       <Head>
         <title>Imaginated: A directory of educational creators</title>
-        <meta name="description">Imaginated is a directory of educational creators. Here you can find the top creators in any given category. Explore their offerings and leave reviews.</meta>
+        <meta name="description" content="Imaginated is a directory of educational creators. Here you can find the top creators in any given category. Explore their offerings and leave reviews." />
         <link rel="canonical" href={`https://www.imaginated.com/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>
