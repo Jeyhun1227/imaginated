@@ -31,7 +31,15 @@ export default function SubCategoryBlogMain( {mainShop, uri, slug, directory, me
 
     useEffect(() => {
         setShareUrl(window.location.href)
-        setContent(parse(mainShop.page.blog));
+        const options = {
+            replace: ({ attribs, children }) => {
+                if (!attribs) return;
+                if(attribs['data-lazy-src'] && attribs['data-lazy-srcset']){
+                    return <Image src={attribs['data-lazy-src']} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
+                  }                
+            }
+          };
+          setContent(parse(mainShop.page.blog, options));
 
     }, [])
 

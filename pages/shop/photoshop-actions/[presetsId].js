@@ -33,10 +33,9 @@ export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
         const options = {
             replace: ({ attribs, children }) => {
                 if (!attribs) return;
-                // if(attribs.src && attribs.srcset){
-                //     return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
-                //   }                
-    
+                if(attribs['data-lazy-src'] && attribs['data-lazy-srcset']){
+                    return <Image src={attribs['data-lazy-src']} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
+                  }                
             }
           };
           setContent(parse(mainShop.page.blog, options));
