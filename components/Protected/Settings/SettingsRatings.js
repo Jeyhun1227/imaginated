@@ -13,6 +13,7 @@ export default function SettingsRatings(props) {
     let reviews_category = []
     const [editReview, setEditReview] = useState({});
     const [UserReviewSelect, setUserReviewSelect] = useState({});
+    const [deleted, setDeleted] = useState([]);
 
     React.useEffect(() => {
         reviews = reviews.map((e) => { 
@@ -41,13 +42,17 @@ export default function SettingsRatings(props) {
     }
     const editReviewFunc = (rev) => {
         setEditReview(rev);
-        setUserReviewSelect([{name: rev.premium_name, id: rev.premium_offer}])
+        let id = rev.premium_offer ? rev.premium_offer : rev.premium_name;
+        setUserReviewSelect([{name: rev.premium_name, id, type: rev.type}])
     }
 
     const deleteReviewFunc = async (rev) => {
+        if(deleted.includes(rev.id)) return;
         let id = rev.premium_offer ? rev.premium_offer : rev.premium_name;
-        let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded`, {id, Individual: rev.individual, delete: true, type: rev.type})
-
+        let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded/`, {id, Individual: rev.individual, delete: true, type: rev.type})
+        let temp_deleted = deleted
+        temp_deleted.push(rev.id)
+        setDeleted(temp_deleted);
     }
 
     const [showMoreReview, setShowMoreReview] = useState({itemsToShow: 3, expanded: false});
@@ -127,6 +132,7 @@ export default function SettingsRatings(props) {
                                         <div className="flex items-end justify-between flex-1 text-sm">
                                             <p className="mb-0">{rev.like}</p>
                                         </div>
+                                        {deleted.includes(rev.id)? <h6>Review submited for deletion!</h6>:null}
                                     </div>
                                 </li>)}
                             </ul>

@@ -29,7 +29,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
       if(UserLike.split(' ').length < 10) return setUserReviewError('Please provide a longer description of your thoughts on how has this offering benefited you (minimum 10 words)');
       let premium_offer = selected.type === 'Paid' ? selected.id : null;
       let free_offer = selected.type === 'Free' ? selected.id.charAt(0).toUpperCase() + selected.id.slice(1) : null;
-      let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded`, {UserRating, UserDislike: UserDislike.trim(), UserLike: UserLike.trim(), type: selected.type, selected: selected.name, Individual: IndividualId, premium_offer, free_offer, editable})
+      let SendingReview = await axios.post(`${window.location.origin}/api/User/ReviewAdded/`, {UserRating, UserDislike: UserDislike.trim(), UserLike: UserLike.trim(), type: selected.type, selected: selected.name, Individual: IndividualId, premium_offer, free_offer, editable})
       if(SendingReview.data.error) return setUserReviewError(SendingReview.data.error);
       if(editable) return editableClose(UserRating, UserLike, UserDislike);
       setUserRating(0)

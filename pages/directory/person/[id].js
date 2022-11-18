@@ -27,10 +27,6 @@ import Image from 'next/image';
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites, IndividualID}) {
   const {data: session} = useSession()
-  const router = useRouter();
-  const previousRoute = () => {
-    router.back()
-  }
   let at_types = ['twitter', 'instagram', 'tiktok']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
   'instagram': ['/Instagram.svg', 'Instagram'],
@@ -42,6 +38,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
   const freeOfferFunc = () => {
     let temp_free_offers_array = Object.keys(free_offers).map((key) => {
+      if(!free_offers[key]) return {link: '', name: "IndividualFreeOffers"};
       let o_val = free_offers[key].split('/')
       let images_name = images[key]
       let name = (o_val[o_val.length - 1] === '' || o_val[o_val.length - 1] === 'feature')? o_val[o_val.length - 2] : o_val[o_val.length - 1];
@@ -151,7 +148,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   let feature = Individual_values.feature? Individual_values.feature.split('||'): [];
 
-
   let premium_offers_types = {}
   premium_offers.map((e) =>{
     let val_type = (e.type) ? e.type : "Other";
@@ -187,7 +183,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
     var getCats = []
     let allreviews = temp_reviews.map((e) => { 
-      let date = new Date(parseInt(e.createdate))
+      let date = new Date(e.createdate);
       let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
       let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
       temp_count_each_rating[Math.round(e.review)] += 1
@@ -206,9 +202,11 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       }, []);
 
       allreviews = allreviews.map((element) => {
+        console.log('element: ', element, 'SESSION: ', session)
         if (session.id === element.user) element.editable = true;
         return element
       })
+      console.log('allreviews: ', allreviews)
       getUserFollowing()
     }
     setreviewAll(allreviews)
@@ -295,7 +293,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
                 <div className="person-flex flex-row space-x-3 flex-nowrap"> 
-                  <h2  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h2>
+                  <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
                   <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">{Individual_values.aka ? `(${Individual_values.aka})`:null}</h2>
                   <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
                     <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
@@ -385,9 +383,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className="">
                   <h2>Featured In</h2>
                   <ul className="pl-0.5 list-outside">{feature.map((url) => 
-                    <li className="" key={url}>
+                    <li className="" key={url.trim()}>
                       <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
-                      <Link  href={url} ><a  target="_blank" rel="noopener noreferrer nofollow" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
+                      <Link  href={url.trim()} ><a  target="_blank" rel="noopener noreferrer nofollow" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
                     </li>)}
                   </ul>
                 </div>
@@ -480,7 +478,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <h5 className="mb-6 font-bold">All Reviews</h5>
                     <div className="flex flex-row">
                       <div className="flex flex-col items-center justify-center w-1/4 ">
-                        <h1 className="font-bold">{Individual_values.avg}</h1>
+                        <h3 className="font-values-big font-bold">{Individual_values.avg}</h3>
                         <Rating className="text-base md:text-2xl" name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
                             color: "yellow",
                             borderRadius: '10px',

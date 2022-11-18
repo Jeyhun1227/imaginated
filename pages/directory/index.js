@@ -24,7 +24,7 @@ export default function MainParentPage({category, subcategory}) {
     </div>
   )
 }
-export async function getServerSideProps(){
+export async function getStaticProps(){
   const { data } = await client.query({query:LOAD_CATEGORIES})
   // const { data } = useQuery(LOAD_CATEGORIES);
   // const load_subCategories = useQuery(LOAD_SUBCATEGORIES);
