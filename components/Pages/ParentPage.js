@@ -13,18 +13,12 @@ import { MenuButtonWide, BsChevronDown } from 'react-bootstrap-icons';
 
 
 export default function MainParent(props) {
-    // const { error, loading, data } = useQuery(LOAD_CATEGORIES);
-    const [CategoryValues, setCategoryValues] = useState([]);
-    const [SubCategoryValues, setSubCategoryValues] = useState([]);
-    const [CategoryValuesFilterable, setCategoryValuesFilterable] = useState([]);
-    const [CategoryRank, setCategoryRank] = useState([]);
-    // const load_subCategories = useQuery(LOAD_SUBCATEGORIES);
-    useEffect(() => {
+    const getCategory = () => {
       let temp_object_category = {};
-      let temp_category = []
       let subcategory = props.subcategory.getAllSubCategory.rows;
+
       if (props.category){
-        temp_category = props.category.getAllCategory.rows.map((e) => {
+        props.category.getAllCategory.rows.map((e) => {
           // FILTERING SUBCATEGORY TO MATCH PARENT AND CATEGORY
           let current_sub = subcategory.filter((s) => e.category === s.categoryname)
           current_sub = current_sub.map((s) => s.subcategory.toLowerCase())
@@ -34,30 +28,43 @@ export default function MainParent(props) {
           else{
             temp_object_category[e.parent] = [{...e, subcategory: current_sub}]
           }
-          return {parent : e.parent, category: e.category}
         })
       }
-      setCategoryValues(temp_object_category);
-      setCategoryValuesFilterable(temp_object_category);
-      if(props.category){
-        let getAllCategory = [...props.category.getAllCategory.rows]
-        let CategoryRank = getAllCategory.sort((a,b) =>  a.category - b.category ).slice(0, 5);
-        setCategoryRank(CategoryRank);
-        let temp_object_subcategory = {}
-        if(props.subcategory){
-          subcategory.map((e) =>{
-            let temp_category_filtered = temp_category.filter((f) => f.category === e.categoryname)
-            temp_category_filtered.map((tm) => {
-              if(temp_object_subcategory[tm.parent])
-                temp_object_subcategory[tm.parent].push(e)
-              else
-                temp_object_subcategory[tm.parent] = [e]
-            })
+      return temp_object_category;
+    }
+
+    const getSubCategory = () => {
+      let subcategory = props.subcategory.getAllSubCategory.rows;
+      let temp_category = props.category.getAllCategory.rows.map((e) => ({parent : e.parent, category: e.category}))
+      let temp_object_subcategory = {}
+      if(props.subcategory){
+        subcategory.map((e) =>{
+          let temp_category_filtered = temp_category.filter((f) => f.category === e.categoryname)
+          temp_category_filtered.map((tm) => {
+            if(temp_object_subcategory[tm.parent])
+              temp_object_subcategory[tm.parent].push(e)
+            else
+              temp_object_subcategory[tm.parent] = [e]
           })
-        }
-        setSubCategoryValues(temp_object_subcategory)
+        })
       }
-    }, [props.category, props.subcategory]);
+      return temp_object_subcategory;
+      // setSubCategoryValues(temp_object_subcategory)
+    }
+
+    const categoryRank = () => {
+      let getAllCategory = [...props.category.getAllCategory.rows]
+      let CategoryRank = getAllCategory.sort((a,b) =>  a.category - b.category ).slice(0, 5);
+      return CategoryRank;
+      // setCategoryRank(CategoryRank);
+    }
+    // const { error, loading, data } = useQuery(LOAD_CATEGORIES);
+    const [CategoryValues, setCategoryValues] = useState(getCategory());
+    const [SubCategoryValues, setSubCategoryValues] = useState(getSubCategory());
+    const [CategoryValuesFilterable, setCategoryValuesFilterable] = useState(getCategory());
+    const [CategoryRank, setCategoryRank] = useState(categoryRank());
+    // const load_subCategories = useQuery(LOAD_SUBCATEGORIES);
+
 
     let ChangedCategory = (value) => {
       let value_lower = value.toLowerCase();

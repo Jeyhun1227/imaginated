@@ -14,7 +14,7 @@ export default function Settings() {
   const [reviews, setReviews] = useState([]);
 
   const get_setup = async () => {
-    if(data === null) return window.location.href = "/directory/login";
+    if(data === null) return window.location.href = "/directory/login/";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     var type = 0;
@@ -25,7 +25,7 @@ export default function Settings() {
         type = type ? type: 0;
         setWindowType(type);  
     }
-    let UserChanges = await axios.post('/api/User/GetUser', {})
+    let UserChanges = await axios.post('/api/User/GetUser/', {})
     // reviews = reviews.map((e) => {
     //   let date = new Date(e.createdate)
     //   e.formatedDate = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()

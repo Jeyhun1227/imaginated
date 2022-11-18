@@ -20,7 +20,7 @@ export default function SettingsFollowing(props) {
     }
 
     const userUnfollow = async (individualid) => {
-        let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower`, {IndividualId: individualid, addIndividual: false})
+        let UserIndividual = await axios.post(`${window.location.origin}/api/User/SetFollower/`, {IndividualId: individualid, addIndividual: false})
         let user = userFollow.filter((e) => e.individualid !== individualid)
         setUserFollow(user)
     }

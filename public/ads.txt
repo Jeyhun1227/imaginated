@@ -1,4 +1,4 @@
-# Mediavine Ads.txt v20220920
+# Mediavine Ads.txt v20221115
 managerdomain=mediavine.com
 contact=sales@mediavine.com
 ownerdomain=imaginated.com
@@ -60,6 +60,7 @@ video.unrulymedia.com, 949103067, DIRECT
 rhythmone.com, 3408527385, DIRECT, a670c89d4a324e47
 video.unrulymedia.com, 3408527385, DIRECT
 themediagrid.com, U1NDYR, DIRECT, 35d5010d7789b49d
+themediagrid.com, ZG2ESM, DIRECT, 35d5010d7789b49d
 improvedigital.com, 1625, DIRECT
 conversantmedia.com, 41025, DIRECT, 03113cd04947736d
 smartadserver.com, 3860, DIRECT
@@ -71,4 +72,4 @@ supply.colossusssp.com, 319, DIRECT, 6c5b49d96ec1b458
 appnexus.com, 10490, RESELLER, f5ab79cb980f11d1
 sharethrough.com, 47b99924, DIRECT, d53b998a7bd4ecd2
 nativo.com, 5705, DIRECT, 59521ca7cc5e9fee
-adyoulike.com, 33263f80bc9b7e261a631dd82afab6a7, DIRECT
+
