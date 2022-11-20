@@ -69,16 +69,14 @@ export default function MainParent(props) {
     let ChangedCategory = (value) => {
       let value_lower = value.toLowerCase();
       let temp_category_filtered = {}
-      // console.log('CategoryValues: ', CategoryValues)
       Object.keys(CategoryValues).map((f) => {
-      let temp_CategoryFiltered = CategoryValues[f].filter((e) => {
-        if(e.category.toLowerCase().includes(value_lower)) return true
-        return e.subcategory.find((s) => s.includes(value_lower))
+        let temp_CategoryFiltered = CategoryValues[f].filter((e) => {
+          if(e.category.toLowerCase().includes(value_lower)) return true
+          return e.subcategory.find((s) => s.includes(value_lower))
+        })
+
+        if(temp_CategoryFiltered.length > 0) temp_category_filtered[f] = temp_CategoryFiltered
       })
-      if(temp_CategoryFiltered.length > 0)
-        temp_category_filtered[f] = temp_CategoryFiltered
-      }
-      )
       setCategoryValuesFilterable(temp_category_filtered)
     }
 

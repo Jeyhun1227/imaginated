@@ -25,7 +25,7 @@ export default function CategoryPageMain(props) {
 
     return <div>
       <Head>
-        <title>Learn {routerID} from Experts | Imaginated</title>
+        <title>{`Learn ${routerID} from Experts | Imaginated`}</title>
         <meta name="description" content={`Learn ${routerID} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
         <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -56,7 +56,7 @@ export default function CategoryPageMain(props) {
                       <h3 className="flow-root -my-3">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <Link href={ routerID + '/' + e}><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point">{e}</div></Link>
+                                  <Link href={ routerID + '/Learn-' + e.replace(' ', '-')}><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point">{e}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">

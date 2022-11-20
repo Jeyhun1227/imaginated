@@ -36,7 +36,7 @@ export default function Post( data ){
     var month = today.toLocaleString('default', { month: 'long' });
     const full_year = month + ' ' + today.getDate() + ', ' + today.getFullYear();
     const [shareUrl, setShareUrl] = useState('');
-    const [content, setContent] = useState(post.content);
+    const [content, setContent] = useState(parse(post.content));
     const [showGlossary, setShowGlossary] = useState(false);
     const [showDesktopImage, setShowDesktopImage] = useState(false);
 
@@ -50,7 +50,7 @@ export default function Post( data ){
 
       setShowGlossary(current_glossary)
 
-      get_react_Parser(current_glossary)
+      setContent(get_react_Parser(current_glossary))
 
     }
 
@@ -64,7 +64,7 @@ export default function Post( data ){
             if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){
                 var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
                 var video_id = child.children[0].attribs.id
-                video_id = video_id.split('_')[1]
+                video_id = video_id.split('WYL_')[1]
                 const width = ref.current.offsetWidth;
                 width = width > 850 ? Math.round(width * .7): width;
 
@@ -75,7 +75,6 @@ export default function Post( data ){
                       autoplay: 0,
                     },
                   };
-              
                   return <YouTube videoId={video_id} opts={opts} onReady={_onReady} className="margin-bottom-two"/>;
             }
             if(attribs.id === 'ez-toc-container'){
@@ -90,13 +89,13 @@ export default function Post( data ){
 
         }
       };
-      setContent(parse(post.content, options));
+      return parse(post.content, options);
     }
 
     useEffect(() => {
         setShareUrl(window.location.href)
         //   console.log('ref.current.offsetWidth: ', ref.current.offsetWidth)
-        get_react_Parser(showGlossary);
+        setContent(get_react_Parser(showGlossary));
         if(window.innerWidth > 650) setShowDesktopImage(true)
 
       }, []); 

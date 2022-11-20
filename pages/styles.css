@@ -248,11 +248,24 @@ a{
   font-family: Roboto, sans-serif;
   font-size: 24px;
   margin-bottom: 36px;
+  overflow: hidden;
 }
 
 #wtr-content p a{
   text-decoration: underline !important;
   color: #1e73be !important;
+}
+
+.individual-share-buttons{
+  position: absolute;
+    width: 350px;
+    padding: 10px 0 10px 15px;
+    box-shadow: 2px 3px 5px #999;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: -150px;
+    z-index: 1;
+    background: white;
 }
 
 .Blog-Main-Image{
@@ -783,6 +796,9 @@ div#ez-toc-container p.ez-toc-title {
   }
 
 @media screen and (max-width: 600px) {
+  .individual-share-buttons{
+      margin-left: -100px;
+  }
   .is-right-sidebar {
     display: none;
   }
