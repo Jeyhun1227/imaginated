@@ -1,13 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import {useRouter} from 'next/router';
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css';
-import {Container, Row, Col} from 'react-bootstrap';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import {Select, MenuItem, Rating, getListSubheaderUtilityClass} from '@mui/material';
-import { Listbox, Transition } from '@headlessui/react'
 import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown, Check, Pen } from 'react-bootstrap-icons';
 import { signIn, useSession, getSession } from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
@@ -22,12 +19,25 @@ import Link_image from '../../../public/link.svg'
 import ImageWithFallback from '../../../components/Image/Image'
 import Head from 'next/head';
 import Image from 'next/image';
-
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  PinterestShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  PinterestIcon,
+  RedditIcon,
+  TwitterIcon
+} from "react-share";
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites, IndividualID}) {
   const {data: session} = useSession()
-  let at_types = ['twitter', 'instagram', 'tiktok']
+  let at_types = ['twitter', 'instagram']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
   'instagram': ['/Instagram.svg', 'Instagram'],
   'slack': ['/Slack.svg', 'Slack'],
@@ -63,9 +73,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
   const [free_offers_array, setFree_offers_array] = useState([]);
   const [reviews_category, set_reviews_category] = useState([]);
-  const getSessionData = () => {
+  const [shareUrl, setShareUrl] = useState('');
+  const [showShare, setShowShare] = useState(false);
 
-  }
+
 
   useEffect(() => {
     let href_hash = window.location.href;
@@ -75,11 +86,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
     let temp_free_offers = freeOfferFunc();
     setFree_offers_array(temp_free_offers)
-
+    setShareUrl(window.location.href)
     setUserReviewSelect(concatUserReview(temp_free_offers));
-    if(session){
-      getSessionData();
-    }
+
   }, []);  
   
   let chanUrlType = (type) => {
@@ -260,7 +269,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   return <div>
           <Head>
-            <title>{Individual_values.first_name + ' ' + Individual_values.last_name} | Imaginated</title>
+            <title>{Individual_values.first_name + ' ' + Individual_values.last_name + '| Imaginated'}</title>
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -296,8 +305,30 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
                   <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">{Individual_values.aka ? `(${Individual_values.aka})`:null}</h2>
                   <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
-                    <ShareFill className="w-3.5 h-3.5 fill-dark-blue"/>
-                  </div> 
+                    <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={setShowShare}/>
+                  </div>
+                  {(showShare)?<div>
+                    <div className='individual-share-buttons'>
+                        <EmailShareButton url={shareUrl} className='margin-right-two'>
+                            <EmailIcon size={40} round={true}/>
+                        </EmailShareButton>
+                        <FacebookShareButton url={shareUrl} className='margin-right-two'>
+                            <FacebookIcon size={40} round={true}/>
+                        </FacebookShareButton>
+                        <LinkedinShareButton url={shareUrl} className='margin-right-two'>
+                            <LinkedinIcon size={40} round={true}/>
+                        </LinkedinShareButton>
+                        <PinterestShareButton url={shareUrl} className='margin-right-two'>
+                            <PinterestIcon size={40} round={true}/>
+                        </PinterestShareButton>
+                        <RedditShareButton url={shareUrl} className='margin-right-two'>
+                            <RedditIcon size={40} round={true}/>
+                        </RedditShareButton >
+                        <TwitterShareButton url={shareUrl} className='margin-right-two'>
+                            <TwitterIcon size={40} round={true}/>
+                        </TwitterShareButton>
+                    </div>
+                  </div>:null}
                 </div>
                 <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
                   <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
@@ -314,7 +345,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <div className={styles.inline_block}>({Individual_values.count})</div>
                 </div>
                 <div className="hidden space-y-3 sm:space-x-3 md:flex">
-                  {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/' + e} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
+                  {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/Learn-' + e.replace(' ', '-')} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                   <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
                 </div>
                 <div className="hidden md:flex">
@@ -328,7 +359,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
               <div className="block col-span-5 md:hidden">
                 <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
-                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/' + e} key={e} ><div className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</div></Link>)}
+                {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/Learn-' + e.replace(' ', '-')} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                   <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
                 </div>
                 <div className="flex mt-4 md:hidden">
@@ -406,7 +437,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
                 {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
                 <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><Image src={e.images_name[0]} width={13} height={15}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-                {e.name.length > 20 ? e.name.slice(0, 20) + '...' : e.name}</a>
+                {e.name.length > 15 ? e.name.slice(0, 15) + '...' : e.name}</a>
                 </Link></div>)}
               </div>
               <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>

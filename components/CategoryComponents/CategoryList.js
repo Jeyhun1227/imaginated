@@ -10,14 +10,14 @@ export default function CategoryList(props) {
         })
         return temp_cat_sub_val
     }
-
+    // console.log('props: ', props)
     const [category, setcategory] = useState(props.category);
     // const [subcategory, setsubcategory] = useState(props.subcategory);
     const [categorySubValues, setcategorySubValues] = useState(getCategorySub());
     const [DisclosureOpen, setDisclosureOpen] = useState(true);
     useEffect(() => {
-        // setDisclosureOpen(false)
-      }, []);
+        setcategory(props.category)
+      }, [props]);
     // const [showSubCategory, setshowSubCategory] = useState([]);
     // let ShowSubCategoryFunc = (subCat) => {
     //     let temp_showSubCategory = showSubCategory;

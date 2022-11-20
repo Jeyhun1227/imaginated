@@ -104,7 +104,7 @@ export default function SubCategoryPageMain(props) {
 
     return <div >
       <Head>
-        <title>Learn {props.subcategoryName} from Experts | Imaginated</title>
+        <title>{`Learn ${props.subcategoryName} from Experts | Imaginated`}</title>
         <meta name="description" content={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
         <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/Learn-${props.subcategoryName.replace(' ', '-')}/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -186,7 +186,7 @@ export default function SubCategoryPageMain(props) {
                   </div>
               </div>
               {(props.subcategory.length > 0)? props.subcategory.filter((e) => e.subcategory !== props.subcategoryName).slice(0, 5).map((e) =>
-              <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/${e.subcategory}`}>
+              <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/Learn-${e.subcategory.replace(' ', '-')}`}>
                       <div className="flow-root -my-3 font-twofour">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
