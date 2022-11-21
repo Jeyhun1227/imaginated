@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React, { useEffect, useState, useRef } from "react";
 import home from '../../../public/home.svg';
 import Shop from '../../../components/Shop/shop.json';
-import ShopDirectory from '../../../components/Shop/shop-directory.json';
 import { ChevronRight } from 'react-bootstrap-icons';
 import ImageGallery from 'react-image-gallery';
 import {

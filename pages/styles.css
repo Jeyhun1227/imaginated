@@ -555,6 +555,21 @@ div#ez-toc-container p.ez-toc-title {
   overflow-wrap: break-word;
 }
 
+.wp-content-youtube {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.wp-content-youtube iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 .lyte, .lyMe {
   position: relative;
   padding-bottom: 56.25%;

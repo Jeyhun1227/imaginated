@@ -33,6 +33,8 @@ import {
   RedditIcon,
   TwitterIcon
 } from "react-share";
+import ImageGallery from 'react-image-gallery';
+
 
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites, IndividualID}) {
@@ -265,7 +267,22 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       `${window.location.origin}/settings?type=Ratings&id=${id}`, "_blank");
   }
 
-  
+  const _renderVideo = (item) => { 
+    return <div className="video-wrapper">
+              <a
+                className="close-video"
+              ></a>
+              <iframe
+                width="560"
+                height="315"
+                src={item.embedUrl}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            </div>
+  }
+  let imagestest = [{embedUrl:           'https://www.youtube.com/embed/sGvh-WJjK60?autoplay=1&showinfo=0',         renderItem: _renderVideo}, {embedUrl:           'https://www.youtube.com/embed/sGvh-WJjK60?autoplay=1&showinfo=0',         renderItem: _renderVideo}]
+
 
   return <div>
           <Head>
@@ -385,6 +402,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
             </main>
+
             <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-one">
               <div>
                 <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
@@ -408,6 +426,8 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
                 <div className="">
                   <div className="text-dim-grey">{Individual_values.description}</div>
+                  {/* <ImageGallery items={imagestest}/> */}
+
                 </div>
               </div>
               <div className="grid person-grid-col-2 my-12">

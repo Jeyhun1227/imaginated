@@ -20,7 +20,6 @@ import {
     RedditIcon,
     TwitterIcon
   } from "react-share";
-import YouTube from 'react-youtube';
 import axios from 'axios';
 import Head from 'next/head';
 import parse, { domToReact } from 'html-react-parser';
