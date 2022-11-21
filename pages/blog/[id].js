@@ -5,7 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import parse, { domToReact } from 'html-react-parser';
 import YouTube from 'react-youtube';
 import Head from 'next/head';
-import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn, ChevronRight } from 'react-bootstrap-icons';
+import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 import {
     EmailShareButton,
@@ -36,15 +36,10 @@ export default function Post( data ){
     var month = today.toLocaleString('default', { month: 'long' });
     const full_year = month + ' ' + today.getDate() + ', ' + today.getFullYear();
     const [shareUrl, setShareUrl] = useState('');
-    const [content, setContent] = useState(parse(post.content));
     const [showGlossary, setShowGlossary] = useState(false);
     const [showDesktopImage, setShowDesktopImage] = useState(false);
 
     
-    const _onReady = (event) =>  {
-        // access to player in all event handlers via event.target
-        event.target.pauseVideo();
-    }
 
     const change_glossary = (current_glossary) => {
 
@@ -65,17 +60,15 @@ export default function Post( data ){
                 var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
                 var video_id = child.children[0].attribs.id
                 video_id = video_id.split('WYL_')[1]
-                const width = ref.current.offsetWidth;
-                width = width > 850 ? Math.round(width * .7): width;
 
                 const opts = {
-                    height: Math.round(width * .6),
-                    width: width,
+                    height: 450,
+                    width: 100,
                     playerVars: {
                       autoplay: 0,
                     },
                   };
-                  return <YouTube videoId={video_id} opts={opts} onReady={_onReady} className="margin-bottom-two"/>;
+                  return <div className='wp-content-youtube'><YouTube videoId={video_id} opts={opts}   sandbox="allow-presentation" className="margin-bottom-two"/></div>;
             }
             if(attribs.id === 'ez-toc-container'){
               if(showGlossary){
@@ -91,11 +84,10 @@ export default function Post( data ){
       };
       return parse(post.content, options);
     }
+    const [content, setContent] = useState(get_react_Parser());
 
     useEffect(() => {
         setShareUrl(window.location.href)
-        //   console.log('ref.current.offsetWidth: ', ref.current.offsetWidth)
-        setContent(get_react_Parser(showGlossary));
         if(window.innerWidth > 650) setShowDesktopImage(true)
 
       }, []); 

@@ -1,11 +1,10 @@
-import styles from '../../styles/Home.module.css';
 // import {Container, Row, Col} from 'react-bootstrap';
 // import mainLogo from '../../public/imaginated_logo.png'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Menu, Transition, Combobox  } from '@headlessui/react';
 // import {Menu, MenuItem} from '@mui/material';
 import React, {useState, useEffect, useRef } from "react";
-import { ChevronDown, ChevronUp, Bell, Star, Gear, BoxArrowInRight, PlayBtn, ChevronRight } from 'react-bootstrap-icons';
+import { ChevronDown, ChevronUp, Star, Gear, BoxArrowInRight, ChevronRight } from 'react-bootstrap-icons';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import Link from 'next/link';
 import ImageWithFallback from '../Image/Image'
@@ -13,8 +12,6 @@ import Imaginated_logo from '../../public/Imaginated_logo.png';
 import Image from 'next/image'
 import BlogMenu from './BlogMenu.json';
 import MarketMenu from './MarketMenu.json';
-import Head from 'next/head';
-import Script from 'next/script';
 
 export default function Header(props) {
   let placeholder = 'Search for a creator or category'
@@ -148,25 +145,14 @@ export default function Header(props) {
 
   return (
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
-      <Head>
-      <script
-          dangerouslySetInnerHTML={{
-            __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-PZPQDSJ');`
-            }}  />
-        <script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"/>
-      </Head>
       <div>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPQDSJ"
         height="0" width="0" style={{"display":"none", "visibility":"hidden"}}></iframe></noscript>
       </div>
       <div className="flex items-center justify-between mx-auto flex-nowrap">
-          {(windowDimensions.width > 1000)? <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
+          <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
               <a><Image src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7" width={160} height={40}/></a>
-          </Link></div></div>: null}
+          </Link></div></div>
           <Combobox as="li" value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} className="relative list-none">
             <div className="items-start justify-start hidden xl:w-4/12 lg:w-3/12 sm:flex sm:order-1">
               <label htmlFor="simple-search" className="sr-only">Search</label>
