@@ -46,7 +46,10 @@ async function SendInitialEmail(name, email, verficationLink){
     };
 
     // Create the promise and SES service object
-    var sent_values = await new SES({apiVersion: '2010-12-01', region: "us-east-1" }).sendEmail(params).promise();
+    var sent_values = await new SES({apiVersion: '2010-12-01', region: "us-east-1",   credentials: {
+      accessKeyId: process.env.ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    } }).sendEmail(params).promise();
     console.log('sentEmail: ', sent_values)
     return true
 }
