@@ -1,5 +1,5 @@
 import {useState, useRef} from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import axios from 'axios';
 
@@ -28,26 +28,29 @@ export default function SettingsSettings(props) {
         if(newPassword1.replace(/\s/g, '').length <= 6) return setErrorPassword("Your Password isn't long enough");
         setChangePasswordFunc(true)
 
-        let returned_pass = await axios.post(`${window.location.origin}/api/User/EditUser`, {password: CurrentPassword, passwordnew: newPassword1})
+        let returned_pass = await axios.post(`${window.location.origin}/api/User/EditUser/`, {password: CurrentPassword, passwordnew: newPassword1})
         // console.log(returned_pass)
         if(returned_pass.data.error){ 
             setChangePasswordFunc(false)
 
             return setErrorPassword(returned_pass.data.error);
         }
-        return setErrorPassword("Password Changed")
+
+        setErrorPassword("Password Changed")
+        signOut()
     }
 
     const ChangeEmail = async () => {
         if(ChangeEmailFunc) return setErrorEmail("Email already changed");
         setChangeEmailFunc(true);
-        let returned_email = await axios.post(`${window.location.origin}/api/User/EditUser`, {email: newEmail, password: newEmailCurrentPassword})
+        let returned_email = await axios.post(`${window.location.origin}/api/User/EditUser/`, {email: newEmail, password: newEmailCurrentPassword})
         if(returned_email.data.error){ 
             setChangeEmailFunc(false)
 
             return setErrorEmail(returned_email.data.error);
         }
-        return setErrorEmail('Email Changed');
+        setErrorEmail('Email Changed');
+        signOut()
     }
 
     const toggleEmailPassword = () => {
@@ -61,7 +64,7 @@ export default function SettingsSettings(props) {
     };
 
     const resendEmail = async () => {
-        let UserIndividual = await axios.post(`${window.location.origin}/api/User/VerifyEmail`, {})
+        let UserIndividual = await axios.post(`${window.location.origin}/api/User/VerifyEmail/`, {})
         if(UserIndividual.data.sent){
             setEmailSent(UserIndividual.data.sent)
         }else{
@@ -75,7 +78,7 @@ export default function SettingsSettings(props) {
         console.log(fileUploaded)
         let formDataVal = new FormData();
         formDataVal.append('Image', fileUploaded);
-        let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage`, formDataVal)
+        let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage/`, formDataVal)
 
     };
     const hiddenFileInput = useRef(null);

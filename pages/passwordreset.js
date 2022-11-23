@@ -44,35 +44,39 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
 
 
     return (
-        <div className='mb-0 ml-4 text-large md:text-xl text-dark-blue'>{FormError ? FormError: 
-        <div>
-            <ul className="pl-0 divide-y divide-whisper">
-                <li className="flex py-3">
-                <div className="relative w-full">
-                    <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password" onChange={(e)=> setNewPassword1(e.target.value)}/>
-                    <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-                        {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
-                    </button>
-                </div>
-                </li>
-                <li className="flex py-3">
-                <div className="relative w-full">
-                    <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your current password" onChange={(e)=> setNewPassword2(e.target.value)}/>
-                    <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-                        {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
-                    </button>
-                </div>
-                </li>
-                <div className="pt-2 text-left">
-                    <button className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue sm:mr-0" onClick={ChangePassword}>
-                        Change password
-                    </button>
-                    <div>{error}</div>
-                </div>
+        <div className='max-w-4xl py-12 mx-auto sm:mx-0'>
+            <div className='pb-6 sm:pb-12'>
+                <div className='mb-0 ml-4 text-large md:text-xl text-dark-blue'>{FormError ? FormError: 
+                <div>
+                    <ul className="pl-0 divide-y divide-whisper">
+                        <li className="flex py-3">
+                        <div className="relative w-full">
+                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password" onChange={(e)=> setNewPassword1(e.target.value)}/>
+                            <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                                {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
+                            </button>
+                        </div>
+                        </li>
+                        <li className="flex py-3">
+                        <div className="relative w-full">
+                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your current password" onChange={(e)=> setNewPassword2(e.target.value)}/>
+                            <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+                                {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
+                            </button>
+                        </div>
+                        </li>
+                        <div className="pt-2 text-left">
+                            <button className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue sm:mr-0" onClick={ChangePassword}>
+                                Change password
+                            </button>
+                            <div>{error}</div>
+                        </div>
 
-            </ul>
-        </div>
-        }
+                    </ul>
+                </div>
+                }
+                </div>
+            </div>
         </div>
     )
 }

@@ -15,10 +15,7 @@ const NewEmail = `<!DOCTYPE html>
                   </html>`;
 const NewEmailUser = compile(NewEmail);
 import { config, SES } from 'aws-sdk';
-config.update({region: 'us-east-1',     
-  accessKeyId: process.env.ACCESS_KEY_ID,
-  accessSecretKey: process.env.SECRET_ACCESS_KEY
-});
+
 async function SendInitialEmail(name, email, verficationLink){
     // Create sendEmail params 
 
@@ -50,8 +47,9 @@ async function SendInitialEmail(name, email, verficationLink){
     };
 
     // Create the promise and SES service object
-    var sent_values = await new SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+    var sent_values = await new SES({apiVersion: '2010-12-01', region: "us-east-1"}).sendEmail(params).promise();
     console.log('sentEmail: ', sent_values)
+    return true;
 }
 
 export default SendInitialEmail;

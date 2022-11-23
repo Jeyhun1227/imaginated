@@ -1,4 +1,4 @@
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 const PoolConnection = require('../postgressql')
 import PasswordChanged from './Email/PasswordChanged';
 import NewEmailUser from './Email/NewEmailUser';
@@ -53,13 +53,12 @@ export default async (req, res) => {
                 let signed_url = jwt.sign({
                     email: session.user.email,
                     userid: session.id
-                  }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
+                  }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
 
-                NewEmailUser(session.user.name, req.body.email, `www.imaginated.com/verification?token=${signed_url}`)
+                await NewEmailUser(session.user.name, req.body.email, `https://www.imaginated.com/verification?token=${signed_url}`)
                 var user_changed = await PoolConnection.query('UPDATE "User" SET email = $1, VERIFIED = TRUE WHERE id = $2', [req.body.email, session.id]);
                 var user_changed_custom = await PoolConnection.query('UPDATE "USER_CUSTOM" SET email = $1, previous_emails = array_append(previous_emails, email), last_email_changed= CURRENT_TIMESTAMP, VERIFIED = TRUE WHERE userid = $2', [req.body.email, session.id]);
                 var sum = user_changed.rowCount + user_changed_custom.rowCount;
-                signOut();
                 return res.status(200).json({sent: sum})
             
             
@@ -90,7 +89,7 @@ export default async (req, res) => {
                 const hashedPassword = bcrypt.hashSync(req.body.passwordnew, 10);
                 // const match = await bcrypt.compare(req.body.passwordnew, hashedPassword);
                 // console.log(match, req.body.passwordnew, hashedPassword)
-                await PasswordChanged(session.user.name, session.user.email, `www.imaginated.com/passwordreset?token=${signed_url}`)
+                await PasswordChanged(session.user.name, session.user.email, `https://www.imaginated.com/passwordreset?token=${signed_url}`)
 
                 var user_changed_custom = await PoolConnection.query('UPDATE "USER_CUSTOM" SET password = $1 WHERE userid = $2', [hashedPassword, session.id]);
                 var sum = user_changed_custom.rowCount;

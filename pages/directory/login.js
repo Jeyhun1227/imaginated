@@ -145,7 +145,7 @@ export default function Login({return_url}) {
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-sm no-underline"><Link href="#" >Forgot Password?</Link></div>
+                    <div className="text-sm no-underline"><Link href="/forgot-password/" >Forgot Password?</Link></div>
                     {FormError ? <div className="FormErrorSubmission">{FormError}</div>: null}
                     <button 
                       type="submit"
