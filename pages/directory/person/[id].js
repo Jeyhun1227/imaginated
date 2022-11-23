@@ -4,9 +4,9 @@ import styles from '../../../styles/Home.module.css';
 import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
-import {Select, MenuItem, Rating, getListSubheaderUtilityClass} from '@mui/material';
+import {Rating} from '@mui/material';
 import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown, Check, Pen } from 'react-bootstrap-icons';
-import { signIn, useSession, getSession } from "next-auth/react";
+import { signIn, useSession} from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
 import home from '../../../public/home.svg'
@@ -286,7 +286,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   return <div>
           <Head>
-            <title>{Individual_values.first_name + ' ' + Individual_values.last_name + '| Imaginated'}</title>
+            <title>{Individual_values.first_name + ' ' + Individual_values.last_name + ' | Imaginated'}</title>
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>

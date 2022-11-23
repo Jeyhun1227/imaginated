@@ -12,7 +12,6 @@ export default async (req, res) => {
             let user_found = await PoolConnection.query('SELECT EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - UC.last_sent)) / 60 AS difference, email_sent FROM "USER_CUSTOM" UC WHERE userid = $1;', [session.id])
             if(user_found.rows.length > 0){
                 let diff = user_found.rows[0]['difference']
-                console.log('diff: ', diff, user_found.rows)
                 if(diff < 2 && diff) return res.status(200).json({error: 'Already sent'})
                 if(user_found.rows[0]['email_sent'] > 6) return res.status(200).json({error: 'Too many emails'})
             }
@@ -20,12 +19,12 @@ export default async (req, res) => {
             let signed_url = jwt.sign({
                 email: session.user.email,
                 userid: session.id
-              }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
+              }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
             // console.log(session)
-            SendInitialEmail(session.user.name, session.user.email, `www.imaginated.com/verification?token=${signed_url}`)
+            await SendInitialEmail(session.user.name, session.user.email, `https://www.imaginated.com/verification?token=${signed_url}`)
             let user_sent = await PoolConnection.query('UPDATE "USER_CUSTOM" SET email_sent = email_sent + 1, last_sent = CURRENT_TIMESTAMP WHERE userid = $1;', [session.id])
 
-            return res.status(200).json({sent: user_sent.rowCount})
+            return res.status(200).json({sent: 'Email Sent'})
         }
     }
     return res.status(403).json({

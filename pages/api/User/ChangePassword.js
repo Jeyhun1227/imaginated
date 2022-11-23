@@ -28,7 +28,6 @@ export default async (req, res) => {
 
             var user_changed_custom = await PoolConnection.query('UPDATE "USER_CUSTOM" SET password = $1 WHERE userid = $2', [hashedPassword, validation.userid]);
             var sum = user_changed_custom.rowCount;
-            signOut()
             
             return res.status(200).json({sent: sum});
             

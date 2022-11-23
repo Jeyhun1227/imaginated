@@ -14,10 +14,7 @@ var CreateUser = `
 </html>`;
 const CreateUserEmail = compile(CreateUser);
 import { config, SES } from 'aws-sdk';
-config.update({region: 'us-east-1',     
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY
-});
+
 async function SendInitialEmail(name, email, verficationLink){
     // Create sendEmail params 
 
@@ -38,7 +35,7 @@ async function SendInitialEmail(name, email, verficationLink){
         },
         Subject: {
           Charset: 'UTF-8',
-          Data: 'Imaginated - Verify your email'
+          Data: 'Imaginated - Verify your email Link expires in 30 minutes'
         }
         },
       Source: 'support@imaginated.com', 
@@ -49,8 +46,9 @@ async function SendInitialEmail(name, email, verficationLink){
     };
 
     // Create the promise and SES service object
-    var sent_values = await new SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+    var sent_values = await new SES({apiVersion: '2010-12-01', region: "us-east-1" }).sendEmail(params).promise();
     console.log('sentEmail: ', sent_values)
+    return true
 }
 
 export default SendInitialEmail;
