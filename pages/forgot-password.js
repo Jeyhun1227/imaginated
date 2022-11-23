@@ -30,7 +30,7 @@ export default function ForgotPassword() {
                 <div className='mb-0 ml-4 text-large md:text-xl text-dark-blue'>
                     <ul className="pl-0 divide-whisper">
                     <h2 className='font-bold'>Reset Password</h2>
-                        <div>Please enter your email address below and we'll email you instructions on how to reset your password.</div>
+                        <div>Please enter your email address below and we&apos;ll email you instructions on how to reset your password.</div>
                         <li className="flex py-3">
                         <div className="relative w-full">
                             <input  name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Please enter your Email" onChange={(e)=> setNewEmail(e.target.value)}/>
