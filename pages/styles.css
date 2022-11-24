@@ -258,7 +258,7 @@ a{
 
 .individual-share-buttons{
   position: absolute;
-    width: 350px;
+    width: 380px;
     padding: 10px 0 10px 15px;
     box-shadow: 2px 3px 5px #999;
     border-radius: 5px;
@@ -266,6 +266,14 @@ a{
     margin-left: -150px;
     z-index: 1;
     background: white;
+}
+
+.individual-share-exit{
+  font-size: 50px;
+  position: absolute;
+  right: 0px;
+  margin-top: -5px;
+  cursor: pointer;
 }
 
 .Blog-Main-Image{
@@ -668,6 +676,17 @@ div#ez-toc-container p.ez-toc-title {
   position: absolute;
   right: 15px;
   margin-top: 5px;
+}
+
+.margin-top-bottom-two{
+  margin: 25px 0;
+}
+.header-main-image{
+  border-radius: 12px;
+}
+
+.border-radius-four{
+  border-radius: 40px;
 }
 
 .openRight{

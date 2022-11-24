@@ -19,6 +19,8 @@ export default function SettingsSettings(props) {
     const [ChangePasswordFunc, setChangePasswordFunc] = useState(false);
     const [ChangeEmailFunc, setChangeEmailFunc] = useState(false);
     const [formData, setFormData] = useState();
+    const [ImageChange, setImageChange] = useState()
+    const [ImageChangeBool, setImageChangeBool] = useState(false)
 
 
     const ChangePassword = async () => {
@@ -74,13 +76,22 @@ export default function SettingsSettings(props) {
     }
     const handleChange = async (event) => {
         let fileUploaded = event.target.files[0];
-        setFormData(fileUploaded)
-        console.log(fileUploaded)
         let formDataVal = new FormData();
         formDataVal.append('Image', fileUploaded);
-        let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage/`, formDataVal)
+        setFormData(formDataVal)
+        setImageChangeBool(true)
+        console.log(formDataVal)
 
     };
+
+    const changeImage = async () => {
+        if(!ImageChangeBool) return;
+        let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage/`, formData)
+        if(file_upload.data.error) return setImageChange(file_upload.data.error)
+        setImageChangeBool(false)
+        setImageChange('Updated Image')
+    }
+
     const hiddenFileInput = useRef(null);
     const handleClick = event => {
         hiddenFileInput.current.click();
@@ -117,10 +128,11 @@ export default function SettingsSettings(props) {
                                             className="inline-flex justify-center w-full py-2 text-sm font-semibold border border-transparent text-dim-grey sm:w-1/4 sm:px-16 bg-whisper"
                                             onClick={handleClick}
                                             >
-                                            {formData === null ? "Choose File" : "Update File"}
+                                            {formData || props.user.image ? "Update File" : "Choose File"}
                                             </button>
+                                            <div className="margin-top-bottom-two">{(formData) ? <button onClick={changeImage} className="px-3 py-2 mr-3 text-center text-white truncate bg-dark-blue sm:mr-0">Save Image</button>: null}</div>
                                             <p className="pt-1 mb-0 text-sm text-dim-grey">{formData ? formData.name: "No File Chosen" }</p>
-                                            {/* <p className="pt-1 mb-0 text-sm text-crimson">{btnDisabled}</p> */}
+                                            <p className="pt-1 mb-0 text-sm text-dim-grey">{ImageChange ? ImageChange : null }</p>
                                         </div>:null}
                                     </div>
                                 </li>

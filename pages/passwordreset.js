@@ -51,7 +51,7 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
                     <ul className="pl-0 divide-y divide-whisper">
                         <li className="flex py-3">
                         <div className="relative w-full">
-                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password" onChange={(e)=> setNewPassword1(e.target.value)}/>
+                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your new password" onChange={(e)=> setNewPassword1(e.target.value)}/>
                             <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                                 {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
                             </button>
@@ -59,7 +59,7 @@ export default function VerificationEmail({authenticateEmailUser, token}) {
                         </li>
                         <li className="flex py-3">
                         <div className="relative w-full">
-                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Enter your current password" onChange={(e)=> setNewPassword2(e.target.value)}/>
+                            <input type={renewPasswordShown ? "text" : "password"} name="password" id="password" className="bg-white border focus:outline-none border-whisper text-dark-blue text-sm block w-full p-2.5" placeholder="Re-enter your new password" onChange={(e)=> setNewPassword2(e.target.value)}/>
                             <button onClick={toggleRenewPassword} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                                 {renewPasswordShown ? <EyeSlashFill/> : <EyeFill/> }
                             </button>

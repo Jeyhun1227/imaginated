@@ -49,6 +49,7 @@ var upload = multer({
         key: async function (req, file, cb) {
 // path.extname(file.originalname).toLowerCase()
             const session = await getSession({ req })
+            console.log('file: ', file)
             cb(null, 'user-' + session.id + path.extname(file.originalname)); //set unique file name if you wise using Date.toISOString()
 
         }
@@ -62,6 +63,8 @@ var upload = multer({
 
         if(!session) return cb("Error: you must be logged in first!");
         const filetypes = /jpeg|jpg|png|pdf/;
+        console.log('fileFilter: ', file)
+
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
         if (mimetype && extname) {

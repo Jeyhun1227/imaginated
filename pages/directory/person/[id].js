@@ -5,7 +5,7 @@ import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import {Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, ChevronDown, Check, Pen } from 'react-bootstrap-icons';
+import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, X, Check, Pen } from 'react-bootstrap-icons';
 import { signIn, useSession} from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
@@ -321,11 +321,12 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <div className="person-flex flex-row space-x-3 flex-nowrap"> 
                   <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
                   <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">{Individual_values.aka ? `(${Individual_values.aka})`:null}</h2>
-                  <div className="inline-flex items-center justify-center pl-3 md:pt-7"> 
-                    <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={setShowShare}/>
+                  <div className="inline-flex items-center justify-center pl-3 md:pt-7 cursor-point"> 
+                    <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={() => setShowShare(true)}/>
                   </div>
                   {(showShare)?<div>
                     <div className='individual-share-buttons'>
+                        <div className="individual-share-exit" onClick={() => setShowShare(false)}><X/></div>
                         <EmailShareButton url={shareUrl} className='margin-right-two'>
                             <EmailIcon size={40} round={true}/>
                         </EmailShareButton>
@@ -444,7 +445,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   <h2>Contact Details</h2>
                     {(Individual_values.company)?<div className="pl-2 text-dim-grey"><Image className="" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
                     {(Individual_values.location)?<div className="pl-2 text-dim-grey"><Image className="" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
-                    {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder}</div>:null}
+                    {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
                     {(Individual_values.link)?<div className="flex pl-2 text-dim-grey "><div className="margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
                 </div>
               </div>
@@ -569,7 +570,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                     <div className="flex flex-row">
                       <div className="pr-4">
-                        <Image className={styles.IndividualReviewImg} src={rev.imagelink? rev.imagelink: "/user.png"} width={55} height={55}/>
+                        <Image className="border-radius-four" src={rev.image? rev.image: "/user.png"} width={55} height={55}/>
                       </div>
                       <div className="">
                         <div className="mb-2 font-semibold">{rev.name}</div>
