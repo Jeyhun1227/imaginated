@@ -1,6 +1,6 @@
 // import {Container, Row, Col} from 'react-bootstrap';
 // import mainLogo from '../../public/imaginated_logo.png'
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Menu, Transition, Combobox  } from '@headlessui/react';
 // import {Menu, MenuItem} from '@mui/material';
 import React, {useState, useEffect, useRef } from "react";
@@ -13,7 +13,7 @@ import Image from 'next/image'
 import BlogMenu from './BlogMenu.json';
 import MarketMenu from './MarketMenu.json';
 
-export default function Header(props) {
+export default function Header() {
   let placeholder = 'Search for a creator or category'
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
@@ -101,7 +101,6 @@ export default function Header(props) {
 
   const openMenu = () => buttonRef.current.click();
   const openMenuMarket = () => buttonRefMarket.current.click();
-
   const closeMenu = () =>
     {
       if(dropdownRef.current)
@@ -372,11 +371,11 @@ export default function Header(props) {
                   <>
                   <div>
                     <Menu.Button className="inline-flex items-center content-center justify-center pt-1">
-                    <div>
+                    {(!session.user.image) ? <div>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                    </div> 
+                    </div>:<div><Image src={session.user.image} width={25} height={25} className='header-main-image'/></div> }
                       <span className="flex items-center">
                       {open ? (
                         <ChevronUp className="w-3 h-3 ml-2 -mr-1" aria-hidden="true" />
@@ -472,7 +471,3 @@ export default function Header(props) {
     
   )
 }
-
-
-
-

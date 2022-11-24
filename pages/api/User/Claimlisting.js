@@ -49,11 +49,8 @@ var upload = multer({
         key: async function (req, file, cb) {
 
             const session = await getSession({ req })
-            cb(null, 'ID-' + req.body.individual + '-' + session.user.email + '-' + new Date().toISOString() + '-' + file.originalname); //set unique file name if you wise using Date.toISOString()
-            // EXAMPLE 1
-            // cb(null, Date.now() + '-' + file.originalname);
-            // EXAMPLE 2
-            // cb(null, new Date().toISOString() + '-' + file.originalname);
+            // console.log('req.body: ', typeof req.body, typeof req.body.individual, req.body.individual)
+            cb(null, `ID-${req.body.individual}-${session.user.email}-test-${new Date().toISOString()}-${file.originalname}`); //set unique file name if you wise using Date.toISOString()
 
         }
     }),

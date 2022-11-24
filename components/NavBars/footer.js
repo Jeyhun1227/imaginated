@@ -174,7 +174,7 @@ export default function Footer() {
                                     <ul className="pl-2">   
                                         {item.links.map((items) => (
                                             <li className="mb-3" key={items.name + 'name_link'}>
-                                                <div className= "no-underline text-dim-grey"><Link href={`${items.href}-${item.title}`} key={items.name} >{items.name}</Link></div>
+                                                <div className= "no-underline text-dim-grey"><Link href={`${items.href}`} key={items.name} >{items.name}</Link></div>
                                             </li>
                                         ))}
                                     </ul> 

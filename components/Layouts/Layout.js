@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+// import {useSession } from "next-auth/react";
 import MobileNav from '../NavBars/mobileNav';
 import Header from '../NavBars/headers';
 import Footer from '../NavBars/footer';
@@ -7,7 +8,6 @@ import Head from 'next/head'
 import Script from 'next/script';
 
 export default function Layout({ children }) {
-
   const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -52,12 +52,3 @@ export default function Layout({ children }) {
     
   )
 }
-
-// export async function getServerSideProps(ctx){
-//   console.log('testtest')
-//   const user = await getSession(ctx)
-//   console.log("user: ", user)
-//   return {    props: {
-//     user}
-//   }
-// }

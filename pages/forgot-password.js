@@ -8,8 +8,12 @@ export default function ForgotPassword() {
 
 
     const ForgotPassword = async () => {
+        if(sending) return;
+
         if(!newEmail) return         setError('Please provide a valid email');
+        setSending(true)
         const Password = await axios.post(`${window.location.origin}/api/User/forgotPassword/`, {email: newEmail});
+        setSending(false)
         if(Password.data.error) return setError(Password.data.error)
 
         setError('Email sent. Please check your email and follow the steps in the email.')
@@ -20,6 +24,7 @@ export default function ForgotPassword() {
 
     const [newEmail, setNewEmail] = useState(null);
     const [error, setError] = useState(null);
+    const [sending, setSending] = useState(false);
 
 
 
