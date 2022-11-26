@@ -12,8 +12,8 @@ export default function RequestCategory() {
         
         setSubmited(true);
         try{
-            let addListing = await axios.post('api/User/addListing', {category})
-            window.location.href = "/directory"   
+            let addListing = await axios.post('/api/User/addListing/', {category})
+            window.location.href = "/directory/"   
 
         }catch(error){
             if (error.response) {

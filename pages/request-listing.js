@@ -33,7 +33,7 @@ export default function RequestListing(props) {
         // listing, selected: selected.name, category: selectedCategory.category
         let you = selected.name === 'Yes' ? true : false;
         try{
-            let addListing = await axios.post('api/User/addListing', {listing, you, category: selectedCategory.category})
+            let addListing = await axios.post('/api/User/addListing/', {listing, you, category: selectedCategory.category})
 
         }catch(error){
             if (error.response) {
