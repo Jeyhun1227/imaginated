@@ -1,5 +1,5 @@
 const PoolConnection = require('../postgressql')
-import Sendnotification from './Email/Sendnotification';
+import SendNotificationEmail from './Email/SendNotificationEmail';
 var xss = require("xss");
 
 import { getSession } from "next-auth/react";
@@ -20,13 +20,13 @@ export default async (req, res) => {
                 <p>Category: ${category}</p>
                 <p>Is this you? ${you}</p>
                 `
-                await Sendnotification(session.id, session.user.email, 'Add New Listing', param_val)
+                await SendNotificationEmail(session.id, session.user.email, 'Add New Listing', param_val)
                 return res.status(200).json({sent: category_added.rowCount});
             }else{
                 var category_added = await PoolConnection.query('INSERT INTO add_category(userid, category) VALUES($1, $2);', [session.id, req.body.category]);
                 // console.log('req.body: ', req.body)
                 const param_val = `<p>Add Category: ${category}</p>`
-                await Sendnotification(session.id, session.user.email, 'Add New Category', param_val)
+                await SendNotificationEmail(session.id, session.user.email, 'Add New Category', param_val)
 
                 return res.status(200).json({sent: category_added.rowCount});
             }
