@@ -1,9 +1,8 @@
 import { getSession } from "next-auth/react";
-const PoolConnection = require('../postgressql')
 import nc from "next-connect";
 const path = require('path');
 const { S3Client } = require('@aws-sdk/client-s3');
-import Sendnotification from './Email/Sendnotification';
+import SendNotificationEmail from './Email/SendNotificationEmail';
 const multer = require('multer'),
 multerS3 = require('multer-s3')
 const handler = nc({  onError: (err, req, res, next) => {
@@ -53,7 +52,7 @@ var upload = multer({
             const param_val = `<p>File Uploaded ID: ${file_id}</p>
             <p>Verification for Individual's ID: ${req.body.individual}</p>
             `
-            await Sendnotification(session.id, session.user.email, 'Claim Listing', param_val)
+            await SendNotificationEmail(session.id, session.user.email, 'Claim Listing', param_val)
             // console.log('req.body: ', typeof req.body, typeof req.body.individual, req.body.individual)
             cb(null, file_id); //set unique file name if you wise using Date.toISOString()
 

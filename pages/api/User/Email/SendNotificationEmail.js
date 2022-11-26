@@ -3,7 +3,7 @@ import { compile } from 'pug';
 
 import { config, SES } from 'aws-sdk';
 
-async function Sendnotification(userid, email, type, param_val){
+async function SendNotificationEmail(userid, email, type, param_val){
     // Create sendEmail params 
     const notify_new = `
 <!DOCTYPE html>
@@ -54,4 +54,4 @@ ${param_val}
     console.log('sentEmail: ', sent_values)
 }
 
-export default Sendnotification;
+export default SendNotificationEmail;
