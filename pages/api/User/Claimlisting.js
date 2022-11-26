@@ -3,7 +3,7 @@ const PoolConnection = require('../postgressql')
 import nc from "next-connect";
 const path = require('path');
 const { S3Client } = require('@aws-sdk/client-s3');
-
+import Sendnotification from './Email/Sendnotification';
 const multer = require('multer'),
 multerS3 = require('multer-s3')
 const handler = nc({  onError: (err, req, res, next) => {
@@ -49,8 +49,13 @@ var upload = multer({
         key: async function (req, file, cb) {
 
             const session = await getSession({ req })
+            const file_id = `ID-${req.body.individual}-${session.user.email}-${new Date().toISOString()}-${file.originalname}`
+            const param_val = `<p>File Uploaded ID: ${file_id}</p>
+            <p>Verification for Individual's ID: ${req.body.individual}</p>
+            `
+            await Sendnotification(session.id, session.user.email, 'Claim Listing', param_val)
             // console.log('req.body: ', typeof req.body, typeof req.body.individual, req.body.individual)
-            cb(null, `ID-${req.body.individual}-${session.user.email}-test-${new Date().toISOString()}-${file.originalname}`); //set unique file name if you wise using Date.toISOString()
+            cb(null, file_id); //set unique file name if you wise using Date.toISOString()
 
         }
     }),

@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import {useRouter} from 'next/router';
 import Link from 'next/link';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import SubCategoryPageSub from '../../../components/SubCategoryPage/SubCategoryPage';
-import {Select, MenuItem} from '@mui/material';
 import HeroNoBtn from "../../../components/Hero/HeroNoBtn";
 import VerticalCallToAction from '../../../components/CallToAction/VerticalCallToAction';
 import { Listbox, Transition } from '@headlessui/react'
@@ -190,7 +188,7 @@ export default function SubCategoryPageMain(props) {
                       <div className="flow-root -my-3 font-twofour">
                           <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                               <div className="flex flex-wrap items-center justify-between">
-                                  <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } ><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
+                                  <Link href={ `/directory/${e.categoryname}/Learn-${e.subcategory.replace(" ", "-")}` } ><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
                               </div>
                               <div className="flex-shrink-0 order-2">
                                   <div className="flex items-center flex-1">
