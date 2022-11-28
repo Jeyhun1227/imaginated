@@ -4,12 +4,6 @@ import VerticalCallToAction from '../CallToAction/VerticalCallToAction'
 import QASingle from "../CallToAction/QASingle";
 import HeroNoBtn from "../Hero/HeroNoBtn";
 import PopularCategories from "../CategoryComponents/PopularCategories";
-import {Disclosure} from '@headlessui/react'
-import styles from '../../styles/Home.module.css';
-import {Container, Row, Col} from 'react-bootstrap';
-import { LOAD_CATEGORIES, LOAD_SUBCATEGORIES } from "../../GraphQL/Queries/Admin";
-import { useQuery, gql } from "@apollo/client";
-import { MenuButtonWide, BsChevronDown } from 'react-bootstrap-icons';
 
 
 export default function MainParent(props) {
