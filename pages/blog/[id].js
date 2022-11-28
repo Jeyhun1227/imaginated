@@ -53,7 +53,9 @@ export default function Post( data ){
       const options = {
         replace: ({ attribs, children }) => {
             if (!attribs) return;
-            if(attribs.src && attribs.srcset){
+            if(attribs.src && attribs.src.includes('https://www.imaginated.com/wp-content')){
+              // console.log('attribs: ', attribs)
+
               return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
             }
             if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){

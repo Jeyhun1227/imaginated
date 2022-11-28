@@ -37,7 +37,7 @@ import ImageGallery from 'react-image-gallery';
 
 
 
-export default function IndividualPageMain({Individual_values, premium_offers, free_offers, favorites, IndividualID}) {
+export default function IndividualPageMain({Individual_values, premium_offers, free_offers, free_content, favorites, IndividualID}) {
   const {data: session} = useSession()
   let at_types = ['twitter', 'instagram']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
@@ -213,11 +213,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       }, []);
 
       allreviews = allreviews.map((element) => {
-        console.log('element: ', element, 'SESSION: ', session)
         if (session.id === element.user) element.editable = true;
         return element
       })
-      console.log('allreviews: ', allreviews)
       getUserFollowing()
     }
     setreviewAll(allreviews)
@@ -225,10 +223,40 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
 
 
-
-
+  const _renderVideo = (item) => { 
+    // console.log("_renderVideo: ", item)
+    return <div className="video-wrapper">
+              <div className='wp-content-youtube'>
+                <a
+                  className="close-video"
+                ></a>
+                <iframe
+                  width="560"
+                  height="315"
+                  src={item.embedUrl}
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+                </div>
+            </div>
+  }
+  const free_content_filter_func = (subcategory) => {
+    return free_content.filter(e => e.subcategory.includes(subcategory))
+  }
   const [reviewAll, setreviewAll] = useState(reviews);
-  // console.log('reviews: ', reviews, reviewAll, session)
+
+  const freeContentSubFind = () => {
+    let all_subs = []
+    free_content.map((e) => 
+    {
+      e.subcategory.map((v) => !all_subs.includes(v) ? all_subs.push(v): null)
+    })
+    return all_subs
+  }
+
+  const [free_content_subcategory, setfree_content_subcategory] = useState(freeContentSubFind);
+  const [free_content_filtered, setfree_content_filtered] = useState(free_content_filter_func(free_content_subcategory[0]));
+  const [selectedSubcategoryVideo, setSelectedSubcategoryVideo] = useState(free_content_subcategory[0]);
 
   const [reviewClickedValue, setreviewClickedValue] = useState();
 
@@ -267,21 +295,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       `${window.location.origin}/settings?type=Ratings&id=${id}`, "_blank");
   }
 
-  const _renderVideo = (item) => { 
-    return <div className="video-wrapper">
-              <a
-                className="close-video"
-              ></a>
-              <iframe
-                width="560"
-                height="315"
-                src={item.embedUrl}
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-            </div>
-  }
-  let imagestest = [{embedUrl:           'https://www.youtube.com/embed/sGvh-WJjK60?autoplay=1&showinfo=0',         renderItem: _renderVideo}, {embedUrl:           'https://www.youtube.com/embed/sGvh-WJjK60?autoplay=1&showinfo=0',         renderItem: _renderVideo}]
 
 
   return <div>
@@ -304,13 +317,13 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div className="inline-block ml-2 no-underline text-whisper cursor-point" ><Link href={'/directory/' + Individual_values.category}><a>{Individual_values.category}</a></Link></div>
+              <div className="inline-block ml-2.5 text-dark-blue font-semibold" ><Link href={'/directory/' + Individual_values.category}><a>{Individual_values.category}</a></Link></div>
               <div className="inline-flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 fill-very-light-grey" viewBox="0 0 20 20" fill="very-light-grey" stroke="#CECECE" strokeWidth="1">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div className="inline-block ml-2.5 text-dark-blue font-semibold">Profile</div>
+              <div className="inline-block ml-2 no-underline text-whisper cursor-point">Profile</div>
             </div>
             <div className="grid items-center grid-cols-4 mb-6 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
               <div className="self-start mt-6">
@@ -404,7 +417,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
             </div>
             </main>
 
-            <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-one">
+            <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-5">
               <div>
                 <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                   About
@@ -427,7 +440,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
                 <div className="">
                   <div className="text-dim-grey">{Individual_values.description}</div>
-                  {/* <ImageGallery items={imagestest}/> */}
 
                 </div>
               </div>
@@ -456,10 +468,18 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 <h3>Free Offerings</h3>
               </div>
               <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
-                {free_offers_array.map((e) => <div className="inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim" key={e.type}><Link href={e.link} >
+                {free_offers_array.map((e) => <div className={(e.type === 'youtube' && free_content_filtered.length > 0)? "grid-layout-end-5 no-underline font-normal sm:text-2xl text-xl text-denim": "inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim"} key={e.type}><Link href={e.link} >
                 <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><Image src={e.images_name[0]} width={13} height={15}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-                {e.name.length > 15 ? e.name.slice(0, 15) + '...' : e.name}</a>
-                </Link></div>)}
+                {e.name.length > 15 && (e.type === 'youtube' && free_content_filtered.length > 0) ? e.name : e.name.slice(0, 15) + '...' }</a>
+                </Link>
+                {(e.type === 'youtube' && free_content_filtered.length > 0)?              <div className={"my-10"}>
+                          {(free_content_subcategory.length > 1) ?<div className="">
+                             {free_content_subcategory.map((e) =>  <div key={e} className={`${(e === selectedSubcategoryVideo)? 'border-selected': ''} inline-block flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke cursor-point`} onClick={() => {setSelectedSubcategoryVideo(e); setfree_content_filtered(free_content_filter_func(e))}}>{e}</div>)}
+                          </div>:null}
+                          <div className="indiv-gallery-parent"><ImageGallery lazyLoad={true} showFullscreenButton={false} showPlayButton={false}  items={free_content_filtered} renderItem={_renderVideo}/></div>
+                          </div>:
+                        null}
+              </div>)}
               </div>
               <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
                 <div className="flex justify-between pb-3">
@@ -631,13 +651,14 @@ export async function getStaticProps(ctx) {
   var session_backend =  null;
   const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend }})
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
-
+  let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
   if(free_offers.length > 0) 
     free_offers = free_offers[0] 
   return {
     props: {
       Individual_values: Individual_values.data.getEachIndividual.rows[0],
       premium_offers: Individual_values.data.getEachIndividual.premium_offers,
+      free_content: free_content,
       free_offers,
       favorites: Individual_values.data.getEachIndividual.favorites,
       IndividualID

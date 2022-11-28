@@ -40,6 +40,12 @@ getEachIndividual(
             slack
             discord
           }
+          free_content{
+            id
+            individual
+            url
+            subcategory
+          }
           premium_offers{
             id
             name
