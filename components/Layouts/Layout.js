@@ -41,7 +41,7 @@ export default function Layout({ children }) {
         <Script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"/>
         <Head>
           <link rel="shortcut icon" href="https://wordpress.imaginated.com/wp-content/uploads/2021/02/cropped-google-removebg-preview-3.png" />
-          <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
+          <meta httpEquiv="Content-Security-Policy" content="block-all-mixed-content" />
         </Head>
         <HeadBar/>
         {(windowDimensions.width > 1000)?<Header placeholder={"Search for a creator or category"}/>:<MobileNav/>}
