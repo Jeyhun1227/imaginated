@@ -63,6 +63,19 @@ a{
     position: relative;
 }
 
+.index-mention-image{
+  height: 40px;
+  position: relative;
+  width: 90%;
+}
+
+.index-mention-image-total{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+  margin: 15px 50px 0px 50px;
+}
+
 .width-80{
   width: 80%;
 }
@@ -832,6 +845,9 @@ div#ez-toc-container p.ez-toc-title {
 .z-index-one{
   z-index: 1;
 }
+.font-size-20{
+  font-size: 20px;
+}
 
 .wtr-content a{
   color: var(--bs-link-color) !important;
@@ -847,12 +863,22 @@ div#ez-toc-container p.ez-toc-title {
     grid-template-columns: auto auto;
     margin: 50px 40px;
   }
+  .grid-layout-end-5{
+    grid-column-end: 3;
+  }
 
 }
 
 @media screen and (max-width: 850px) {
   .shop-download{
     margin-right: 0px;
+  }
+  .index-mention-image-total{
+    gap: 10px;
+    margin: 15px 10px 0px 10px;
+  }
+  .index-mention-image {
+    width: 100%;
   }
   .grid-layout-two{
     grid-template-columns: auto;
