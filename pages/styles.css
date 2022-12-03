@@ -64,15 +64,29 @@ a{
 }
 
 .index-mention-image{
-  height: 40px;
+  height: 47px;
+  filter: brightness(0);
+   opacity: 50%;
   position: relative;
   width: 90%;
+  max-width: 320px;
+}
+
+.editable-indvidual{
+  border: solid blue;
+    border-radius: 16px;
+    padding: 5px;
+}
+
+.editable-textarea{
+  height: 250px;
+  width: 100%;
 }
 
 .index-mention-image-total{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10%;
   margin: 15px 50px 0px 50px;
 }
 

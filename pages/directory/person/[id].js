@@ -37,7 +37,8 @@ import ImageGallery from 'react-image-gallery';
 
 
 
-export default function IndividualPageMain({Individual_values, premium_offers, free_offers, free_content, favorites, IndividualID}) {
+
+export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID}) {
   const {data: session} = useSession()
   let at_types = ['twitter', 'instagram']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
@@ -67,30 +68,57 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     return premiumTempUserReview.concat(freeTempUserReview)
   }
 
-  const [reviews, setReviews] = useState([]);
+  const favoritesOfferFunc = () => {
+    let temp_favorites_offers = {}
+
+    favorites.map((e) =>{
+      let val_type = (e.category) ? e.category : "Other";
+      let linkName = new URL(e.link).hostname;
+      (temp_favorites_offers[val_type]) ? temp_favorites_offers[val_type].push({...e, linkName}): temp_favorites_offers[val_type]= [{...e, linkName}];
+    });
+    return temp_favorites_offers
+  }
+
+  const reviewsFunc = () => {
+    let temp_count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+
+    var getCats = []
+    let allreviews = reviews_offer.map((e) => { 
+      let date = new Date(Number(e.createdate));
+      let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
+      let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
+      temp_count_each_rating[Math.round(e.review)] += 1
+      if(!getCats.includes(premium_name_value)) getCats.push(premium_name_value)
+      return {...e, createDate_Val, premium_name_value}
+    })
+    return [allreviews, getCats, temp_count_each_rating]
+  }
+
+  const [reviews, setReviews] = useState(reviewsFunc()[0]);
   const [UserReviewSelect, setUserReviewSelect] = useState(() => concatUserReview(freeOfferFunc()));
   const [urlType, seturlType] = useState();
-  const [count_each_rating, setcount_each_rating] = useState({});
-  const [favorites_offers, setfavorites_offers] = useState({})
+  const [count_each_rating, setcount_each_rating] = useState(reviewsFunc()[2]);
+  const [favorites_offers, setfavorites_offers] = useState(favoritesOfferFunc())
   const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
   const [free_offers_array, setFree_offers_array] = useState([]);
-  const [reviews_category, set_reviews_category] = useState([]);
+  const [reviews_category, set_reviews_category] = useState(reviewsFunc()[1]);
   const [shareUrl, setShareUrl] = useState('');
   const [showShare, setShowShare] = useState(false);
-
-
+  const [UserSignUp, setUserSignUp] = useState(false);
 
   useEffect(() => {
     let href_hash = window.location.href;
     let href_value = (href_hash.split("#").length > 1) ? href_hash.split("#")[1].toLowerCase() : null;
     seturlType(href_value);
     getUseStart()
-
+    let signup = localStorage.getItem('signup');
+    setUserSignUp(signup > 6)
     let temp_free_offers = freeOfferFunc();
     setFree_offers_array(temp_free_offers)
     setShareUrl(window.location.href)
     setUserReviewSelect(concatUserReview(temp_free_offers));
-
+    let temp_num = localStorage.getItem('signup') ? Number(localStorage.getItem('signup')): 0;
+    localStorage.setItem('signup', 1 + temp_num);
   }, []);  
   
   let chanUrlType = (type) => {
@@ -151,6 +179,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
       }
     };
     handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -181,29 +210,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
 
   const getUseStart = async () => {
-    let temp_count_each_rating = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
-    let temp_favorites_offers = {}
-    const getReviews = await axios.post(`${window.location.origin}/api/User/GetReviews/`, {Individual: Individual_values.id});
-    let temp_reviews = getReviews.data.rows
-    favorites.map((e) =>{
-      let val_type = (e.category) ? e.category : "Other";
-      let linkName = new URL(e.link).hostname;
-      (temp_favorites_offers[val_type]) ? temp_favorites_offers[val_type].push({...e, linkName}): temp_favorites_offers[val_type]= [{...e, linkName}];
-    });
-    setfavorites_offers(temp_favorites_offers)
-
-    var getCats = []
-    let allreviews = temp_reviews.map((e) => { 
-      let date = new Date(e.createdate);
-      let createDate_Val = date.toLocaleString('default', { month: 'short' }) + ' ' + date.getDate() + ', '  +date.getFullYear()
-      let premium_name_value = e.premium_name//(e.type === 'Paid')? e.premium_name: reviews_free[e.premium_offer];
-      temp_count_each_rating[Math.round(e.review)] += 1
-      if(!getCats.includes(premium_name_value)) getCats.push(premium_name_value)
-      return {...e, createDate_Val, premium_name_value}
-    })
-    setReviews(allreviews)
-    set_reviews_category(getCats)
-    setcount_each_rating(temp_count_each_rating)
+    let allreviews = reviews;
     if(session){
       allreviews = allreviews.reduce((acc, element) => {
         if (session.id === element.user) {
@@ -294,6 +301,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     window.open(
       `${window.location.origin}/settings?type=Ratings&id=${id}`, "_blank");
   }
+
 
 
 
@@ -586,7 +594,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 </div>
                 <div className="my-6">
                   <h5 className="font-bold ">Reviews</h5>
-                  {(session) ? <>
+                  {(!UserSignUp || session) ? <>
                   {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                     <div className="flex flex-row">
                       <div className="pr-4">
@@ -658,6 +666,7 @@ export async function getStaticProps(ctx) {
     props: {
       Individual_values: Individual_values.data.getEachIndividual.rows[0],
       premium_offers: Individual_values.data.getEachIndividual.premium_offers,
+      reviews_offer: Individual_values.data.getEachIndividual.reviews,
       free_content: free_content,
       free_offers,
       favorites: Individual_values.data.getEachIndividual.favorites,
