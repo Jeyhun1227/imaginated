@@ -6,7 +6,7 @@ const ImageWithFallback = (props) => {
     const [imgSrc, setImgSrc] = useState(src);
 
     return (
-        <Image loader={() => imgSrc} src={imgSrc} className={className} width={width} height={height} unoptimized={true}  onError={() => {
+        <Image  src={imgSrc} className={className} width={width} height={height}  onError={() => {
             setImgSrc(fallbackSrc);
         }}/>
     );

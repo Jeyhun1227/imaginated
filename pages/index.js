@@ -7,11 +7,11 @@ import Mainpage2 from '../public/mainpage2.png';
 import Mainpage3 from '../public/mainpage3.png';
 import MainpageFirst from '../public/mainpagefirst.png';
 import MainpageLast from '../public/mainpagelast.png';
-import Yelp from '../public/mentioned/yelp1.png';
+// import Yelp from '../public/mentioned/yelp1.png';
 import Medium from '../public/mentioned/medium2.png';
 import Substack from '../public/mentioned/substack3.png';
 import Buzzfeed from '../public/mentioned/buzzfeed4.png';
-import Digg from '../public/mentioned/digg5.png';
+// import Digg from '../public/mentioned/digg5.png';
 
 
 export default function MainPage() {
@@ -62,9 +62,6 @@ export default function MainPage() {
           <div className='text-dim-grey index-featured'>AS MENTIONED IN</div>
           <div className='index-mention-image-total'>
           <div className='index-mention-image'>
-            <Image src={Yelp} layout='fill'/>
-          </div>
-          <div className='index-mention-image'>
             <Image src={Medium} layout='fill'/>
           </div>
           <div className='index-mention-image'>
@@ -72,9 +69,6 @@ export default function MainPage() {
           </div>
           <div className='index-mention-image'>
             <Image src={Buzzfeed} layout='fill'/>
-          </div>
-          <div className='index-mention-image'>
-            <Image src={Digg} layout='fill'/>
           </div>
           </div>
         </div>

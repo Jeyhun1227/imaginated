@@ -89,7 +89,7 @@ export default function SettingsSettings(props) {
         let file_upload  = await axios.post(`${window.location.origin}/api/User/AdduserImage/`, formData)
         if(file_upload.data.error) return setImageChange(file_upload.data.error)
         setImageChangeBool(false)
-        setImageChange('Updated Image')
+        setImageChange('Updated Image. Please log out and log back in to see the change.')
     }
 
     const hiddenFileInput = useRef(null);
