@@ -28,13 +28,13 @@ export default function MainPage() {
       setWindowDimensions(getWindowDimensions());
     }
     setWindowDimensions(getWindowDimensions());
-    const tagManagerArgs = {
-      dataLayer: {
-          userId: 'test'
-      },
-      dataLayerName: 'PageDataLayer'
-  }
-    TagManager.dataLayer(tagManagerArgs)
+  //   const tagManagerArgs = {
+  //     dataLayer: {
+  //         userId: 'test'
+  //     },
+  //     dataLayerName: 'PageDataLayer'
+  // }
+  //   TagManager.dataLayer(tagManagerArgs)
 
 
     window.addEventListener('resize', handleResize);
