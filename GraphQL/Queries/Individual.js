@@ -87,6 +87,21 @@ getEachIndividual(
             link
             validation
           }
+          similar_Individual{
+            rows{
+          	id
+          	categoryname
+          	subcategory
+          	first_name
+          	last_name
+          	linkname
+          	aka
+          	imagelink
+          	description
+          	avg
+          	count
+            }
+          }
         }
       }
   `;
