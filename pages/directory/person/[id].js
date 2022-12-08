@@ -570,7 +570,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                   {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
                     <div className="flex flex-row">
                       <div className="pr-4">
-                        <Image className="border-radius-four" src={rev.image? rev.image: "/user.png"} width={55} height={55}/>
+                        <Image className="border-radius-four" src={rev.imagelink? rev.imagelink: "/user.png"} width={55} height={55}/>
                       </div>
                       <div className="">
                         <div className="mb-2 font-semibold">{rev.name}</div>
@@ -633,7 +633,7 @@ export async function getStaticProps(ctx) {
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
   let category_values_clean = Individual_values.data.getEachIndividual.similar_Individual.rows.filter((e) => e.linkname != IndividualID)
-  
+  // console.log('reviews: ', Individual_values.data.getEachIndividual.reviews)
   // const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
   // const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
   // const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
