@@ -16,10 +16,9 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
       });
     }
   });
-  
   const link = from([
     errorLink,
-    new HttpLink({ uri: "https://api.imaginated.com/graphql/graphql" }),
+    new HttpLink({ uri: "https://api.imaginated.com/graphql" }),
   ]);
   
   const client = new ApolloClient({

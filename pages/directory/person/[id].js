@@ -282,7 +282,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
 
   return <div>
           <Head>
-            {/* <title>{Individual_values.first_name + ' ' + Individual_values.last_name + ' | Imaginated'}</title> */}
+            <title>{`${Individual_values.first_name} ${Individual_values.last_name} ${Individual_values.aka ? `(${Individual_values.aka}) `:null}| Imaginated`}</title>
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -632,12 +632,11 @@ export async function getStaticProps(ctx) {
   const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend }})
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
-
+  let category_values_clean = Individual_values.data.getEachIndividual.similar_Individual.rows.filter((e) => e.linkname != IndividualID)
   
-  const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
-  const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
-  const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
-
+  // const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
+  // const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
+  // const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
   if(free_offers.length > 0) 
     free_offers = free_offers[0] 
   return {
