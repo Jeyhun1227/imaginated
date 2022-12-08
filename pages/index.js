@@ -11,7 +11,7 @@ import MainpageLast from '../public/mainpagelast.png';
 import Medium from '../public/mentioned/medium2.png';
 import Substack from '../public/mentioned/substack3.png';
 import Buzzfeed from '../public/mentioned/buzzfeed4.png';
-// import Digg from '../public/mentioned/digg5.png';
+import TagManager from 'react-gtm-module'
 
 
 export default function MainPage() {
@@ -28,6 +28,14 @@ export default function MainPage() {
       setWindowDimensions(getWindowDimensions());
     }
     setWindowDimensions(getWindowDimensions());
+    const tagManagerArgs = {
+      dataLayer: {
+          userId: 'test'
+      },
+      dataLayerName: 'PageDataLayer'
+  }
+    TagManager.dataLayer(tagManagerArgs)
+
 
     window.addEventListener('resize', handleResize);
     () => window.removeEventListener('resize', handleResize);

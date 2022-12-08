@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Container, Row, Col} from 'react-bootstrap';
 import {Rating} from '@mui/material';
-import styles from  '../../styles/Home.module.css';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Person } from 'react-bootstrap-icons';
 import ImageWithFallback from '../Image/Image'
 
 export default function CategoryPageSub(props) {

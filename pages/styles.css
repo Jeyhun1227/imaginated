@@ -69,7 +69,7 @@ a{
    opacity: 50%;
   position: relative;
   width: 90%;
-  max-width: 320px;
+  max-width: 270px;
 }
 
 .editable-indvidual{
@@ -166,6 +166,22 @@ a{
   position: absolute;
   padding-top: 0px !important;
   margin-top: -1px;
+}
+
+.padding-top-bottom-10{
+  padding:10px 0;
+}
+.padding-top-bottom-20{
+  padding:20px 0;
+}
+.padding-top-20{
+  padding-top:20px;
+}
+
+.grid-layout-70-30{
+  display: grid;
+  grid-template-columns: 70% 25%;
+  grid-gap: 5%;
 }
 
 .margin-top-bottom{
@@ -624,6 +640,12 @@ div#ez-toc-container p.ez-toc-title {
   padding-bottom: 2rem;
 }
 
+.grid-layout-3{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: 20px;
+}
+
 .grid-layout-end-5{
   grid-column-start: 1;
   grid-column-end: 5;
@@ -903,6 +925,10 @@ div#ez-toc-container p.ez-toc-title {
   .grid-container-blog{
     grid-template-columns: auto;
     margin: 50px 115px;
+  }
+  .grid-layout-70-30{
+    grid-template-columns: 1fr;
+    grid-gap: 0px;
   }
   .padding-left-right-15{
     padding-right: 0rem;

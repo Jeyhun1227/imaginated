@@ -16,7 +16,7 @@ import Company_Image from '../../../public/company.svg'
 import Location_Image from '../../../public/location.svg'
 import Founded_image from '../../../public/founded.svg'
 import Link_image from '../../../public/link.svg'
-import ImageWithFallback from '../../../components/Image/Image'
+import ImageWithFallback from '../../../components/Image/Image';
 import Head from 'next/head';
 import Image from 'next/image';
 import {
@@ -33,12 +33,13 @@ import {
   RedditIcon,
   TwitterIcon
 } from "react-share";
-import ImageGallery from 'react-image-gallery';
+import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
+import Sidebar from '../../../components/Person/Sidebar';
+import IndividualYoutube from '../../../components/Person/Youtube';
+import IndividualFreeOfferingComponent from '../../../components/Person/FreeOffering';
 
 
-
-
-export default function IndividualPageMain({Individual_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID}) {
+export default function IndividualPageMain({Individual_values, category_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID}) {
   const {data: session} = useSession()
   let at_types = ['twitter', 'instagram']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
@@ -49,13 +50,18 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   'linkedin': ['/Linkedin.svg', 'Linkedin'],
   'discord': ['/Discord.svg', 'Discord'],
   }
+  
+  const get_name_from_link = (link, key) => {
+    let o_val = link.split('/')
+    let name = (o_val[o_val.length - 1] === '' || o_val[o_val.length - 1] === 'feature')? o_val[o_val.length - 2] : o_val[o_val.length - 1];
+    return (at_types.includes(key))? '@' + name: name;
+  }
+  
   const freeOfferFunc = () => {
     let temp_free_offers_array = Object.keys(free_offers).map((key) => {
       if(!free_offers[key]) return {link: '', name: "IndividualFreeOffers"};
-      let o_val = free_offers[key].split('/')
       let images_name = images[key]
-      let name = (o_val[o_val.length - 1] === '' || o_val[o_val.length - 1] === 'feature')? o_val[o_val.length - 2] : o_val[o_val.length - 1];
-      name = (at_types.includes(key))? '@' + name: name;
+      let name = get_name_from_link(free_offers[key], key)
       return {name, link: free_offers[key], type: key, images_name}
     })
     temp_free_offers_array = temp_free_offers_array.filter((e) => e.link != '' && e.name !== "IndividualFreeOffers")
@@ -230,40 +236,9 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
 
 
-  const _renderVideo = (item) => { 
-    // console.log("_renderVideo: ", item)
-    return <div className="video-wrapper">
-              <div className='wp-content-youtube'>
-                <a
-                  className="close-video"
-                ></a>
-                <iframe
-                  width="560"
-                  height="315"
-                  src={item.embedUrl}
-                  frameBorder="0"
-                  allowFullScreen
-                ></iframe>
-                </div>
-            </div>
-  }
-  const free_content_filter_func = (subcategory) => {
-    return free_content.filter(e => e.subcategory.includes(subcategory))
-  }
   const [reviewAll, setreviewAll] = useState(reviews);
 
-  const freeContentSubFind = () => {
-    let all_subs = []
-    free_content.map((e) => 
-    {
-      e.subcategory.map((v) => !all_subs.includes(v) ? all_subs.push(v): null)
-    })
-    return all_subs
-  }
 
-  const [free_content_subcategory, setfree_content_subcategory] = useState(freeContentSubFind);
-  const [free_content_filtered, setfree_content_filtered] = useState(free_content_filter_func(free_content_subcategory[0]));
-  const [selectedSubcategoryVideo, setSelectedSubcategoryVideo] = useState(free_content_subcategory[0]);
 
   const [reviewClickedValue, setreviewClickedValue] = useState();
 
@@ -307,7 +282,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
   return <div>
           <Head>
-            <title>{Individual_values.first_name + ' ' + Individual_values.last_name + ' | Imaginated'}</title>
+            {/* <title>{Individual_values.first_name + ' ' + Individual_values.last_name + ' | Imaginated'}</title> */}
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -442,85 +417,82 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
               </div>
             </div>
             <main className="pt-2 px-2 mt-2.5">
-            {/* <div className={(!urlType) ? "my-8" : "hidden"}> */}
-            <div className={"my-10"} ref={aboutSection}>
-              <div className="pb-12 border-b border-very-light-grey">
-                <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
-                <div className="">
-                  <div className="text-dim-grey">{Individual_values.description}</div>
+              <div className="grid-layout-70-30">
+                <div>
+                  <div className={"my-10"} ref={aboutSection}>
+                    <div className="pb-12 border-b border-very-light-grey">
+                      <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
+                      <div className="">
+                        <div className="text-dim-grey">{Individual_values.description}</div>
 
-                </div>
-              </div>
-              <div className="grid person-grid-col-2 my-12">
-                <div className="">
-                  <h2>Featured In</h2>
-                  <ul className="pl-0.5 list-outside">{feature.map((url) => 
-                    <li className="" key={url.trim()}>
-                      <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
-                      <Link  href={url.trim()} ><a  target="_blank" rel="noopener noreferrer nofollow" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
-                    </li>)}
-                  </ul>
-                </div>
-                <div className="">
-                  <h2>Contact Details</h2>
-                    {(Individual_values.company)?<div className="pl-2 text-dim-grey"><Image className="" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
-                    {(Individual_values.location)?<div className="pl-2 text-dim-grey"><Image className="" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
-                    {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
-                    {(Individual_values.link)?<div className="flex pl-2 text-dim-grey "><div className="margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
-                </div>
-              </div>
-            </div>
-            {/* <div className={(urlType === 'offerings')? null: styles.displayNone}> */}
-            <div className={"my-10"} ref={offeringsSection}>
-              <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
-                <h3>Free Offerings</h3>
-              </div>
-              <div className="grid grid-cols-2 pt-4 pb-3 mx-0 border-b sm:mx-4 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 border-very-light-grey">
-                {free_offers_array.map((e) => <div className={(e.type === 'youtube' && free_content_filtered.length > 0)? "grid-layout-end-5 no-underline font-normal sm:text-2xl text-xl text-denim": "inline-block mr-2 py-.5 px-1 no-underline font-normal sm:text-2xl text-xl text-denim"} key={e.type}><Link href={e.link} >
-                <a target="_blank" rel="noopener noreferrer nofollow" ><div className="flex flex-row space-x-2"><Image src={e.images_name[0]} width={13} height={15}/> <div className="text-sm text-dim-grey ">{e.images_name[1]}</div></div>
-                {e.name.length > 15 && (e.type === 'youtube' && free_content_filtered.length > 0) ? e.name : e.name.slice(0, 15) + '...' }</a>
-                </Link>
-                {(e.type === 'youtube' && free_content_filtered.length > 0)?              <div className={"my-10"}>
-                          {(free_content_subcategory.length > 1) ?<div className="">
-                             {free_content_subcategory.map((e) =>  <div key={e} className={`${(e === selectedSubcategoryVideo)? 'border-selected': ''} inline-block flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke cursor-point`} onClick={() => {setSelectedSubcategoryVideo(e); setfree_content_filtered(free_content_filter_func(e))}}>{e}</div>)}
-                          </div>:null}
-                          <div className="indiv-gallery-parent"><ImageGallery lazyLoad={true} showFullscreenButton={false} showPlayButton={false}  items={free_content_filtered} renderItem={_renderVideo}/></div>
-                          </div>:
-                        null}
-              </div>)}
-              </div>
-              <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
-                <div className="flex justify-between pb-3">
-                  <h3 className="">{key}</h3>
-                  {/* <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button> */}
-                </div>
-                <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
-                {premium_offers_types[key].map((value) => <div key={value.name} className="">
-                    <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
-                      currentTarget.onerror = null; 
-                      currentTarget.src=No_image.src;
-                    }} />
-                      <div className="pt-3 text-large text-denim">{value.name}</div>
-                      <div className="flex flex-row flex-wrap items-center space-x-2">
-                        <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
-                              color: "yellow",
-                              borderRadius: '10px',
-                              '& .MuiSvgIcon-root': {
-                                fill: '#F8DC81',
-                              },
-                              '& .css-dqr9h-MuiRating-label': {
-                              display: 'block'
-                              }                        
-                            }} readOnly/>
-                        <div className="text-denim">{value.avg}</div>
-                        <div className="text-denim">({value.count})</div>
                       </div>
-                    <div className="w-48 text-sm text-dim-grey">{value.description}</div>
-                  </div>)}
+                    </div>
+                    <div className="grid person-grid-col-2 my-12">
+                      <div className="">
+                        <h2>Featured In</h2>
+                        <ul className="pl-0.5 list-outside">{feature.map((url) => 
+                          <li className="" key={url.trim()}>
+                            <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
+                            <Link  href={url.trim()} ><a  target="_blank" rel="noopener noreferrer nofollow" className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</a></Link>
+                          </li>)}
+                        </ul>
+                      </div>
+                      <div className="">
+                        <h2>Contact Details</h2>
+                          {(Individual_values.company)?<div className="pl-2 text-dim-grey"><Image className="" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
+                          {(Individual_values.location)?<div className="pl-2 text-dim-grey"><Image className="" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
+                          {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
+                          {(Individual_values.link)?<div className="flex pl-2 text-dim-grey "><div className="margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link href={Individual_values.link}><a  target='_blank' rel="noopener noreferrer nofollow">{Individual_values.link}</a></Link></div></div>:null}
+                      </div>
+                    </div>
                   </div>
-                </div>)}
+                  {/* <div className={(urlType === 'offerings')? null: styles.displayNone}> */}
+                  <div className={"my-10"} ref={offeringsSection}>
+                    <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
+                      <h3>Free Offerings</h3>
+                    </div>
+                    <div>
+                          {(free_offers.youtube && free_content.length > 0) ? <IndividualYoutube free_content={free_content} link={free_offers.youtube} name={get_name_from_link(free_offers.youtube, 'youtube')} />: null}
+                    </div>
+                      <IndividualFreeOfferingComponent free_offers_array={free_content.length > 0 ? free_offers_array.filter((e) => e.type != 'youtube') : free_offers_array}/>
+                  </div>
+                </div>
+                <Sidebar category_values={category_values.slice(0, 5)}/>
               </div>
-            </div>
+
+              <div className={"my-10"}>
+                <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
+                  <div className="flex justify-between pb-3">
+                    <h3 className="">{key}</h3>
+                    {/* <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button> */}
+                  </div>
+                  <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
+                  {premium_offers_types[key].map((value) => <div key={value.name} className="">
+                      <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; 
+                        currentTarget.src=No_image.src;
+                      }} />
+                        <div className="pt-3 text-large text-denim">{value.name}</div>
+                        <div className="flex flex-row flex-wrap items-center space-x-2">
+                          <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
+                                color: "yellow",
+                                borderRadius: '10px',
+                                '& .MuiSvgIcon-root': {
+                                  fill: '#F8DC81',
+                                },
+                                '& .css-dqr9h-MuiRating-label': {
+                                display: 'block'
+                                }                        
+                              }} readOnly/>
+                          <div className="text-denim">{value.avg}</div>
+                          <div className="text-denim">({value.count})</div>
+                        </div>
+                      <div className="w-48 text-sm text-dim-grey">{value.description}</div>
+                    </div>)}
+                    </div>
+                  </div>)}
+                </div>
+              </div>
             {/* <div className={(urlType === 'favorites')? null: styles.displayNone}> */}
             <div className={"my-8"} ref={favoritesSection}>
             {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
@@ -660,6 +632,12 @@ export async function getStaticProps(ctx) {
   const Individual_values = await client.query({query:LOAD_INDIVIDUAL_PAGE, variables: { linkname: IndividualID, session: session_backend }})
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
+
+  
+  const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
+  const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
+  const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
+
   if(free_offers.length > 0) 
     free_offers = free_offers[0] 
   return {
@@ -667,6 +645,7 @@ export async function getStaticProps(ctx) {
       Individual_values: Individual_values.data.getEachIndividual.rows[0],
       premium_offers: Individual_values.data.getEachIndividual.premium_offers,
       reviews_offer: Individual_values.data.getEachIndividual.reviews,
+      category_values: category_values_clean,
       free_content: free_content,
       free_offers,
       favorites: Individual_values.data.getEachIndividual.favorites,

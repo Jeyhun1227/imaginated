@@ -144,10 +144,10 @@ export default function Header() {
 
   return (
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
-      <div>
+      {/* <div>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPQDSJ"
         height="0" width="0" style={{"display":"none", "visibility":"hidden"}}></iframe></noscript>
-      </div>
+      </div> */}
       <div className="flex items-center justify-between mx-auto flex-nowrap">
           <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
               <a><Image src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7" width={160} height={40}/></a>
