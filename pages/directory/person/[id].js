@@ -282,7 +282,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
 
   return <div>
           <Head>
-            <title>{`${Individual_values.first_name} ${Individual_values.last_name} ${Individual_values.aka ? `(${Individual_values.aka}) `:null}| Imaginated`}</title>
+            <title>{`${Individual_values.first_name} ${Individual_values.last_name} ${Individual_values.aka ? `(${Individual_values.aka}) `:''}| Imaginated`}</title>
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
