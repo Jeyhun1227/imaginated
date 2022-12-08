@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
-import styles from '../../../styles/Home.module.css';
-import {Container, Row, Col} from 'react-bootstrap';
 import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import CategoryPageSub from '../../../components/CategoryPage/CategoryPageSub';
 import VerticalCallToAction from '../../../components/CallToAction/VerticalCallToAction';
-import QASingle from "../../../components/CallToAction/QASingle";
 import HeroNoBtn from "../../../components/Hero/HeroNoBtn";
-import axios from 'axios';
 import Head from 'next/head'
 
 export default function CategoryPageMain(props) {

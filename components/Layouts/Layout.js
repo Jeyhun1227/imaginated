@@ -6,6 +6,14 @@ import Footer from '../NavBars/footer';
 import HeadBar from '../NavBars/headBar';
 import Head from 'next/head'
 import Script from 'next/script';
+import TagManager from 'react-gtm-module'
+ 
+const tagManagerArgs = {
+    gtmId: 'GTM-PZPQDSJ',
+    dataLayerName: 'PageDataLayer'
+
+}
+ 
 
 export default function Layout({ children }) {
   const getWindowDimensions = () => {
@@ -22,6 +30,7 @@ export default function Layout({ children }) {
       setWindowDimensions(getWindowDimensions());
     }
     setWindowDimensions(getWindowDimensions());
+    TagManager.initialize(tagManagerArgs)
 
     window.addEventListener('resize', handleResize);
     () => window.removeEventListener('resize', handleResize);
@@ -30,14 +39,14 @@ export default function Layout({ children }) {
   return (
     
     <>
-        <Script   id="show-banner"
+        {/* <Script   id="show-banner"
           dangerouslySetInnerHTML={{
             __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-PZPQDSJ');`
-            }}  />
+            }}  /> */}
         <Script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"/>
         <Head>
           <link rel="shortcut icon" href="https://wordpress.imaginated.com/wp-content/uploads/2021/02/cropped-google-removebg-preview-3.png" />

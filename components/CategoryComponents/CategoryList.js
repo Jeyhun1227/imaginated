@@ -67,7 +67,7 @@ export default function CategoryList(props) {
                         </div>
                         <Disclosure.Panel className="pt-2.5">
                         <div className="space-y-4">
-                            {categorySubValues[e.category].map((sub) =>
+                            {categorySubValues[e.category] ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
                                 <div className="pl-4 ml-3 text-small no-underline text-denim"><Link href={'directory/' + e.category + '/Learn-' + sub.subcategory.replace(' ', '-')}>
                                     {sub.subcategory}
@@ -75,7 +75,7 @@ export default function CategoryList(props) {
                                 <label className="pl-10 ml-3 text-small text-dim-grey">
                                 {e.category}
                                 </label>
-                            </div>)}
+                            </div>): null}
                         </div>
                         </Disclosure.Panel>
                     </>
