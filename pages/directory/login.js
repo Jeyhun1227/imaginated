@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import manBehindComputer from '../../public/logIn/ManBehindComputer_427x574.png'
 import Image from 'next/image'
 import Link from 'next/link';
+import TagManager from 'react-gtm-module'
 
 export default function Login({return_url}) {
   const {data} = useSession()
@@ -12,8 +13,15 @@ export default function Login({return_url}) {
 
   useEffect(() => {
     if (data) {
-
-        window.location.href = return_url
+    const tagManagerArgs = {
+      dataLayer: {
+          user_id: data.id,
+          event: 'Login'
+      },
+      dataLayerName: 'PageDataLayer'
+    }
+    TagManager.dataLayer(tagManagerArgs)
+    window.location.href = return_url
 
     }
   }, [data]);

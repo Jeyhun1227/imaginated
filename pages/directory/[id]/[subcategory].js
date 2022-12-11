@@ -44,37 +44,47 @@ export default function SubCategoryPageMain(props) {
     const [offset, setOffset] = useState(10);
     const [getNewSubcategoryBool, setGetNewSubcategoryBool] = useState(true);
 
-
+    
+    const [IndividualEachAll, setIndividualEachAll] = useState(props.Subcategory_values);
     const [IndividualEach, setIndividualEach] = useState(props.Subcategory_values);
     const [filterSelect, setfilterSelect] = useState("Most Reviews");
     // const [filterSelect] = ["Sponsored", "Highest Rated", "Most Reviews", "Alphabetical"]
     let searchedValueFunction = (searched) => {
       let temp = searched
-      let temp_individual = props.Subcategory_values.filter((e) => (e.first_name.toLowerCase() + ' ' + e.last_name.toLowerCase()).includes(temp))
+      let temp_individual = IndividualEachAll.filter((e) => (e.first_name.toLowerCase() + ' ' + e.last_name.toLowerCase()).includes(temp))
       setIndividualEach(temp_individual)
       setsearchedValue(temp)
     }
-    let filterChange = (filter) => {
-      let filterValue = filter.option;
+    
+    const filterCleaningChange = (IndividualEachAllCleaning, option) => {
       let value_mapping = {'Most Reviewed': ['count', -1, 1], 'Sponsored': ['id', -1, 1], 'Highest Rated': ['avg', -1, 1], 'Alphabetical': ['first_name', 1, -1]}
-      let valuemapped = value_mapping[filterValue]
+      let valuemapped = value_mapping[option]
       let field = valuemapped[0]
-      let IndividualEachTemp = props.Subcategory_values.sort((a,b) => {
+      return IndividualEachAllCleaning.sort((a,b) => {
         let current = a[field]
         let previous = b[field]
         if(current > previous) return valuemapped[1]
         if(current < previous) return valuemapped[2]
         return 0
       })
-      // setsearchedValue("")
+    }
+    
+    let filterChange = (filter) => {
+      let filterValue = filter.option;
+      const IndividualEachTemp = filterCleaningChange(IndividualEachAll, filterValue)
+      
       setIndividualEach(IndividualEachTemp)
-      // setfilterSelect(filterValue)
+      
       setSelected(filter)
     }
     const getNewSubcategory = async () => {
       const Subcategory_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: props.routerID, subcategory: props.subcategoryName, offset}})
       if(Subcategory_values.data.getCategoryPage.rows.length === 0) return setGetNewSubcategoryBool(false);
-      setIndividualEach(IndividualEach.concat(Subcategory_values.data.getCategoryPage.rows))
+      let subcategory_vals = IndividualEachAll.concat(Subcategory_values.data.getCategoryPage.rows);
+      
+      setIndividualEachAll(subcategory_vals);
+      const IndividualEachTemp = filterCleaningChange(subcategory_vals, selected.option)
+      setIndividualEach(IndividualEachTemp)
 
       setOffset(offset += 10)
     }
@@ -219,10 +229,7 @@ export async function getStaticProps({params}){
     const routerID = params.id
     const subcategory = params.subcategory.replace('Learn-', '').replace('-', ' ')
     const Subcategory_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: routerID, subcategory, offset: 0}})
-// 
     // console.log('category_values.error:', category_values.error)
-
-    // let category_values = {}
 
     return {
       props: {

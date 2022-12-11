@@ -12,7 +12,7 @@ export default function MainParentPage({category, subcategory}) {
     <div>
       <Head>
 
-          <title>Imaginated – directory for creators.</title>
+          <title>Directory | Imaginated</title>
           <meta name="description" content="Helping students match with educators and creators grow personally and professionally. Providing in-depth articles, guides, and videos made by credible educational creators." />
           <link rel="canonical" href="https://www.imaginated.com/directory/" />
           <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>

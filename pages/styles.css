@@ -69,7 +69,7 @@ a{
    opacity: 50%;
   position: relative;
   width: 90%;
-  max-width: 270px;
+  max-width: 220px;
 }
 
 .editable-indvidual{
@@ -86,8 +86,8 @@ a{
 .index-mention-image-total{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10%;
   margin: 15px 50px 0px 50px;
+  justify-items: center;
 }
 
 .width-80{
@@ -171,12 +171,30 @@ a{
 .padding-top-bottom-10{
   padding:10px 0;
 }
+
+.padding-left-right-10{
+  padding: 0px 10px;
+}
+
 .padding-top-bottom-20{
   padding:20px 0;
 }
 .padding-top-20{
   padding-top:20px;
 }
+
+.padding-top-10{
+  padding-top:10px;
+}
+
+.font-size-24{
+  font-size: 24px;
+}
+
+.align-bottom{
+  vertical-align: text-bottom;
+}
+
 
 .grid-layout-70-30{
   display: grid;
@@ -215,6 +233,22 @@ a{
 
 .inline-block-block{
   display: inline-block;
+}
+.float-right{
+  float: right;
+}
+
+.width-height-25{
+  width: 25px;
+  height: 25px;
+}
+
+.color-dark-blue{
+  color: rgb(33 65 81);
+}
+
+.color-dark-orange{
+  color: #E08B22;
 }
 
 .border-selected{
@@ -910,8 +944,8 @@ div#ez-toc-container p.ez-toc-title {
     margin-right: 0px;
   }
   .index-mention-image-total{
-    gap: 10px;
     margin: 15px 10px 0px 10px;
+    gap: 10px;
   }
   .index-mention-image {
     width: 100%;
