@@ -75,6 +75,7 @@ getEachIndividual(
             type
             review
             title
+            engagement
             validation
           }
           favorites{

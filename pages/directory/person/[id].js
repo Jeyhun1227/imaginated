@@ -5,7 +5,7 @@ import {LOAD_INDIVIDUAL_PAGE} from '../../../GraphQL/Queries/Individual';
 import {LOAD_STATIC_DIRECTORY} from '../../../GraphQL/Queries/StaticPaths';
 import client from '../../../components/GraphQL';
 import {Rating} from '@mui/material';
-import { Bookmark, ExclamationCircle, ShareFill, Dot, PatchCheckFill, HourglassBottom, PersonXFill, X, Check, Pen } from 'react-bootstrap-icons';
+import { Bookmark, ExclamationCircle, ShareFill, Dot,  X, Check } from 'react-bootstrap-icons';
 import { signIn, useSession} from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
@@ -33,11 +33,11 @@ import {
   RedditIcon,
   TwitterIcon
 } from "react-share";
-import {CATEOGORIES_PAGE} from '../../../GraphQL/Queries/CategoryPage';
 import Sidebar from '../../../components/Person/Sidebar';
 import IndividualYoutube from '../../../components/Person/Youtube';
 import IndividualFreeOfferingComponent from '../../../components/Person/FreeOffering';
-
+import ReviewsComponent from '../../../components/Person/Reviews';
+import Script from 'next/script'
 
 export default function IndividualPageMain({Individual_values, category_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID}) {
   const {data: session} = useSession()
@@ -111,14 +111,17 @@ export default function IndividualPageMain({Individual_values, category_values, 
   const [shareUrl, setShareUrl] = useState('');
   const [showShare, setShowShare] = useState(false);
   const [UserSignUp, setUserSignUp] = useState(false);
+  const [ReviewEngagement, setReviewEngagement] = useState([]);
 
   useEffect(() => {
     let href_hash = window.location.href;
     let href_value = (href_hash.split("#").length > 1) ? href_hash.split("#")[1].toLowerCase() : null;
     seturlType(href_value);
-    getUseStart()
+    setreviewAll(reviews)
+
+    // getUseStart()
     let signup = localStorage.getItem('signup');
-    setUserSignUp(signup > 6)
+    setUserSignUp(signup > 2)
     let temp_free_offers = freeOfferFunc();
     setFree_offers_array(temp_free_offers)
     setShareUrl(window.location.href)
@@ -126,6 +129,10 @@ export default function IndividualPageMain({Individual_values, category_values, 
     let temp_num = localStorage.getItem('signup') ? Number(localStorage.getItem('signup')): 0;
     localStorage.setItem('signup', 1 + temp_num);
   }, []);  
+
+  useEffect(() => {
+    getUseStart()
+  }, [session]); 
   
   let chanUrlType = (type) => {
     history.replaceState(undefined, undefined, '#'+ type)
@@ -210,9 +217,10 @@ export default function IndividualPageMain({Individual_values, category_values, 
   }
 
   const getUserFollowing = async () => {
-    const getUser = await axios.post(`${window.location.origin}/api/User/GetUser/`, {});
+    const getUser = await axios.post(`${window.location.origin}/api/User/GetUser/`, {id: Individual_values.id});
     const getBool = getUser.data.user_follow.find((e) => e.individualid == Individual_values.id) != null;
     setgetUserFollowingBool(getBool)
+    setReviewEngagement(getUser.data.reviews_engagement)
   }
 
   const getUseStart = async () => {
@@ -287,6 +295,21 @@ export default function IndividualPageMain({Individual_values, category_values, 
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
           </Head>
+          {(['Jonathan-Paragas'].includes(Individual_values.linkname))?<Head>
+            <script type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org/", 
+              "@type": "Product", 
+              "name": `${Individual_values.first_name} ${Individual_values.last_name}`,
+              "image": Individual_values.imagelink,
+              "description": Individual_values.description,
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": Individual_values.avg,
+                "bestRating": "5",
+                "ratingCount": Individual_values.count
+              }
+            }) }}></script></Head>:null}
           <div className= "mx-auto max-w-7xl">
           <main className="pt-2 px-2 mt-2.5">
             <div className="flex flex-row flex-wrap space-x-3">
@@ -567,42 +590,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                 <div className="my-6">
                   <h5 className="font-bold ">Reviews</h5>
                   {(!UserSignUp || session) ? <>
-                  {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) =><div key={rev.id} className="py-6 border-b border-gainsboro">
-                    <div className="flex flex-row">
-                      <div className="pr-4">
-                        <Image className="border-radius-four" src={rev.imagelink? rev.imagelink: "/user.png"} width={55} height={55}/>
-                      </div>
-                      <div className="">
-                        <div className="mb-2 font-semibold">{rev.name}</div>
-                        <div className="person-grid-col-2 flex-row space-x-4">
-                          {(rev.validation === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Validated Review</div></div> : <div className="inline-flex items-center justify-center space-x-2"><HourglassBottom className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Pending Validated</div></div>}
-                          {(rev.verified === 'Y')? <div className="inline-flex items-center justify-center space-x-2"><PatchCheckFill className="w-3.5 h-3.5 fill-sea-green"/><div className="truncate">Verified User</div></div> : <div className="inline-flex items-center justify-center space-x-2"><PersonXFill className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Unverified User</div></div>}
-                          {(rev.editable) ? <div className="inline-flex items-center justify-center space-x-2 editable" onClick={() => editvalue(rev.id)}><Pen className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Edit</div></div>:null}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row flex-wrap mt-4 mb-2">
-                      <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} sx={{
-                            color: "yellow",
-                            borderRadius: '10px',
-                            '& .MuiSvgIcon-root': {
-                              fill: '#F8DC81',
-                            },
-                            '& .css-dqr9h-MuiRating-label': {
-                            display: 'block'
-                            }                        
-                          }} readOnly/>
-                      <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
-                      <div className="text-dim-grey">{rev.createDate_Val}</div>
-                      <div className="inline-flex items-center justify-center px-2.5 "><Dot className="w-5 h-5 fill-dim-grey"/></div>
-                      <div className="text-dim-grey">Review for {rev.premium_name_value}</div>
-                    </div>
-                    {/* <h4 className="font-semibold">"{rev.title}"</h4> */}
-                    <div className="pb-2 mt-4 font-semibold">How has this benefited you?</div>
-                    <div>{rev.like}</div>
-                    <div className="pb-2 mt-4 font-semibold">What do you think could be better?</div>
-                    <div>{rev.dislike}</div>
-                  </div> )}
+                  {reviewAll.slice(0, showMoreReview.itemsToShow).map((rev) => <ReviewsComponent reviews={rev} key={rev.id} IndividualID={Individual_values.id} ReviewEngagement={ReviewEngagement.find((e) => e.reviewid === rev.id)} session={session}/>)}
                   <div className="border-t-2 -mt-0.5 border-white">
                     <div className="flex mr-auto truncate lg:w-2/12">
                       <div onClick={reviewShowMore} className={`items-center justify-center px-4 py-1.5 text-center text-green-vogue cursor-pointer border border-green-vogue ${reviews.length - showMoreReview.itemsToShow <= 0 ? "hidden" : 0}`}>Load More Review</div>

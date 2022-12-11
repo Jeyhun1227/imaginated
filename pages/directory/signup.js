@@ -1,9 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Apple, CheckLg } from 'react-bootstrap-icons';
-import womanBehindComputer from '../public/signup/WomanBehindComputer_336x306.png';
-import {CREATER_USER_CUSTOM} from '../GraphQL/Mutations/Auth'
+import womanBehindComputer from '../../public/signup/WomanBehindComputer_336x306.png';
+import {CREATER_USER_CUSTOM} from '../../GraphQL/Mutations/Auth'
 import Image from 'next/image'
-import client from '../components/GraphQL';
+import client from '../../components/GraphQL';
 import { useMutation } from "@apollo/client";
 import Link from 'next/link';
 
