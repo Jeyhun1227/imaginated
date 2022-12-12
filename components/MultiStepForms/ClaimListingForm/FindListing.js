@@ -85,7 +85,7 @@ export default function FindListing(props) {
                         <div className="py-12">
                             <div className="text-left sm:text-center">
                                 <h1 className="font-bold">Find & Claim Your Listing</h1>
-                                <div className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/signup"><a>Get started</a></Link></div> today.</div>
+                                <div className="my-3 text-dim-grey">Thousands of people visit Imaginated every day looking for new personal brands to learn from. Customize and optimize your listing to make it easier for new users to find you. It’s free!! <div className="no-underline text-denim"><Link href="/directory/signup/"><a>Get started</a></Link></div> today.</div>
                             </div>
                             <div className="flex mx-auto mt-8 place-content-center"> 
                                 {/* <Image className="object-cover object-center sm:justify-center" 
