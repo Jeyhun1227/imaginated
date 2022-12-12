@@ -49,7 +49,7 @@ export default function Login({return_url}) {
                   <h2 className="font-bold">Log In</h2>
                   <span>
                     <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                    <div className="inline-block pl-1 no-underline"><Link href={`/signup?return_url=${return_url}`} >Sign Up</Link></div>
+                    <div className="inline-block pl-1 no-underline"><Link href={`/directory/signup/?return_url=${return_url}`} >Sign Up</Link></div>
                     <p className="mb-0 text-dim-grey">By logging in, you agree to Imaginated&apos;s</p>
                     <span className="flex flex-row">
                       <div className="pr-1 no-underline"><Link href="/termsofservice" >Terms of Service</Link></div>
@@ -163,7 +163,7 @@ export default function Login({return_url}) {
                     </button>
                     <span>
                       <p className="inline-block mb-0 text-dim-grey">New to Imaginated?</p> 
-                      <div className="inline-block pl-1 no-underline"><Link href={`/signup?return_url=${return_url}`} >Sign Up</Link></div>
+                      <div className="inline-block pl-1 no-underline"><Link href={`/directory/signup/?return_url=${return_url}`} >Sign Up</Link></div>
                     </span>
                   </div>
                 </form>
