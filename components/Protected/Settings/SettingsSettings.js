@@ -2,6 +2,7 @@ import {useState, useRef} from "react";
 import { useSession, signOut } from "next-auth/react";
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 export default function SettingsSettings(props) {
     
@@ -39,6 +40,8 @@ export default function SettingsSettings(props) {
         }
 
         setErrorPassword("Password Changed")
+        const cookies = new Cookies();
+        cookies.remove('user_id', { path: '/' });
         signOut()
     }
 
@@ -52,6 +55,8 @@ export default function SettingsSettings(props) {
             return setErrorEmail(returned_email.data.error);
         }
         setErrorEmail('Email Changed');
+        const cookies = new Cookies();
+        cookies.remove('user_id', { path: '/' });
         signOut()
     }
 

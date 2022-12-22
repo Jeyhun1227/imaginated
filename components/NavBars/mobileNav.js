@@ -10,6 +10,8 @@ import GetSearchResults from './headerSearch/HeaderSearch';
 import ImageWithFallback from '../Image/Image'
 import Imaginated_logo from '../../public/Imaginated_logo.png';
 import BlogMenu from './BlogMenu.json';
+import Cookies from 'universal-cookie';
+import HeadBar from './headBar';
 
 export default function MobileNav() {
 
@@ -19,7 +21,13 @@ export default function MobileNav() {
   const [ShowResults, setShowResults] = useState(true);
   const [clickedBlog, setClickedBlog] = useState('');
   const [ClickedMainBlog, setClickedMainBlog] = useState(false);
+  const [showHeadbar, setShowHeadbar] = useState(false);
 
+  const signOutFunc = () => {
+    const cookies = new Cookies();
+    cookies.remove('user_id', { path: '/' });
+    signOut()
+  }
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if(!searchTerm) return;
@@ -38,7 +46,9 @@ export default function MobileNav() {
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
 
-
+  useEffect(() => {
+    if(session === null) setShowHeadbar(true)
+  }, [session])
 
   const links = [
     {
@@ -87,6 +97,7 @@ export default function MobileNav() {
 
   return (
     <div>
+      {showHeadbar? <HeadBar/>:null}
       <div className="relative z-10 bg-white shadow-sm md:hidden">
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
@@ -303,9 +314,9 @@ export default function MobileNav() {
                 </> : <> 
                   <div className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white no-underline border border-transparent shadow-sm bg-dark-blue hover:bg-indigo-700">
                   <button
-                    onClick={signOut}
+                    onClick={signOutFunc}
                     >
-                    Logout
+                    Log out
                   </button>
                   </div>
                 </>}

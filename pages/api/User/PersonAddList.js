@@ -40,17 +40,15 @@ var upload = multer({
     storage: multerS3({
         s3: S3,
         // acl: 'public-read',
-        bucket: 'imaginated-user-images-public',
+        bucket: 'imaginated-individual-premium-image-public',
         // META DATA FOR PUTTING FIELD NAME
         metadata: function (req, file, cb) {
             cb(null, { fieldName: file.fieldname });
         },
         // SET / MODIFY ORIGINAL FILE NAME
         key: async function (req, file, cb) {
-// path.extname(file.originalname).toLowerCase()
             const session = await getSession({ req })
-            console.log('file: ', file)
-            cb(null, 'user-' + session.id + path.extname(file.originalname)); //set unique file name if you wise using Date.toISOString()
+            cb(null, `${session.id}-${file.originalname}`); 
 
         }
     }),
@@ -79,16 +77,33 @@ var upload = multer({
 let uploadFile = upload.single("Image");
 handler.use(uploadFile);
 handler.post(async (req, res) => {
-    const session = await getSession({ req })
+  const session = await getSession({ req })
 
-    var user_updated = await PoolConnection.query('UPDATE "User" SET image = $1 WHERE id = $2', ['https://imaginated-user-images-public.s3.amazonaws.com/user-' + session.id + path.extname(req.file.originalname), session.id])
-// https://imaginated-user-images-public.s3.amazonaws.com/ID-32220502-d874-4bda-bb95-34c1cf232885
-  // console.log("req.individual: ", req.body.individual);
-// 
-//   let url = "http://" + req.headers.host;
-//   let filename = req.file.filename;
+
+// https://imaginated-individual-premium-image-public.s3.amazonaws.com/favorite-undefined-cl6a08bxq0006tez2mt9h0x44-test
+    const p_result = await PoolConnection.query('SELECT * FROM "User" WHERE id = $1', [session.id])
+    if(p_result.rows.length === 0) return {error: 'No Individual'}
+    const individualId = p_result.rows[0].individual
+    if(!individualId) return {error: 'No Individual'}
+    const imagelink = `https://imaginated-individual-premium-image-public.s3.amazonaws.com/${session.id}-${req.file.originalname}`
+    let sql_command = null;
+    let values = [];
+    if(req.body.type === 'favorite'){
+      sql_command = `INSERT INTO individual_user_edit(record_type, userid, individualid, imagelink, link, category, description, name) VALUES($1, $2, $3, $4, $5,$6,$7,$8)`
+      values = ['favorite', session.id, individualId, imagelink, req.body.link, req.body.category, req.body.description, req.body.name]
+
+    }else{
+      let subcategory = req.body.subcategory.split(' || ');
+      sql_command = `INSERT INTO individual_user_edit(record_type, type, userid, individualid, imagelink, link, subcategory, description, name) VALUES($1, $2, $3, $4, $5,$6,$7,$8, $9)`
+      values = ['paid', req.body.type, session.id, individualId, imagelink, req.body.link, subcategory, req.body.description, req.body.name]
+
+    }
+
+    const individual_added = await PoolConnection.query(sql_command, values)
+    // name, description, subcategory, imagelink, link, type, rank
 
   res.status(200).send({
+      result: individual_added.rowCount
     // result: result,
     // url: url + "/public/" + req.file.filename,
   });
@@ -101,17 +116,3 @@ export const config = {
     },
 };
 
-// export default async (req, res) => {
-//   const session = await getSession({ req })
-//     if (req.method === 'POST') {
-//         if (session) {
-
-//             console.log(req.files)
-//             console.log(req)
-//         }
-//     }
-//     return res.status(403).json({
-//         message:
-//             'You must be sign in to view the protected content on this page.',
-//         })
-// }

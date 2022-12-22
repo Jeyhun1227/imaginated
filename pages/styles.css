@@ -121,6 +121,33 @@ a{
   display: flex;
 }
 
+.delete-container{
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid;
+    margin-top: 10px;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.margin-left-5{
+  margin-left: 5px;
+}
+
+.fixed-pixels-top{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.margin-bottom-35{
+  margin-bottom: 35px
+}
+
 .indiv-gallery-parent > .image-gallery{
   margin: auto;
 }
@@ -191,6 +218,14 @@ a{
   font-size: 24px;
 }
 
+.font-size-30{
+  font-size: 30px;
+}
+
+.position-absolute{
+  position: absolute
+}
+
 .align-bottom{
   vertical-align: text-bottom;
 }
@@ -245,6 +280,15 @@ a{
 
 .color-dark-blue{
   color: rgb(33 65 81);
+}
+
+.center-all{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-max-500{
+  max-width: 500px;
 }
 
 .color-dark-orange{

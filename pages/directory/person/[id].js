@@ -142,12 +142,14 @@ export default function IndividualPageMain({Individual_values, category_values, 
   const headerSection = useRef(null);
   const aboutSection = useRef(null);
   const offeringsSection = useRef(null);
+  const offeringsPremiumSection = useRef(null);
   const reviewsSection = useRef(null);
   const favoritesSection = useRef(null);
 
   const sectionRefs = [
     { section: "about", ref: aboutSection },
     { section: "offerings", ref: offeringsSection },
+    { section: "offerings", ref: offeringsPremiumSection },
     { section: "reviews", ref: reviewsSection },
     { section: "favorites", ref: favoritesSection },
   ];
@@ -483,7 +485,10 @@ export default function IndividualPageMain({Individual_values, category_values, 
                 <Sidebar category_values={category_values.slice(0, 5)}/>
               </div>
 
-              <div className={"my-10"}>
+              <div className={"my-10"} ref={offeringsPremiumSection}>
+                {Object.keys(premium_offers_types).length > 0 ? <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
+                  <h3>Premium Offerings</h3>
+                </div>:null}
                 <div>{Object.keys(premium_offers_types).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
                   <div className="flex justify-between pb-3">
                     <h3 className="">{key}</h3>
@@ -508,7 +513,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                                 }                        
                               }} readOnly/>
                           <div className="text-denim">{value.avg}</div>
-                          <div className="text-denim">({value.count})</div>
+                          <div className="text-denim">{value.count ? `(${value.count})`:null}</div>
                         </div>
                       <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                     </div>)}
@@ -518,6 +523,9 @@ export default function IndividualPageMain({Individual_values, category_values, 
               </div>
             {/* <div className={(urlType === 'favorites')? null: styles.displayNone}> */}
             <div className={"my-8"} ref={favoritesSection}>
+            {Object.keys(favorites_offers).length > 0 ? <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
+                <h3>Favorites</h3>
+            </div>:null}
             {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
                 <h3 className="pb-3">{key}</h3>
                 <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
