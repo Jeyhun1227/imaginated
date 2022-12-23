@@ -18,9 +18,10 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
   });
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://localhost:5000/graphql" }),
+    new HttpLink({ uri: "https://api.imaginated.com/graphql" }),
   ]);
-  // "https://api.imaginated.com/graphql"
+  // http://localhost:5000/graphql
+  // https://api.imaginated.com/graphql
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: link,
