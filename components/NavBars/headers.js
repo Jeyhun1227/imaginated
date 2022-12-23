@@ -12,14 +12,18 @@ import Imaginated_logo from '../../public/Imaginated_logo.png';
 import Image from 'next/image'
 import BlogMenu from './BlogMenu.json';
 import MarketMenu from './MarketMenu.json';
+import Cookies from 'universal-cookie';
+import HeadBar from './headBar';
 
-export default function Header() {
+export default function Header({main_blog_value}) {
   let placeholder = 'Search for a creator or category'
+  const blog_header = 'Learn [Category] for free - See the top educators'
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
   const [ShowResults, setShowResults] = useState(true);
   const [SubMenuHover, setSubMenuHover] = useState('');
+  const [showHeadbar, setShowHeadbar] = useState(false);
 
 
   var location_href = '';
@@ -63,6 +67,9 @@ export default function Header() {
     () => window.removeEventListener('resize', handleResize);
   }, [])
 
+  useEffect(() => {
+    if(session === null) setShowHeadbar(true)
+  }, [session])
 
   const userMenu = [
     {
@@ -142,7 +149,14 @@ export default function Header() {
   }
   const useHover = true;
 
-  return (
+  const signOutFunc = () => {
+    const cookies = new Cookies();
+    cookies.remove('user_id', { path: '/' });
+    signOut()
+  }
+
+  return (<div>
+          {showHeadbar? <HeadBar main_blog_value={main_blog_value}/>:null}
     <nav className="hidden md:block max-w-7xl mt-1 mx-auto md:border-b md:border-very-light-grey px-2 h-16 sm:px-4 py-2.5">
       {/* <div>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPQDSJ"
@@ -442,7 +456,7 @@ export default function Header() {
                         ))}
                         <Menu.Item>
                           {({ active }) => (
-                            <div onClick={signOut} className={classNames(
+                            <div onClick={signOutFunc} className={classNames(
                               active ? 'bg-white-smoke text-gray-900' : 'text-gray-700',
                               'flex items-center no-underline margin-top-bottom')}>
                               <div >
@@ -468,6 +482,6 @@ export default function Header() {
           </div>
       </div>
     </nav>
-    
+    </div>
   )
 }

@@ -27,9 +27,14 @@ import axios from 'axios';
 export default function Post( data ){
 
     const post = data.post;
-    const categories = post.categories.nodes[0]
-    var category_all = categories.ancestors ? categories.ancestors.nodes.filter((e) => e.uri):[];
-    category_all.push({name: categories.name, uri: categories.uri})
+    // const categories = post.categories.nodes[0]
+    const getCategories = (categories) => {
+      var cat = categories.ancestors ? categories.ancestors.nodes.filter((e) => e.uri):[];
+      cat.push({name: categories.name, uri: categories.uri})
+      return cat
+    };
+    const [category_all, setCategory_all] = useState(getCategories(data.post.categories.nodes[0]));
+
     const author = post.author.node;
     const date = post.modified;
     var today = new Date(date);

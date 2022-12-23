@@ -42,7 +42,7 @@ export default async (req, res) => {
                 Individual: yup
                   .number(),
                 premium_offer: yup
-                  .number().nullable(true),
+                  .string().nullable(true),
                 free_offer: yup
                   .string().nullable(true)
             }); 

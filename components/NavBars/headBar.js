@@ -1,16 +1,25 @@
 
 import {useState} from "react";
-
-export default function HeadBar() {
+import Link from "next/link"
+export default function HeadBar({main_blog_value}) {
     const [closeHeadBar, setCloseHeadBar] = useState(true);
+    const listOfTypes = {'Photography': ['/directory/Photography', 'Photography']}
+    const blog_header = 'Learn [Category] for free - See the top educators'
 
+
+    const getCustomMessage = (value) => {
+      return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn {value[1]} for free - </div><div className='underline inline-block margin-left-5'><Link href={value[0]}><a> See the top educators</a></Link></div></div></div>
+    }
+    const getCurrentLinks = () => {
+      return <div className="text-xs text-white sm:text-base "><div className='underline inline-block'><Link href='/directory/signup'><a>Sign up</a></Link></div> <div className='inline-block'>for free to see and leave reviews!</div></div>
+    }
   return (
     
-      closeHeadBar && <div className="flex items-center justify-center h-10 bg-dark-blue">
+      closeHeadBar && <div><div className= {main_blog_value && listOfTypes[main_blog_value] ? "fixed-pixels-top flex items-center justify-center h-10 bg-dark-blue": "flex items-center justify-center h-10 bg-dark-blue"}>
       <div className="text-center">
-        <div className="text-xs text-white sm:text-base ">Sign up for free to see and leave reviews!</div>
+        {main_blog_value && listOfTypes[main_blog_value] ? getCustomMessage(listOfTypes[main_blog_value]): getCurrentLinks()}
       </div>
-      <div className="absolute ml-auto top-1 right-2">
+      <div className="absolute ml-auto right-2">
         <button onClick={() => {
           setCloseHeadBar(false);
         }} type="button" className="inline-block leading-normal text-center text-white uppercase align-middle rounded-full w-9 h-9">
@@ -19,6 +28,8 @@ export default function HeadBar() {
         </svg>
         </button>
       </div>
+    </div>
+    {main_blog_value && listOfTypes[main_blog_value] ?<div className="margin-bottom-35"></div>:null}
     </div>
     
   )

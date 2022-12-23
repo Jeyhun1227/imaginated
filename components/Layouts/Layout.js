@@ -6,16 +6,12 @@ import Footer from '../NavBars/footer';
 import HeadBar from '../NavBars/headBar';
 import Head from 'next/head'
 import Script from 'next/script';
-import TagManager from 'react-gtm-module'
- 
-const tagManagerArgs = {
-    gtmId: 'GTM-PZPQDSJ',
-    dataLayerName: 'PageDataLayer'
 
-}
  
 
 export default function Layout({ children }) {
+  const main_blog_value = children.props.post && children.props.post.categories ? children.props.post.categories.nodes[0].name : null;
+
   const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -30,7 +26,6 @@ export default function Layout({ children }) {
       setWindowDimensions(getWindowDimensions());
     }
     setWindowDimensions(getWindowDimensions());
-    TagManager.initialize(tagManagerArgs)
 
     window.addEventListener('resize', handleResize);
     () => window.removeEventListener('resize', handleResize);
@@ -39,21 +34,23 @@ export default function Layout({ children }) {
   return (
     
     <>
-        {/* <Script   id="show-banner"
+          {/* <Partytown debug={true} forward={['dataLayer.push']} /> */}
+
+          <Script id='gtm-setup'
           dangerouslySetInnerHTML={{
             __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-PZPQDSJ');`
-            }}  /> */}
+            }}/>
         <Script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="//scripts.mediavine.com/tags/imaginated.js"/>
         <Head>
           <link rel="shortcut icon" href="https://wordpress.imaginated.com/wp-content/uploads/2021/02/cropped-google-removebg-preview-3.png" />
           <meta httpEquiv="Content-Security-Policy" content="block-all-mixed-content" />
         </Head>
-        <HeadBar/>
-        {(windowDimensions.width > 1000)?<Header placeholder={"Search for a creator or category"}/>:<MobileNav/>}
+        {/* <HeadBar/> */}
+        {(windowDimensions.width > 1000)?<Header main_blog_value={main_blog_value}/>:<MobileNav main_blog_value={main_blog_value}/>}
         <main>{children}</main>
         <div className="shadow-inner bg-light-grey">
           <Footer/>

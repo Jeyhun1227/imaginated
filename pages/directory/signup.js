@@ -6,7 +6,7 @@ import Image from 'next/image'
 import client from '../../components/GraphQL';
 import { useMutation } from "@apollo/client";
 import Link from 'next/link';
-
+import Cookies from 'universal-cookie';
 import { useEffect, useState } from "react";
 
 export default function Signup() {
@@ -49,6 +49,11 @@ export default function Signup() {
 
       // const newUserCreated = await client.query({query:CREATER_USER_CUSTOM, variables: {fullname, email, password}})
     }
+  const signOutFunc = () => {
+      const cookies = new Cookies();
+      cookies.remove('user_id', { path: '/' });
+      signOut()
+  }
   return (
     <div>
       <div className="bg-white xl:px-0">
@@ -155,7 +160,7 @@ export default function Signup() {
                           style={{ width: "25px", borderRadius: "50%" }}
                         />
                       )}
-                      <button onClick={signOut}>Sign Out</button>
+                      <button onClick={signOutFunc}>Sign Out</button>
                     </div>
                   )}
                 </div>

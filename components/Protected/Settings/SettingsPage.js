@@ -5,17 +5,23 @@ import SettingsSettings from "./SettingsSettings";
 import { Star, Gear, BoxArrowInRight } from 'react-bootstrap-icons';
 import { Tab } from '@headlessui/react'
 import { useEffect, useState } from "react";
+import Cookies from 'universal-cookie';
 
 export default function SettingsPage(props) {
 
     const [type, setType] = useState(props.type);
     useEffect(() => {
         setType(props.type)
-      }, [props]);
+    }, [props]);
     
-      const changeType = (changeTypeValue) => {
-        setType(changeTypeValue)
-      }
+    const changeType = (changeTypeValue) => {
+    setType(changeTypeValue)
+    }
+    const signOutFunc = () => {
+        const cookies = new Cookies();
+        cookies.remove('user_id', { path: '/' });
+        signOut()
+    }
   return (
     <div className="">
         <section className="hidden px-4 sm:block sm:px-0">
@@ -39,7 +45,7 @@ export default function SettingsPage(props) {
                                 <Gear/>
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Settings</Tab>
                             </li>
-                            <li onClick={signOut} className="flex items-center py-1 pl-3 space-x-3 cursor-pointer hover:bg-dark-blue hover:text-white" >
+                            <li onClick={signOutFunc} className="flex items-center py-1 pl-3 space-x-3 cursor-pointer hover:bg-dark-blue hover:text-white" >
                                 <BoxArrowInRight/>
                                 <p className="mb-0.5 sm:mr-auto lg:mr-0 text-base font-medium">Log out</p>
                             </li>

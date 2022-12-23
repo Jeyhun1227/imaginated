@@ -3,25 +3,20 @@ import React, { useEffect, useState } from "react";
 import manBehindComputer from '../../public/logIn/ManBehindComputer_427x574.png'
 import Image from 'next/image'
 import Link from 'next/link';
-import TagManager from 'react-gtm-module'
+import Cookies from 'universal-cookie';
 
 export default function Login({return_url}) {
   const {data} = useSession()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [FormError, setFormError] = useState();
+  const [signInProcess, setSignInProcess] = useState();
 
   useEffect(() => {
     if (data) {
-    const tagManagerArgs = {
-      dataLayer: {
-          user_id: data.id,
-          event: 'Login'
-      },
-      dataLayerName: 'PageDataLayer'
-    }
-    TagManager.dataLayer(tagManagerArgs)
-    window.location.href = return_url
+      const cookies = new Cookies();
+      cookies.set('user_id', data.id, { path: '/' });
+      window.location.href = return_url
 
     }
   }, [data]);
@@ -33,6 +28,17 @@ export default function Login({return_url}) {
       email: email})
     if(!signedin.ok) return setFormError('Incorrect Email or Password')
     window.location.href = return_url
+  }
+
+  const signInValue = (value) => {
+    if(signInProcess) return;
+    setSignInProcess(true)
+    signIn(value)
+  }
+  const signOutFunc = () => {
+    const cookies = new Cookies();
+    cookies.remove('user_id', { path: '/' });
+    signOut()
   }
 
   return (
@@ -72,7 +78,7 @@ export default function Login({return_url}) {
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 font-bold text-black truncate border border-transparent text-med bg-white-smoke group" 
-                      onClick={() => signIn("google")}>
+                      onClick={() => signInValue("google")}>
                         <span className="absolute inset-y-0 left-0 flex items-center pl-12 sm:pl-2 lg:pl-12">
                           <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px">
                               <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
@@ -86,7 +92,7 @@ export default function Login({return_url}) {
                     <button 
                       type="submit"
                       className="relative flex justify-center w-full px-4 py-2 font-bold text-white truncate border border-transparent text-med bg-dodger-blue group" 
-                      onClick={() => signIn("facebook")}>
+                      onClick={() => signInValue("facebook")}>
                         <span className="absolute inset-y-0 left-0 flex items-center pl-12 sm:pl-2 lg:pl-12">
                           <svg className="w-5 h-5 fill-white" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px">
                             <path d="M32,11h5c0.552,0,1-0.448,1-1V3.263c0-0.524-0.403-0.96-0.925-0.997C35.484,2.153,32.376,2,30.141,2C24,2,20,5.68,20,12.368 V19h-7c-0.552,0-1,0.448-1,1v7c0,0.552,0.448,1,1,1h7v19c0,0.552,0.448,1,1,1h7c0.552,0,1-0.448,1-1V28h7.222 c0.51,0,0.938-0.383,0.994-0.89l0.778-7C38.06,19.518,37.596,19,37,19h-8v-5C29,12.343,30.343,11,32,11z"/>
@@ -107,7 +113,7 @@ export default function Login({return_url}) {
                           style={{ width: "25px", borderRadius: "50%" }}
                         />
                       )}
-                      <button onClick={signOut}>Sign Out</button>
+                      <button onClick={signOutFunc}>Sign Out</button>
                     </div>
                   )}
                 </div>
