@@ -98,9 +98,9 @@ export default function MobileNav() {
   return (
     <div>
       {showHeadbar? <HeadBar/>:null}
-      <div className="relative z-10 bg-white shadow-sm md:hidden">
+      <div className="relative z-10 bg-white shadow-sm">
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
-          <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
+          <div className="flex items-center justify-between py-6 md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/"><a >
                 <span className="sr-only">Imaginated</span>
@@ -194,7 +194,7 @@ export default function MobileNav() {
         </Transition>
         </Popover> */}
             <Popover className="flex justify-end">
-            <div className="flex justify-end -my-2 -mr-2 md:hidden">
+            <div className="flex justify-end -my-2 -mr-2">
               <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
                 <span className="sr-only">Open menu</span>
                 <List className="w-6 h-6" aria-hidden="true" />

@@ -148,6 +148,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
                 <label htmlFor="source" className="pb-2.5 block text-sm font-medium text-black">
                 Your rating of this offering?
                 </label>
+                <div className="inline-block vertical-align-top padding-right-5 font-weight-500 font-size-14">Offering Rating: </div>
                 <Rating
                 name="Form Review"
                 defaultValue={0}

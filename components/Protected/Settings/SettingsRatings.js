@@ -118,6 +118,7 @@ export default function SettingsRatings(props) {
                                             <div className="inline-flex items-center justify-center space-x-2 editable2" onClick={() => deleteReviewFunc(rev)}><Trash className="w-3.5 h-3.5 fill-silver"/><div className="truncate">Delete</div></div>
                                         </div>
                                         <div>
+                                        <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                                         <Rating name="name" value={rev.review} precision={0.5} sx={{
                                         color: "yellow",
                                         borderRadius: '10px',

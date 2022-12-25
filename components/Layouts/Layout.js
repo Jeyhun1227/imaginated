@@ -10,7 +10,17 @@ import Script from 'next/script';
  
 
 export default function Layout({ children }) {
-  const main_blog_value = children.props.post && children.props.post.categories ? children.props.post.categories.nodes[0].name : null;
+
+  useEffect(() => {
+    var main_blog_value_temp = [];
+    if(children.props.post && children.props.post.categories){
+      main_blog_value_temp.push(children.props.post.categories.nodes[0].name)
+      if(children.props.post.categories.nodes[0].ancestors)
+      main_blog_value_temp = main_blog_value_temp.concat(children.props.post.categories.nodes[0].ancestors.nodes.map((e) => e.name))
+    }
+    setMain_blog_value(main_blog_value_temp)
+  }, [children])
+
 
   const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -20,6 +30,7 @@ export default function Layout({ children }) {
     };
   }
   const [windowDimensions, setWindowDimensions] = useState({});
+  const [main_blog_value, setMain_blog_value] = useState({});
 
   useEffect(() => {
     function handleResize() {

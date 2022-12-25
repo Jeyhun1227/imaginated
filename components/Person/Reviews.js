@@ -48,6 +48,7 @@ export default function ReviewsComponent({reviews, IndividualID, ReviewEngagemen
       <div className="inline-block" >{(engagement === -1)?<HandThumbsDownFill className="width-height-25 color-dark-orange cursor-pointer" onClick={() => EngagementFunc(0)}/>: <HandThumbsDown className="width-height-25 color-dark-blue cursor-pointer" onClick={() => EngagementFunc(-1)}/>}</div>
     </div>
     <div className="flex flex-row flex-wrap mt-4 mb-2">
+      <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
       <Rating name={rev.name} value={parseFloat(rev.review)} precision={0.5} sx={{
             color: "yellow",
             borderRadius: '10px',
