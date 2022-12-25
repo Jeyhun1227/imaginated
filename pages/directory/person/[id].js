@@ -340,9 +340,9 @@ export default function IndividualPageMain({Individual_values, category_values, 
               </div>
               <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
                 <div className="person-flex flex-row space-x-3 flex-nowrap"> 
-                  <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
-                  <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey">{Individual_values.aka ? `(${Individual_values.aka})`:null}</h2>
-                  <div className="inline-flex items-center justify-center pl-3 md:pt-7 cursor-point"> 
+                  <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7 inline-block">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
+                  {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey inline-block padding-top-5">{`(${Individual_values.aka})`}</h2>:null}
+                  <div className="inline-flex items-center justify-center pl-3 md:pt-7 cursor-point inline-block vertical-align-top padding-top-10-4"> 
                     <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={() => setShowShare(true)}/>
                   </div>
                   {(showShare)?<div>
@@ -370,6 +370,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                   </div>:null}
                 </div>
                 <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
+                <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                   <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
                             color: "yellow",
                             borderRadius: '10px',
@@ -383,6 +384,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                   <div className={styles.inline_block}>{Individual_values.avg}</div>
                   <div className={styles.inline_block}>({Individual_values.count})</div>
                 </div>
+                <div className="hidden space-y-3 sm:space-x-3 md:flex font-weight-500 font-size-14">Categories: </div>
                 <div className="hidden space-y-3 sm:space-x-3 md:flex">
                   {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/Learn-' + e.replace(' ', '-')} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                   <div onClick={showMore} className={`items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
@@ -397,6 +399,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                 </div>
               </div>
               <div className="block col-span-5 md:hidden">
+                <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Categories: </div>
                 <div className="flex flex-wrap space-y-3 md:hidden sm:space-x-3">
                 {Individual_values.subcategory.slice(0, showMoreSubcategory.itemsToShow).map((e) => <Link href={'/directory/' + Individual_values.category + '/Learn-' + e.replace(' ', '-')} key={e} ><a className="flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke">{e}</a></Link>)}
                   <div onClick={showMore} className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${Individual_values.subcategory.length - showMoreSubcategory.itemsToShow <= 0 ? "hidden" : 0}`}>+{Individual_values.subcategory.length - showMoreSubcategory.itemsToShow} more</div>
@@ -502,6 +505,8 @@ export default function IndividualPageMain({Individual_values, category_values, 
                       }} />
                         <div className="pt-3 text-large text-denim">{value.name}</div>
                         <div className="flex flex-row flex-wrap items-center space-x-2">
+                        <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Offering Rating: </div>
+
                           <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
                                 color: "yellow",
                                 borderRadius: '10px',
@@ -513,7 +518,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                                 }                        
                               }} readOnly/>
                           <div className="text-denim">{value.avg}</div>
-                          <div className="text-denim">{value.count ? `(${value.count})`:null}</div>
+                          <div className="text-denim">{value.count ? `"${value.count}"`:null}</div>
                         </div>
                       <div className="w-48 text-sm text-dim-grey">{value.description}</div>
                     </div>)}
@@ -562,6 +567,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                     <div className="flex flex-row">
                       <div className="flex flex-col items-center justify-center w-1/4 ">
                         <h3 className="font-values-big font-bold">{Individual_values.avg}</h3>
+                        <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                         <Rating className="text-base md:text-2xl" name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
                             color: "yellow",
                             borderRadius: '10px',

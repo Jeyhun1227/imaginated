@@ -1,11 +1,20 @@
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Link from "next/link"
 export default function HeadBar({main_blog_value}) {
     const [closeHeadBar, setCloseHeadBar] = useState(true);
+    const [mainValue, setMainValue] = useState(null);
+
     const listOfTypes = {'Photography': ['/directory/Photography', 'Photography']}
     const blog_header = 'Learn [Category] for free - See the top educators'
 
+    useEffect(() => {
+      if (main_blog_value) {
+        let main = main_blog_value.find((e) => listOfTypes[e])
+        if(main) return setMainValue(listOfTypes[main])
+        setMainValue(null)
+      }
+    }, [main_blog_value]);
 
     const getCustomMessage = (value) => {
       return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn {value[1]} for free - </div><div className='underline inline-block margin-left-5'><Link href={value[0]}><a> See the top educators</a></Link></div></div></div>
@@ -15,9 +24,9 @@ export default function HeadBar({main_blog_value}) {
     }
   return (
     
-      closeHeadBar && <div><div className= {main_blog_value && listOfTypes[main_blog_value] ? "fixed-pixels-top flex items-center justify-center h-10 bg-dark-blue": "flex items-center justify-center h-10 bg-dark-blue"}>
+      closeHeadBar && <div><div className= {mainValue ? "fixed-pixels-top flex items-center justify-center h-10 bg-dark-blue": "flex items-center justify-center h-10 bg-dark-blue"}>
       <div className="text-center">
-        {main_blog_value && listOfTypes[main_blog_value] ? getCustomMessage(listOfTypes[main_blog_value]): getCurrentLinks()}
+        {mainValue ? getCustomMessage(mainValue): getCurrentLinks()}
       </div>
       <div className="absolute ml-auto right-2">
         <button onClick={() => {
@@ -29,7 +38,7 @@ export default function HeadBar({main_blog_value}) {
         </button>
       </div>
     </div>
-    {main_blog_value && listOfTypes[main_blog_value] ?<div className="margin-bottom-35"></div>:null}
+    {mainValue?<div className="margin-bottom-35"></div>:null}
     </div>
     
   )

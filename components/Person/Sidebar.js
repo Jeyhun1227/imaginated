@@ -48,6 +48,7 @@ export default function IndividualSidebar({category_values, mobile}) {
                                         <span className="text-[9px] sm:text-sm text-ellipsis text-dim-grey">({e.aka})</span>
                                     </div> :null}
                                 </div>
+                                <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                                 <div className="flex space-x-0.5 sm:space-x-1.5 items-center sm:flex-row sm:flex-wrap">
                                     <Rating name={e.first_name + e.last_name} value={parseFloat(e.avg)} precision={0.5} size="small" sx={{
                                             color: "yellow",

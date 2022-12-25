@@ -392,6 +392,14 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     return classes.filter(Boolean).join(' ')
   }
 
+  const getApproval = () => {
+    if(submitted) return 'Sent for Approval!';
+    if(changeNeeded()) return 'Save Changes first';
+
+    return 'Submit for Approval'
+
+  }
+
   return <div>
           <div className= "mx-auto max-w-7xl">
           <main className="pt-2 px-2 mt-2.5">
@@ -429,6 +437,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                   </div>
                 </div>
                 <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
+                <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                   <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
                             color: "yellow",
                             borderRadius: '10px',
@@ -458,7 +467,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
             <div ref={headerSection} className="sticky top-0 z-50 space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-5">
               <div className='width-max-500 center-all'>
-                <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2" onClick={SubmitChanges}>{submitted ? 'Submitted for Approval': 'Submit for Approval'}</button>
+                <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2" onClick={SubmitChanges}>{getApproval() ? 'Sent for Approval!': 'Submit for Approval'}</button>
                 <button className="relative flex justify-center px-4 py-2 text-white border border-transparent text-med bg-dark-blue group  inline-block" onClick={FreeSaveChanges}>{ changeNeeded() ? 'Save Changes': 'Up to Date!'}</button>
               </div>
               <div>
@@ -534,6 +543,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                     <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224}/>
                       <div className="pt-3 text-large text-denim">{value.name}</div>
                       <div className="flex flex-row flex-wrap items-center space-x-2">
+                      <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
                         <Rating name={value.name} value={parseFloat(value.avg)} precision={0.5} size="small" sx={{
                               color: "yellow",
                               borderRadius: '10px',

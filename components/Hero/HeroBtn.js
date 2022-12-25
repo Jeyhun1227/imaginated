@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 export default function HeroBtn(props) {
-    const varLargeTextTop = "Browse Personal Brands " 
+    const varLargeTextTop = "Browse Educators " 
     const varLargeTextBottom = "by Category" 
     const varSmallText = "Find, research, or discover a creator to learn from."
     const varBtnText = "Edit your profile"
