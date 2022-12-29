@@ -292,7 +292,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
 
   return <div>
           <Head>
-            <title>{`${Individual_values.first_name} ${Individual_values.last_name} ${Individual_values.aka ? `(${Individual_values.aka}) `:''}| Imaginated`}</title>
+            <title>{`${Individual_values.first_name} ${Individual_values.last_name} ${Individual_values.aka ? `"${Individual_values.aka}" `:''}| Imaginated`}</title>
             <meta name="description" content={Individual_values.description}/>
             <link rel="canonical" href={`https://www.imaginated.com/directory/person/${IndividualID}/`} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
@@ -341,7 +341,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
               <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
                 <div className="person-flex flex-row space-x-3 flex-nowrap md:pt-7"> 
                   <h1  className="text-xl font-semibold truncate md:text-3xl inline-block">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
-                  {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg text-dim-grey inline-block padding-top-5">{`(${Individual_values.aka})`}</h2>:null}
+                  {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg text-dim-grey inline-block padding-top-5">{`"${Individual_values.aka}"`}</h2>:null}
                   <div className="pl-3 cursor-point inline-block vertical-align-top padding-top-15-4"> 
                     <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={() => setShowShare(true)}/>
                   </div>
