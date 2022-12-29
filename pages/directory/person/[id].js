@@ -339,10 +339,10 @@ export default function IndividualPageMain({Individual_values, category_values, 
                 <ImageWithFallback src={Individual_values.imagelink} className={styles.IndividualImage} width={80} height={80} fallbackSrc={"/fallbackimage.svg"}/>
               </div>
               <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
-                <div className="person-flex flex-row space-x-3 flex-nowrap"> 
-                  <h1  className="text-xl font-semibold truncate md:text-3xl md:pt-7 inline-block">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
-                  {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg md:pt-7 text-dim-grey inline-block padding-top-5">{`(${Individual_values.aka})`}</h2>:null}
-                  <div className="inline-flex items-center justify-center pl-3 md:pt-7 cursor-point inline-block vertical-align-top padding-top-10-4"> 
+                <div className="person-flex flex-row space-x-3 flex-nowrap md:pt-7"> 
+                  <h1  className="text-xl font-semibold truncate md:text-3xl inline-block">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
+                  {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg text-dim-grey inline-block padding-top-5">{`(${Individual_values.aka})`}</h2>:null}
+                  <div className="pl-3 cursor-point inline-block vertical-align-top padding-top-15-4"> 
                     <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={() => setShowShare(true)}/>
                   </div>
                   {(showShare)?<div>
