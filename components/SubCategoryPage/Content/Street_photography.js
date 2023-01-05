@@ -13,7 +13,7 @@ const StaticHTML = () => {
 
 
 
-<p>Street photography is a broad niche within photography that deals with capturing the essence of humanity through candid photos. Street photography is about viewing the world through the photographer's lens and mind. While street photography does often happen in the street, the word "street photography" is more of a combination of candid portrait photography and action photography. Street photography could imply that it's only photographs of the street or that it only takes place in the street but this is far from the case. It is named "street photography" because the photographer often goes out "into the street," away from the professional studios and setups of strobe lights and flashes, grey cards, and makeup artists. The photographer has to venture out into the wild and capture candid images that convey a story at the same time. There is something freeing about street photography as a photographer. The photographer is not tied down to anything, it's just him/her, their camera, and a story that needs to be told.</p>
+<p>Street photography is a broad niche within photography that deals with capturing the essence of humanity through candid photos. Street photography is about viewing the world through the photographer&apos;s lens and mind. While street photography does often happen in the street, the word "street photography" is more of a combination of candid portrait photography and action photography. Street photography could imply that it&apos;s only photographs of the street or that it only takes place in the street but this is far from the case. It is named "street photography" because the photographer often goes out "into the street," away from the professional studios and setups of strobe lights and flashes, grey cards, and makeup artists. The photographer has to venture out into the wild and capture candid images that convey a story at the same time. There is something freeing about street photography as a photographer. The photographer is not tied down to anything, it&apos;s just him/her, their camera, and a story that needs to be told.</p>
 
 
 
@@ -45,7 +45,7 @@ const StaticHTML = () => {
 
 
 
-<p>The third way you can learn street photography is through paid courses. There are many great paid course platforms out there if you want to go that route. The free information out there online can rival some of the paid content you just have to find it. Luckily, we've gathered the top street photography creators so you can easily filter and search through them. If you want a paid course to spark motivation to learn, then be sure to check out the creator's websites on their Creator Profile to see if that creator offers any paid courses themselves.</p>
+<p>The third way you can learn street photography is through paid courses. There are many great paid course platforms out there if you want to go that route. The free information out there online can rival some of the paid content you just have to find it. Luckily, we&apos;ve gathered the top street photography creators so you can easily filter and search through them. If you want a paid course to spark motivation to learn, then be sure to check out the creator&apos;s websites on their Creator Profile to see if that creator offers any paid courses themselves.</p>
 
 
 
@@ -61,7 +61,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you feel like you're ready to take on street photography, it's time to dive headfirst into it. In the beginning, you may feel very nervous, not knowing what to take photos of or not wanting to take photos of strangers due to fear. It's important to remember that your first few or handful of street photography attempts will most likely result in photos that aren't the best. The important thing is that you're doing it and conquering any fear that you have. But leading up to the first street photography attempts can be difficult, so let's touch on some tips to get into it:</p>
+<p>Once you feel like you&apos;re ready to take on street photography, it&apos;s time to dive headfirst into it. In the beginning, you may feel very nervous, not knowing what to take photos of or not wanting to take photos of strangers due to fear. It&apos;s important to remember that your first few or handful of street photography attempts will most likely result in photos that aren&apos;t the best. The important thing is that you&apos;re doing it and conquering any fear that you have. But leading up to the first street photography attempts can be difficult, so let&apos;s touch on some tips to get into it:</p>
 
 
 
@@ -69,15 +69,15 @@ const StaticHTML = () => {
 
 
 
-<p>We fear what we do not know. In a street photography session, the photographer may fear how people will judge them, they may fear that they won't get any good photos, or they may fear that they'll never be a good street photographer. The best way to ease these feelings is to educate yourself as best as possible on the subject. Knowing the pitfalls and tips from people who have been in your shoes is the best way to go. Those people are the street photography creators that you can find on this page, as mentioned earlier.</p>
+<p>We fear what we do not know. In a street photography session, the photographer may fear how people will judge them, they may fear that they won&apos;t get any good photos, or they may fear that they&apos;ll never be a good street photographer. The best way to ease these feelings is to educate yourself as best as possible on the subject. Knowing the pitfalls and tips from people who have been in your shoes is the best way to go. Those people are the street photography creators that you can find on this page, as mentioned earlier.</p>
 
 
 
-<h3><strong>Don't Give Into Fear</strong></h3>
+<h3><strong>Don&apos;t Give Into Fear</strong></h3>
 
 
 
-<p>Once you've set out on a street photography session, you may feel uneasy but it's only normal. We like things that we're good at, and most likely, a beginning street photographer is not that good at street photography yet. When those feelings start to creep in, don't listen to them and just start photographing. Don't worry too much about the outcome, just remember the education and tips you've learned from the creators.</p>
+<p>Once you&apos;ve set out on a street photography session, you may feel uneasy but it&apos;s only normal. We like things that we&apos;re good at, and most likely, a beginning street photographer is not that good at street photography yet. When those feelings start to creep in, don&apos;t listen to them and just start photographing. Don&apos;t worry too much about the outcome, just remember the education and tips you&apos;ve learned from the creators.</p>
 
 
 
@@ -85,7 +85,7 @@ const StaticHTML = () => {
 
 
 
-<p>Networking with other street photographers is another great way to get started in street photography. If there are local street photographers in your area, then don't be afraid to reach out to them for any local area tips and insights. He/she may give you insights on the best cities to photograph in your area and what times and days are best.</p>
+<p>Networking with other street photographers is another great way to get started in street photography. If there are local street photographers in your area, then don&apos;t be afraid to reach out to them for any local area tips and insights. He/she may give you insights on the best cities to photograph in your area and what times and days are best.</p>
 
 
 
@@ -93,7 +93,7 @@ const StaticHTML = () => {
 
 
 
-<p>Staying consistent as a street photographer is crucial. When you stay consistent, you will develop an "eye" for composition and composing a fast-moving scene. You will start to anticipate people's movements and patterns and know where to stand in order to capture the best image. Staying consistent is also important for getting over those nerves we discussed earlier. The more you do something, the more familiar you will get with it.</p>
+<p>Staying consistent as a street photographer is crucial. When you stay consistent, you will develop an "eye" for composition and composing a fast-moving scene. You will start to anticipate people&apos;s movements and patterns and know where to stand in order to capture the best image. Staying consistent is also important for getting over those nerves we discussed earlier. The more you do something, the more familiar you will get with it.</p>
 
 
 
@@ -101,7 +101,7 @@ const StaticHTML = () => {
 
 
 
-<p>Analyzing your own photos after a street photography session is important for overall growth and improvement as a street photographer. Things to take note of when analyzing your photos include composition techniques and rules, camera settings, and what you like or didn't like about a certain photo. Knowing how to analyze and critique your own photos is important for every niche of photography if you want to improve. Just don't be overly critical of your photos.</p>
+<p>Analyzing your own photos after a street photography session is important for overall growth and improvement as a street photographer. Things to take note of when analyzing your photos include composition techniques and rules, camera settings, and what you like or didn&apos;t like about a certain photo. Knowing how to analyze and critique your own photos is important for every niche of photography if you want to improve. Just don&apos;t be overly critical of your photos.</p>
 
 
 
@@ -117,7 +117,7 @@ const StaticHTML = () => {
 
 
 
-<p>Before diving into street photography, it's important to understand the skills you need in order to be successful.</p>
+<p>Before diving into street photography, it&apos;s important to understand the skills you need in order to be successful.</p>
 
 
 
@@ -125,7 +125,7 @@ const StaticHTML = () => {
 
 
 
-<p>2. Patience: Street photography isn't a passive hobby, so patience is key when waiting for the ideal moment to capture your photo.</p>
+<p>2. Patience: Street photography isn&apos;t a passive hobby, so patience is key when waiting for the ideal moment to capture your photo.</p>
 
 
 
@@ -133,7 +133,7 @@ const StaticHTML = () => {
 
 
 
-<p>By mastering these skills, street photographers can create captivating photos that will leave viewers in awe. So don't be afraid to give it a try and hone your street photography skills! Good luck!</p>
+<p>By mastering these skills, street photographers can create captivating photos that will leave viewers in awe. So don&apos;t be afraid to give it a try and hone your street photography skills! Good luck!</p>
 
 
 
@@ -145,7 +145,7 @@ const StaticHTML = () => {
 
 
 
-<p>• Don't be afraid to experiment with different camera settings, angles, and shots.</p>
+<p>• Don&apos;t be afraid to experiment with different camera settings, angles, and shots.</p>
 
 
 
@@ -153,7 +153,7 @@ const StaticHTML = () => {
 
 
 
-<p>• Have patience; street photography can be unpredictable so it's important to not get frustrated too quickly.</p>
+<p>• Have patience; street photography can be unpredictable so it&apos;s important to not get frustrated too quickly.</p>
 
 
 
@@ -165,7 +165,7 @@ const StaticHTML = () => {
 
 
 
-<p>• Take breaks when needed, it's important to keep your mind fresh and energized in order to have the best results.</p>
+<p>• Take breaks when needed, it&apos;s important to keep your mind fresh and energized in order to have the best results.</p>
 
 
 
@@ -197,7 +197,7 @@ const StaticHTML = () => {
 
 
 
-<p>There are many talented street photographers in the world. Many of them exist on this page, providing the highest quality educational street photography content, for free. In order to browse the street photography creators on this page optimally, we've put together a roadmap:</p>
+<p>There are many talented street photographers in the world. Many of them exist on this page, providing the highest quality educational street photography content, for free. In order to browse the street photography creators on this page optimally, we&apos;ve put together a roadmap:</p>
 
 
 
@@ -205,7 +205,7 @@ const StaticHTML = () => {
 
 
 
-<p>The first thing when landing on the Street Photography Subcategory page is to read the creators' About Sections. It's only about 2-4 sentences but reading this will give you a high-level overview of what they teach and who they are.</p>
+<p>The first thing when landing on the Street Photography Subcategory page is to read the creators&apos; About Sections. It&apos;s only about 2-4 sentences but reading this will give you a high-level overview of what they teach and who they are.</p>
 
 
 
@@ -217,11 +217,11 @@ const StaticHTML = () => {
 
 
 
-<h3><strong>Check Where They've Been Featured</strong></h3>
+<h3><strong>Check Where They&apos;ve Been Featured</strong></h3>
 
 
 
-<p>Once you read their reviews, it's also good to check out some of the websites and articles the creators have been featured in which you can find in the Featured In section.</p>
+<p>Once you read their reviews, it&apos;s also good to check out some of the websites and articles the creators have been featured in which you can find in the Featured In section.</p>
 
 
 
@@ -229,7 +229,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've seen and read the article they've been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it's easily presented to you on one page for you to go back to and visit.</p>
+<p>Once you&apos;ve seen and read the article they&apos;ve been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it&apos;s easily presented to you on one page for you to go back to and visit.</p>
 
 
 
@@ -237,7 +237,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
+<p>Once you&apos;ve found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
 
 
 
