@@ -38,7 +38,7 @@ const StaticHTML = () => {
 
 
 
-<p>The second way we recommend learning wedding photography is through the use of books. There are many great wedding photography books out there, in fact, most of the wedding photography creators on this page have written them! Visit your favorite bookstore or go online and type in "wedding photography books" to check out the latest and best books on wedding photography. Make sure to read the reviews from others and check out the table of contents to make sure it covers everything you want to learn about wedding photography.</p>
+<p>The second way we recommend learning wedding photography is through the use of books. There are many great wedding photography books out there, in fact, most of the wedding photography creators on this page have written them! Visit your favorite bookstore or go online and type in &quot;wedding photography books&quot; to check out the latest and best books on wedding photography. Make sure to read the reviews from others and check out the table of contents to make sure it covers everything you want to learn about wedding photography.</p>
 
 
 
@@ -82,7 +82,7 @@ const StaticHTML = () => {
 
 
 
-<p>Networking with other wedding photographers is also another thing you should be doing after you educate yourself as best as you can on wedding photography. Networking can be intimidating because we often think, "how do I even start networking?" Here&apos;s some advice for networking as a wedding photographer. Find some local wedding photographers in your area and reach out to them via email. Send them a message that you&apos;re looking to get started as a wedding photographer and you would love to take them out to coffee to pick their brain. If you are brand new and don&apos;t mind gaining experience without money, then ask if you could shadow them on a wedding photography session so you can see the ins and outs that go on behind the scenes during a wedding photoshoot. When you shadow another photographer and help them out, then it&apos;s called being a "Second Shooter" so be sure to use that terminology.</p>
+<p>Networking with other wedding photographers is also another thing you should be doing after you educate yourself as best as you can on wedding photography. Networking can be intimidating because we often think, &quot;how do I even start networking?&quot; Here&apos;s some advice for networking as a wedding photographer. Find some local wedding photographers in your area and reach out to them via email. Send them a message that you&apos;re looking to get started as a wedding photographer and you would love to take them out to coffee to pick their brain. If you are brand new and don&apos;t mind gaining experience without money, then ask if you could shadow them on a wedding photography session so you can see the ins and outs that go on behind the scenes during a wedding photoshoot. When you shadow another photographer and help them out, then it&apos;s called being a &quot;Second Shooter&quot; so be sure to use that terminology.</p>
 
 
 
@@ -90,7 +90,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you have the proper knowledge and some on-hands experience during a wedding photography session, it&apos;s time to venture out on your own! The best way to do this is to work with people you already know. This means reaching out to friends or acquaintances who are engaged and asking them if you could photograph their wedding. Be sure to not make your friend feel uncomfortable because they would love to have you photograph their wedding but you also don&apos;t really have much experience. With this being said, the best way to pose the question is to ask them while also showing them the photos you took during your on-hands experience as a "Second Shooter." This way they can see that you actually have experience photographing weddings. Be sure to show them your best photos and get feedback on the photos beforehand. For example, let&apos;s say your first experience being a "Second Shooter" didn&apos;t go so well, get feedback on the photos you took and see what you can improve. Once you are really proud of the photos you have, then congrats, you now have a small portfolio! Once you book your first wedding session through a friend or acquaintance, then you should have even more photos to add to this portfolio, which leads us to the next point.</p>
+<p>Once you have the proper knowledge and some on-hands experience during a wedding photography session, it&apos;s time to venture out on your own! The best way to do this is to work with people you already know. This means reaching out to friends or acquaintances who are engaged and asking them if you could photograph their wedding. Be sure to not make your friend feel uncomfortable because they would love to have you photograph their wedding but you also don&apos;t really have much experience. With this being said, the best way to pose the question is to ask them while also showing them the photos you took during your on-hands experience as a &quot;Second Shooter.&quot; This way they can see that you actually have experience photographing weddings. Be sure to show them your best photos and get feedback on the photos beforehand. For example, let&apos;s say your first experience being a &quot;Second Shooter&quot; didn&apos;t go so well, get feedback on the photos you took and see what you can improve. Once you are really proud of the photos you have, then congrats, you now have a small portfolio! Once you book your first wedding session through a friend or acquaintance, then you should have even more photos to add to this portfolio, which leads us to the next point.</p>
 
 
 
@@ -136,7 +136,7 @@ const StaticHTML = () => {
 
 
 
-<p>Whether or not something is "hard" is completely subjective. By preparing yourself correctly, learning from the best sources and creators, and by putting in the work, and learning from your mistakes, then it will not be "hard," but it will take time - just like anything. If you follow the tips and advice that we provided, then you should have no problem getting into wedding photography!</p>
+<p>Whether or not something is &quot;hard&quot; is completely subjective. By preparing yourself correctly, learning from the best sources and creators, and by putting in the work, and learning from your mistakes, then it will not be &quot;hard,&quot; but it will take time - just like anything. If you follow the tips and advice that we provided, then you should have no problem getting into wedding photography!</p>
 
 
 

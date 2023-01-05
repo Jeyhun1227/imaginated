@@ -70,7 +70,7 @@ const StaticHTML = () => {
 
 
 
-<p>The first step when it comes to getting into landscape photography is an education first and foremost. This was already covered in the previous section, but once you feel like you&apos;ve learned all you could about landscape photography, then it&apos;s time. By the way, you&apos;ll never feel "ready," but at some point, you just have to start taking photos.</p>
+<p>The first step when it comes to getting into landscape photography is an education first and foremost. This was already covered in the previous section, but once you feel like you&apos;ve learned all you could about landscape photography, then it&apos;s time. By the way, you&apos;ll never feel &quot;ready,&quot; but at some point, you just have to start taking photos.</p>
 
 
 
