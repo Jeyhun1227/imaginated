@@ -139,7 +139,7 @@ const StaticHTML = () => {
 
 
 
-<p>Yes, portrait photographers can make money! There are many different ways to monetize your skills as a portrait photographer. You can start off by doing some free shoots in exchange for portfolio images, then don’t be afraid to start reaching out to more experienced models in your area.&nbsp; Once you have built up a nice portfolio, you can start charging for your services. Portrait photography prices vary based on the type of shoot, location, editing, and any other considerations you may have. You can also look into selling print products, such as albums or framed prints. This is a great way to make a little extra income from your work! Check out the Photography Business subcategory and see all the photographers who have made a successful business out of their own photography. Once you've built up some experiences and had your own portrait photography journey, then you can educate others by becoming your own educational creator and getting listed on our directory. From there you can create a website with your own blog as well as create other social media channels and monetize your knowledge.</p>
+<p>Yes, portrait photographers can make money! There are many different ways to monetize your skills as a portrait photographer. You can start off by doing some free shoots in exchange for portfolio images, then don’t be afraid to start reaching out to more experienced models in your area.&nbsp; Once you have built up a nice portfolio, you can start charging for your services. Portrait photography prices vary based on the type of shoot, location, editing, and any other considerations you may have. You can also look into selling print products, such as albums or framed prints. This is a great way to make a little extra income from your work! Check out the Photography Business subcategory and see all the photographers who have made a successful business out of their own photography. Once you&apos;ve built up some experiences and had your own portrait photography journey, then you can educate others by becoming your own educational creator and getting listed on our directory. From there you can create a website with your own blog as well as create other social media channels and monetize your knowledge.</p>
 
 
 
@@ -147,7 +147,7 @@ const StaticHTML = () => {
 
 
 
-<p>There are many talented Portrait photographers in the world. Many of them exist on this page, providing the highest quality educational Portrait photography content, for free. In order to browse the Portrait photography creators on this page optimally, we've put together a roadmap:</p>
+<p>There are many talented Portrait photographers in the world. Many of them exist on this page, providing the highest quality educational Portrait photography content, for free. In order to browse the Portrait photography creators on this page optimally, we&apos;ve put together a roadmap:</p>
 
 
 
@@ -155,7 +155,7 @@ const StaticHTML = () => {
 
 
 
-<p>Take a quick look at the creators' About Sections when you first enter the Portrait Photography Subcategory page. Although it's short, usually only 2-4 sentences, this will give you an overview of the content they teach and who they are as photographers.</p>
+<p>Take a quick look at the creators&apos; About Sections when you first enter the Portrait Photography Subcategory page. Although it&apos;s short, usually only 2-4 sentences, this will give you an overview of the content they teach and who they are as photographers.</p>
 
 
 
@@ -167,11 +167,11 @@ const StaticHTML = () => {
 
 
 
-<h3><strong>Check Where They've Been Featured</strong></h3>
+<h3><strong>Check Where They&apos;ve Been Featured</strong></h3>
 
 
 
-<p>You might want to investigate the websites and articles in the "Featured In" section once you read their reviews. This way, you can see if they're credible creators.</p>
+<p>You might want to investigate the websites and articles in the "Featured In" section once you read their reviews. This way, you can see if they&apos;re credible creators.</p>
 
 
 
@@ -179,7 +179,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've seen and read the article they've been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it's easily presented to you on one page for you to go back to and visit.</p>
+<p>Once you&apos;ve seen and read the article they&apos;ve been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it&apos;s easily presented to you on one page for you to go back to and visit.</p>
 
 
 
@@ -187,7 +187,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
+<p>Once you&apos;ve found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
 
 
 

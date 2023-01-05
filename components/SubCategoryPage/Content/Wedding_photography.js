@@ -22,7 +22,7 @@ const StaticHTML = () => {
 
 
 
-<p>With the Internet, learning wedding photography has never been easier. There's a wealth of information out there, but the question is where and who should you start learning from? Let's look at some of the best ways to start learning wedding photography.</p>
+<p>With the Internet, learning wedding photography has never been easier. There&apos;s a wealth of information out there, but the question is where and who should you start learning from? Let&apos;s look at some of the best ways to start learning wedding photography.</p>
 
 
 
@@ -30,7 +30,7 @@ const StaticHTML = () => {
 
 
 
-<p>The first way we recommend learning wedding photography is straight from the source itself - other wedding photographers! There are thousands of credible, educational creators who teach wedding photography that are also wedding photographers themselves. In fact, you'll find most of them on this page. To learn from the best wedding photography creators, browse the creators on this page, check out their offerings such as their YouTube channel, Facebook groups, Twitter feeds, Instagram pages, etc., check the reviews on their educational offerings that other users have left to see how informative and helpful their offerings are, and create an account and save their profile so you can come back to them next time.</p>
+<p>The first way we recommend learning wedding photography is straight from the source itself - other wedding photographers! There are thousands of credible, educational creators who teach wedding photography that are also wedding photographers themselves. In fact, you&apos;ll find most of them on this page. To learn from the best wedding photography creators, browse the creators on this page, check out their offerings such as their YouTube channel, Facebook groups, Twitter feeds, Instagram pages, etc., check the reviews on their educational offerings that other users have left to see how informative and helpful their offerings are, and create an account and save their profile so you can come back to them next time.</p>
 
 
 
@@ -46,7 +46,7 @@ const StaticHTML = () => {
 
 
 
-<p>The third way we recommend learning wedding photography is by enrolling in a paid course. There are many great course platforms out there so pick your favorite one and check out what courses they have on wedding photography. While we include this as a tip, it's also important to remember that the free resources out there are just as good as the paid ones these days! Many of the educational wedding photography creators on this page have content that should be paid for, it's that good! So before heading off to check out a paid course, be sure to browse this page first and see all the creators you can learn from.</p>
+<p>The third way we recommend learning wedding photography is by enrolling in a paid course. There are many great course platforms out there so pick your favorite one and check out what courses they have on wedding photography. While we include this as a tip, it&apos;s also important to remember that the free resources out there are just as good as the paid ones these days! Many of the educational wedding photography creators on this page have content that should be paid for, it&apos;s that good! So before heading off to check out a paid course, be sure to browse this page first and see all the creators you can learn from.</p>
 
 
 
@@ -54,7 +54,7 @@ const StaticHTML = () => {
 
 
 
-<p>The final way we recommend learning wedding photography is through blog articles. Just like visual content, written content is another great way to learn wedding photography online. There are many great photography blogs out there, such as ours! Be sure to check out our<a href="https://www.imaginated.com/blog/category/art/photography/"> Photography Blog</a> as every article is written by a photographer themselves, so they have first-hand experience writing on the subjects in the articles. Also, the educational creators we have listed on this page also have blogs of their own. If you visit their creator profile and check out the Contact Details section, you will find that we have listed their website. Many of them have blogs so be sure to check out the content they have written on their own websites! Now that we've covered some of the best ways to learn photography, let's discuss how to actually become a wedding photographer!</p>
+<p>The final way we recommend learning wedding photography is through blog articles. Just like visual content, written content is another great way to learn wedding photography online. There are many great photography blogs out there, such as ours! Be sure to check out our<a href="https://www.imaginated.com/blog/category/art/photography/"> Photography Blog</a> as every article is written by a photographer themselves, so they have first-hand experience writing on the subjects in the articles. Also, the educational creators we have listed on this page also have blogs of their own. If you visit their creator profile and check out the Contact Details section, you will find that we have listed their website. Many of them have blogs so be sure to check out the content they have written on their own websites! Now that we&apos;ve covered some of the best ways to learn photography, let&apos;s discuss how to actually become a wedding photographer!</p>
 
 
 
@@ -62,7 +62,7 @@ const StaticHTML = () => {
 
 
 
-<p>So you've learned how to become a wedding photographer, but reading and watching content will only get you so far! At some point, you have to go photograph your own wedding based on the skills and knowledge you've acquired. After you photograph your first wedding, then you've officially become a wedding photographer! But leading up to that point can be intimidating, so let's touch on all the steps you need to accomplish in order to get to this point. We've already touched on one of these which is the educational aspect, so let's dive into all of them now:</p>
+<p>So you&apos;ve learned how to become a wedding photographer, but reading and watching content will only get you so far! At some point, you have to go photograph your own wedding based on the skills and knowledge you&apos;ve acquired. After you photograph your first wedding, then you&apos;ve officially become a wedding photographer! But leading up to that point can be intimidating, so let&apos;s touch on all the steps you need to accomplish in order to get to this point. We&apos;ve already touched on one of these which is the educational aspect, so let&apos;s dive into all of them now:</p>
 
 
 
@@ -70,7 +70,7 @@ const StaticHTML = () => {
 
 
 
-<p>As mentioned, learning how to become a wedding photographer is the first step toward actually becoming a wedding photographer. Before diving head first into a wedding and potentially having lots of anxiety and nerves because you have no idea what to do, it's best to first educate yourself on the subject.</p>
+<p>As mentioned, learning how to become a wedding photographer is the first step toward actually becoming a wedding photographer. Before diving head first into a wedding and potentially having lots of anxiety and nerves because you have no idea what to do, it&apos;s best to first educate yourself on the subject.</p>
 
 
 
@@ -82,7 +82,7 @@ const StaticHTML = () => {
 
 
 
-<p>Networking with other wedding photographers is also another thing you should be doing after you educate yourself as best as you can on wedding photography. Networking can be intimidating because we often think, "how do I even start networking?" Here's some advice for networking as a wedding photographer. Find some local wedding photographers in your area and reach out to them via email. Send them a message that you're looking to get started as a wedding photographer and you would love to take them out to coffee to pick their brain. If you are brand new and don't mind gaining experience without money, then ask if you could shadow them on a wedding photography session so you can see the ins and outs that go on behind the scenes during a wedding photoshoot. When you shadow another photographer and help them out, then it's called being a "Second Shooter" so be sure to use that terminology.</p>
+<p>Networking with other wedding photographers is also another thing you should be doing after you educate yourself as best as you can on wedding photography. Networking can be intimidating because we often think, "how do I even start networking?" Here&apos;s some advice for networking as a wedding photographer. Find some local wedding photographers in your area and reach out to them via email. Send them a message that you&apos;re looking to get started as a wedding photographer and you would love to take them out to coffee to pick their brain. If you are brand new and don&apos;t mind gaining experience without money, then ask if you could shadow them on a wedding photography session so you can see the ins and outs that go on behind the scenes during a wedding photoshoot. When you shadow another photographer and help them out, then it&apos;s called being a "Second Shooter" so be sure to use that terminology.</p>
 
 
 
@@ -90,7 +90,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you have the proper knowledge and some on-hands experience during a wedding photography session, it's time to venture out on your own! The best way to do this is to work with people you already know. This means reaching out to friends or acquaintances who are engaged and asking them if you could photograph their wedding. Be sure to not make your friend feel uncomfortable because they would love to have you photograph their wedding but you also don't really have much experience. With this being said, the best way to pose the question is to ask them while also showing them the photos you took during your on-hands experience as a "Second Shooter." This way they can see that you actually have experience photographing weddings. Be sure to show them your best photos and get feedback on the photos beforehand. For example, let's say your first experience being a "Second Shooter" didn't go so well, get feedback on the photos you took and see what you can improve. Once you are really proud of the photos you have, then congrats, you now have a small portfolio! Once you book your first wedding session through a friend or acquaintance, then you should have even more photos to add to this portfolio, which leads us to the next point.</p>
+<p>Once you have the proper knowledge and some on-hands experience during a wedding photography session, it&apos;s time to venture out on your own! The best way to do this is to work with people you already know. This means reaching out to friends or acquaintances who are engaged and asking them if you could photograph their wedding. Be sure to not make your friend feel uncomfortable because they would love to have you photograph their wedding but you also don&apos;t really have much experience. With this being said, the best way to pose the question is to ask them while also showing them the photos you took during your on-hands experience as a "Second Shooter." This way they can see that you actually have experience photographing weddings. Be sure to show them your best photos and get feedback on the photos beforehand. For example, let&apos;s say your first experience being a "Second Shooter" didn&apos;t go so well, get feedback on the photos you took and see what you can improve. Once you are really proud of the photos you have, then congrats, you now have a small portfolio! Once you book your first wedding session through a friend or acquaintance, then you should have even more photos to add to this portfolio, which leads us to the next point.</p>
 
 
 
@@ -98,7 +98,7 @@ const StaticHTML = () => {
 
 
 
-<p>Websites, you see them everywhere but how do you actually make one? Well, there are many ways to create a website, we recommend checking out our Photography Business creator category and learning from the creators in that subcategory as well as the Wedding Photography subcategory. These creators discuss creating wedding photography websites and some of the lessons and tips they've learned. Now that we've touched on how to become a wedding photographer, let's explore some of the skills you should possess as a wedding photographer.</p>
+<p>Websites, you see them everywhere but how do you actually make one? Well, there are many ways to create a website, we recommend checking out our Photography Business creator category and learning from the creators in that subcategory as well as the Wedding Photography subcategory. These creators discuss creating wedding photography websites and some of the lessons and tips they&apos;ve learned. Now that we&apos;ve touched on how to become a wedding photographer, let&apos;s explore some of the skills you should possess as a wedding photographer.</p>
 
 
 
@@ -106,7 +106,7 @@ const StaticHTML = () => {
 
 
 
-<p>Wedding photography isn't just about taking pretty pictures, it's also about having the right skills. Here are some of the most important wedding photographer skills:</p>
+<p>Wedding photography isn&apos;t just about taking pretty pictures, it&apos;s also about having the right skills. Here are some of the most important wedding photographer skills:</p>
 
 
 
@@ -152,7 +152,7 @@ const StaticHTML = () => {
 
 
 
-<p>As mentioned, on this page we have some of the best educational creators in wedding photography. But not all of them are equal, so here's how to find the best creators and people to learn wedding photography from.</p>
+<p>As mentioned, on this page we have some of the best educational creators in wedding photography. But not all of them are equal, so here&apos;s how to find the best creators and people to learn wedding photography from.</p>
 
 
 
@@ -160,7 +160,7 @@ const StaticHTML = () => {
 
 
 
-<p>The first thing when landing on the Wedding Photography Subcategory page is to read the creators' About Sections. It's only about 2-4 sentences but reading this will give you a high-level overview of what they teach and who they are.</p>
+<p>The first thing when landing on the Wedding Photography Subcategory page is to read the creators&apos; About Sections. It&apos;s only about 2-4 sentences but reading this will give you a high-level overview of what they teach and who they are.</p>
 
 
 
@@ -172,11 +172,11 @@ const StaticHTML = () => {
 
 
 
-<h3><strong>Check Where They've Been Featured</strong></h3>
+<h3><strong>Check Where They&apos;ve Been Featured</strong></h3>
 
 
 
-<p>Once you read their reviews, it's also good to check out some of the websites and articles the creators have been featured in which you can find in the Featured In section.</p>
+<p>Once you read their reviews, it&apos;s also good to check out some of the websites and articles the creators have been featured in which you can find in the Featured In section.</p>
 
 
 
@@ -184,7 +184,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've seen and read the article they've been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it's easily presented to you on one page for you to go back to and visit.</p>
+<p>Once you&apos;ve seen and read the article they&apos;ve been featured in, then explore their offerings. On their Creator Profile, you will find links to all of their popular social media channels. This makes it easy to see all of their platforms on one page. Instead of trying to find every place they produce content, it&apos;s easily presented to you on one page for you to go back to and visit.</p>
 
 
 
@@ -192,7 +192,7 @@ const StaticHTML = () => {
 
 
 
-<p>Once you've found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
+<p>Once you&apos;ve found a creator you like learning from, be sure to sign up and create an account and save their profile. We will be adding extra features that will allow creators to add exclusive content to their Creator Profile page so by following them you will keep up to date on these developments!</p>
 
 
 
