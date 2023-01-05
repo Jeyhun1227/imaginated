@@ -36,8 +36,14 @@ export default function SettingsPageMobile(props) {
             icon: <Star className="hover:fill-black"/>, 
             component:<SettingsRatings reviews={props.reviews}/>
         },
+        {   
+            id: 3, 
+            title: 'Manage Profile', 
+            icon: <Star className="hover:fill-black"/>, 
+            component:() => window.location.href = "/settingsperson"
+        },
         { 
-            id: 3,
+            id: 4,
             title: 'Settings', 
             icon: <Gear/>, 
             component:<SettingsSettings userFollow={userFollow} user={props.user}/>},

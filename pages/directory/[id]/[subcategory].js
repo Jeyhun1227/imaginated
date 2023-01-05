@@ -11,6 +11,11 @@ import { ChevronDown, QuestionCircle } from 'react-bootstrap-icons'
 import axios from 'axios';
 import { InView } from 'react-intersection-observer';
 import Head from 'next/head'
+import Headshop_photography from '../../../components/SubCategoryPage/Content/Headshop_photography.js'
+import Landscape_photography from '../../../components/SubCategoryPage/Content/Landscape_photography.js'
+import Portrait_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
+import Street_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
+import Wedding_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
 
 
 export default function SubCategoryPageMain(props) {
@@ -18,6 +23,7 @@ export default function SubCategoryPageMain(props) {
     const [userFollow, setUserFollow] = useState([])
     const [user, setUser] = useState();
     const routerID = props.routerID;
+
 
     let subcategory = [];
     props.Subcategory_values.map((e) => {
@@ -39,6 +45,19 @@ export default function SubCategoryPageMain(props) {
     useEffect( () => {
       getStartedValue()
     }, [props]);
+
+    const contentBlog = () => {
+      const contentSources = {
+        'Headshot Photography': <Headshop_photography/>,
+        'Landscape Photography': <Landscape_photography/>,
+        'Portrait Photography': <Portrait_photography/>,
+        'Street Photography': <Street_photography/>,
+        'Wedding Photography': <Wedding_photography/>,
+      }
+      if(!contentSources[props.subcategoryName]) return null;
+      
+      return <div className="px-4 my-5">{contentSources[props.subcategoryName]}</div>
+    }
 
     const [searchedValue, setsearchedValue] = useState("");
     const [offset, setOffset] = useState(10);
@@ -183,11 +202,10 @@ export default function SubCategoryPageMain(props) {
                   )}
                 </Listbox>
               </div>
-            </div>
-            <div className="items-center padding-left-right-15 sm:bg-white sm:px-0 bg-light-grey sm:col-span-4 xl:ml-28 margin-left-16">
+              <div className="items-center ">
               <VerticalCallToAction setBtnText={"Request a Listing"} setLink={"/request-listing"} setLargeTextTop={"Looking for a specific creator but"} setLargeTextBottom={"can't find them? Let us know!"}/>
             </div>
-            <div className="items-center px-4 mb-auto sm:px-0 sm:row-span-3 sm:col-span-4 xl:ml-28 margin-left-16">
+            <div className="items-center">
               <div className="mx-auto mt-4 max-w-7xl">
                   <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
                       <div className="pl-2 text-2xl tracking-tight text-dark-blue">Related Categories</div>
@@ -218,10 +236,14 @@ export default function SubCategoryPageMain(props) {
               </div>
               ):null}
             </div>
+            </div>
+
           </div>
+          <InView onChange={(inView, entry) => inView && getNewSubcategoryBool ? getNewSubcategory(inView): null}/>
+
+          {(contentBlog()) ? contentBlog():null}
         </div>
       </div>
-      <InView onChange={(inView, entry) => inView && getNewSubcategoryBool ? getNewSubcategory(inView): null}/>
 </div>
 }
 
