@@ -13,7 +13,7 @@ const StaticHTML = () => {
 
 
 
-<p>Street photography is a broad niche within photography that deals with capturing the essence of humanity through candid photos. Street photography is about viewing the world through the photographer&apos;s lens and mind. While street photography does often happen in the street, the word "street photography" is more of a combination of candid portrait photography and action photography. Street photography could imply that it&apos;s only photographs of the street or that it only takes place in the street but this is far from the case. It is named "street photography" because the photographer often goes out "into the street," away from the professional studios and setups of strobe lights and flashes, grey cards, and makeup artists. The photographer has to venture out into the wild and capture candid images that convey a story at the same time. There is something freeing about street photography as a photographer. The photographer is not tied down to anything, it&apos;s just him/her, their camera, and a story that needs to be told.</p>
+<p>Street photography is a broad niche within photography that deals with capturing the essence of humanity through candid photos. Street photography is about viewing the world through the photographer&apos;s lens and mind. While street photography does often happen in the street, the word &quot;street photography&quot; is more of a combination of candid portrait photography and action photography. Street photography could imply that it&apos;s only photographs of the street or that it only takes place in the street but this is far from the case. It is named &quot;street photography&quot; because the photographer often goes out &quot;into the street,&quot; away from the professional studios and setups of strobe lights and flashes, grey cards, and makeup artists. The photographer has to venture out into the wild and capture candid images that convey a story at the same time. There is something freeing about street photography as a photographer. The photographer is not tied down to anything, it&apos;s just him/her, their camera, and a story that needs to be told.</p>
 
 
 
@@ -21,7 +21,7 @@ const StaticHTML = () => {
 
 
 
-<p>Learning street photography can be difficult because there are many facets of photography that one should "learn" before diving into street photography. Of course, the best way to learn something is to just do it, but some foundational skillsets the photographer should have include knowledge of their camera, lenses, and composition. As mentioned, street photography can be seen as a blend between candid portrait photography and action photography, so if the street photographer has some experience with posed portrait photography, then it may come easier to them when out on a street photography session. Here are some of the best ways to learn street photography:</p>
+<p>Learning street photography can be difficult because there are many facets of photography that one should &quot;learn&quot; before diving into street photography. Of course, the best way to learn something is to just do it, but some foundational skillsets the photographer should have include knowledge of their camera, lenses, and composition. As mentioned, street photography can be seen as a blend between candid portrait photography and action photography, so if the street photographer has some experience with posed portrait photography, then it may come easier to them when out on a street photography session. Here are some of the best ways to learn street photography:</p>
 
 
 
@@ -93,7 +93,7 @@ const StaticHTML = () => {
 
 
 
-<p>Staying consistent as a street photographer is crucial. When you stay consistent, you will develop an "eye" for composition and composing a fast-moving scene. You will start to anticipate people&apos;s movements and patterns and know where to stand in order to capture the best image. Staying consistent is also important for getting over those nerves we discussed earlier. The more you do something, the more familiar you will get with it.</p>
+<p>Staying consistent as a street photographer is crucial. When you stay consistent, you will develop an &quot;eye&quot; for composition and composing a fast-moving scene. You will start to anticipate people&apos;s movements and patterns and know where to stand in order to capture the best image. Staying consistent is also important for getting over those nerves we discussed earlier. The more you do something, the more familiar you will get with it.</p>
 
 
 
@@ -181,7 +181,7 @@ const StaticHTML = () => {
 
 
 
-<p>Street photography can be a difficult but rewarding field for photographers. It requires skill, practice, patience, people skills, and most of all—dedication! A street photographer must have deep knowledge of multiple niches of photography as mentioned earlier. A street photographer must also develop an "eye" for scenes and people. If you understand human nature and how your camera works, then you understand street photography. That being said, it is possible to become a great street photographer if you are willing to put in the effort and time. With enough dedication and practice, you can create amazing photos that will leave viewers in awe.</p>
+<p>Street photography can be a difficult but rewarding field for photographers. It requires skill, practice, patience, people skills, and most of all—dedication! A street photographer must have deep knowledge of multiple niches of photography as mentioned earlier. A street photographer must also develop an &quot;eye&quot; for scenes and people. If you understand human nature and how your camera works, then you understand street photography. That being said, it is possible to become a great street photographer if you are willing to put in the effort and time. With enough dedication and practice, you can create amazing photos that will leave viewers in awe.</p>
 
 
 

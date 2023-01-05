@@ -171,7 +171,7 @@ const StaticHTML = () => {
 
 
 
-<p>You might want to investigate the websites and articles in the "Featured In" section once you read their reviews. This way, you can see if they&apos;re credible creators.</p>
+<p>You might want to investigate the websites and articles in the &quot;Featured In&quot; section once you read their reviews. This way, you can see if they&apos;re credible creators.</p>
 
 
 
