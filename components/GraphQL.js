@@ -20,7 +20,7 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
     errorLink,
     new HttpLink({ uri: "https://api.imaginated.com/graphql" }),
   ]);
-  // http://localhost:5000/graphql
+  // http://localhost:6000/graphql
   // https://api.imaginated.com/graphql
   const client = new ApolloClient({
     cache: new InMemoryCache(),

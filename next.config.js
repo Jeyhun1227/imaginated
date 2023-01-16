@@ -12,7 +12,7 @@ module.exports = {
   },
   
   trailingSlash: true,
-  images: { domains: ['wordpress.imaginated.com', 'm.media-amazon.com', 'image.shutterstock.com', 'imaginated-individual-image-public.s3.amazonaws.com', 'imaginated-user-images-public.s3.amazonaws.com', 'imaginated-individual-premium-image-public.s3.amazonaws.com', 'lh3.googleusercontent.com'], formats: ['image/avif', 'image/webp'], },
+  images: { domains: ['wordpress.imaginated.com', 'm.media-amazon.com', 'image.shutterstock.com', 'imaginated-individual-image-public.s3.amazonaws.com', 'imaginated-user-images-public.s3.amazonaws.com', 'imaginated-individual-premium-image-public.s3.amazonaws.com', 'lh3.googleusercontent.com', 'i.ytimg.com'], formats: ['image/avif', 'image/webp'], },
   webpack: (config) => {
     config.plugins.push(
       new webpack.IgnorePlugin({

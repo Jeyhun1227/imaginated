@@ -37,9 +37,10 @@ import Sidebar from '../../../components/Person/Sidebar';
 import IndividualYoutube from '../../../components/Person/Youtube';
 import IndividualFreeOfferingComponent from '../../../components/Person/FreeOffering';
 import ReviewsComponent from '../../../components/Person/Reviews';
-import Script from 'next/script'
+import Script from 'next/script';
+import WordChart from '../../../components/Person/WordChart'
 
-export default function IndividualPageMain({Individual_values, category_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID}) {
+export default function IndividualPageMain({Individual_values, category_values, premium_offers, free_offers, reviews_offer, free_content, favorites, IndividualID, wordChartIndividual}) {
   const {data: session} = useSession()
   let at_types = ['twitter', 'instagram']
   let images = {'youtube': ['/Youtube.svg', 'YouTube'], 'twitter': ['/Twitter.svg', 'Twitter'], 
@@ -480,6 +481,9 @@ export default function IndividualPageMain({Individual_values, category_values, 
                       <h3>Free Offerings</h3>
                     </div>
                     <div>
+                      <WordChart wordChartIndividual={wordChartIndividual}/>
+                    </div>
+                    <div>
                           {(free_offers.youtube && free_content.length > 0) ? <IndividualYoutube free_content={free_content} link={free_offers.youtube} name={get_name_from_link(free_offers.youtube, 'youtube')} />: null}
                     </div>
                       <IndividualFreeOfferingComponent free_offers_array={free_content.length > 0 ? free_offers_array.filter((e) => e.type != 'youtube') : free_offers_array}/>
@@ -635,6 +639,9 @@ export async function getStaticProps(ctx) {
   let free_offers = Individual_values.data.getEachIndividual.free_offers;
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
   let category_values_clean = Individual_values.data.getEachIndividual.similar_Individual.rows.filter((e) => e.linkname != IndividualID)
+  let wordChartIndividual = Individual_values.data.getEachIndividual.YoutubeFieldsObject
+  console.log('Individual_values: ', wordChartIndividual)
+  wordChartIndividual = wordChartIndividual ? wordChartIndividual : [];
   // console.log('reviews: ', Individual_values.data.getEachIndividual.reviews)
   // const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
   // const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
@@ -649,6 +656,7 @@ export async function getStaticProps(ctx) {
       category_values: category_values_clean,
       free_content: free_content,
       free_offers,
+      wordChartIndividual,
       favorites: Individual_values.data.getEachIndividual.favorites,
       IndividualID
     },
