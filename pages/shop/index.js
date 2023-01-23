@@ -17,13 +17,13 @@ export default function SubCategoryBlogMain( {post, metadata} ){
             <div className="grid-container-blog">
                 <h1 className='shop-title'>Shop</h1>
                 {post.map((e) => <div key={e.id} className="blog-each-post">
-                    <Link href={e.uri}><a>
-                    <div className='shop-post-image'><Image src={e.featuredImage} width={350} height={350}/></div>
-                    <h3 className='blog-title'>{e.title}</h3></a></Link>
+                    <Link href={e.uri}>
+                        <div className='shop-post-image'><Image src={e.featuredImage} width={350} height={350}/></div>
+                        <h3 className='blog-title'>{e.title}</h3></Link>
                 </div>)} 
             </div>
         </div>
-    )
+    );
 
 }
 

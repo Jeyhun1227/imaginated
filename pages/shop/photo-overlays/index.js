@@ -20,7 +20,7 @@ export default function photo_overlays_function( {photo_overlays, metadata} ){
             <div className="flex flex-row flex-wrap space-x-3 margin-left-top">
                 <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/" >  
-                <a ><Image className="content-center h-4" width={20} height={20} src={home.src}/></a>
+                <Image className="content-center h-4" width={20} height={20} src={home.src}/>
                 </Link>
                 </div>
             </div>
@@ -29,12 +29,12 @@ export default function photo_overlays_function( {photo_overlays, metadata} ){
             <h1>Photo Overlays, Textures & Graphics</h1>
             </div>
             {photo_overlays.map((e) => <div key={e.uri} className="blog-each-post">
-                <Link href={e.uri}><a>
-                <div className='shop-post-image'><Image src={e.image} width={350} height={350}/></div>
-                <h3 className='blog-title'>{e.title}</h3></a></Link>
+                <Link href={e.uri}>
+                    <div className='shop-post-image'><Image src={e.image} width={350} height={350}/></div>
+                    <h3 className='blog-title'>{e.title}</h3></Link>
             </div>)} 
         </div></div>
-    )
+    );
 
 }
 

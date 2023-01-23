@@ -28,7 +28,7 @@ export default function Post( data ){
                     var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
                     var video_id = child.children[0].attribs.id
                     video_id = video_id.split('_')[1]
-                    const width = ref.current.offsetWidth;
+                    var width = ref.current.offsetWidth;
                     width = width > 850 ? Math.round(width * .7): width;
 
                     const opts = {

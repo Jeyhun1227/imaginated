@@ -112,20 +112,20 @@ export default function Post( data ){
               <div className="flex flex-row flex-wrap space-x-3">
                   <div className="inline-flex items-center justify-center cursor-point">
                   <Link href="/" >  
-                  <a ><Image width={18} height={18} className="content-center h-4" src={home.src}/></a>
+                  <Image width={18} height={18} className="content-center h-4" src={home.src}/>
                   </Link>
                   <div className="inline-flex pointing-right"><ChevronRight/></div>
 
                   </div>
                   {category_all.map((e, i) => <div key={e.uri}>
-                      <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri}><div>{e.name}</div></Link></div>
+                      <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={e.uri} legacyBehavior><div>{e.name}</div></Link></div>
                       
                       {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
                       </div>:null}
                   </div>)}
               </div>
               <h1 className="blog-header">{post.title}</h1>
-              <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}><a>{author.name}</a></Link></div>
+              <div className="margin-bottom-ten"><div className='blog-full-year'>{full_year} by</div><div className='blog-individual-link'><Link href={author.uri}>{author.name}</Link></div>
               </div>
               {(showDesktopImage)?<div className='Blog-main-images-desktop'>
                 {(post.featuredImage)? <div className='Blog-Main-Image'><Image     layout='fill'
@@ -161,7 +161,7 @@ export default function Post( data ){
               </div>
             </div>
         </div>:<h1>Post Not Found</h1>}</div>
-    )
+    );
 
 }
 export async function getStaticProps(context) {

@@ -57,13 +57,13 @@ export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
                         <div className="flex flex-row flex-wrap space-x-3">
                                 <div className="inline-flex items-center justify-center cursor-point">
                                 <Link href="/" >  
-                                <a ><Image className="content-center h-4" width={20} height={20} src={home.src}/></a>
+                                <Image className="content-center h-4" width={20} height={20} src={home.src}/>
                                 </Link>
                                 <div className="inline-flex pointing-right"><ChevronRight/></div>
 
                                 </div>
                                 <div className="inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point">
-                                    <Link href='/shop/photo-overlays/'><a>Photo Overlays</a></Link>
+                                    <Link href='/shop/photo-overlays/'>Photo Overlays</Link>
                                     <div className="inline-flex pointing-right"><ChevronRight/></div>
                                 </div>
                                 <div className="text-whisper inline-block ml-2 no-underline" ><div>{slug}</div></div>
@@ -104,8 +104,8 @@ export default function SubCategoryBlogMain( {mainShop, slug, metadata} ){
                     </div>
 
                 </div>
-            </div>        
-    )
+            </div>
+    );
 
 }
 

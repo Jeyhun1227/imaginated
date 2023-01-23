@@ -103,6 +103,12 @@ getEachIndividual(
           	count
             }
           }
+          YoutubeFieldsObject{
+            id
+            keyword
+            score
+            view
+          }
         }
       }
   `;

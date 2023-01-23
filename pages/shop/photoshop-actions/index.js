@@ -33,12 +33,12 @@ export default function photoshop_actions_function( {photoshop_actions, metadata
             <p>A Photoshop action is a recorded series of steps by the creator. You can then use the recording, a .ATN file, to apply these steps automatically to any photo. I’ve made some sets over the past handful of years, and I’m going to give all of them to you, free.</p>
             </div>
             {photoshop_actions.map((e) => <div key={e.uri} className="blog-each-post">
-                <Link href={e.uri}><a>
-                <div className='shop-post-image'><Image src={e.image} width={350} height={350}/></div>
-                <h3 className='blog-title'>{e.title}</h3></a></Link>
+                <Link href={e.uri}>
+                    <div className='shop-post-image'><Image src={e.image} width={350} height={350}/></div>
+                    <h3 className='blog-title'>{e.title}</h3></Link>
             </div>)} 
         </div></div>
-    )
+    );
 
 }
 
