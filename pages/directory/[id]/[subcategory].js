@@ -104,8 +104,8 @@ export default function SubCategoryPageMain(props) {
       setIndividualEachAll(subcategory_vals);
       const IndividualEachTemp = filterCleaningChange(subcategory_vals, selected.option)
       setIndividualEach(IndividualEachTemp)
-
-      setOffset(offset += 10)
+      const offset_temp = offset + 10;
+      setOffset(offset_temp)
     }
     const options = [
       {
@@ -129,122 +129,126 @@ export default function SubCategoryPageMain(props) {
 
 
 
-    return <div >
-      <Head>
-        <title>{`Learn ${props.subcategoryName} from Experts | Imaginated`}</title>
-        <meta name="description" content={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
-        <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/Learn-${props.subcategoryName.replace(' ', '-')}/`} />
-        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
-      </Head>
-      <HeroNoBtn setLargeTextTop={'Learn ' + props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings.`}/>
-      <div className="">
-        <div className="py-12 mx-auto max-w-7xl">
-          <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
-            <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-              <label htmlFor="search" className="block mb-2 text-2xl sm:text-3xl text-dark-blue">Looking for someone specific?</label>
-              <input onChange={(e)=> searchedValueFunction(e.target.value)} type="text" name="categoryName" id="search" className="focus:outline-none shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a personal brand"/>
-            </div>
-            <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
-              <div>
-                {IndividualEach.map((e) => {
-                  let id = e.id.toLowerCase().split(/[a-z](.*)/s)[0];
-                  return <SubCategoryPageSub key={e.id} values={e} selected={userFollow.find((u) => u.individualid === id)} />
-                }
-                  )}
+    return (
+      <div >
+        <Head>
+          <title>{`Learn ${props.subcategoryName} from Experts | Imaginated`}</title>
+          <meta name="description" content={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings, all on one page.`}/>
+          <link rel="canonical" href={`https://www.imaginated.com/directory/${routerID}/Learn-${props.subcategoryName.replace(' ', '-')}/`} />
+          <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+        </Head>
+        <HeroNoBtn setLargeTextTop={'Learn ' + props.subcategoryName} setLargeTextBottom={" "} setSmallText={`Learn ${props.subcategoryName} from credible educational creators. Compare reviews and explore their offerings.`}/>
+        <div className="">
+          <div className="py-12 mx-auto max-w-7xl">
+            <div className="sm:grid sm:grid-rows-3 sm:grid-cols-9 sm:gap-4">
+              <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+                <label htmlFor="search" className="block mb-2 text-2xl sm:text-3xl text-dark-blue">Looking for someone specific?</label>
+                <input onChange={(e)=> searchedValueFunction(e.target.value)} type="text" name="categoryName" id="search" className="focus:outline-none shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Search for a personal brand"/>
               </div>
-            </div>
-            <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 margin-left-16">
-              <div className="flex flex-row items-center pb-5 space-x-4 sm:border-b sm:border-very-light-grey">
-                <Listbox value={selected} onChange={filterChange}>
-                  {({ open }) => (
-                    <>
-                      <Listbox.Label className="block text-xl font-medium whitespace-nowrap text-dark-blue">Sort by:</Listbox.Label>
-                      <QuestionCircle className="w-6 h-6 fill-denim"/>
-                      <div className="relative w-full mt-1">
-                        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                          <span className="flex items-center">
-                            <span className="block ml-3 truncate text-dim-grey">{selected.option}</span>
-                          </span>
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 ml-3 pointer-events-none">
-                            <ChevronDown className="w-3 h-3 text-very-light-grey" aria-hidden="true" />
-                          </span>
-                        </Listbox.Button>
+              <div className="items-center px-4 sm:px-0 sm:row-span-3 sm:col-span-5 xl:mr-28 sm:mr-16">
+                <div>
+                  {IndividualEach.map((e) => {
+                    let id = e.id.toLowerCase().split(/[a-z](.*)/s)[0];
+                    return <SubCategoryPageSub key={e.id} values={e} selected={userFollow.find((u) => u.individualid === id)} />
+                  }
+                    )}
+                </div>
+              </div>
+              <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 margin-left-16">
+                <div className="flex flex-row items-center pb-5 space-x-4 sm:border-b sm:border-very-light-grey">
+                  <Listbox value={selected} onChange={filterChange}>
+                    {({ open }) => (
+                      <>
+                        <Listbox.Label className="block text-xl font-medium whitespace-nowrap text-dark-blue">Sort by:</Listbox.Label>
+                        <QuestionCircle className="w-6 h-6 fill-denim"/>
+                        <div className="relative w-full mt-1">
+                          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <span className="flex items-center">
+                              <span className="block ml-3 truncate text-dim-grey">{selected.option}</span>
+                            </span>
+                            <span className="absolute inset-y-0 right-0 flex items-center pr-3 ml-3 pointer-events-none">
+                              <ChevronDown className="w-3 h-3 text-very-light-grey" aria-hidden="true" />
+                            </span>
+                          </Listbox.Button>
 
-                        <Transition
-                          show={open}
-                          leave="transition ease-in duration-100"
-                          leaveFrom="opacity-100"
-                          leaveTo="opacity-0"
-                        >
-                          <Listbox.Options className="absolute z-10 w-full py-1 pl-0 mt-1 overflow-auto text-base bg-white shadow-lg max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {options.map((option) => (
-                              <Listbox.Option key={option.id} className={({ active }) =>
-                              classNames(
-                                active ? ' bg-light-grey text-dim-grey' : 'text-dim-grey', 'relative py-2 pl-3 text-dim-grey cursor-default select-none pr-9')}
-                                value={option}
-                              >
-                                {({ selected, active  }) => (
-                                  <>
-                                    <div className="flex items-center">
-                                      <span
-                                        className={classNames(selected ? 'bg-white' : 'bg-white', 'ml-3 block truncate')}>
-                                        {option.option}
-                                      </span>
+                          <Transition
+                            show={open}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Listbox.Options className="absolute z-10 w-full py-1 pl-0 mt-1 overflow-auto text-base bg-white shadow-lg max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              {options.map((option) => (
+                                <Listbox.Option key={option.id} className={({ active }) =>
+                                classNames(
+                                  active ? ' bg-light-grey text-dim-grey' : 'text-dim-grey', 'relative py-2 pl-3 text-dim-grey cursor-default select-none pr-9')}
+                                  value={option}
+                                >
+                                  {({ selected, active  }) => (
+                                    <>
+                                      <div className="flex items-center">
+                                        <span
+                                          className={classNames(selected ? 'bg-white' : 'bg-white', 'ml-3 block truncate')}>
+                                          {option.option}
+                                        </span>
+                                      </div>
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </div>
+                      </>
+                    )}
+                  </Listbox>
+                </div>
+                <div className="items-center ">
+                <VerticalCallToAction setBtnText={"Request a Listing"} setLink={"/request-listing"} setLargeTextTop={"Looking for a specific creator but"} setLargeTextBottom={"can't find them? Let us know!"}/>
+              </div>
+              <div className="items-center">
+                <div className="mx-auto mt-4 max-w-7xl">
+                    <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
+                        <div className="pl-2 text-2xl tracking-tight text-dark-blue">Related Categories</div>
+                    </div>
+                </div>
+                {(props.subcategory.length > 0)? props.subcategory.filter((e) => e.subcategory !== props.subcategoryName).slice(0, 5).map((e) =>
+                <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/Learn-${e.subcategory.replace(' ', '-')}`}>
+                        <div className="flow-root -my-3 font-twofour">
+                            <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
+                                <div className="flex flex-wrap items-center justify-between">
+                                    <Link
+                                      href={ `/directory/${e.categoryname}/Learn-${e.subcategory.replace(" ", "-")}` }
+                                      legacyBehavior><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
+                                </div>
+                                <div className="flex-shrink-0 order-2">
+                                    <div className="flex items-center flex-1">
+                                        <span className="flex items-center">
+                                            <div className="color-none">
+                                            <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } legacyBehavior>
+                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
+                                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                            </Link>
+                                            </div>
+                                        </span>   
                                     </div>
-                                  </>
-                                )}
-                              </Listbox.Option>
-                            ))}
-                          </Listbox.Options>
-                        </Transition>
-                      </div>
-                    </>
-                  )}
-                </Listbox>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                ):null}
               </div>
-              <div className="items-center ">
-              <VerticalCallToAction setBtnText={"Request a Listing"} setLink={"/request-listing"} setLargeTextTop={"Looking for a specific creator but"} setLargeTextBottom={"can't find them? Let us know!"}/>
-            </div>
-            <div className="items-center">
-              <div className="mx-auto mt-4 max-w-7xl">
-                  <div className="relative flex items-baseline pb-2 border-b justify-left border-very-light-grey">
-                      <div className="pl-2 text-2xl tracking-tight text-dark-blue">Related Categories</div>
-                  </div>
               </div>
-              {(props.subcategory.length > 0)? props.subcategory.filter((e) => e.subcategory !== props.subcategoryName).slice(0, 5).map((e) =>
-              <div key={e.id} className="py-6 border-b border-very-light-grey cursor-point" onClick={() => window.location.href=  `/directory/${e.categoryname}/Learn-${e.subcategory.replace(' ', '-')}`}>
-                      <div className="flow-root -my-3 font-twofour">
-                          <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
-                              <div className="flex flex-wrap items-center justify-between">
-                                  <Link href={ `/directory/${e.categoryname}/Learn-${e.subcategory.replace(" ", "-")}` } ><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point" >{e.subcategory}</div></Link>
-                              </div>
-                              <div className="flex-shrink-0 order-2">
-                                  <div className="flex items-center flex-1">
-                                      <span className="flex items-center">
-                                          <div className="color-none">
-                                          <Link href={ `/directory/${e.categoryname}/${e.subcategory}` } >
-                                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="#187BC0" strokeWidth="1">
-                                                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                              </svg>
-                                          </Link>
-                                          </div>
-                                      </span>   
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-              </div>
-              ):null}
-            </div>
-            </div>
 
+            </div>
+            <InView onChange={(inView, entry) => inView && getNewSubcategoryBool ? getNewSubcategory(inView): null}/>
+
+            {(contentBlog()) ? contentBlog():null}
           </div>
-          <InView onChange={(inView, entry) => inView && getNewSubcategoryBool ? getNewSubcategory(inView): null}/>
-
-          {(contentBlog()) ? contentBlog():null}
         </div>
-      </div>
-</div>
+  </div>
+    );
 }
 
 export async function getStaticProps({params}){

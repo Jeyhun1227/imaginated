@@ -31,6 +31,17 @@ export default function CategoryList(props) {
     // }
 
     return (
+        // <div className={styles.CategoryList}>
+        //     <h2>{props.parent}</h2>
+        //     <div >
+        //     {category.map((e) => <div key={'category_'+e.id}>
+        //         {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?<ChevronRight className={(showSubCategory.includes(e.category) && subcategory)? 
+        //          styles.CategoryCaretFillOpen: styles.CategoryCaretFill} onClick={(w) => ShowSubCategoryFunc(e.category)}/>: null}
+        //         <Link href={'category/' + e.category} className={styles.CategoryMainTitle} >{e.category}</Link>
+        //         {(showSubCategory.includes(e.category) && subcategory)? categorySubValues[e.category].map((sub) => <div id={sub.id}>{sub.subcategory}</div>):null}
+        //         </div>)}
+        //     </div>
+        // </div> 
         <div>
             <div className="mx-auto py-9 max-w-7xl">
                 <div className="relative flex items-baseline justify-between pb-1 border-b border-very-light-grey">
@@ -56,7 +67,7 @@ export default function CategoryList(props) {
                                     </svg>
                                 )}
                                 </Disclosure.Button>
-                                <div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point"><Link href={'directory/' + e.category} >{e.category}</Link></div>
+                                <div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point"><Link href={'directory/' + e.category} legacyBehavior>{e.category}</Link></div>
                                 </div>}
                             </div>
                             <div className="flex-shrink-0 order-2">
@@ -69,7 +80,9 @@ export default function CategoryList(props) {
                         <div className="space-y-4">
                             {categorySubValues[e.category] ? categorySubValues[e.category].map((sub) =>
                             <div key={sub.id} className="flex items-center justify-between">
-                                <div className="pl-4 ml-3 text-small no-underline text-denim"><Link href={'directory/' + e.category + '/Learn-' + sub.subcategory.replace(' ', '-')}>
+                                <div className="pl-4 ml-3 text-small no-underline text-denim"><Link
+                                    href={'directory/' + e.category + '/Learn-' + sub.subcategory.replace(' ', '-')}
+                                    legacyBehavior>
                                     {sub.subcategory}
                                 </Link></div>
                                 <label className="pl-10 ml-3 text-small text-dim-grey">
@@ -84,16 +97,5 @@ export default function CategoryList(props) {
                 )}
             </div>
         </div>
-        // <div className={styles.CategoryList}>
-        //     <h2>{props.parent}</h2>
-        //     <div >
-        //     {category.map((e) => <div key={'category_'+e.id}>
-        //         {(categorySubValues[e.category] && categorySubValues[e.category].length > 0)?<ChevronRight className={(showSubCategory.includes(e.category) && subcategory)? 
-        //          styles.CategoryCaretFillOpen: styles.CategoryCaretFill} onClick={(w) => ShowSubCategoryFunc(e.category)}/>: null}
-        //         <Link href={'category/' + e.category} className={styles.CategoryMainTitle} >{e.category}</Link>
-        //         {(showSubCategory.includes(e.category) && subcategory)? categorySubValues[e.category].map((sub) => <div id={sub.id}>{sub.subcategory}</div>):null}
-        //         </div>)}
-        //     </div>
-        // </div> 
-    )
+    );
 }

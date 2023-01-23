@@ -12,6 +12,7 @@ import Imaginated_logo from '../../public/Imaginated_logo.png';
 import BlogMenu from './BlogMenu.json';
 import Cookies from 'universal-cookie';
 import HeadBar from './headBar';
+import { useRouter } from 'next/router';
 
 export default function MobileNav() {
 
@@ -22,7 +23,13 @@ export default function MobileNav() {
   const [clickedBlog, setClickedBlog] = useState('');
   const [ClickedMainBlog, setClickedMainBlog] = useState(false);
   const [showHeadbar, setShowHeadbar] = useState(false);
+  const router = useRouter();
+  const {query} = router.query;
+  useEffect( () => {
+    if(query) setSearchTerm(query)
 
+
+  }, [query]);
   const signOutFunc = () => {
     const cookies = new Cookies();
     cookies.remove('user_id', { path: '/' });
@@ -33,11 +40,13 @@ export default function MobileNav() {
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
 
-      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: []}
+      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: [], Keywords: []}
       returnedSearch.map((e) => {
         if(e.type_value === 'Individual') return returnedSearchClean.Individual.push(e)
         if(e.type_value === 'Subcategory') return returnedSearchClean.Subcategory.push(e)
         if(e.type_value === 'Offering') return returnedSearchClean.Offering.push(e)
+        if(e.type_value === 'Keyword') return returnedSearchClean.Keywords.push(e)
+
       })
       setSearchResult(returnedSearchClean)
 
@@ -102,7 +111,7 @@ export default function MobileNav() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
           <div className="flex items-center justify-between py-6 md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <Link href="/"><a >
+              <Link href="/">
                 <span className="sr-only">Imaginated</span>
                 <Image
                   className="w-auto h-8 sm:h-10"
@@ -111,7 +120,7 @@ export default function MobileNav() {
                   height={35}
                   alt="Imaginated Logo"
                 />
-              </a></Link>
+              </Link>
             </div>
             <div className="inline-flex">
             {/* <Popover className="flex items-center">
@@ -235,7 +244,7 @@ export default function MobileNav() {
                 {(session) ? <>
                   <div className="border-b border-gainsboro">
                         <Link  href="#" >
-                          <a>
+
                           <div className='flex items-center mx-3.5 no-underline '>
                           <div className='pr-2 text-black'>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
@@ -246,7 +255,7 @@ export default function MobileNav() {
                             {session.user.name}
                           </span>
                           </div>
-                          </a>
+
                         </Link>
                   </div>
                   <div className="border-b border-gainsboro">
@@ -320,7 +329,7 @@ export default function MobileNav() {
                   </button>
                   </div>
                 </>}
-                  <div className="relative">
+                  {/* <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pt-4 pl-3 pointer-events-none">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                     </div>
@@ -330,39 +339,67 @@ export default function MobileNav() {
                         <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
                       </button>
                     </div>
-                  </div>
-                  <div className={(ShowResults) ?'' : 'display-none'} >
+                  </div> */}
+
+                </div>
+              </div>
+            </div>
+          </Popover.Panel>
+        </Transition>
+        </Popover>
+        </div>
+          </div>
+          <div className="relative hidden-width-1000">
+                    <div className="absolute right-10px flex items-center pt-2 pointer-events-none">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                    </div>
+                    <div className="flex items-center justify-between w-full">
+                      <input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="mb-4 width-100 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-4" placeholder="Search for a creator or category" required   value={searchTerm}    onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} />
+                      {/* <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 overflow-hidden text-sm border border-black text-dark-blue hover:text-indigo-500">
+                        <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
+                      </button> */}
+                    </div>
+                    <div className={(ShowResults) ?'' : 'display-none'} >
+                    <div className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
+
+                    {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
+                          <div className='each-results-cat-menu cursor-point' >
+                            <div className="each-results-fullname">{result.fullname}</div>
+                          </div>
+                      
+                    </div>
+                    ):null}
                     {searchResult.Subcategory.length > 0 ?<div>
                               <div className="each-result-name">Top Categories</div>
                         </div>:null}
-                        {searchResult.Subcategory.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/${result.linkname}`}>
+                        {searchResult.Subcategory.map( (result) =>  <Link key={result.id} href={`/directory/person/${result.linkname}`}>
                               <div className='each-results-cat-menu cursor-point' >
                                 <div className="each-results-fullname">{result.fullname}</div>
                               </div>
                           
-                        </div>
+                        </Link>
                         )}
 
                         {searchResult.Individual.length > 0 ?<div>
                               <div className="each-result-name">Top Creators</div>
                         </div>:null}
-                        {searchResult.Individual.map( (result) =>  <div key={result.id}>
-                              <div className='each-results-search cursor-point'  onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                        {searchResult.Individual.map( (result) =>  <div key={result.id} className="width-100 overflow-hidden">
+                              <Link className='each-results-search cursor-point'  href={`/directory/person/${result.linkname}`}>
                                 <div className="each-results-image" >
                                 <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
                                 </div>
                                 <div>
                                 <div className="each-results-fullname">{result.fullname}</div>
-                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.slice(0, 4).map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
                                 </div>
-                              </div>
+                              </Link>
                           
                         </div>
                         )}
                         {searchResult.Offering.length > 0 ?<div>
                               <div className="each-result-name">Top Market</div>
                         </div>:null}
-                        {searchResult.Offering.map( (result) =>  <div  key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/person/${result.linkname}`}>
+                        {searchResult.Offering.map( (result) =>  <Link  key={result.id}  href={`/directory/person/${result.linkname}`}>
                               <div className='each-results-search cursor-point' >
                                 <div className="each-results-image" >
                                 <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
@@ -373,20 +410,14 @@ export default function MobileNav() {
                                 </div>
                               </div>
                           
-                        </div>
+                        </Link>
 
                         )}
-              </div>
-                </div>
-              </div>
-            </div>
-          </Popover.Panel>
-        </Transition>
-        </Popover>
-        </div>
-          </div>
+                        </div>
+                    </div>
+                  </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

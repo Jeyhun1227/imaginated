@@ -107,6 +107,7 @@ getEachIndividual(
             id
             keyword
             score
+            view
           }
         }
       }

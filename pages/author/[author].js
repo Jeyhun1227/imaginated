@@ -29,13 +29,13 @@ export default function AuthorBlogMain( {post, author} ){
             </div>
             <div className="grid-container-blog">
                 {post.map((e) => <div key={e.id} className="blog-each-post">
-                    <Link href={e.uri}><a><h3 className='blog-title'>{e.title}</h3>
-                    <div className='blog-post-image'>{(e.featuredImage)?<Image src={e.featuredImage.node.sourceUrl} width={2048} height={1152}/>:null}</div>
-                    <div className="pl-1.5 no-underline text-denim cursor-point">...Read more</div></a></Link>
+                    <Link href={e.uri}><h3 className='blog-title'>{e.title}</h3>
+                        <div className='blog-post-image'>{(e.featuredImage)?<Image src={e.featuredImage.node.sourceUrl} width={2048} height={1152}/>:null}</div>
+                        <div className="pl-1.5 no-underline text-denim cursor-point">...Read more</div></Link>
                 </div>)} 
             </div>
         </div>
-    )
+    );
 
 }
 

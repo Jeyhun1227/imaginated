@@ -46,8 +46,12 @@ export default function MainPage() {
             <h1 className='text-4xl tracking-tight'>A directory of educational creators</h1>
             <div className='margin-top-bottom-three text-dim-grey font-size-20'>Save yourself time. Know whom to learn from and where to start learning in just a few clicks.</div>
             <div>
-              <Link href='/directory/'><a className='px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue'>Start Learning</a></Link>
-              <Link href='/directory/signup/'><a className='px-3 py-2 mr-3 text-sm text-center truncate md:mr-0 bg-white-smoke m-left-20'>Sign up for free</a></Link>
+              <Link
+                href='/directory/'
+                className='px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue'>Start Learning</Link>
+              <Link
+                href='/directory/signup/'
+                className='px-3 py-2 mr-3 text-sm text-center truncate md:mr-0 bg-white-smoke m-left-20'>Sign up for free</Link>
             </div>
             <div className='margin-top-bottom-three text-dim-grey'>Trusted by 100,000+ users</div>
 
@@ -124,7 +128,9 @@ export default function MainPage() {
             <div className='text-3xl tracking-tight'>Are you an educational creator?</div>
             <div className='margin-top-bottom-three text-dim-grey font-size-20'>List yourself on the directory and choose your category, respond to reviews, edit links, and more!</div>
             <div>
-              <Link href='/directory/signup/'><a className='px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue'>Get listed</a></Link>
+              <Link
+                href='/directory/signup/'
+                className='px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue'>Get listed</Link>
             </div>
 
           </div>
@@ -134,7 +140,7 @@ export default function MainPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 export async function getStaticProps(){
 

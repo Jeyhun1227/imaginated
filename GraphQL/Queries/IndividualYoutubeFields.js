@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const LOAD_INDIVIDUAL_PAGE = gql`
+const LOAD_YOUTUBE_FIELDS = gql`
 query
 getEachIndividual(
       $linkname: String 

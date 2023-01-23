@@ -20,13 +20,13 @@ export default function SubCategoryBlogMain( {post, category_all, metadata} ){
             <div className="flex flex-row flex-wrap space-x-3 margin-left-top">
                 <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/" >  
-                <a ><Image width={18} height={18} className="content-center h-4" src={home.src}/></a>
+                <Image width={18} height={18} className="content-center h-4" src={home.src}/>
                 </Link>
                 <div className="inline-flex pointing-right"><ChevronRight/></div>
 
                 </div>
                 {category_all.map((e, i) => <div key={e.uri}>
-                    <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={`/blog/category/${e.uri}`}><div>{e.name}</div></Link></div>
+                    <div className={(i < category_all.length - 1)?"inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point": "text-whisper inline-block ml-2 no-underline cursor-point"} ><Link href={`/blog/category/${e.uri}`} legacyBehavior><div>{e.name}</div></Link></div>
                     
                     {(i < category_all.length - 1)? <div className="inline-flex pointing-right"><ChevronRight/>
                     </div>:null}
@@ -34,13 +34,13 @@ export default function SubCategoryBlogMain( {post, category_all, metadata} ){
             </div>
         <div className="grid-container-blog">
             {post.map((e) => <div key={e.id} className="blog-each-post">
-                <Link href={e.uri}><a><h3 className='blog-title'>{e.title}</h3>
-                <div className='blog-post-image'>{(e.featuredImage)?<Image src={e.featuredImage.node.sourceUrl} width={2048} height={1152}/>:null}</div>
-                <div className="pl-1.5 no-underline text-denim cursor-point">...Read more</div></a></Link>
+                <Link href={e.uri}><h3 className='blog-title'>{e.title}</h3>
+                    <div className='blog-post-image'>{(e.featuredImage)?<Image src={e.featuredImage.node.sourceUrl} width={2048} height={1152}/>:null}</div>
+                    <div className="pl-1.5 no-underline text-denim cursor-point">...Read more</div></Link>
             </div>)} 
         </div>
         </div>
-    )
+    );
 
 }
 

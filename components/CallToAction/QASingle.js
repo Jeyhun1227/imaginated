@@ -11,22 +11,18 @@ export default function QASingle() {
     const [link, setLink] = useState(varLink);
     const [smallText, setSmallText] = useState(varSmallText);
   return (
-    
-    <div className="text-left">
-        <div className="text-xl tracking-tight text-dark-blue">
-            <span>{largeText}</span>
-        </div>
-        <p className="pt-2 mt-2 mb-0 text-base text-dim-grey">{smallText}</p>
-        <div>
-            <div className="text-base font-medium no-underline justify-left text-denim">
-            <Link
-                href="#"
-                >
-                {linkText}
-            </Link>
-            </div>
-        </div>
-    </div>
-    
-  )
+      <div className="text-left">
+          <div className="text-xl tracking-tight text-dark-blue">
+              <span>{largeText}</span>
+          </div>
+          <p className="pt-2 mt-2 mb-0 text-base text-dim-grey">{smallText}</p>
+          <div>
+              <div className="text-base font-medium no-underline justify-left text-denim">
+              <Link href="#" legacyBehavior>
+                  {linkText}
+              </Link>
+              </div>
+          </div>
+      </div>
+  );
 }
