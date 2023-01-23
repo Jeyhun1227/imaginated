@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Menu, Transition, Combobox  } from '@headlessui/react';
 // import {Menu, MenuItem} from '@mui/material';
 import React, {useState, useEffect, useRef } from "react";
-import { ChevronDown, ChevronUp, Star, Gear, BoxArrowInRight, ChevronRight } from 'react-bootstrap-icons';
+import { ChevronDown, ChevronUp, Star, Gear, BoxArrowInRight, Search } from 'react-bootstrap-icons';
 import GetSearchResults from './headerSearch/HeaderSearch';
 import Link from 'next/link';
 import ImageWithFallback from '../Image/Image'
@@ -169,6 +169,18 @@ export default function Header({main_blog_value}) {
   
   ]
 
+  const onKeyboardHandler = (event) => {
+    if (event.keyCode === 13) {
+      window.location.href = `/search/?query=${searchTerm}`
+    }
+  }
+
+  const onClickSeach = () => {
+    console.log('search: ', `/search/?query=${searchTerm}`)
+
+    window.location.href = `/search/?query=${searchTerm}`
+  }
+
   return (
     <div>
             {showHeadbar? <HeadBar main_blog_value={main_blog_value}/>:null}
@@ -187,11 +199,12 @@ export default function Header({main_blog_value}) {
                 <div className="relative w-full">
                     <div className="border width-rem-38">
                       <div className="inline-block"><Select options={categroyOptions} values={selectedOptions}  placeholder={'All Categories'} className="border-none bg-light-grey"/></div>
-                      <Combobox.Input type="text" id="simple-search" data-dropdown-toggle="dropdown" className="inline-block text-sm text-ellipsis sm:pr-10 w-96 focus:outline-none margin-left-10px" placeholder={placeholder} required onChange={(e) => setSearchTerm(e.target.value)}/>
+                      <Combobox.Input type="text" onKeyUp={onKeyboardHandler} id="simple-search" data-dropdown-toggle="dropdown" className="inline-block text-sm text-ellipsis sm:pr-10 w-96 focus:outline-none margin-left-10px" placeholder={placeholder} required onChange={(e) => setSearchTerm(e.target.value)}/>
                     </div>
                 </div>
-                <div className="absolute inset-y-0 right-0 flex items-center margin-right-12 pointer-events-none">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                <div className="absolute flex inset-y-0 right-0 items-center margin-right-12 cursor-pointer z-index-five" onClick={() => onClickSeach()}>
+                        <Search />
+                        {/* <svg className="w-5 h-5  cursor-pointer z-index-five" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg> */}
                 </div>
               </div>
               <Combobox.Options className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-rem-38 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
