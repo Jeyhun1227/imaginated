@@ -51,7 +51,7 @@ export default function SearchFunction() {
             <div className="py-12 mx-auto max-w-7xl">
                 <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 min-height-200">
                 <div className="items-center">
-                    <div className="text-xl font-semibold truncate md:text-3xl">{FormDetails}</div>
+                    <div className="text-xl font-semibold truncate md:text-3xl mt-5">{FormDetails}</div>
                     {
                         youtubeChannel.map((yc) => 
                         <div key={yc.id} className="py-6 border-b border-very-light-grey ">
