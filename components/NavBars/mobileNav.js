@@ -19,7 +19,7 @@ export default function MobileNav() {
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
-  const [ShowResults, setShowResults] = useState(true);
+  const [ShowResults, setShowResults] = useState(false);
   const [clickedBlog, setClickedBlog] = useState('');
   const [ClickedMainBlog, setClickedMainBlog] = useState(false);
   const [showHeadbar, setShowHeadbar] = useState(false);
@@ -118,7 +118,7 @@ export default function MobileNav() {
       {showHeadbar? <HeadBar/>:null}
       <div className="relative z-10 bg-white shadow-sm">
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
-          <div className="flex items-center justify-between py-6 md:space-x-10">
+          <div className="flex items-center justify-between py-6 md:space-x-10  z-index-five">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/">
                 <span className="sr-only">Imaginated</span>
@@ -132,85 +132,7 @@ export default function MobileNav() {
               </Link>
             </div>
             <div className="inline-flex">
-            {/* <Popover className="flex items-center">
-            <div className="-py-2 -pr-2 md:hidden">
-              <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
-                <span className="sr-only">Open menu</span>
-                {(session) ? <Bell className="w-4 h-4" aria-hidden="true" /> : null}
-              </Popover.Button>
-            </div>
-            <Transition
-          as={Fragment}
-          enter="duration-200 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel focus className="absolute inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden">
-            <div className="bg-white divide-y-2 shadow-lg divide-gray-50">
-              <div className="px-3 pt-3 pb-3">
-                <div className="flex items-center justify-between pb-2.5 border-b border-gainsboro">
-                  <div>
-                    <span className="text-large">
-                      Notification
-                    </span>
-                  </div>
-                  <div className="-mr-2">
-                    <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
-                      <span className="sr-only">Close menu</span>
-                      <X className="w-6 h-6" aria-hidden="true" />
-                    </Popover.Button>
-                  </div>
-                </div>
-                {!(session) ? <>
-                  <div className="pt-2.5">
-                    <div>
-                      <div className='py-2 hover:bg-white-smoke'>
-                        <div className='flex items-center px-3.5 no-underline'>
-                        <Link href="#">
-                          <>
-                          <div className='pr-2 text-black no-underline'>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                            </svg>
-                          </div>
-                          <span className='block text-xs font-semibold text-black no-underline'> 
-                          </span>
-                          </>
-                        </Link>
-                        </div>
-                        <span className='block pt-2 text-xs text-black no-underline pl-9'>
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <div className='py-2 hover:bg-white-smoke'>
-                        <div className='flex items-center px-3.5 no-underline'>
-                        <Link href="#" >
-                          <>
-                          <div className='pr-2 text-black no-underline'>
-                            <PlayBtn/>
-                          </div>
-                          <span className='block text-xs font-semibold text-black no-underline'>
-                            John updated their content, go check it out now!
-                          </span>
-                          </>
-                        </Link>
-                        </div>
-                        <span className='block pt-2 text-xs text-black no-underline pl-9'>
-                          Yesterday
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  </> : null}
-              </div>
-            </div>
-          </Popover.Panel>
-        </Transition>
-        </Popover> */}
+
             <Popover className="flex justify-end">
             <div className="flex justify-end -my-2 -mr-2">
               <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white">
@@ -227,7 +149,7 @@ export default function MobileNav() {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <Popover.Panel focus className="absolute inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden">
+          <Popover.Panel focus className="absolute inset-x-0 top-0 p-2 transition origin-top-right transform z-10">
             <div className="bg-white divide-y-2 shadow-lg divide-gray-50">
               <div className="px-3 pt-3 pb-3">
                 <div className="flex items-center justify-between pb-4 border-b border-gainsboro">
@@ -363,13 +285,14 @@ export default function MobileNav() {
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                     </div>
                     <div className="flex items-center justify-between w-full">
-                      <input type="text" id="simple-search" onKeyUp={onKeyboardHandler} data-dropdown-toggle="dropdown" className="mb-4 width-100 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-4" placeholder="Search for a creator or category" required   value={searchTerm}    onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} />
+                      <input type="text" id="simple-search" onKeyUp={onKeyboardHandler} data-dropdown-toggle="dropdown" className="mb-4 width-100 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-4" placeholder="Search for a creator or category" required   value={searchTerm}    onClick={()=>setShowResults(true)} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} />
                       {/* <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 overflow-hidden text-sm border border-black text-dark-blue hover:text-indigo-500">
                         <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
                       </button> */}
                     </div>
                     <div className={(ShowResults) ?'' : 'display-none'} >
-                    <div className="absolute z-10 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
+                    {(ShowResults)? < >
+                    <div className="absolute z-4 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
 
                     {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
                           <div className='each-results-cat-menu cursor-point' >
@@ -423,6 +346,8 @@ export default function MobileNav() {
 
                         )}
                         </div>
+                        </>:null}
+
                     </div>
                   </div>
         </div>

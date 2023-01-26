@@ -16,7 +16,7 @@ import Select from "react-dropdown-select";
 import { useRouter } from 'next/router';
 
 export default function Header({main_blog_value}) {
-  let placeholder = 'Search for a creator or category'
+  let placeholder = 'Search a photography term to learn more about'
   const blog_header = 'Learn [Category] for free - See the top educators'
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
