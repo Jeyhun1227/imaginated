@@ -1,7 +1,7 @@
 const PoolConnection = require('../postgressql')
 import { getSession } from "next-auth/react";
 import { PineconeClient } from 'pinecone-client';
-const pinecone = new PineconeClient({ /* ... */ });
+// const pinecone = new PineconeClient({ /* ... */ });
 
 
 
