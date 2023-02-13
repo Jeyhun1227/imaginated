@@ -19,8 +19,8 @@ export default async (req, res) => {
             //     includeMetadata: true,
             // });
 
-            let youtubeChannel = await PoolConnection.query('SELECT * FROM youtube_channel_keyword_individual_vw WHERE keyword IN ($1:csv) ORDER BY match_rate desc;', [req.body.keyword])
-            let youtubeKeywords = await PoolConnection.query('SELECT * FROM youtube_video_keyword yck where keyword IN ($1:csv);', [req.body.keyword])
+            let youtubeChannel = await PoolConnection.query('SELECT * FROM youtube_channel_keyword_individual_vw WHERE keyword = $1 ORDER BY match_rate desc;', [req.body.keyword])
+            let youtubeKeywords = await PoolConnection.query('SELECT * FROM youtube_video_keyword yck where keyword = $1;', [req.body.keyword])
             let youtubeChannelResults = youtubeChannel.rows
             let youtubeKeywordsResults = youtubeKeywords.rows
             var insert_values = await PoolConnection.query('INSERT INTO user_request_search(search_term, userid, ip, category, channel_results, video_results) VALUES($1, $2, $3, $4, $5, $6);', 
