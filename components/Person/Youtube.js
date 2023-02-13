@@ -58,7 +58,7 @@ export default function IndividualYoutube({free_content, link, name, scroll_down
             {/* {(free_content_subcategory.length > 1) ?<div className="">
               {free_content_subcategory.map((e) =>  <div key={e} className={`${(e === selectedSubcategoryVideo)? 'border-selected': ''} inline-block flex items-center justify-center px-1 py-1 mt-0 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke cursor-point`} onClick={() => {setSelectedSubcategoryVideo(e); setfree_content_filtered(free_content_filter_func(e))}}>{e}</div>)}
             </div>:null} */}
-            <div className="indiv-gallery-parent" ref={myRef}><ImageGallery lazyLoad={true} showFullscreenButton={false} showPlayButton={false}  items={free_content_filtered} renderItem={_renderVideo}/></div>
+            <div className="indiv-gallery-parent" ref={myRef}><ImageGallery showNav={false} lazyLoad={true} showFullscreenButton={false} showPlayButton={false}  items={free_content_filtered} renderItem={_renderVideo}/></div>
           </div>
         </div>
     );

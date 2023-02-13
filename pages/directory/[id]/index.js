@@ -53,7 +53,7 @@ export default function CategoryPageMain(props) {
                           <h3 className="flow-root -my-3">
                               <div className="flex flex-wrap items-center justify-between w-full py-2 mx-auto text-sm bg-white">
                                   <div className="flex flex-wrap items-center justify-between">
-                                      <Link href={ routerID + '/Learn-' + e.replace(' ', '-')} legacyBehavior><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point">{e}</div></Link>
+                                      <Link href={ `${routerID}/Learn-${e.replace(' ', '-')}/`} legacyBehavior><div className="flex pl-2 text-large no-underline text-denim whitespace-nowrap cursor-point">{e}</div></Link>
                                   </div>
                                   <div className="flex-shrink-0 order-2">
                                       <div className="flex items-center flex-1">
