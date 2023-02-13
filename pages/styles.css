@@ -593,6 +593,10 @@ a{
   margin-left: 4px;
 }
 
+.image-gallery-thumbnail{
+  width: 128px !important;
+  /* height: 70px; */
+}
 
 .font-twofour{
   font-size: 24px;

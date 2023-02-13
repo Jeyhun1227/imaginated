@@ -13,8 +13,8 @@ import { InView } from 'react-intersection-observer';
 import Head from 'next/head'
 import Headshop_photography from '../../../components/SubCategoryPage/Content/Headshop_photography.js'
 import Landscape_photography from '../../../components/SubCategoryPage/Content/Landscape_photography.js'
-import Portrait_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
-import Street_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
+import Portrait_photography from '../../../components/SubCategoryPage/Content/Portrait_photography'
+import Street_photography from '../../../components/SubCategoryPage/Content/Street_photography.js'
 import Wedding_photography from '../../../components/SubCategoryPage/Content/Wedding_photography.js'
 
 

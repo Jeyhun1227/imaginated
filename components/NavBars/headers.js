@@ -190,7 +190,7 @@ export default function Header({main_blog_value}) {
           height="0" width="0" style={{"display":"none", "visibility":"hidden"}}></iframe></noscript>
         </div> */}
         <div className="flex items-center justify-between mx-auto flex-nowrap">
-            <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/">
+            <div className="flex items-center mr-3"><div className="xl:h-10 sm:h-5 md:h-7 cursor-point"><Link href="/" as="/">
                 <Image src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7" width={160} height={40}/>
             </Link></div></div>
             <Combobox as="li" value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} className="relative list-none">
