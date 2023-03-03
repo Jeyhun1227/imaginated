@@ -34,7 +34,7 @@ export default async (req, res) => {
                 const keyword_list = pinecone_values.data.matches.filter(item => item.score >= .90)
                 .map(item => item.id.toLowerCase()) // lower the strings
                 .filter((item, index, arr) => arr.indexOf(item) === index);
-                console.log('keyword_list: ', keyword_list)
+                // console.log('keyword_list: ', keyword_list)
                 var indivudal_val = await PoolConnection.query('SELECT v.id, v."channelId", v.parent, v.sub_bucket, v.videoid, v.title, v.thumbnail, sum(v.score) score, sum(v.relevance) relevance, sum(v.engagement) engagement from youtube_channel_keyword c join youtube_video_keyword v on c.id = v.channel_key where v.videoid = $1 AND lower(v.keyword) = ANY($2) AND c."individualId" = $3  group by 1,2,3,4,5,6,7', [req.body.videoid, keyword_list, req.body.individual])
             }else{
                 const pinecone_values = await index.query({

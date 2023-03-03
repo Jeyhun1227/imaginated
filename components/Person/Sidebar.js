@@ -68,7 +68,7 @@ export default function IndividualSidebar({category_values, mobile}) {
                         <div className="pt-2 text-dim-grey">
                             {e.description.length > 150 ? e.description.slice(0, 150) + '...': e.description}
                             <div className="no-underline text-denim cursor-point">
-                            <Link  href={() => window.location.href = '/directory/person/' + e.linkname}>
+                            <Link  href={'/directory/person/' + e.linkname}>
                                 <div >Learn more about {e.first_name} {e.last_name}</div>
                             </Link>
                             </div>

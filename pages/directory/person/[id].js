@@ -652,6 +652,36 @@ export default function IndividualPageMain({Individual_values, category_values, 
 
 
 export async function getStaticProps(ctx) {
+  const cleanWordChartIndividual = (wordChartIndividual) => {
+
+    let sub_bucket_obj = {}
+    let sub_bucket_count = {}
+    wordChartIndividual.map(item => {
+      const sub_bucket = item.sub_bucket;
+      const videoid = item.videoid;
+      const title = item.title;
+      const thumbnail = item.thumbnail;
+      const parent = item.parent;
+      const embedUrl = `https://www.youtube.com/embed/${videoid}?autoplay=0&showinfo=0`;
+      sub_bucket_count[sub_bucket] = sub_bucket_count[sub_bucket] || [];
+      if (!sub_bucket_count[sub_bucket].includes(videoid)) {
+        sub_bucket_count[sub_bucket].push(videoid);
+      }
+      if (!sub_bucket_obj[sub_bucket]) {
+        sub_bucket_obj[sub_bucket] = { [parent]: { [videoid]: {title, thumbnail, embedUrl} } };
+      } else if (sub_bucket_obj[sub_bucket][parent]) {
+        sub_bucket_obj[sub_bucket][parent][videoid] = {title, thumbnail, embedUrl};
+      } else {
+        sub_bucket_obj[sub_bucket][parent] = { [videoid]: {title, thumbnail, embedUrl} };
+      }
+    });
+    let final_sub_list = Object.keys(sub_bucket_obj).map((obj_key) => ({parents: Object.keys(sub_bucket_obj[obj_key]).map((parent) => ({parent: parent, values: sub_bucket_obj[obj_key][parent], count: Object.keys(sub_bucket_obj[obj_key][parent]).length})).sort((a, b) => b.count - a.count), sub_bucket: obj_key, expanded: false, count: sub_bucket_count[obj_key].length}))
+    const _sum = final_sub_list.reduce((accumulator, currentValue) => accumulator + currentValue.count, 0);
+    const final_sub_list_with_avg = final_sub_list.map((e) => ({...e, avg: Math.round(e.count * 100 / _sum)}))
+    const final_sub_list_sorted = final_sub_list_with_avg.sort((a, b) => b.count - a.count);
+
+    return final_sub_list_sorted.slice(0, 15)
+  }
   const IndividualID = ctx.params.id
   // let session_backend = await getSession(ctx);
   var session_backend =  null;
@@ -660,9 +690,8 @@ export async function getStaticProps(ctx) {
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
   let category_values_clean = Individual_values.data.getEachIndividual.similar_Individual.rows.filter((e) => e.linkname != IndividualID)
   let wordChartIndividual = Individual_values.data.getEachIndividual.YoutubeFieldsObject
-  // console.log('Individual_values: ', wordChartIndividual)
-  wordChartIndividual = wordChartIndividual ? wordChartIndividual : [];
-  // console.log('reviews: ', Individual_values.data.getEachIndividual.reviews)
+  wordChartIndividual = wordChartIndividual ? cleanWordChartIndividual(wordChartIndividual) : [];
+  // console.log('wordChartIndividual: ', wordChartIndividual)
   // const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
   // const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
   // const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)

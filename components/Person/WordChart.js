@@ -118,46 +118,11 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
     // //   invalidation.then(() => cloud.stop());
     //   };
     
-    const cleanWordChartIndividual = () => {
 
-      let sub_bucket_obj = {}
-      let sub_bucket_count = {}
-      wordChartIndividual.map(item => {
-        const sub_bucket = item.sub_bucket;
-        const videoid = item.videoid;
-        const title = item.title;
-        const thumbnail = item.thumbnail;
-        const parent = item.parent;
-        const embedUrl = `https://www.youtube.com/embed/${videoid}?autoplay=0&showinfo=0`;
-        sub_bucket_count[sub_bucket] = sub_bucket_count[sub_bucket] || [];
-        if (!sub_bucket_count[sub_bucket].includes(videoid)) {
-          sub_bucket_count[sub_bucket].push(videoid);
-        }
-        if (!sub_bucket_obj[sub_bucket]) {
-          sub_bucket_obj[sub_bucket] = { [parent]: { [videoid]: {title, thumbnail, embedUrl} } };
-        } else if (sub_bucket_obj[sub_bucket][parent]) {
-          sub_bucket_obj[sub_bucket][parent][videoid] = {title, thumbnail, embedUrl};
-        } else {
-          sub_bucket_obj[sub_bucket][parent] = { [videoid]: {title, thumbnail, embedUrl} };
-        }
-      });
-      // console.log('sub_bucket_obj: ', sub_bucket_obj['Photographing on Location']['Wedding Photos'])
-      // const sortedKeys = Object.keys(sub_bucket_obj['Photographing on Location']).sort();
-
-      // sortedKeys.forEach(key => {
-      //   console.log(`${key}: ${sub_bucket_obj['Photographing on Location'][key]}`);
-      // });
-      let final_sub_list = Object.keys(sub_bucket_obj).map((obj_key) => ({parents: Object.keys(sub_bucket_obj[obj_key]).map((parent) => ({parent: parent, values: sub_bucket_obj[obj_key][parent], count: Object.keys(sub_bucket_obj[obj_key][parent]).length})).sort((a, b) => b.count - a.count), sub_bucket: obj_key, expanded: false, count: sub_bucket_count[obj_key].length}))
-      const _sum = final_sub_list.reduce((accumulator, currentValue) => accumulator + currentValue.count, 0);
-      const final_sub_list_with_avg = final_sub_list.map((e) => ({...e, avg: Math.round(e.count * 100 / _sum)}))
-      const final_sub_list_sorted = final_sub_list_with_avg.sort((a, b) => b.count - a.count);
-
-      setSub_bucket_list(final_sub_list_sorted)
-    }
     useEffect(() => {
         // if(width && wordChartIndividual.length > 0) drawWordCloud()
-        if(wordChartIndividual.length > 0) cleanWordChartIndividual()
-    }, [wordChartIndividual, width])
+        if(wordChartIndividual.length > 0) setSub_bucket_list(wordChartIndividual)
+    }, [wordChartIndividual])
     const router = useRouter();
 
     const getMainCategory = async (sub_bucket) => {
@@ -166,19 +131,25 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
       setTimeout(() => scrollToRef(sub_bucket), 400);
 
     }
+    const getVideoId = async (video_selected, message) => {
+      console.log(message);
+      if(!video_selected) return;
+      setShowVideoId(video_selected)
 
+
+    }
     const getMainQuery = async (query, videoid) => {
       let main_list = await getWordIndividual({value: query, param: true, videoid})
-      if(main_list.length === 0) return console.log('failed to find a match');
+      if(main_list.length === 0) return getVideoId(null,'failed to find a match');
       let {parent, sub_bucket} = main_list[0];
       // console.log('sub_bucket_list: ', sub_bucket_list)
       let getting_sub_bucket = sub_bucket_list.find((e) => e.sub_bucket === sub_bucket);
       // console.log('main_list: ',getting_sub_bucket, parent, sub_bucket)
-      if(!getting_sub_bucket) return console.log('failed to find a parent')
+      if(!getting_sub_bucket) return getVideoId(main_list[0],'failed to find a parent');
       let parent_value = getting_sub_bucket.parents.find((e) => e.parent === parent)
-      
+      // console.log('parent_value: ', parent_value)
       let parent_val_list = Object.keys(parent_value.values).map((e) => parent_value.values[e])
-
+      if(!parent_value.values[videoid] ) return getVideoId(main_list[0],'failed to find a parent');
       // console.log('sub_bucket: ', sub_bucket, parent_val_list)
 
       setWordIndividualFound(parent_val_list)
@@ -186,8 +157,8 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
       setCategoryClicked(sub_bucket)
 
       setExpendedValue(parent.toLowerCase())
+      // console.log('videoid: ', videoid, parent_val_list, main_list)
       if(videoid){
-        // console.log('parent_value: ', videoid, parent_value.values[videoid])
         setShowVideoId(parent_value.values[videoid])
       }
       setTimeout(() => scrollToRef(sub_bucket), 400);
