@@ -39,7 +39,8 @@ export default function Header({main_blog_value}) {
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
 
-      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: [], Keywords: []}
+      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: [], Keywords: [], searchTerm: null}
+      if(searchTerm.length > 3) returnedSearchClean.searchTerm = searchTerm
       returnedSearch.map((e) => {
         if(e.type_value === 'Individual') return returnedSearchClean.Individual.push(e)
         if(e.type_value === 'Subcategory') return returnedSearchClean.Subcategory.push(e)
@@ -176,7 +177,6 @@ export default function Header({main_blog_value}) {
   }
 
   const onClickSeach = () => {
-    console.log('search: ', `/search/?query=${searchTerm}`)
 
     window.location.href = `/search/?query=${searchTerm}`
   }
@@ -212,23 +212,30 @@ export default function Header({main_blog_value}) {
 
                 <div className={(ShowResults) ?'' : 'display-none'} >
                 {(ShowResults)? < >
-                {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
+                  {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`}><div className='each-results-cat-menu cursor-point' >
+                            <div className="each-results-fullname">{searchResult.searchTerm} - Keyword</div>
+                  </div></Link>:null
+                  }
+                  {searchResult.Subcategory.length > 0 ?<div>
+                          <div className="each-result-name">Top Categories</div>
+                    </div>:null}
+                    {searchResult.Subcategory.map( (result) =>  <div key={result.id} >
+                          <Link href={`/directory/${result.linkname}`}><div className='each-results-cat-menu cursor-point' >
+                            <div className="each-results-fullname">{result.fullname}</div>
+                          </div></Link>
+                      
+                    </div>
+                    )}
+                  {searchResult.Keywords.length > 0 ?<div>
+                      <div className="each-result-name">Top Search Results</div>
+                  </div>:null}
+                  {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
                           <div className='each-results-cat-menu cursor-point' >
                             <div className="each-results-fullname">{result.fullname}</div>
                           </div>
                       
                     </div>
                     ):null}
-                {searchResult.Subcategory.length > 0 ?<div>
-                          <div className="each-result-name">Top Categories</div>
-                    </div>:null}
-                    {searchResult.Subcategory.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/directory/${result.linkname}`}>
-                          <div className='each-results-cat-menu cursor-point' >
-                            <div className="each-results-fullname">{result.fullname}</div>
-                          </div>
-                      
-                    </div>
-                    )}
 
                     {searchResult.Individual.length > 0 ?<div>
                           <div className="each-result-name">Top Creators</div>

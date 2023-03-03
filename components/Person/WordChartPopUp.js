@@ -30,7 +30,7 @@ export default function WordChartPopUp({query, initialRunVideoid, initialRunVide
     }
 
     const getWordIndividual = async () => {
-        let youtubeKeywords = await axios.post(`${window.location.origin}/api/WordCloud/search/`, {query, individual})
+        let youtubeKeywords = await axios.post(`${window.location.origin}/api/WordCloud/search/`, {query: query.value, individual, query_param: query.param})
         // console.log('setYoutubeKeywordsVal: ', youtubeKeywords.data.indivudal_val)
         
         let youtube_val = turnArrayIntoNestedArrayOf2(youtubeKeywords.data.indivudal_val)

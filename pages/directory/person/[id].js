@@ -10,6 +10,7 @@ import { signIn, useSession} from "next-auth/react";
 import UserReview from '../../../components/Form/UserReview';
 import axios from 'axios';
 import home from '../../../public/home.svg'
+import contactImg from '../../../public/contact.svg'
 import star from '../../../public/star.svg'
 import No_image from '../../../public/No-image.png'
 import Company_Image from '../../../public/company.svg'
@@ -113,6 +114,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
   const [showShare, setShowShare] = useState(false);
   const [UserSignUp, setUserSignUp] = useState(false);
   const [ReviewEngagement, setReviewEngagement] = useState([]);
+  const [ContactInfoClicked, setContactInfoClicked] = useState(false);
 
   useEffect(() => {
     let href_hash = window.location.href;
@@ -344,7 +346,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                 <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
                   <div className="person-flex flex-row space-x-3 flex-nowrap md:pt-7"> 
                     <h1  className="text-xl font-semibold truncate md:text-3xl inline-block">{Individual_values.first_name + ' ' + Individual_values.last_name} </h1>
-                    {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg text-dim-grey inline-block padding-top-5">{`"${Individual_values.aka}"`}</h2>:null}
+                    {Individual_values.aka ? <h2  className="self-end text-sm truncate md:text-lg text-dim-grey inline-block margin-bottom-12">{`"${Individual_values.aka}"`}</h2>:null}
                     <div className="pl-3 cursor-point inline-block vertical-align-top padding-top-15-4"> 
                       <ShareFill className="w-3.5 h-3.5 fill-dark-blue" onClick={() => setShowShare(true)}/>
                     </div>
@@ -371,9 +373,12 @@ export default function IndividualPageMain({Individual_values, category_values, 
                           </TwitterShareButton>
                       </div>
                     </div>:null}
+                    <div className='indiv-social-media'>
+                      <IndividualFreeOfferingComponent free_offers_array={free_offers_array}/>
+                    </div>
                   </div>
-                  <div className="flex space-x-3 sm:flex-row sm:flex-wrap">
-                  <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div>
+                  <div className="grid indiv-content-3 align-items-center">
+                  {/* <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div> */}
                     <Rating name={Individual_values.first_name + Individual_values.last_name} value={parseFloat(Individual_values.avg)} precision={0.5} sx={{
                               color: "yellow",
                               borderRadius: '10px',
@@ -384,8 +389,22 @@ export default function IndividualPageMain({Individual_values, category_values, 
                               display: 'block'
                               }                        
                             }} readOnly/>
-                    <div className={styles.inline_block}>{Individual_values.avg}</div>
-                    <div className={styles.inline_block}>({Individual_values.count})</div>
+                    <div className='inline-block font-size-14'>{Individual_values.avg}</div>
+                    <div className='inline-block font-size-14'>({Individual_values.count})</div>
+                    <div className='inline-block cursor-point' onClick={()=>setContactInfoClicked(true)}><Image src={contactImg} alt='contact' className='inline-block' ></Image><div className='inline-block font-weight-500 font-size-14 margin-left-10'>Contact</div></div>
+                    {(ContactInfoClicked)?<div className='individual-share-buttons individual-contact-buttons'>
+                          <div className="individual-share-exit" onClick={() => setContactInfoClicked(false)}><X/></div>
+                          <div className="">
+                          <h2>Contact Details</h2>
+                            {(Individual_values.company)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
+                            {(Individual_values.location)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
+                            {(Individual_values.founder)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
+                            {(Individual_values.link)?<div className="pl-2 text-dim-grey margin-top-10"><div className="inline-block margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link
+                              href={Individual_values.link}
+                              target='_blank'
+                              rel="noopener noreferrer nofollow">{Individual_values.link}</Link></div></div>:null}
+                          </div>
+                    </div>:null}
                   </div>
                   <div className="hidden space-y-3 sm:space-x-3 md:flex font-weight-500 font-size-14">Categories: </div>
                   <div className="hidden space-y-3 sm:space-x-3 md:flex">
@@ -437,7 +456,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
               </div>
               </main>
 
-              <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-5">
+              <div ref={headerSection} className="sticky top-0 z-50 flex flex-row space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-6">
                 <div>
                   <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
                     About
@@ -461,14 +480,10 @@ export default function IndividualPageMain({Individual_values, category_values, 
                         <h2>Who is {Individual_values.first_name + ' ' + Individual_values.last_name}?</h2>
                         <div className="">
                           <div className="text-dim-grey">{Individual_values.description}</div>
+                          <div className="indiv-featured-in">Featured In</div>
 
-                        </div>
-                      </div>
-                      <div className="grid person-grid-col-2 my-12">
-                        <div className="">
-                          <h2>Featured In</h2>
                           <ul className="pl-0.5 list-outside">{feature.map((url) => 
-                            <li className="" key={url.trim()}>
+                            <li className="inline-block mr-10" key={url.trim()}>
                               <Dot className="inline-flex items-center justify-center fill-dim-grey inline-block"/>
                               <Link
                                 href={url.trim()}
@@ -478,21 +493,11 @@ export default function IndividualPageMain({Individual_values, category_values, 
                             </li>)}
                           </ul>
                         </div>
-                        <div className="">
-                          <h2>Contact Details</h2>
-                            {(Individual_values.company)?<div className="pl-2 text-dim-grey"><Image className="" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
-                            {(Individual_values.location)?<div className="pl-2 text-dim-grey"><Image className="" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
-                            {(Individual_values.founder)?<div className="pl-2 text-dim-grey"><Image className="" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
-                            {(Individual_values.link)?<div className="flex pl-2 text-dim-grey "><div className="margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link
-                              href={Individual_values.link}
-                              target='_blank'
-                              rel="noopener noreferrer nofollow">{Individual_values.link}</Link></div></div>:null}
-                        </div>
                       </div>
                     </div>
                     {/* <div className={(urlType === 'offerings')? null: styles.displayNone}> */}
                     <div className={"my-10"} ref={offeringsSection}>
-                      <div className="pt-12 pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
+                      <div className="pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
                         <h3>Free Offerings</h3>
                       </div>
                       <div>
@@ -501,7 +506,6 @@ export default function IndividualPageMain({Individual_values, category_values, 
                       <div>
                             {/* {(free_offers.youtube && free_content.length > 0) ? <IndividualYoutube free_content={free_content} link={free_offers.youtube} name={get_name_from_link(free_offers.youtube, 'youtube')} />: null} */}
                       </div>
-                        <IndividualFreeOfferingComponent free_offers_array={free_content.length > 0 ? free_offers_array.filter((e) => e.type != 'youtube') : free_offers_array}/>
                     </div>
                   </div>
                   <Sidebar category_values={category_values.slice(0, 5)}/>
@@ -648,6 +652,36 @@ export default function IndividualPageMain({Individual_values, category_values, 
 
 
 export async function getStaticProps(ctx) {
+  const cleanWordChartIndividual = (wordChartIndividual) => {
+
+    let sub_bucket_obj = {}
+    let sub_bucket_count = {}
+    wordChartIndividual.map(item => {
+      const sub_bucket = item.sub_bucket;
+      const videoid = item.videoid;
+      const title = item.title;
+      const thumbnail = item.thumbnail;
+      const parent = item.parent;
+      const embedUrl = `https://www.youtube.com/embed/${videoid}?autoplay=0&showinfo=0`;
+      sub_bucket_count[sub_bucket] = sub_bucket_count[sub_bucket] || [];
+      if (!sub_bucket_count[sub_bucket].includes(videoid)) {
+        sub_bucket_count[sub_bucket].push(videoid);
+      }
+      if (!sub_bucket_obj[sub_bucket]) {
+        sub_bucket_obj[sub_bucket] = { [parent]: { [videoid]: {title, thumbnail, embedUrl} } };
+      } else if (sub_bucket_obj[sub_bucket][parent]) {
+        sub_bucket_obj[sub_bucket][parent][videoid] = {title, thumbnail, embedUrl};
+      } else {
+        sub_bucket_obj[sub_bucket][parent] = { [videoid]: {title, thumbnail, embedUrl} };
+      }
+    });
+    let final_sub_list = Object.keys(sub_bucket_obj).map((obj_key) => ({parents: Object.keys(sub_bucket_obj[obj_key]).map((parent) => ({parent: parent, values: sub_bucket_obj[obj_key][parent], count: Object.keys(sub_bucket_obj[obj_key][parent]).length})).sort((a, b) => b.count - a.count), sub_bucket: obj_key, expanded: false, count: sub_bucket_count[obj_key].length}))
+    const _sum = final_sub_list.reduce((accumulator, currentValue) => accumulator + currentValue.count, 0);
+    const final_sub_list_with_avg = final_sub_list.map((e) => ({...e, avg: Math.round(e.count * 100 / _sum)}))
+    const final_sub_list_sorted = final_sub_list_with_avg.sort((a, b) => b.count - a.count);
+
+    return final_sub_list_sorted.slice(0, 15)
+  }
   const IndividualID = ctx.params.id
   // let session_backend = await getSession(ctx);
   var session_backend =  null;
@@ -656,9 +690,8 @@ export async function getStaticProps(ctx) {
   let free_content = Individual_values.data.getEachIndividual.free_content.map((e) => ({...e, embedUrl: `https://www.youtube.com/embed/${e.url.split('watch?v=')[1]}?autoplay=0&showinfo=0`, thumbnail: `https://img.youtube.com/vi/${e.url.split('watch?v=')[1]}/0.jpg`}))
   let category_values_clean = Individual_values.data.getEachIndividual.similar_Individual.rows.filter((e) => e.linkname != IndividualID)
   let wordChartIndividual = Individual_values.data.getEachIndividual.YoutubeFieldsObject
-  // console.log('Individual_values: ', wordChartIndividual)
-  wordChartIndividual = wordChartIndividual ? wordChartIndividual : [];
-  // console.log('reviews: ', Individual_values.data.getEachIndividual.reviews)
+  wordChartIndividual = wordChartIndividual ? cleanWordChartIndividual(wordChartIndividual) : [];
+  // console.log('wordChartIndividual: ', wordChartIndividual)
   // const clean_individual_values = Individual_values.data.getEachIndividual.rows[0]
   // const category_values = await client.query({query:CATEOGORIES_PAGE, variables: { categoryName: clean_individual_values.category, subcategory: clean_individual_values.subcategory[0], offset: 0, }})
   // const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
