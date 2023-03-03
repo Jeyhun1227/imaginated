@@ -100,7 +100,7 @@ export default function SearchDisplayVideos({youtubeKeywords, youtube_channel, q
                                 <div>
                                     <div>{each_bucket.sub_bucket}</div>
                                 <div>
-                                    <div className='inline-block font-size-14 text-dim-grey margin-right-10'>{each_bucket.avg}%</div>
+                                    {/* <div className='inline-block font-size-14 text-dim-grey margin-right-10'>{each_bucket.avg}%</div> */}
                                     <div className='inline-block font-size-14 text-dim-grey'>{each_bucket.count} videos</div>
                                 </div>
                             </div>

@@ -40,7 +40,9 @@ export default function MobileNav() {
       if(!searchTerm) return;
       let returnedSearch = await GetSearchResults(searchTerm);
 
-      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: [], Keywords: []}
+      let returnedSearchClean = {Individual: [], Subcategory: [], Offering: [], Keywords: [], searchTerm: null}
+      if(searchTerm.length > 3) returnedSearchClean.searchTerm = searchTerm
+
       returnedSearch.map((e) => {
         if(e.type_value === 'Individual') return returnedSearchClean.Individual.push(e)
         if(e.type_value === 'Subcategory') return returnedSearchClean.Subcategory.push(e)
@@ -292,6 +294,10 @@ export default function MobileNav() {
                     </div>
                     <div className={(ShowResults) ?'' : 'display-none'} >
                     {(ShowResults)? < >
+                      {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`}><div className='each-results-cat-menu cursor-point' >
+                            <div className="each-results-fullname">{searchResult.searchTerm} - Keyword</div>
+                        </div></Link>:null
+                      }
                     <div className="absolute z-4 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
                     {searchResult.Subcategory.length > 0 ?<div>
                               <div className="each-result-name">Top Categories</div>
