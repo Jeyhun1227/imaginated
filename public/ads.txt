@@ -1,4 +1,4 @@
-# Mediavine Ads.txt v20221115
+# Mediavine Ads.txt v20230220
 managerdomain=mediavine.com
 contact=sales@mediavine.com
 ownerdomain=imaginated.com
@@ -29,10 +29,6 @@ triplelift.com, 4116, DIRECT, 6c33edb13117fd86
 sovrn.com, 217201, DIRECT, fafdf38b16bf6b2b
 lijit.com, 217201, DIRECT, fafdf38b16bf6b2b
 lijit.com, 217201-eb, DIRECT, fafdf38b16bf6b2b
-emxdgt.com, 1403, DIRECT, 1e1d41537f7cad7f
-emxdgt.com, 1460, DIRECT, 1e1d41537f7cad7f
-appnexus.com, 1356, RESELLER, f5ab79cb980f11d1
-appnexus.com, 1832, RESELLER, f5ab79cb980f11d1
 appnexus.com, 2758, RESELLER, f5ab79cb980f11d1
 chicoryapp.com, 1641021363254de6830750e1ca78e06d, DIRECT
 33across.com, 0013300001r0t9mAAA, RESELLER, bbea06d9c4d2853c
@@ -57,8 +53,6 @@ pubmatic.com, 157109, DIRECT, 5d62403b186f2ace
 pubmatic.com, 160748, DIRECT, 5d62403b186f2ace
 rhythmone.com, 949103067, DIRECT, a670c89d4a324e47
 video.unrulymedia.com, 949103067, DIRECT
-rhythmone.com, 3408527385, DIRECT, a670c89d4a324e47
-video.unrulymedia.com, 3408527385, DIRECT
 themediagrid.com, U1NDYR, DIRECT, 35d5010d7789b49d
 themediagrid.com, ZG2ESM, DIRECT, 35d5010d7789b49d
 improvedigital.com, 1625, DIRECT
@@ -66,8 +60,6 @@ conversantmedia.com, 41025, DIRECT, 03113cd04947736d
 smartadserver.com, 3860, DIRECT
 smartadserver.com, 4071, DIRECT
 smartadserver.com, 4012, DIRECT
-districtm.io, 100331, DIRECT, 3fd707be9c4527c3
-sharethrough.com, caf7e432, DIRECT, d53b998a7bd4ecd2
 supply.colossusssp.com, 319, DIRECT, 6c5b49d96ec1b458
 appnexus.com, 10490, RESELLER, f5ab79cb980f11d1
 sharethrough.com, 47b99924, DIRECT, d53b998a7bd4ecd2

@@ -106,8 +106,14 @@ getEachIndividual(
           YoutubeFieldsObject{
             id
             keyword
+            videoid
+            title
+            thumbnail
             score
             view
+            bucket
+            parent
+            sub_bucket
           }
         }
       }

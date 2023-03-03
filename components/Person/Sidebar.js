@@ -1,7 +1,7 @@
 import ImageWithFallback from '../Image/Image'
 import {Rating} from '@mui/material';
 import React, { useEffect, useState } from "react";
-
+import Link from 'next/link'
 
 
 export default function IndividualSidebar({category_values, mobile}) {
@@ -34,7 +34,7 @@ export default function IndividualSidebar({category_values, mobile}) {
 
     return <div>
                 <div className="">
-                    <div className="text-2xl tracking-tight text-dark-blue padding-top-bottom-10">Related Creators</div>
+                    <div className="text-2xl tracking-tight text-dark-blue padding-top-bottom-10" >Related Creators</div>
                     <div className={(windowDimensions.width <= 850)? "grid-layout-3": ""}>
                     {category_values_filtered.map((e) => <div className={mobile ? "inline-block": "padding-top-bottom-20"} key={e.linkname}>
                         <div>
@@ -43,7 +43,7 @@ export default function IndividualSidebar({category_values, mobile}) {
                             </div>
                             <div className="inline-block">
                                 <div className="flex flex-row space-x-0.5 sm:space-x-1 flex-wrap"> 
-                                    <div className="mb-0 text-small no-underline truncate sm:text-base md:text-lg text-denim cursor-point"><div onClick={() => window.location.href = '/directory/person/' + e.linkname}  >{e.first_name + ' ' + e.last_name}</div></div>
+                                    <div className="mb-0 text-small no-underline truncate sm:text-base md:text-lg text-denim cursor-point sidebar-related-creators"><Link href={'/directory/person/' + e.linkname}  ><div>{e.first_name + ' ' + e.last_name}</div></Link></div>
                                     {(e.aka && e.aka !== '')?<div className="inline-flex items-center justify-center"> 
                                         <span className="text-[9px] sm:text-sm text-ellipsis text-dim-grey">({e.aka})</span>
                                     </div> :null}
@@ -68,9 +68,9 @@ export default function IndividualSidebar({category_values, mobile}) {
                         <div className="pt-2 text-dim-grey">
                             {e.description.length > 150 ? e.description.slice(0, 150) + '...': e.description}
                             <div className="no-underline text-denim cursor-point">
-                            <div  onClick={() => window.location.href = '/directory/person/' + e.linkname}>
+                            <Link  href={() => window.location.href = '/directory/person/' + e.linkname}>
                                 <div >Learn more about {e.first_name} {e.last_name}</div>
-                            </div>
+                            </Link>
                             </div>
                         </div>
                     </div>)}

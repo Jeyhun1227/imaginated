@@ -18,7 +18,7 @@ export default function MobileNav() {
 
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: []});
+  const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: [], Keywords: []});
   const [ShowResults, setShowResults] = useState(false);
   const [clickedBlog, setClickedBlog] = useState('');
   const [ClickedMainBlog, setClickedMainBlog] = useState(false);
@@ -293,7 +293,19 @@ export default function MobileNav() {
                     <div className={(ShowResults) ?'' : 'display-none'} >
                     {(ShowResults)? < >
                     <div className="absolute z-4 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
-
+                    {searchResult.Subcategory.length > 0 ?<div>
+                              <div className="each-result-name">Top Categories</div>
+                    </div>:null}
+                    {searchResult.Subcategory.map( (result) =>  <Link key={result.id} href={`/directory/${result.linkname}`}>
+                          <div className='each-results-cat-menu cursor-point' >
+                            <div className="each-results-fullname">{result.fullname}</div>
+                          </div>
+                      
+                    </Link>
+                    )}
+                    {searchResult.Keywords.length > 0 ?<div>
+                      <div className="each-result-name">Top Search Results</div>
+                    </div>:null}
                     {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
                           <div className='each-results-cat-menu cursor-point' >
                             <div className="each-results-fullname">{result.fullname}</div>
@@ -301,55 +313,45 @@ export default function MobileNav() {
                       
                     </div>
                     ):null}
-                    {searchResult.Subcategory.length > 0 ?<div>
-                              <div className="each-result-name">Top Categories</div>
-                        </div>:null}
-                        {searchResult.Subcategory.map( (result) =>  <Link key={result.id} href={`/directory/person/${result.linkname}`}>
-                              <div className='each-results-cat-menu cursor-point' >
-                                <div className="each-results-fullname">{result.fullname}</div>
-                              </div>
-                          
-                        </Link>
-                        )}
 
-                        {searchResult.Individual.length > 0 ?<div>
-                              <div className="each-result-name">Top Creators</div>
-                        </div>:null}
-                        {searchResult.Individual.map( (result) =>  <div key={result.id} className="width-100 overflow-hidden">
-                              <Link className='each-results-search cursor-point'  href={`/directory/person/${result.linkname}`}>
-                                <div className="each-results-image" >
-                                <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
-                                </div>
-                                <div>
-                                <div className="each-results-fullname">{result.fullname}</div>
-                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.slice(0, 4).map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
-                                </div>
-                              </Link>
-                          
-                        </div>
-                        )}
-                        {searchResult.Offering.length > 0 ?<div>
-                              <div className="each-result-name">Top Market</div>
-                        </div>:null}
-                        {searchResult.Offering.map( (result) =>  <Link  key={result.id}  href={`/directory/person/${result.linkname}`}>
-                              <div className='each-results-search cursor-point' >
-                                <div className="each-results-image" >
-                                <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
-                                </div>
-                                <div>
-                                <div className="each-results-fullname">{result.fullname}</div>
-                                <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
-                                </div>
-                              </div>
-                          
-                        </Link>
-
-                        )}
-                        </div>
-                        </>:null}
-
+                    {searchResult.Individual.length > 0 ?<div>
+                          <div className="each-result-name">Top Creators</div>
+                    </div>:null}
+                    {searchResult.Individual.map( (result) =>  <div key={result.id} className="width-100 overflow-hidden">
+                          <Link className='each-results-search cursor-point'  href={`/directory/person/${result.linkname}`}>
+                            <div className="each-results-image" >
+                            <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                            </div>
+                            <div>
+                            <div className="each-results-fullname">{result.fullname}</div>
+                            <div className="each-results-subcategory">{result.subcategory ? result.subcategory.slice(0, 4).map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                            </div>
+                          </Link>
+                      
                     </div>
+                    )}
+                    {searchResult.Offering.length > 0 ?<div>
+                          <div className="each-result-name">Top Market</div>
+                    </div>:null}
+                    {searchResult.Offering.map( (result) =>  <Link  key={result.id}  href={`/directory/person/${result.linkname}`}>
+                          <div className='each-results-search cursor-point' >
+                            <div className="each-results-image" >
+                            <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
+                            </div>
+                            <div>
+                            <div className="each-results-fullname">{result.fullname}</div>
+                            <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
+                            </div>
+                          </div>
+                      
+                    </Link>
+
+                    )}
+                    </div>
+                    </>:null}
+
                   </div>
+              </div>
         </div>
       </div>
     </div>

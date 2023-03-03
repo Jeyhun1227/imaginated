@@ -7,11 +7,14 @@ import {Rating} from '@mui/material';
 import ImageWithFallback from '../components/Image/Image';
 import styles from '../styles/Home.module.css';
 import SearchDisplayVideos from '../components/search/SearchDisplayVideos'
+import Star from '../public/star.svg';
+import {ColorRing} from 'react-loader-spinner'
 
 export default function SearchFunction() {
     // const [userFollow, setUserFollow] = useState([])
     const [youtubeChannel, setYoutubeChannel] = useState([]);
     const [youtubeKeywords, setYoutubeKeywords] = useState([]);
+    const [youtubeSubs, setYoutubeSubs] = useState([]);
     const [FormDetails, setFormDetails] = useState('');
 
     const router = useRouter();
@@ -22,18 +25,16 @@ export default function SearchFunction() {
         const res = await axios.post(`/api/search/search`, { keyword: query });
         const data = res.data;
         if(data.youtubeChannel.length === 0) return setFormDetails('No Results found');
-        setYoutubeChannel(data.youtubeChannel)
+        let mainSumValue = data.youtubeChannel.map((e) => e.match_rate).reduce((e, prev) => e + prev, 0)
+        let mainYoutubeChannel = data.youtubeChannel.map((e) => ({...e, match_rate: Math.round((e.match_rate / mainSumValue) * 100)}))
+        setYoutubeChannel(mainYoutubeChannel)
         setYoutubeKeywords(data.youtubeKeywords)
-        
+        setYoutubeSubs(data.youtubeSubs)
     }
 
     useEffect( () => {
         if(query) getChannelValues()
-
-
       }, [query]);
-
-
 
 
 
@@ -48,26 +49,38 @@ export default function SearchFunction() {
           </Head>
 
           <div className="">
-            <div className="py-12 mx-auto max-w-7xl">
-                <div className="items-center px-4 sm:px-0 sm:-mt-14 sm:col-span-4 xl:ml-28 min-height-200">
+            <div className="mx-auto max-w-7xl">
+                <div className="items-center px-4 sm:px-0 sm:col-span-4 min-height-200">
                 <div className="items-center">
-                    <div className="text-xl font-semibold truncate md:text-3xl mt-5">{FormDetails}</div>
+                    {FormDetails ? <div className="text-xl font-semibold truncate md:text-3xl mt-5">{FormDetails}</div>:null}
+                    {!FormDetails && youtubeChannel.length === 0 ? <div  className="inline-block align-content-center  mt-5"><ColorRing
+                            visible={true}
+                            height="120"
+                            width="120"
+                            ariaLabel="blocks-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="blocks-wrapper"
+
+                            colors={["#214499", "#215d99", "#1b4c8c", "#256ea6", "#218150"]}
+                        /></div>:null
+                    }
                     {
                         youtubeChannel.map((yc) => 
-                        <div key={yc.id} className="py-6 border-b border-very-light-grey ">
+                        <div key={yc.id} className="padding-tb-50 border-b border-very-light-grey ">
               
                             <div className="inline-block">
 
                                 <div className="">  
-                                    <Link href={`/directory/person/${yc.linkname}/?query=${query}`}><div className="person-flex flex-row space-x-3 flex-nowrap md:pt-7"> 
+                                    <Link href={`/directory/person/${yc.linkname}/?query=${query}`}><div className="search-each-result"> 
                                         <div className="self-start inline-block">
-                                            <ImageWithFallback src={yc.imagelink} className={styles.IndividualImage} width={60} height={60} fallbackSrc={"/fallbackimage.svg"}/>
+                                            <ImageWithFallback alt={yc.first_name + yc.last_name} src={yc.imagelink} className={styles.IndividualImage} width={60} height={60} fallbackSrc={"/fallbackimage.svg"}/>
                                         </div>
+                                        <div>
                                         <h1  className="text-xl font-semibold truncate md:text-3xl inline-block">{yc.first_name + ' ' + yc.last_name} </h1>
-                                        {yc.aka ? <h2  className="text-sm md:text-lg text-dim-grey inline-block padding-top-10 pt-phone-5 truncate">{`"${yc.aka}"`}</h2>:null}
-                                        <div className="flex space-x-3 sm:flex-row sm:flex-wrap padding-top-8 pt-phone-0">
-                                            {/* <div className="inline-flex items-center justify-center space-x-2 padding-right-5 font-weight-500 font-size-14">Educator Rating: </div> */}
-                                            <Rating name={yc.first_name + yc.last_name} value={parseFloat(yc.avg)} precision={0.5} sx={{
+                                        {yc.aka ? <h2  className="text-sm md:text-lg text-dim-grey inline-block padding-top-10 pt-phone-0 truncate margin-left-10-desktop">{`"${yc.aka}"`}</h2>:null}
+                                        <div className="flex sm:flex-row sm:flex-wrap pt-phone-0 text-sm text-md-mobile">
+                                            <ImageWithFallback alt='star rating' src={Star}/>
+                                            {/* <Rating name={yc.first_name + yc.last_name} value={parseFloat(yc.avg)} precision={0.5} sx={{
                                                         color: "yellow",
                                                         borderRadius: '10px',
                                                         '& .MuiSvgIcon-root': {
@@ -76,13 +89,14 @@ export default function SearchFunction() {
                                                         '& .css-dqr9h-MuiRating-label': {
                                                         display: 'block'
                                                         }                        
-                                                    }} readOnly/>
-                                            <div className={styles.inline_block}>{yc.avg}</div>
-                                            <div className={styles.inline_block}>({yc.count})</div>
-                                            <div className="inline-block text-dim-grey">keyword Match: {yc.match_rate * 100}%</div>
+                                                    }} readOnly/> */}
+                                            <div className='margin-left-5'>{yc.avg}</div>
+                                            <div className='margin-left-5'>({yc.count})</div>
+                                            <div className="inline-block text-dim-grey margin-left-5">Keyword Match: {yc.match_rate}%</div>
+                                        </div>
                                         </div>
                                     </div></Link>
-                                    <div className="margin-left-70-0">
+                                    <div className="margin-top-20">
                                         <div className="inline-block">
                                         <div className="hidden space-y-3 sm:space-x-3 md:flex font-weight-500 font-size-14">Categories: </div>
                                         <div className="hidden space-y-3 sm:space-x-3 md:flex">
@@ -102,8 +116,7 @@ export default function SearchFunction() {
                                             <div  className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${yc.subcategory.length - 3 <= 0 ? "hidden" : 0}`}>+{yc.subcategory.length - 3} more</div>
                                             </div>
                                         </div>  
-                                        <div className="space-y-3 sm:space-x-3 md:flex font-weight-500 font-size-14 margin-top-bottom-10">Matching Content: </div>
-                                        <SearchDisplayVideos youtubeKeywords={youtubeKeywords} youtube_channel={yc} query={query}/>
+                                        <SearchDisplayVideos youtubeKeywords={youtubeKeywords} youtube_channel={yc} query={query} youtubeSubs={youtubeSubs}/>
                                         </div>
                                     </div>
                                 </div>
