@@ -19,12 +19,17 @@ export default function SearchFunction() {
 
     const router = useRouter();
     const {query} = router.query;
-    const getChannelValues = async () =>{
 
-        // console.log(query, router.query)
+    const resetValues = () => {
+        setFormDetails('No Results found');
+        setYoutubeChannel([])
+        setYoutubeKeywords([])
+        setYoutubeSubs([])
+    }
+    const getChannelValues = async () =>{
         const res = await axios.post(`/api/search/search`, { keyword: query });
         const data = res.data;
-        if(data.youtubeChannel.length === 0) return setFormDetails('No Results found');
+        if(data.youtubeChannel.length === 0) return resetValues()
         let mainSumValue = data.youtubeChannel.map((e) => e.match_rate).reduce((e, prev) => e + prev, 0)
         let mainYoutubeChannel = data.youtubeChannel.map((e) => ({...e, match_rate: Math.round((e.match_rate / mainSumValue) * 100)}))
         setYoutubeChannel(mainYoutubeChannel)

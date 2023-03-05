@@ -212,7 +212,7 @@ export default function Header({main_blog_value}) {
 
                 <div className={(ShowResults) ?'' : 'display-none'} >
                 {(ShowResults)? < >
-                  {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`}><div className='each-results-cat-menu cursor-point' >
+                  {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`} ><div onClick={()=> setShowResults(false)} className='each-results-cat-menu cursor-point' >
                             <div className="each-results-fullname">{searchResult.searchTerm} - Keyword</div>
                   </div></Link>:null
                   }
@@ -220,7 +220,7 @@ export default function Header({main_blog_value}) {
                           <div className="each-result-name">Top Categories</div>
                     </div>:null}
                     {searchResult.Subcategory.map( (result) =>  <div key={result.id} >
-                          <Link href={`/directory/${result.linkname}`}><div className='each-results-cat-menu cursor-point' >
+                          <Link href={`/directory/${result.linkname}`}  ><div className='each-results-cat-menu cursor-point' onClick={()=> setShowResults(false)} >
                             <div className="each-results-fullname">{result.fullname}</div>
                           </div></Link>
                       

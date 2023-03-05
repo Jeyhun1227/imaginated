@@ -295,7 +295,7 @@ export default function MobileNav() {
                     <div className={(ShowResults) ?'' : 'display-none'} >
                     {(ShowResults)? < >
                       {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`}><div className='each-results-cat-menu cursor-point' >
-                            <div className="each-results-fullname">{searchResult.searchTerm} - Keyword</div>
+                            <div className="each-results-fullname" onClick={()=> setShowResults(false)}>{searchResult.searchTerm} - Keyword</div>
                         </div></Link>:null
                       }
                     <div className="absolute z-4 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
@@ -303,7 +303,7 @@ export default function MobileNav() {
                               <div className="each-result-name">Top Categories</div>
                     </div>:null}
                     {searchResult.Subcategory.map( (result) =>  <Link key={result.id} href={`/directory/${result.linkname}`}>
-                          <div className='each-results-cat-menu cursor-point' >
+                          <div className='each-results-cat-menu cursor-point' onClick={()=> setShowResults(false)}>
                             <div className="each-results-fullname">{result.fullname}</div>
                           </div>
                       

@@ -142,22 +142,18 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
       let main_list = await getWordIndividual({value: query, param: true, videoid})
       if(main_list.length === 0) return getVideoId(null,'failed to find a match');
       let {parent, sub_bucket} = main_list[0];
-      // console.log('sub_bucket_list: ', sub_bucket_list)
       let getting_sub_bucket = sub_bucket_list.find((e) => e.sub_bucket === sub_bucket);
-      // console.log('main_list: ',getting_sub_bucket, parent, sub_bucket)
-      if(!getting_sub_bucket) return getVideoId(main_list[0],'failed to find a parent');
+      if(!getting_sub_bucket) return getVideoId(main_list[0],'failed to find a sub_bucket');
       let parent_value = getting_sub_bucket.parents.find((e) => e.parent === parent)
-      // console.log('parent_value: ', parent_value)
+      if(!parent_value) return getVideoId(main_list[0], 'failed to find parent')
       let parent_val_list = Object.keys(parent_value.values).map((e) => parent_value.values[e])
       if(!parent_value.values[videoid] ) return getVideoId(main_list[0],'failed to find a parent');
-      // console.log('sub_bucket: ', sub_bucket, parent_val_list)
 
       setWordIndividualFound(parent_val_list)
 
       setCategoryClicked(sub_bucket)
 
       setExpendedValue(parent.toLowerCase())
-      // console.log('videoid: ', videoid, parent_val_list, main_list)
       if(videoid){
         setShowVideoId(parent_value.values[videoid])
       }
