@@ -14,14 +14,15 @@ import ImageWithFallback from '../Image/Image';
 import {PlayFill} from 'react-bootstrap-icons';
 import axios from 'axios';
 import HorizontalStackedBarChart from './BarChart';
-import YoutubePlayButton from '../../public/youtube-play-button.svg'
+import YoutubePlayButton from '../../public/youtube-play-button.svg';
+import hex_colors_list from '../Colors/HexColorSub.json'
 
 export default function WordChart({wordChartIndividual, width, individual, Youtube_free_content, Youtube_free_offers, Youtube_name, Youtube_link}) {
     const hex_colors = { 100: "#214499", 1000: "#215151", 1100: "#215599", 21000: "#215950", 41000: "#215d99", 61000: "#216150", 81000: "#216599",
     101000: "#216950", 130000: "#216d99", 180000: "#217151", 250000: "#217599", 300000: "#217950", 350000: "#217d99", 500000: "#218150",
     700000: "#218598", 900000: "#218950", 1000000: "#218d98",1200000: "#219150", 1500000: "#219599",
     }
-    const hex_colors_list = ["#214499", "#215d99", "#216950", "#217599", "#218150", "#218d98", "#219150", "#219599"]
+    // const hex_colors_list = ["#214499", "#215d99", "#216950", "#217599", "#218150", "#218d98", "#219150", "#219599"]
 
     // function getColor(view){
     //     let view_found = Object.keys(hex_colors).find((e) => e > view)
@@ -259,7 +260,7 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <div className="accordion-circle" style={{backgroundColor: index > 5 ? 'rgba(0, 0, 0, 0.1)': hex_colors_list[index]}}></div>
+                  <div className="accordion-circle" style={{backgroundColor: index > 4 ? 'rgba(0, 0, 0, 0.1)': hex_colors_list[each_bucket.sub_bucket]}}></div>
                   <div>
                   <div>{each_bucket.sub_bucket}</div>
                   <div>
