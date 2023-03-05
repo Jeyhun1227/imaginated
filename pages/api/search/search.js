@@ -55,7 +55,7 @@ export default async (req, res) => {
         // console.log('pinecone_values: ', pinecone_values.data.matches, keyword_list)
 
         let youtubeChannel = await PoolConnection.query('SELECT "channelId" id, "channelId", first_name, last_name, linkname, aka, category, subcategory, imagelink, "count", avg, sum(match_rate) match_rate, sum("index") "index" FROM youtube_channel_keyword_individual_vw WHERE lower(keyword) = ANY($1) GROUP BY 1,2,3,4,5,6,7,8,9,10,11 ORDER BY match_rate desc;', [keyword_list])
-        let youtubeKeywords = await PoolConnection.query('SELECT videoid id, "channelId", videoid, title, thumbnail, sum(score) score, sum(relevance) relevance, sum(engagement) engagement from youtube_video_keyword where lower(keyword) = ANY($1) group by 1,2,3,4,5;', [keyword_list])
+        let youtubeKeywords = await PoolConnection.query('SELECT videoid id, "channelId", videoid, title, thumbnail, sum(score) score, sum(relevance) relevance, sum(engagement) engagement from youtube_video_keyword where show_overall is true and lower(keyword) = ANY($1) group by 1,2,3,4,5;', [keyword_list])
         let youtubeChannelResults = youtubeChannel.rows
         let youtubeKeywordsResults = youtubeKeywords.rows
         let channel_ids = [...new Set(youtubeChannelResults.map((e) => e.channelId))];

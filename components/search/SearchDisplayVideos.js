@@ -86,7 +86,7 @@ export default function SearchDisplayVideos({youtubeKeywords, youtube_channel, q
             </div>
             <div>
                 <div>
-                <div  className="search-header-main">Top 3 Categories: </div>
+                <div  className="search-header-main">Content Breakdown: </div>
 
                 <HorizontalStackedBarChart getChart categoryClicked={categoryClicked} putMainClickedBucket={putMainClickedBucket} sub_bucket_list={youtubeSubsVal}/>
                 {youtubeSubsVal.map((each_bucket, index) => <div key={each_bucket.sub_bucket}>

@@ -70,10 +70,7 @@ export default function IndividualYoutube({WordIndividualFound, link, name, scro
 
 
     return (
-        <div className="no-underline font-normal sm:text-2xl text-xl text-denim padding-top-20"><Link href={link} target="_blank" rel="noopener noreferrer nofollow">
-            <div className="flex flex-row space-x-2"><Image src='/Youtube.svg' width={13} height={15}/> <div className="text-sm text-dim-grey ">Youtube</div></div>
-            {name}
-        </Link>
+        <div className="no-underline font-normal sm:text-2xl text-xl text-denim padding-top-20">
           <div className={"my-10"}>
             <div className="indiv-gallery-parent" ref={myRef}>{windowDimensions.width > 800 ? <DesktopPopup WordIndividualFound={WordIndividualFound} showVideoId={showVideoId} showVideoIdChange={showVideoIdChange}/>:
             <MobilePopup showVideoId={showVideoId} showVideoIdChange={showVideoIdChange}/>}
