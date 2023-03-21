@@ -94,6 +94,22 @@ a{
   width: 80%;
 }
 
+.width-137px{
+  width: 137px;
+}
+
+.width-24rem{
+  width: 24rem;
+}
+
+.width-90{
+  width: 90%;
+}
+
+.height-30px{
+  height: 36px;
+}
+
 .m-left-20{
   margin-left: 20px;
 }
@@ -242,6 +258,10 @@ a{
   padding-top:10px;
 }
 
+.padding-bottom-10{
+  padding-bottom: 10px;
+}
+
 .width-rem-38{
   width: 38rem;
 }
@@ -256,6 +276,31 @@ a{
 
 .padding-top-8{
   padding-top: 8px;
+}
+
+.index-video-number{
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: #F2F4F7;
+  border-radius: 20px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #98A2B3;
+  margin-right: 15px;
+  padding-top: 7px;
+}
+
+.index-video-title{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 30px;
+padding: 0px 0 10px;
+color: #475467;
 }
 
 .position-relative{
@@ -386,6 +431,26 @@ a{
 
 .width-100{
   width: 100%;
+}
+
+.center-items{
+  /* text-align: center;  */
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.wistia_embed{
+  width: 620px;
+  height: 349px;
+}
+
+.height-100{
+  height: 100% !important;
+}
+
+.margin-top-50{
+  margin-top: 50%;
 }
 
 .right-10px{
@@ -634,6 +699,10 @@ a{
   padding: 5px;
   /* transform: translateY(100%); */
   /* transition: transform 0.3s ease-out; */
+}
+
+.individual-popup-inner{
+  max-height: 200px;
 }
 
 .individual-popup-handle {
@@ -1416,11 +1485,19 @@ div#ez-toc-container p.ez-toc-title {
   .hidden-width-1000{
     display: block;
   }
+  .margin-bottom10-phone{
+    margin-bottom: 10px;
+  }
 
 }
 
 @media screen and (max-width: 850px) {
-
+  .width-24rem{
+    max-width: 24rem;
+  }
+  .width-100-phone{
+    width: 100%;
+  }
   .shop-download{
     margin-right: 0px;
   }
@@ -1510,14 +1587,23 @@ div#ez-toc-container p.ez-toc-title {
   padding-left: 10px !important;
   padding-right: 10px !important;
   }
+
   }
 
-@media screen and (max-width: 600px) {
 
+@media screen and (max-width: 600px) {
+  .wistia_embed{
+    width: 380px;
+    height: 215px;
+  }
   .text-md-mobile{
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
+  .inline-block-650{
+    display: inline-block;
+  }
+
   .indiv-content-3{
     grid-template-columns: 8fr 1fr 1fr;  
   }
@@ -1605,5 +1691,15 @@ div#ez-toc-container p.ez-toc-title {
   }
   .margin-left-10-desktop{
     margin-left:0px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .wistia_embed{
+    width: 300px;
+    height: 169px;
+  }
+  .width-100-350-phone{
+    width: 100%;
   }
 }

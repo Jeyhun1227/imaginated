@@ -1,32 +1,42 @@
 
 import {useState, useEffect} from "react";
 import Link from "next/link"
-export default function HeadBar({main_blog_value}) {
-    const [closeHeadBar, setCloseHeadBar] = useState(true);
-    const [mainValue, setMainValue] = useState(null);
+export default function HeadBar({main_blog_value, BannerText}) {
+  const [closeHeadBar, setCloseHeadBar] = useState(true);
+  const [mainValue, setMainValue] = useState(null);
 
-    const listOfTypes = {'Photography': ['/directory/Photography', 'Photography']}
-    const blog_header = 'Learn [Category] for free - See the top educators'
+  const listOfTypes = {'Photography': ['/directory/Photography', 'Photography']}
+  const blog_header = 'Learn [Category] for free - See the top educators'
 
-    useEffect(() => {
-      if (main_blog_value) {
-        let main = main_blog_value.find((e) => listOfTypes[e])
-        if(main) return setMainValue(listOfTypes[main])
-        setMainValue(null)
-      }
-    }, [main_blog_value]);
-
-    const getCustomMessage = (value) => {
-      return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn {value[1]} for free - </div><div className='underline inline-block margin-left-5'><Link href={value[0]}> See the top educators</Link></div></div></div>;
+  useEffect(() => {
+    if (main_blog_value) {
+      let main = main_blog_value.find((e) => listOfTypes[e])
+      if(main) return setMainValue(listOfTypes[main])
+      setMainValue(null)
     }
-    const getCurrentLinks = () => {
-      return <div className="text-xs text-white sm:text-base "><div className='underline inline-block'><Link href='/directory/signup'>Sign up</Link></div> <div className='inline-block'>for free to see and leave reviews!</div></div>;
-    }
+  }, [main_blog_value]);
+
+  const getCustomMessage = (value) => {
+    return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn {value[1]} for free - </div><div className='underline inline-block margin-left-5'><Link href={value[0]}> See the top educators</Link></div></div></div>;
+  }
+  const getCurrentLinks = () => {
+    return <div className="text-xs text-white sm:text-base "><div className='underline inline-block'><Link href='/directory/signup'>Sign up</Link></div> <div className='inline-block'>for free to see and leave reviews!</div></div>;
+  }
+
+  const getCustomSearch = (BannerText) => {
+    return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn more about </div><div className='underline inline-block margin-left-5'><Link href={`/search/?query=${BannerText}`}>{BannerText}</Link></div> from credible educators</div></div>;
+  }
+
+  const getMainText = (mainValue) => {
+    if(BannerText) return getCustomSearch(BannerText);
+    if(mainValue) return getCustomMessage(mainValue);
+    return getCurrentLinks()
+  }
   return (
     
-      closeHeadBar && <div><div className= {mainValue ? "fixed-pixels-top flex items-center justify-center h-10 bg-dark-blue": "flex items-center justify-center h-10 bg-dark-blue"}>
+      closeHeadBar && <div><div className='h-10'></div><div className= {"fixed-pixels-top flex items-center justify-center h-10 bg-dark-blue"}>
       <div className="text-center">
-        {mainValue ? getCustomMessage(mainValue): getCurrentLinks()}
+        {getMainText(mainValue)}
       </div>
       <div className="absolute ml-auto right-2">
         <button onClick={() => {

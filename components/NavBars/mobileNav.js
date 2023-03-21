@@ -13,13 +13,14 @@ import BlogMenu from './BlogMenu.json';
 import Cookies from 'universal-cookie';
 import HeadBar from './headBar';
 import { useRouter } from 'next/router';
+import SearchBar from './searchBar';
 
-export default function MobileNav() {
+export default function MobileNav({main_blog_value, BannerText}) {
 
   const {data: session} = useSession()
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: [], Keywords: []});
-  const [ShowResults, setShowResults] = useState(false);
+  const [MenuFrontend, setMenuFrontend] = useState(false);
   const [clickedBlog, setClickedBlog] = useState('');
   const [ClickedMainBlog, setClickedMainBlog] = useState(false);
   const [showHeadbar, setShowHeadbar] = useState(false);
@@ -27,9 +28,8 @@ export default function MobileNav() {
   const {query} = router.query;
   useEffect( () => {
     if(query) setSearchTerm(query)
-
-
   }, [query]);
+
   const signOutFunc = () => {
     const cookies = new Cookies();
     cookies.remove('user_id', { path: '/' });
@@ -105,22 +105,24 @@ export default function MobileNav() {
       svg: <Gear/>
     },
   ]
-  const onKeyboardHandler = (event) => {
-    if (event.keyCode === 13) {
-      window.location.href = `/search/?query=${searchTerm}`
-    }
+
+  const showSearchBar = () => {
+    if(!MenuFrontend) return false;
+    if(!window) return false;
+    if(window.location.pathname === '/') return false;
+    return true
   }
 
-  const onClickSeach = () => {
-    window.location.href = `/search/?query=${searchTerm}`
-  }
+  useEffect( () => {
+    setMenuFrontend(true)
+  }, []);
 
   return (
     <div>
-      {showHeadbar? <HeadBar/>:null}
+      {showHeadbar? <HeadBar main_blog_value={main_blog_value} BannerText={BannerText}/>:null}
       <div className="relative z-10 bg-white shadow-sm">
         <div className="px-4 mx-auto max-w-7xl sm:px-6">
-          <div className="flex items-center justify-between py-6 md:space-x-10  z-index-five">
+          <div className="flex items-center justify-between py-6 md:space-x-10 z-index-five">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/">
                 <span className="sr-only">Imaginated</span>
@@ -282,82 +284,7 @@ export default function MobileNav() {
         </Popover>
         </div>
           </div>
-          <div className="relative hidden-width-1000">
-                    <div className="absolute right-10px flex items-center pt-2 pointer-events-none">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-                    </div>
-                    <div className="flex items-center justify-between w-full">
-                      <input type="text" id="simple-search" onKeyUp={onKeyboardHandler} data-dropdown-toggle="dropdown" className="mb-4 width-100 py-2 text-sm text-gray-900 border focus:outline-none text-ellipsis border-very-light-grey pl-4" placeholder="Search for a creator or category" required   value={searchTerm}    onClick={()=>setShowResults(true)} onChange={(e) => {setSearchTerm(e.target.value); setShowResults(true);}} />
-                      {/* <button type="submit" className="inline-flex items-center justify-end flex-shrink-0 order-2 px-4 py-2 ml-4 overflow-hidden text-sm border border-black text-dark-blue hover:text-indigo-500">
-                        <span className="text-sm truncate text-dark-blue hover:text-indigo-500">Search</span>
-                      </button> */}
-                    </div>
-                    <div className={(ShowResults) ?'' : 'display-none'} >
-                    {(ShowResults)? < >
-                      {searchResult.searchTerm ? <Link href={`/search/?query=${searchResult.searchTerm}`}><div className='each-results-cat-menu cursor-point' >
-                            <div className="each-results-fullname" onClick={()=> setShowResults(false)}>{searchResult.searchTerm} - Keyword</div>
-                        </div></Link>:null
-                      }
-                    <div className="absolute z-4 py-1 mt-1 overflow-x-hidden overflow-y-auto text-base bg-white shadow-lg width-325 top-10 max-h-56 focus:outline-none sm:text-sm padding-none">
-                    {searchResult.Subcategory.length > 0 ?<div>
-                              <div className="each-result-name">Top Categories</div>
-                    </div>:null}
-                    {searchResult.Subcategory.map( (result) =>  <Link key={result.id} href={`/directory/${result.linkname}`}>
-                          <div className='each-results-cat-menu cursor-point' onClick={()=> setShowResults(false)}>
-                            <div className="each-results-fullname">{result.fullname}</div>
-                          </div>
-                      
-                    </Link>
-                    )}
-                    {searchResult.Keywords.length > 0 ?<div>
-                      <div className="each-result-name">Top Search Results</div>
-                    </div>:null}
-                    {searchResult.Keywords ? searchResult.Keywords.map( (result) =>  <div key={result.id} onClick={() => window.location.href=`${window.location.origin}/search/${result.linkname}`}>
-                          <div className='each-results-cat-menu cursor-point' >
-                            <div className="each-results-fullname">{result.fullname}</div>
-                          </div>
-                      
-                    </div>
-                    ):null}
-
-                    {searchResult.Individual.length > 0 ?<div>
-                          <div className="each-result-name">Top Creators</div>
-                    </div>:null}
-                    {searchResult.Individual.map( (result) =>  <div key={result.id} className="width-100 overflow-hidden">
-                          <Link className='each-results-search cursor-point'  href={`/directory/person/${result.linkname}`}>
-                            <div className="each-results-image" >
-                            <ImageWithFallback src={result.imagelink} className={"w-8 h-8 rounded-full sm:w-10 sm:h-10"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
-                            </div>
-                            <div>
-                            <div className="each-results-fullname">{result.fullname}</div>
-                            <div className="each-results-subcategory">{result.subcategory ? result.subcategory.slice(0, 4).map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
-                            </div>
-                          </Link>
-                      
-                    </div>
-                    )}
-                    {searchResult.Offering.length > 0 ?<div>
-                          <div className="each-result-name">Top Market</div>
-                    </div>:null}
-                    {searchResult.Offering.map( (result) =>  <Link  key={result.id}  href={`/directory/person/${result.linkname}`}>
-                          <div className='each-results-search cursor-point' >
-                            <div className="each-results-image" >
-                            <ImageWithFallback src={result.imagelink} className={"border-radius-five"} width={40} height={40} fallbackSrc={"/fallbackimage.svg"}  />
-                            </div>
-                            <div>
-                            <div className="each-results-fullname">{result.fullname}</div>
-                            <div className="each-results-subcategory">{result.subcategory ? result.subcategory.map((e, i) => <div key={e} className='subcat-margin'>{(i >= 1)? <div className='bullet'></div>:null}<div className='subcat-each'>{e}</div></div>) : null}</div>
-                            </div>
-                          </div>
-                      
-                    </Link>
-
-                    )}
-                    </div>
-                    </>:null}
-
-                  </div>
-              </div>
+          {showSearchBar() ?<SearchBar/>: null}
         </div>
       </div>
     </div>

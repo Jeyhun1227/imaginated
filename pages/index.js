@@ -2,19 +2,35 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from "react";
-import Mainpage1 from '../public/mainpage1.png';
-import Mainpage2 from '../public/mainpage2.png';
-import Mainpage3 from '../public/mainpage3.png';
+// import Mainpage1 from '../public/mainpage1.png';
+// import Mainpage2 from '../public/mainpage2.png';
+// import Mainpage3 from '../public/mainpage3.png';
 import MainpageFirst from '../public/mainpagefirst.png';
 import MainpageLast from '../public/mainpagelast.png';
 // import Yelp from '../public/mentioned/yelp1.png';
 import Medium from '../public/mentioned/medium2.png';
 import Substack from '../public/mentioned/substack3.png';
 import Buzzfeed from '../public/mentioned/buzzfeed4.png';
+import Searchbar from '../components/NavBars/searchBar';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 export default function MainPage() {
   const [windowDimensions, setWindowDimensions] = useState(1000);
+  const [getMainLink, setGetMainLink] = useState(0);
+  const [playVideo, setPlayVideo] = useState(false);
+  const videos_instructions = [{title: 'Enter an educational topic or keyword', 
+  desc: 'Input a term or phrase related to a subject of learning or study, which will help to narrow down the search for the best educational creator on that topic.'}, 
+  {title: 'Discover the credible educators on that topic',
+  desc: 'After entering an educational topic or keyword, our algorithm will help you to identify reliable and trustworthy educators related to that topic, which can provide you with accurate and relevant information on the subject.'}, 
+  {title: 'Explore all of their content on one page',
+  desc: 'Upon discovering credible educators on a particular topic, you can explore all of their educational content, resources or materials on their Creator Profile page, allowing you to easily navigate and access their teachings, insights, and perspectives in one place.'}
+  ]
+
   const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -32,6 +48,16 @@ export default function MainPage() {
     window.addEventListener('resize', handleResize);
     () => window.removeEventListener('resize', handleResize);
   }, [])
+
+  const getVideoIframe = () => {
+    const links = ['ri6uea31x9', 'ofa6van345', 'f1dah4nt9h']
+    return <iframe src={`//imaginated.wistia.com/embed/iframe/${links[getMainLink]}?videoFoam=true&autoPlay=${playVideo}&playerColor=red`} allowtransparency="true" frameBorder="0" scrolling="no" className="wistia_embed" name="wistia_embed" width="620" height="349"></iframe>
+  }
+
+  const getVideoChange = (index) => {
+    setPlayVideo(true);
+    setGetMainLink(index)
+  }
   return (
     <div>
       <Head>
@@ -41,27 +67,29 @@ export default function MainPage() {
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>
       <div className='py-12 mx-auto max-w-7xl'>
-        <div className='grid-layout-two'>
+        <div className="flex justify-center">
           <div className='width-80'>
-            <h1 className='text-4xl tracking-tight'>A directory of educational creators</h1>
-            <div className='margin-top-bottom-three text-dim-grey font-size-20'>Save yourself time. Know whom to learn from and where to start learning in just a few clicks.</div>
-            <div>
+            <div className='text-align-center'>
+            <h1 className='text-4xl tracking-tight'>Revolutionalize your learning</h1>
+            <div className='margin-top-bottom-three text-dim-grey font-size-20'>Enter an educational topic, find the credible educators on that topic, and access all their content on one page.</div>
+            </div>
+            <Searchbar/>
+            {/* <div>
               <Link
                 href='/directory/'
                 className='px-3 py-2 mr-3 text-sm text-center text-white truncate md:mr-0 bg-dark-blue'>Start Learning</Link>
               <Link
                 href='/directory/signup/'
                 className='px-3 py-2 mr-3 text-sm text-center truncate md:mr-0 bg-white-smoke m-left-20'>Sign up for free</Link>
-            </div>
-            <div className='margin-top-bottom-three text-dim-grey'>Trusted by 100,000+ users</div>
+            </div> */}
+            {/* <div className='margin-top-bottom-three text-dim-grey'>Trusted by 100,000+ users</div> */}
 
-          </div>
-          <div className='index-image-container'>
-            <Image src={MainpageFirst} layout='fill'/>
           </div>
         </div>
       </div>
+      
       <div className='w-full bg-light-grey'>
+        
         <div className='py-12 mx-auto max-w-7xl'>
           <div className='text-dim-grey index-featured'>AS MENTIONED IN</div>
           <div className='index-mention-image-total'>
@@ -79,46 +107,38 @@ export default function MainPage() {
       </div>
       <div className='ptb-2 mx-auto max-w-7xl'>
         <div className='grid-layout-two'>
-          <div className={(windowDimensions.width >= 850)? 'grid-column-full': ''}>
+          {/* <div className={(windowDimensions.width >= 850)? 'grid-column-full': ''}>
             <div className="font-size-20 text-dim-grey">How it works</div>
             <div className="text-3xl">Start learning in 3 simple steps</div>
-          </div>
+          </div> */}
 
             <div className='width-80'>
-              <div className='font-size-20 text-dim-grey margin-bottom-10'>01</div>
-              <h2 className='text-3xl tracking-tight'>Browse creator by category</h2>
-              <div className='margin-top-bottom-three text-dim-grey font-size-20'>Pick a category to see all the educational creators in that niche.</div>
+              {getVideoIframe()}
             </div>
-            <div className='index-image-container'>
-              <Image src={Mainpage1} layout='fill'/>
+            <div>
+            <div className='padding-bottom-10'>
+            <div className="font-size-20 text-dim-grey">How it works</div>
+            <div className="text-3xl">Start learning in 3 simple steps</div>
             </div>
-        </div>
-      </div>
-      <div className='ptb-2 mx-auto max-w-7xl'>
-        <div className='grid-layout-two'>
-          {windowDimensions.width >= 850 ? <div className='index-image-container'>
-            <Image src={Mainpage2} layout='fill'/>
-          </div>:null}
-          <div className='width-80'>
-            <div className='font-size-20 text-dim-grey margin-bottom-10'>02</div>
-            <h2 className='text-3xl tracking-tight'>Filter by reviews</h2>
-            <div className='margin-top-bottom-three text-dim-grey font-size-20'>Discover the best educational creators in your choosen category. Filter and compare by reviews.</div>
-          </div>
-          {windowDimensions.width < 850 ? <div className='index-image-container'>
-            <Image src={Mainpage2} layout='fill'/>
-          </div>:null}
-        </div>
-      </div>
-      <div className='ptb-2 mx-auto max-w-7xl'>
-        <div className='grid-layout-two'>
-          <div className='width-80'>
-            <div className='font-size-20 text-dim-grey margin-bottom-10'>03</div>
-            <h2 className='text-3xl tracking-tight'>Explore al their educational offerings on one page</h2>
-            <div className='margin-top-bottom-three text-dim-grey font-size-20'>Learn about the creator and why they ahave credibility in their given niche. Explore their free educational offerings so you can start learning</div>
-          </div>
-          <div className='index-image-container'>
-            <Image src={Mainpage3} layout='fill'/>
-          </div>
+            {videos_instructions.map((each_vid, index) => <div key={each_vid.title}>
+              <Accordion TransitionProps={{ unmountOnExit: true }} onChange={() => getVideoChange(index)}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className='index-video-number'>0{index + 1}</div>
+                  <div className='text-xl index-video-title'>{each_vid.title}</div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography className='text-dim-grey'>{each_vid.desc}
+                  </Typography>
+                </AccordionDetails>
+                </Accordion>
+                </div>
+            )}
+
+            </div>
         </div>
       </div>
 
