@@ -19,6 +19,8 @@ export default function Layout({ children }) {
       main_blog_value_temp = main_blog_value_temp.concat(children.props.post.categories.nodes[0].ancestors.nodes.map((e) => e.name))
     }
     setMain_blog_value(main_blog_value_temp)
+    // RANKMATH KEYWORD ASSOCIATION 
+    setBannerText(children.props.BannerText)
   }, [children])
 
 
@@ -31,6 +33,8 @@ export default function Layout({ children }) {
   }
   const [windowDimensions, setWindowDimensions] = useState({});
   const [main_blog_value, setMain_blog_value] = useState({});
+  const [BannerText, setBannerText] = useState();
+
 
   useEffect(() => {
     function handleResize() {
@@ -61,7 +65,7 @@ export default function Layout({ children }) {
           <meta httpEquiv="Content-Security-Policy" content="block-all-mixed-content" />
         </Head>
         {/* <HeadBar/> */}
-        {(windowDimensions.width > 1000)?<Header main_blog_value={main_blog_value}/>:<MobileNav main_blog_value={main_blog_value}/>}
+        {(windowDimensions.width > 1000)?<Header main_blog_value={main_blog_value} BannerText={BannerText}/>:<MobileNav main_blog_value={main_blog_value} BannerText={BannerText}/>}
         <main>{children}</main>
         <div className="shadow-inner bg-light-grey">
           <Footer/>

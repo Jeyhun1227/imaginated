@@ -6,6 +6,8 @@ import parse, { domToReact } from 'html-react-parser';
 import YouTube from 'react-youtube';
 import Head from 'next/head';
 import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+import { JSDOM }  from "jsdom";
+
 
 import {
     EmailShareButton,
@@ -61,7 +63,7 @@ export default function Post( data ){
             if(attribs.src && attribs.src.includes('https://www.imaginated.com/wp-content')){
               // console.log('attribs: ', attribs)
 
-              return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height} width={attribs.width}/>
+              return <Image src={attribs.src.replace('www.', 'wordpress.')} className={attribs.class} alt={attribs.alt} height={attribs.height ? attribs.height  : 300} width={attribs.width ? attribs.width : 300}/>
             }
             if(attribs.class === 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube'){
                 var child = children.find((e) => e.attribs.class === 'lyte-wrapper')
@@ -218,14 +220,26 @@ export async function getStaticProps(context) {
             }
         })
     })
+    const json = await res.json()
 
     let metadata_raw = await axios.get('https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/blog/' + context.params.id)
     let metadata = metadata_raw.data.head;
-    const json = await res.json()
+    // GET BANNER INTERENCE
+    const htmlDocument = new JSDOM(metadata);
+    const scriptElement = htmlDocument.window.document.querySelector("script");
+    console.log('scriptElement: ', scriptElement)
+    // extract the JSON data from the script element
+    const jsonText = scriptElement.textContent.trim();
+
+    // parse the JSON data into a JavaScript object
+    const jsonObject = JSON.parse(jsonText);
+    const BannerInterence = jsonObject['@graph'].find((e) => e['@type'] === 'BlogPosting')
+    const BannerText = BannerInterence ? BannerInterence.keywords : null;
 
     return {
         props: {
             post: json.data.post,
+            BannerText,
             metadata: metadata
         },
         revalidate: 1200, // In seconds
