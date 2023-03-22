@@ -66,7 +66,7 @@ export default function MainPage() {
         <link rel="canonical" href={`https://www.imaginated.com/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>
-      <div className='ptb-120 mx-auto max-w-7xl'>
+      <div className='ptb-140 mx-auto max-w-7xl'>
         <div className="flex justify-center">
           <div className='width-80'>
             <div className='text-align-center'>
@@ -74,6 +74,7 @@ export default function MainPage() {
             <div className='margin-top-bottom-three text-dim-grey font-size-20'>Enter an educational topic, find the credible educators on that topic, and access all their content on one page.</div>
             </div>
             <Searchbar/>
+            <div className='mgt-12 mgl-15 relative w-full center-items inline-block-650 text-dim-grey'>Search engine of educational creators</div>
             {/* <div>
               <Link
                 href='/directory/'
@@ -88,7 +89,7 @@ export default function MainPage() {
         </div>
       </div>
       
-      <div className='w-full bg-light-grey'>
+      <div className='w-full bg-light-grey mb-100'>
         
         <div className='py-12 mx-auto max-w-7xl'>
           <div className='text-dim-grey index-featured'>AS MENTIONED IN</div>
@@ -105,7 +106,7 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-      <div className='ptb-2 mx-auto max-w-7xl'>
+      <div className='ptb-2 mx-auto max-w-7xl mb-100'>
         <div className='grid-layout-two'>
           {/* <div className={(windowDimensions.width >= 850)? 'grid-column-full': ''}>
             <div className="font-size-20 text-dim-grey">How it works</div>

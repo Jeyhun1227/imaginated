@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 
 export default function SearchBar({BannerText}) {
-    let placeholder = 'Search engine of educational creatures'
+    let placeholder = 'Learn from 500+ photographers'
     const [ShowResults, setShowResults] = useState(true);
     const [searchResult, setSearchResult] = useState({Individual: [], Subcategory: [], Offering: [], Keywords: []});
     const [selectedOptions, setSelectedOptions] = useState([{ value: 'photography', label: 'Photography'}]);

@@ -131,7 +131,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
     setUserReviewSelect(concatUserReview(temp_free_offers));
     let temp_num = localStorage.getItem('signup') ? Number(localStorage.getItem('signup')): 0;
     localStorage.setItem('signup', 1 + temp_num);
-  }, []);  
+  }, [Individual_values]);  
 
   useEffect(() => {
     getUseStart()

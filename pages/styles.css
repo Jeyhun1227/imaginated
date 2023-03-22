@@ -254,10 +254,17 @@ a{
   padding-top:20px;
 }
 
-.ptb-120{
-  padding: 120px 0;
+.ptb-140{
+  padding: 140px 0;
 }
 
+.mgt-12{
+  margin-top: 12px
+}
+
+.mgl-15{
+  margin-left: 15px
+}
 .padding-top-10{
   padding-top:10px;
 }
@@ -276,6 +283,10 @@ a{
 
 .margin-left-10px{
   margin-left: 10px;
+}
+
+.mb-100{
+  margin-bottom: 100px;
 }
 
 .padding-top-8{
