@@ -66,7 +66,7 @@ export default function MainPage() {
         <link rel="canonical" href={`https://www.imaginated.com/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>
-      <div className='py-12 mx-auto max-w-7xl'>
+      <div className='ptb-120 mx-auto max-w-7xl'>
         <div className="flex justify-center">
           <div className='width-80'>
             <div className='text-align-center'>

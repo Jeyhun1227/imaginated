@@ -86,7 +86,7 @@ a{
 .index-mention-image-total{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 15px 50px 0px 50px;
+  margin: 15px 90px 0px 90px;
   justify-items: center;
 }
 
@@ -252,6 +252,10 @@ a{
 }
 .padding-top-20{
   padding-top:20px;
+}
+
+.ptb-120{
+  padding: 120px 0;
 }
 
 .padding-top-10{
