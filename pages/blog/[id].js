@@ -233,11 +233,12 @@ export async function getStaticProps(context) {
       const jsonText = scriptElement.textContent.trim();
 
       // parse the JSON data into a JavaScript object
+      console.log('jsonText: ', jsonText)
       let jsonObject = null;
       if(jsonText){
         jsonObject = JSON.parse(jsonText);
         const BannerInterence = jsonObject['@graph'].find((e) => e['@type'] === 'BlogPosting')
-        BannerText = BannerInterence ? BannerInterence.keywords : null;
+        if(BannerInterence && BannerInterence.keywords) BannerText = BannerInterence.keywords;
       }
     }
 
