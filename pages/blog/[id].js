@@ -225,7 +225,7 @@ export async function getStaticProps(context) {
     let metadata_raw = await axios.get('https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/blog/' + context.params.id)
     let metadata = metadata_raw.data.head;
     let BannerText = null;
-    if(!metadata){
+    if(metadata){
       // GET BANNER INTERENCE
       const htmlDocument = new JSDOM(metadata);
       const scriptElement = htmlDocument.window.document.querySelector("script");
@@ -233,9 +233,12 @@ export async function getStaticProps(context) {
       const jsonText = scriptElement.textContent.trim();
 
       // parse the JSON data into a JavaScript object
-      const jsonObject = JSON.parse(jsonText);
-      const BannerInterence = jsonObject['@graph'].find((e) => e['@type'] === 'BlogPosting')
-      BannerText = BannerInterence ? BannerInterence.keywords : null;
+      let jsonObject = null;
+      if(jsonText){
+        jsonObject = JSON.parse(jsonText);
+        const BannerInterence = jsonObject['@graph'].find((e) => e['@type'] === 'BlogPosting')
+        BannerText = BannerInterence ? BannerInterence.keywords : null;
+      }
     }
 
 
