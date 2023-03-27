@@ -17,7 +17,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import IntroGif1 from '../public/introgif1.gif';
+import IntroGif2 from '../public/introgif2.gif';
+import IntroGif3 from '../public/introgif3.gif';
 
 export default function MainPage() {
   const [windowDimensions, setWindowDimensions] = useState(1000);
@@ -50,8 +52,10 @@ export default function MainPage() {
   }, [])
 
   const getVideoIframe = () => {
-    const links = ['ri6uea31x9', 'ofa6van345', 'f1dah4nt9h']
-    return <iframe src={`//imaginated.wistia.com/embed/iframe/${links[getMainLink]}?videoFoam=true&autoPlay=${playVideo}&playerColor=red`} allowtransparency="true" frameBorder="0" scrolling="no" className="wistia_embed" name="wistia_embed" width="620" height="349"></iframe>
+    // const links = ['ri6uea31x9', 'ofa6van345', 'f1dah4nt9h']
+    const links = [IntroGif1, IntroGif2, IntroGif3]
+    const altlinks = ['main intro video', 'second intro video', 'third intro video']
+    return <div className='main-link-gifs'><Image src={links[getMainLink]} alt={altlinks[getMainLink]} fill /></div>
   }
 
   const getVideoChange = (index) => {
@@ -113,7 +117,7 @@ export default function MainPage() {
             <div className="text-3xl">Start learning in 3 simple steps</div>
           </div> */}
 
-            <div className='width-80'>
+            <div className=''>
               {getVideoIframe()}
             </div>
             <div>
