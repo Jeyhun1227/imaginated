@@ -1,5 +1,4 @@
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://localhost:3000',
-  generateRobotsTxt: false, // (optional)
+  siteUrl: process.env.SITE_URL || 'https://localhost:3000'
   // ...other options
 }
