@@ -1,0 +1,8 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /search/
+# Host
+Host: https://www.imaginated.com
+# Sitemaps
+Sitemap: https://www.imaginated.com/sitemap.xml

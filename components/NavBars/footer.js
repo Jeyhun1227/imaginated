@@ -121,7 +121,7 @@ export default function Footer() {
                           </div>
                           <div className="flex mx-auto md:block">
                               <div className="md:mt-2.5 xl:mx-0 xl:mb-0">
-                                  <p className="mb-0 text-xs truncate sm:text-base text-dim-grey">© 2021 Imaginated.com</p>
+                                  <p className="mb-0 text-xs truncate sm:text-base text-dim-grey">© 2023 Imaginated</p>
                               </div>
                           </div>
                       </div>    

@@ -66,7 +66,7 @@ export default function MainPage() {
         <link rel="canonical" href={`https://www.imaginated.com/`} />
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
       </Head>
-      <div className='ptb-140 mx-auto max-w-7xl'>
+      <div className='ptb-140-100 mx-auto max-w-7xl'>
         <div className="flex justify-center">
           <div className='width-80'>
             <div className='text-align-center'>
@@ -89,7 +89,7 @@ export default function MainPage() {
         </div>
       </div>
       
-      <div className='w-full bg-light-grey mb-100'>
+      <div className='w-full bg-light-grey mb-100-50'>
         
         <div className='py-12 mx-auto max-w-7xl'>
           <div className='text-dim-grey index-featured'>AS MENTIONED IN</div>
@@ -106,7 +106,7 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-      <div className='ptb-2 mx-auto max-w-7xl mb-100'>
+      <div className='ptb-2 mx-auto max-w-7xl mb-100-50'>
         <div className='grid-layout-two'>
           {/* <div className={(windowDimensions.width >= 850)? 'grid-column-full': ''}>
             <div className="font-size-20 text-dim-grey">How it works</div>

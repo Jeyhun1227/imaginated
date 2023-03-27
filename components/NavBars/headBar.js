@@ -20,7 +20,7 @@ export default function HeadBar({main_blog_value, BannerText}) {
     return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn {value[1]} for free - </div><div className='underline inline-block margin-left-5'><Link href={value[0]}> See the top educators</Link></div></div></div>;
   }
   const getCurrentLinks = () => {
-    return <div className="text-xs text-white sm:text-base "><div className='underline inline-block'><Link href='/directory/signup'>Sign up</Link></div> <div className='inline-block'>for free to see and leave reviews!</div></div>;
+    return <div><div className="text-xs text-white sm:text-base"> <div className='inline-block'>Learn more about </div><div className='underline inline-block margin-left-5'><Link href={`/`}>Imaginated</Link></div></div></div>;
   }
 
   const getCustomSearch = (BannerText) => {
