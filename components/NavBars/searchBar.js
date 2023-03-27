@@ -79,7 +79,7 @@ export default function SearchBar({BannerText}) {
                 <label htmlFor="simple-search" className="sr-only">Search</label>
                 <div className="relative w-full center-items inline-block-650">
                     <div className='width-137px inline-block border text-sm margin-bottom10-phone width-100-350-phone'><Select options={categroyOptions} values={selectedOptions}  placeholder={'All Categories'} className="border-none bg-light-grey"/></div>
-                    <div className="border inline-block relative width-100-phone width-24rem margin-bottom10-phone">
+                    <div className="border inline-block relative width-100-phone width-30rem margin-bottom10-phone">
                         <Combobox.Input type="text" onKeyUp={onKeyboardHandler} id="simple-search" data-dropdown-toggle="dropdown" className="inline-block text-sm text-ellipsis sm:pr-10 focus:outline-none margin-left-10px height-30px width-90" placeholder={placeholder} required onChange={(e) => setSearchTerm(e.target.value)}/>
                         <div className="absolute flex inset-y-0 right-0 items-center margin-right-12 cursor-pointer z-index-five" onClick={() => onClickSeach()}>
                             <Search />

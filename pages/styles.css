@@ -98,8 +98,8 @@ a{
   width: 137px;
 }
 
-.width-24rem{
-  width: 24rem;
+.width-30rem{
+  width: 30rem;
 }
 
 .width-90{
@@ -254,8 +254,13 @@ a{
   padding-top:20px;
 }
 
-.ptb-140{
+.ptb-140-100{
   padding: 140px 0;
+}
+
+.plr-rem1{
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .mgt-12{
@@ -285,7 +290,7 @@ a{
   margin-left: 10px;
 }
 
-.mb-100{
+.mb-100-50{
   margin-bottom: 100px;
 }
 
@@ -1507,7 +1512,7 @@ div#ez-toc-container p.ez-toc-title {
 }
 
 @media screen and (max-width: 850px) {
-  .width-24rem{
+  .width-30rem{
     max-width: 24rem;
   }
   .width-100-phone{
@@ -1607,6 +1612,12 @@ div#ez-toc-container p.ez-toc-title {
 
 
 @media screen and (max-width: 600px) {
+  .ptb-140-100{
+    padding: 100px 0;
+  }
+  .mb-100-50{
+    margin-bottom: 50px;
+  }
   .wistia_embed{
     width: 380px;
     height: 215px;

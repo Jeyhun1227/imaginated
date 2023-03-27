@@ -30,7 +30,7 @@ export default function IndividualSidebar({category_values, mobile}) {
         handleResize();    
         window.addEventListener('resize', handleResize);
         () => window.removeEventListener('resize', handleResize);
-      }, [])
+      }, [category_values])
 
     return <div>
                 <div className="">
@@ -65,8 +65,8 @@ export default function IndividualSidebar({category_values, mobile}) {
                                 </div>
                             </div>
                         </div>
-                        <div className="pt-2 text-dim-grey">
-                            {e.description.length > 150 ? e.description.slice(0, 150) + '...': e.description}
+                        <div className="pt-3 text-dim-grey">
+                            {/* {e.description.length > 150 ? e.description.slice(0, 150) + '...': e.description} */}
                             <div className="no-underline text-denim cursor-point">
                             <Link  href={'/directory/person/' + e.linkname}>
                                 <div >Learn more about {e.first_name} {e.last_name}</div>

@@ -47,13 +47,14 @@ export default async (req, res) => {
             topK: 20,
             vector: embedding            
         });
-        const keyword_list = pinecone_values.data.matches.filter(item => item.score >= .90)
-                            .map(item => item.id.toLowerCase()) // lower the strings
+        const keyword_list_main = pinecone_values.data.matches.filter(item => item.score >= .90)
+        const keyword_list = keyword_list_main.map(item => item.id.toLowerCase()) // lower the strings
                             .filter((item, index, arr) => arr.indexOf(item) === index);
 
-
-        // console.log('pinecone_values: ', pinecone_values.data.matches, keyword_list)
-
+        const keyword_list_array = keyword_list_main.map((e) => [e.id.toLowerCase(), Math.round(e.score * 1000)])
+                                // .filter((item, index, arr) => arr.indexOf(item[0]) === index)
+        let main_keywords = Array.from(new Map(keyword_list_array.map(item => [item[0], item])).values());
+        // console.log('pinecone_values: ', main_keywords)
         let youtubeChannel = await PoolConnection.query('SELECT "channelId" id, "channelId", first_name, last_name, linkname, aka, category, subcategory, imagelink, "count", avg, sum(match_rate) match_rate, sum("index") "index" FROM youtube_channel_keyword_individual_vw WHERE lower(keyword) = ANY($1) GROUP BY 1,2,3,4,5,6,7,8,9,10,11 ORDER BY match_rate desc;', [keyword_list])
         let youtubeKeywords = await PoolConnection.query('SELECT videoid id, "channelId", videoid, title, thumbnail, sum(score) score, sum(relevance) relevance, sum(engagement) engagement from youtube_video_keyword where show_overall is true and lower(keyword) = ANY($1) group by 1,2,3,4,5;', [keyword_list])
         let youtubeChannelResults = youtubeChannel.rows
@@ -61,8 +62,8 @@ export default async (req, res) => {
         let channel_ids = [...new Set(youtubeChannelResults.map((e) => e.channelId))];
         let youtubeSubs = await PoolConnection.query('SELECT * from youtube_top_ranking_sub_buckets WHERE "channelId" = ANY($1);', [channel_ids])
         let youtubeSubsResults = youtubeSubs.rows
-        var insert_values = await PoolConnection.query('INSERT INTO user_request_search(search_term, userid, ip, category, channel_results, video_results) VALUES($1, $2, $3, $4, $5, $6);', 
-        [req.body.keyword, sessionId, ip, req.body.category, youtubeChannelResults.length, youtubeKeywordsResults.length]);
+        var insert_values = await PoolConnection.query('INSERT INTO user_request_search(search_term, userid, ip, category, channel_results, video_results, keyword_list) VALUES($1, $2, $3, $4, $5, $6, $7);', 
+        [req.body.keyword, sessionId, ip, req.body.category, youtubeChannelResults.length, youtubeKeywordsResults.length, keyword_list_array]);
 
         return res.status(200).json({youtubeChannel: youtubeChannelResults, youtubeKeywords: youtubeKeywordsResults, youtubeSubs: youtubeSubsResults})
 

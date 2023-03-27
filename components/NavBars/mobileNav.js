@@ -121,7 +121,7 @@ export default function MobileNav({main_blog_value, BannerText}) {
     <div>
       {showHeadbar? <HeadBar main_blog_value={main_blog_value} BannerText={BannerText}/>:null}
       <div className="relative z-10 bg-white shadow-sm">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6">
+        <div className="plr-rem1 mx-auto max-w-7xl sm:px-6">
           <div className="flex items-center justify-between py-6 md:space-x-10 z-index-five">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/">

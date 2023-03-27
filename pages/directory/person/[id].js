@@ -37,7 +37,6 @@ import {
 import Sidebar from '../../../components/Person/Sidebar';
 import IndividualFreeOfferingComponent from '../../../components/Person/FreeOffering';
 import ReviewsComponent from '../../../components/Person/Reviews';
-import Script from 'next/script';
 import WordChart from '../../../components/Person/WordChart'
 
 
@@ -138,7 +137,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
   }, [session]); 
   
   let chanUrlType = (type) => {
-    history.replaceState(undefined, undefined, '#'+ type)
+    // history.replaceState(undefined, undefined, '#'+ type)
     seturlType(type)
   }
 
@@ -322,7 +321,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
               <div className="flex flex-row flex-wrap space-x-3">
                 <div className="inline-flex items-center justify-center cursor-point">
                 <Link href="/directory" >  
-                  <Image className="content-center h-4" src={home.src} width={20} height={20}/>
+                  <Image className="content-center h-4" src={home.src} width={20} height={20} alt='home'/>
                 </Link>
                 </div>
                 <div className="inline-flex items-center justify-center">
@@ -341,7 +340,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
               <div className="grid items-center grid-cols-4 mb-6 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-y-6 justify-items-start">
                 <div className="self-start mt-6">
                   {/* <Image src={Individual_values.imagelink} className={styles.IndividualImage}/> */}
-                  <ImageWithFallback src={Individual_values.imagelink} className={styles.IndividualImage} width={80} height={80} fallbackSrc={"/fallbackimage.svg"}/>
+                  <ImageWithFallback src={Individual_values.imagelink} alt={Individual_values.first_name + ' ' + Individual_values.last_name} className={styles.IndividualImage} width={80} height={80} fallbackSrc={"/fallbackimage.svg"}/>
                 </div>
                 <div className="col-span-1 mt-6 space-y-3 md:mt-0 sm:col-span-2 md:col-span-6 lg:col-span-9 grid-row-4">  
                   <div className="person-flex flex-row space-x-3 flex-nowrap md:pt-7"> 
@@ -391,15 +390,15 @@ export default function IndividualPageMain({Individual_values, category_values, 
                             }} readOnly/>
                     <div className='inline-block font-size-14'>{Individual_values.avg}</div>
                     <div className='inline-block font-size-14'>({Individual_values.count})</div>
-                    <div className='inline-block cursor-point' onClick={()=>setContactInfoClicked(true)}><Image src={contactImg} alt='contact' className='inline-block' ></Image><div className='inline-block font-weight-500 font-size-14 margin-left-10'>Contact</div></div>
+                    <div className='inline-block cursor-point' onClick={()=>setContactInfoClicked(true)}><Image src={contactImg} alt='contact' className='inline-block' alt='contact' ></Image><div className='inline-block font-weight-500 font-size-14 margin-left-10'>Contact</div></div>
                     {(ContactInfoClicked)?<div className='individual-share-buttons individual-contact-buttons'>
                           <div className="individual-share-exit" onClick={() => setContactInfoClicked(false)}><X/></div>
                           <div className="">
                           <h2>Contact Details</h2>
-                            {(Individual_values.company)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Company_Image.src} height={13} width={15}/> {Individual_values.company}</div>:null}
-                            {(Individual_values.location)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Location_Image.src} height={13} width={15}/> Located in {Individual_values.location}</div>:null}
-                            {(Individual_values.founder)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Founded_image.src} height={13} width={15}/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
-                            {(Individual_values.link)?<div className="pl-2 text-dim-grey margin-top-10"><div className="inline-block margin-right-five"><Image  src={Link_image.src} height={13} width={15}/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link
+                            {(Individual_values.company)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Company_Image.src} height={13} width={15}  alt='company'/> {Individual_values.company}</div>:null}
+                            {(Individual_values.location)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Location_Image.src} height={13} width={15}  alt='location'/> Located in {Individual_values.location}</div>:null}
+                            {(Individual_values.founder)?<div className="pl-2 text-dim-grey margin-top-10"><Image className="inline-block" src={Founded_image.src} height={13} width={15}  alt='founder'/> Founded in {Individual_values.founder.split('.')[0]}</div>:null}
+                            {(Individual_values.link)?<div className="pl-2 text-dim-grey margin-top-10"><div className="inline-block margin-right-five"><Image  src={Link_image.src} height={13} width={15}  alt='link'/></div><div className="flex-initial overflow-hidden no-underline break-words text-dim-grey"><Link
                               href={Individual_values.link}
                               target='_blank'
                               rel="noopener noreferrer nofollow">{Individual_values.link}</Link></div></div>:null}
@@ -522,7 +521,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                     </div>
                     <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
                     {premium_offers_types[key].map((value) => <div key={value.name} className="">
-                        <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
+                        <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
                           currentTarget.onerror = null; 
                           currentTarget.src=No_image.src;
                         }} />
@@ -558,7 +557,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                   <h3 className="pb-3">{key}</h3>
                   <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
                   {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3 margin-bottom-mobile align-center-mobile">
-                      <Image src={value.imagelink? value.imagelink: No_image.src} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224}  onError={({ currentTarget }) => {
+                      <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224}  onError={({ currentTarget }) => {
                         currentTarget.onerror = null; 
                         currentTarget.src=No_image.src;
                       }} />
@@ -610,7 +609,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                               </div>
                                 <div className="flex flex-row-reverse pl-3">
                                   <div className="pl-1">{e}</div>
-                                  <Image src={star.src} width={25} height={25}/>
+                                  <Image src={star.src} width={25} height={25} alt='star'/>
                                 </div>
                               </div>
                           )}
