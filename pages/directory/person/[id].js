@@ -390,7 +390,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                             }} readOnly/>
                     <div className='inline-block font-size-14'>{Individual_values.avg}</div>
                     <div className='inline-block font-size-14'>({Individual_values.count})</div>
-                    <div className='inline-block cursor-point' onClick={()=>setContactInfoClicked(true)}><Image src={contactImg} alt='contact' className='inline-block' alt='contact' ></Image><div className='inline-block font-weight-500 font-size-14 margin-left-10'>Contact</div></div>
+                    <div className='inline-block cursor-point' onClick={()=>setContactInfoClicked(true)}><Image src={contactImg} className='inline-block' alt='contact' ></Image><div className='inline-block font-weight-500 font-size-14 margin-left-10'>Contact</div></div>
                     {(ContactInfoClicked)?<div className='individual-share-buttons individual-contact-buttons'>
                           <div className="individual-share-exit" onClick={() => setContactInfoClicked(false)}><X/></div>
                           <div className="">

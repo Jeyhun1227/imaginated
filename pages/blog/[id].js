@@ -233,7 +233,6 @@ export async function getStaticProps(context) {
       const jsonText = scriptElement.textContent.trim();
 
       // parse the JSON data into a JavaScript object
-      console.log('jsonText: ', jsonText)
       let jsonObject = null;
       if(jsonText){
         jsonObject = JSON.parse(jsonText);
