@@ -55,7 +55,7 @@ export default function MainPage() {
     // const links = ['ri6uea31x9', 'ofa6van345', 'f1dah4nt9h']
     const links = [IntroGif1, IntroGif2, IntroGif3]
     const altlinks = ['main intro video', 'second intro video', 'third intro video']
-    return <div className='main-link-gifs'><Image src={links[getMainLink]} alt={altlinks[getMainLink]} fill /></div>
+    return <div className='main-links-gifs'><Image src={links[getMainLink]} alt={altlinks[getMainLink]} fill /></div>
   }
 
   const getVideoChange = (index) => {
