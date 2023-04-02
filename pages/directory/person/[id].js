@@ -504,7 +504,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                     <div className={"my-10"} ref={offeringsSection}>
                       <div className="pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
                         <h3>Content Breakdown Chart</h3>
-                        <div>Explore the Bar Chart below to discover the percentage breakdown of {Individual_values.first_name}'s content</div>
+                        <div>Explore the Bar Chart below to discover the percentage breakdown of {Individual_values.first_name}&apos;s content</div>
 
                       </div>
                       <div>
