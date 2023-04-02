@@ -101,14 +101,14 @@ export default function IndividualPageMain({Individual_values, category_values, 
     return [allreviews, getCats, temp_count_each_rating]
   }
 
-  const [reviews, setReviews] = useState(reviewsFunc()[0]);
-  const [UserReviewSelect, setUserReviewSelect] = useState(() => concatUserReview(freeOfferFunc()));
+  const [reviews, setReviews] = useState([]);
+  const [UserReviewSelect, setUserReviewSelect] = useState();
   const [urlType, seturlType] = useState();
-  const [count_each_rating, setcount_each_rating] = useState(reviewsFunc()[2]);
-  const [favorites_offers, setfavorites_offers] = useState(favoritesOfferFunc())
+  const [count_each_rating, setcount_each_rating] = useState({});
+  const [favorites_offers, setfavorites_offers] = useState([])
   const [getUserFollowingBool, setgetUserFollowingBool] = useState(false);
   const [free_offers_array, setFree_offers_array] = useState([]);
-  const [reviews_category, set_reviews_category] = useState(reviewsFunc()[1]);
+  const [reviews_category, set_reviews_category] = useState([]);
   const [shareUrl, setShareUrl] = useState('');
   const [showShare, setShowShare] = useState(false);
   const [UserSignUp, setUserSignUp] = useState(false);
@@ -119,7 +119,13 @@ export default function IndividualPageMain({Individual_values, category_values, 
     let href_hash = window.location.href;
     let href_value = (href_hash.split("#").length > 1) ? href_hash.split("#")[1].toLowerCase() : null;
     seturlType(href_value);
-    setreviewAll(reviews)
+    let temp_reviews = reviewsFunc()[0]
+    setcount_each_rating(reviewsFunc()[2])
+    setreviewAll(temp_reviews)
+    setReviews(temp_reviews)
+    setUserReviewSelect(() => concatUserReview(freeOfferFunc()));
+    set_reviews_category(reviewsFunc()[1])
+    setfavorites_offers(favoritesOfferFunc())
 
     // getUseStart()
     let signup = localStorage.getItem('signup');
@@ -497,7 +503,9 @@ export default function IndividualPageMain({Individual_values, category_values, 
                     {/* <div className={(urlType === 'offerings')? null: styles.displayNone}> */}
                     <div className={"my-10"} ref={offeringsSection}>
                       <div className="pb-2 mx-0 border-b sm:mx-4 MainOfferingValue border-very-light-grey">
-                        <h3>Free Offerings</h3>
+                        <h3>Content Breakdown Chart</h3>
+                        <div>Explore the Bar Chart below to discover the percentage breakdown of {Individual_values.first_name}'s content</div>
+
                       </div>
                       <div>
                         <WordChart  Youtube_free_offers={free_offers} Youtube_free_content={free_content.slice(0,3)} Youtube_link={free_offers.youtube} Youtube_name={get_name_from_link(free_offers.youtube, 'youtube')} wordChartIndividual={wordChartIndividual} width={offeringsSection.current ? offeringsSection.current.offsetWidth: null} individual={Individual_values.id}/>

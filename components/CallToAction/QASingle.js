@@ -5,7 +5,7 @@ export default function QASingle() {
     const varLargeText = "What is Imaginated?" 
     const varLinkText = "Learn more" 
     const varLink = "/directory"
-    const varSmallText = "Imaginated is a directory of educational creators. Here you can find the top Educators."
+    const varSmallText = "Imaginated is a seach engine of educational creators. Here you can find the top Educators."
     const [largeText, setLargeText] = useState(varLargeText);
     const [linkText, setLinkText] = useState(varLinkText);
     const [link, setLink] = useState(varLink);

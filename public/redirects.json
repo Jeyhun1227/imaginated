@@ -720,5 +720,6 @@
     {"source": "/best-camera/canon-cameras/canon-rebel-t7/","destination": "https://www.natetorresphotography.com/best-canon-rebel-t7-lens/", "permanent": true}, 
     {"source": "/best-camera-lens/canon-lenses/canon-landscape-lens/","destination": "https://www.natetorresphotography.com/best-canon-landscape-lens/", "permanent": true}, 
     {"source": "/best-camera-lens/best-canon-lens/best-canon-lenses-for-portraits/","destination": "https://www.natetorresphotography.com/best-canon-portrait-lens/", "permanent": true}, 
-    {"source": "/best-camera-lens/best-canon-lens/best-canon-lenses-for-astrophotography/","destination": "https://www.natetorresphotography.com/best-canon-lenses-for-astrophotography/", "permanent": true}
+    {"source": "/best-camera-lens/best-canon-lens/best-canon-lenses-for-astrophotography/","destination": "https://www.natetorresphotography.com/best-canon-lenses-for-astrophotography/", "permanent": true},
+    {"source": "/ads.txt","destination": "https://adstxt.mediavine.com/sites/imaginated/ads.txt", "permanent": true}
 ]
