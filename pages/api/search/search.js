@@ -44,8 +44,10 @@ export default async (req, res) => {
         const index = pinecone.Index("openai")
 
         const pinecone_values = await index.query({
-            topK: 20,
-            vector: embedding            
+            topK: 12,
+            vector: embedding,
+            namespace: "Photography",     
+                  
         });
         const keyword_list_main = pinecone_values.data.matches.filter(item => item.score >= .90)
         const keyword_list = keyword_list_main.map(item => item.id.toLowerCase()) // lower the strings

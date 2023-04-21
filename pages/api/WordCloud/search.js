@@ -28,8 +28,10 @@ export default async (req, res) => {
 
             if(req.body.videoid){
                 const pinecone_values = await index.query({
-                    topK: 20,
-                    vector: embedding            
+                    topK: 12,
+                    vector: embedding,
+                    namespace: "Photography",
+          
                 });
                 const keyword_list = pinecone_values.data.matches.filter(item => item.score >= .90)
                 .map(item => item.id.toLowerCase()) // lower the strings
