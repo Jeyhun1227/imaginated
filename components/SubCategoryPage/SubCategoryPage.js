@@ -23,6 +23,12 @@ export default function SubCategoryPageSub({values, selected}) {
 
     }
 
+    const get_description = (str, limit=280) => {
+        if (str.length <= limit) return str;
+        const subString = str.substr(0, limit - 1);
+        return subString.substr(0, subString.lastIndexOf(' ')) + '...';
+    }
+
   return (
       <div className="py-6 my-5 border-y border-very-light-grey" >
 
@@ -69,7 +75,7 @@ export default function SubCategoryPageSub({values, selected}) {
                 </div>    
             </div>
             <div className="pt-2 text-dim-grey">
-                {values.description}
+                {get_description(values.description)}
                 <div className="pl-1.5 no-underline text-denim cursor-point">
                 <Link href={'/directory/person/' + values.linkname}>
                     Learn more about{values.first_name} {values.last_name}
