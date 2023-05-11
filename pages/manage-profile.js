@@ -474,7 +474,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
               <div ref={headerSection} className="sticky top-0 z-50 space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-5">
                 <div className='width-max-500 center-all'>
-                  <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2" onClick={SubmitChanges}>{getApproval() ? 'Sent for Approval!': 'Submit for Approval'}</button>
+                  <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2" onClick={SubmitChanges}>{getApproval()}</button>
                   <button className="relative flex justify-center px-4 py-2 text-white border border-transparent text-med bg-dark-blue group  inline-block" onClick={FreeSaveChanges}>{ changeNeeded() ? 'Save Changes': 'Up to Date!'}</button>
                 </div>
                 <div>

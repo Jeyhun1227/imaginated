@@ -40,7 +40,7 @@ export default function SettingsPageMobile(props) {
             id: 3, 
             title: 'Manage Profile', 
             icon: <Star className="hover:fill-black"/>, 
-            component:() => window.location.href = "/settingsperson"
+            component:() => window.location.href = "/manage-profile"
         },
         { 
             id: 4,
