@@ -45,7 +45,7 @@ export default function SettingsPage(props) {
                                 <Gear/>
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Settings</Tab>
                             </li>
-                            {(props.user.individual) ? <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => window.location.href = "/settingsperson"}>
+                            {(props.user.individual) ? <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => window.location.href = "/manage-profile"}>
                                 <CardImage/>
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Manage Profile</Tab>
                             </li>:null}
