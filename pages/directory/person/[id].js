@@ -296,7 +296,14 @@ export default function IndividualPageMain({Individual_values, category_values, 
       `${window.location.origin}/settings?type=Ratings&id=${id}`, "_blank");
   }
 
-
+  const isValidHttpUrl = (url) => {
+    try {
+      const newUrl = new URL(url);
+      return newUrl.hostname
+    } catch (err) {
+      return false;
+    }
+  }
 
 
   return (
@@ -494,7 +501,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                                 href={url.trim()}
                                 target="_blank"
                                 rel="noopener noreferrer nofollow"
-                                className="pl-1 no-underline text-dim-grey inline-block">{new URL(url).hostname}</Link>
+                                className="pl-1 no-underline text-dim-grey inline-block">{isValidHttpUrl(url)}</Link>
                             </li>)}
                           </ul>
                         </div>
