@@ -37,14 +37,16 @@ export default async (req, res) => {
                 .map(item => item.id.toLowerCase()) // lower the strings
                 .filter((item, index, arr) => arr.indexOf(item) === index);
                 // console.log('keyword_list: ', keyword_list)
-                var indivudal_val = await PoolConnection.query('SELECT v.id, v."channelId", v.parent, v.sub_bucket, v.videoid, v.title, v.thumbnail, sum(v.score) score, sum(v.relevance) relevance, sum(v.engagement) engagement from youtube_channel_keyword c join youtube_video_keyword v on c.id = v.channel_key where v.videoid = $1 AND lower(v.keyword) = ANY($2) AND c."individualId" = $3  group by 1,2,3,4,5,6,7', [req.body.videoid, keyword_list, req.body.individual])
+                var indivudal_val = await PoolConnection.query('SELECT v.id, v."channelId", v.parent, v.sub_bucket, v.videoid, v.title, v.thumbnail, sum(v.score) score, sum(v.relevance) relevance, sum(v.engagement) engagement from youtube_channel_keyword c join youtube_video_keyword v on c.id = v.channel_key where v.videoid = $1 AND lower(v.keyword) = ANY($2) AND c.individualid = $3  group by 1,2,3,4,5,6,7', [req.body.videoid, keyword_list, req.body.individual])
             }else{
                 const pinecone_values = await index.query({
                     topK: 1,
-                    vector: embedding            
+                    vector: embedding,
+                    namespace: "Photography",          
                 });
+
                 keyword_found = pinecone_values.data.matches[0].id.toLowerCase();
-                var indivudal_val = await PoolConnection.query('SELECT v.id, v."channelId", v.parent, v.sub_bucket, v.videoid, v.title, v.thumbnail, sum(v.score) score, sum(v.relevance) relevance, sum(v.engagement) engagement from youtube_channel_keyword c join youtube_video_keyword v on c.id = v.channel_key where lower(v.keyword) = $1 AND c."individualId" = $2  group by 1,2,3,4,5,6,7', [keyword_found, req.body.individual])
+                var indivudal_val = await PoolConnection.query('SELECT v.id, v."channelId", v.parent, v.sub_bucket, v.videoid, v.title, v.thumbnail, sum(v.score) score, sum(v.relevance) relevance, sum(v.engagement) engagement from youtube_channel_keyword c join youtube_video_keyword v on c.id = v.channel_key where lower(v.keyword) = $1 AND c.individualid = $2  group by 1,2,3,4,5,6,7', [keyword_found, req.body.individual])
             }
             return res.status(200).json({
                 indivudal_val: indivudal_val.rows
