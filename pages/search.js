@@ -16,6 +16,7 @@ export default function SearchFunction() {
     const [youtubeKeywords, setYoutubeKeywords] = useState([]);
     const [youtubeSubs, setYoutubeSubs] = useState([]);
     const [FormDetails, setFormDetails] = useState('');
+    const [premiumOfferings, setPremiumOfferings] = useState([]);
 
     const router = useRouter();
     const {query} = router.query;
@@ -25,6 +26,7 @@ export default function SearchFunction() {
         setYoutubeChannel([])
         setYoutubeKeywords([])
         setYoutubeSubs([])
+        setPremiumOfferings([])
     }
     const getChannelValues = async () =>{
         const res = await axios.post(`/api/search/search`, { keyword: query });
@@ -35,6 +37,7 @@ export default function SearchFunction() {
         setYoutubeChannel(mainYoutubeChannel)
         setYoutubeKeywords(data.youtubeKeywords)
         setYoutubeSubs(data.youtubeSubs)
+        setPremiumOfferings(data.premiumOfferings)
     }
 
     useEffect( () => {
@@ -73,7 +76,7 @@ export default function SearchFunction() {
                         youtubeChannel.map((yc) => 
                         <div key={yc.id} className="padding-tb-50 border-b border-very-light-grey ">
               
-                            <div className="inline-block">
+                            <div className="">
 
                                 <div className="">  
                                     <Link href={`/directory/person/${yc.linkname}/?query=${query}`}><div className="search-each-result"> 
@@ -102,7 +105,7 @@ export default function SearchFunction() {
                                         </div>
                                     </div></Link>
                                     <div className="margin-top-20">
-                                        <div className="inline-block">
+                                        <div className="">
                                         <div className="hidden space-y-3 sm:space-x-3 md:flex font-weight-500 font-size-14">Categories: </div>
                                         <div className="hidden space-y-3 sm:space-x-3 md:flex">
                                         {yc.subcategory.slice(0, 3).map((e) => <Link
@@ -121,7 +124,7 @@ export default function SearchFunction() {
                                             <div  className={`flex items-center justify-center px-1 py-1 mt-2 mr-2 text-base text-center text-black no-underline truncate bg-white-smoke ${yc.subcategory.length - 3 <= 0 ? "hidden" : 0}`}>+{yc.subcategory.length - 3} more</div>
                                             </div>
                                         </div>  
-                                        <SearchDisplayVideos youtubeKeywords={youtubeKeywords} youtube_channel={yc} query={query} youtubeSubs={youtubeSubs}/>
+                                        <SearchDisplayVideos youtubeKeywords={youtubeKeywords} youtube_channel={yc} query={query} youtubeSubs={youtubeSubs} premiumOfferings={premiumOfferings}/>
                                         </div>
                                     </div>
                                 </div>

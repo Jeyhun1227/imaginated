@@ -123,7 +123,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
     setcount_each_rating(reviewsFunc()[2])
     setreviewAll(temp_reviews)
     setReviews(temp_reviews)
-    setUserReviewSelect(() => concatUserReview(freeOfferFunc()));
+    // setUserReviewSelect(() => concatUserReview(freeOfferFunc()));
     set_reviews_category(reviewsFunc()[1])
     setfavorites_offers(favoritesOfferFunc())
 
@@ -303,6 +303,11 @@ export default function IndividualPageMain({Individual_values, category_values, 
     } catch (err) {
       return false;
     }
+  }
+  const get_description = (str, limit=280) => {
+    if (str.length <= limit) return str;
+    const subString = str.substr(0, limit - 1);
+    return subString.substr(0, subString.lastIndexOf(' ')) + '...';
   }
 
 
@@ -535,8 +540,8 @@ export default function IndividualPageMain({Individual_values, category_values, 
                       {/* <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button> */}
                     </div>
                     <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
-                    {premium_offers_types[key].map((value) => <div key={value.name} className="">
-                        <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
+                    {premium_offers_types[key].map((value) => <div key={value.name} className=""><Link href={value.linkname}>
+                        <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="width-80per h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
                           currentTarget.onerror = null; 
                           currentTarget.src=No_image.src;
                         }} />
@@ -557,8 +562,8 @@ export default function IndividualPageMain({Individual_values, category_values, 
                             <div className="text-denim">{value.avg}</div>
                             <div className="text-denim">{value.count ? `"${value.count}"`:null}</div>
                           </div>
-                        <div className="w-48 text-sm text-dim-grey">{value.description}</div>
-                      </div>)}
+                        <div className="width-80per text-sm text-dim-grey">{get_description(value.description)}</div>
+                      </Link></div>)}
                       </div>
                     </div>)}
                   </div>
@@ -711,10 +716,12 @@ export async function getStaticProps(ctx) {
   // const category_values_clean = category_values.data.getCategoryPage.rows.filter((e) => e.linkname != IndividualID)
   if(free_offers.length > 0) 
     free_offers = free_offers[0] 
+  // console.log('premium_offers: ', Individual_values.data.getEachIndividual.premium_offers)
+  let premium_offers = Individual_values.data.getEachIndividual.premium_offers.map((e) => ({...e, linkname: `/shop/${e.name.toLowerCase().replace(/\s+/g, "-")}`}))
   return {
     props: {
       Individual_values: Individual_values.data.getEachIndividual.rows[0],
-      premium_offers: Individual_values.data.getEachIndividual.premium_offers,
+      premium_offers,
       reviews_offer: Individual_values.data.getEachIndividual.reviews,
       category_values: category_values_clean,
       free_content: free_content,

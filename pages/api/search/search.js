@@ -21,6 +21,7 @@ export default async (req, res) => {
         const session = await getSession({ req })
         const { headers } = req;
         const sessionId = session? session.id: null;
+        const category = 'Photography'
         const ip = headers['x-forwarded-for'] || req.connection.remoteAddress;
         // const response = await openai.createCompletion({
         //     model: "text-davinci-002",
@@ -55,10 +56,12 @@ export default async (req, res) => {
 
         const keyword_list_array = keyword_list_main.map((e) => [e.id.toLowerCase(), Math.round(e.score * 1000)])
                                 // .filter((item, index, arr) => arr.indexOf(item[0]) === index)
-        let main_keywords = Array.from(new Map(keyword_list_array.map(item => [item[0], item])).values());
+        // let main_keywords = Array.from(new Map(keyword_list_array.map(item => [item[0], item])).values());
         // console.log('pinecone_values: ', main_keywords)
-        let youtubeChannel = await PoolConnection.query('SELECT "channelId" id, "channelId", first_name, last_name, linkname, aka, category, subcategory, imagelink, "count", avg, sum(match_rate) match_rate, sum("index") "index" FROM youtube_channel_keyword_individual_vw WHERE lower(keyword) = ANY($1) GROUP BY 1,2,3,4,5,6,7,8,9,10,11 ORDER BY match_rate desc;', [keyword_list])
-        let youtubeKeywords = await PoolConnection.query('SELECT videoid id, "channelId", videoid, title, thumbnail, sum(score) score, sum(relevance) relevance, sum(engagement) engagement from youtube_video_keyword where show_overall is true and lower(keyword) = ANY($1) group by 1,2,3,4,5;', [keyword_list])
+        let youtubeChannel = await PoolConnection.query('SELECT "channelId" id, "channelId", individualid, first_name, last_name, linkname, aka, category, subcategory, imagelink, "count", avg, sum(match_rate) match_rate, sum("index") "index" FROM youtube_channel_keyword_individual WHERE keyword_lower = ANY($1) and category = $2 GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12 ORDER BY match_rate desc;', [keyword_list, category])
+        let youtubeKeywords = await PoolConnection.query('SELECT videoid id, "channelId", videoid, title, thumbnail, sum(score) score, sum(relevance) relevance, sum(engagement) engagement from youtube_video_keyword where show_overall is true and keyword_lower = ANY($1) and category = $2 group by 1,2,3,4,5;', [keyword_list, category])
+        let premiumOfferings = await PoolConnection.query('SELECT o.* from individual_premium_offerings o join category c on c.id = o.category where keyword = ANY($1) and c.category = $2;', [keyword_list, category])
+
         let youtubeChannelResults = youtubeChannel.rows
         let youtubeKeywordsResults = youtubeKeywords.rows
         let channel_ids = [...new Set(youtubeChannelResults.map((e) => e.channelId))];
@@ -67,7 +70,7 @@ export default async (req, res) => {
         var insert_values = await PoolConnection.query('INSERT INTO user_request_search(search_term, userid, ip, category, channel_results, video_results, keyword_list) VALUES($1, $2, $3, $4, $5, $6, $7);', 
         [req.body.keyword, sessionId, ip, req.body.category, youtubeChannelResults.length, youtubeKeywordsResults.length, keyword_list_array]);
 
-        return res.status(200).json({youtubeChannel: youtubeChannelResults, youtubeKeywords: youtubeKeywordsResults, youtubeSubs: youtubeSubsResults})
+        return res.status(200).json({youtubeChannel: youtubeChannelResults, youtubeKeywords: youtubeKeywordsResults, youtubeSubs: youtubeSubsResults, premiumOfferings: premiumOfferings.rows})
 
     }
     return res.status(403).json({

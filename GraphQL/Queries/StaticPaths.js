@@ -10,6 +10,7 @@ getEachStaticPathDirectory(
             types: $types 
           )
         {
+          premium
           category
           individual
           subcategory{

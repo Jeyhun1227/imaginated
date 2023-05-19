@@ -789,6 +789,9 @@ color: #475467;
   width: 95%;
   margin-top: 15px;
 }
+.width-80per{
+  width: 80%;
+}
 
 .indiv-barchart-popup span {
   display: block;

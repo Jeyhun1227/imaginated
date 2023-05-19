@@ -8,16 +8,19 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
     const [UserRating, setUserRating] = useState(0);
     const [UserDislike, setUserDislike] = useState();
     const [UserLike, setUserLike] = useState();
-    const [selected, setSelected] = useState(UserReviewSelect[0])
+    const [selected, setSelected] = useState()
     const [UserReviewError, setUserReviewError] = useState();
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(editable){
             setUserDislike(editValues.dislike);
             setUserRating(editValues.review)
             setUserLike(editValues.like)
         }
       }, [editValues]);  
+    useEffect(() => {
+        setSelected(UserReviewSelect[0])
+    }, [UserReviewSelect])
 
   
     const SubmittedReview = async (e) => {
