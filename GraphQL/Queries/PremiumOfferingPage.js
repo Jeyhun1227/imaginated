@@ -30,6 +30,24 @@ getPremiumOfferingPage(
                 engagement
                 validation
             }
+            individual{
+              id
+              first_name
+              last_name
+              linkname
+              aka
+              subcategory
+              description
+              feature
+              imagelink
+              company
+              founder
+              link
+              location
+              category
+              avg
+              count
+            }
             premium{
                 id
                 name
@@ -42,6 +60,7 @@ getPremiumOfferingPage(
                 rank
                 avg
                 count
+                price
               }
         }
       }
