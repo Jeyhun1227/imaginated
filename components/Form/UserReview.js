@@ -10,6 +10,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
     const [UserLike, setUserLike] = useState();
     const [selected, setSelected] = useState()
     const [UserReviewError, setUserReviewError] = useState();
+    const [UserReviewSelectComp, setUserReviewSelectComp] = useState([])
 
     useEffect(() => {
         if(editable){
@@ -19,7 +20,11 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
         }
       }, [editValues]);  
     useEffect(() => {
-        setSelected(UserReviewSelect[0])
+        if(UserReviewSelect) {
+            setUserReviewSelectComp(UserReviewSelect)
+            setSelected(UserReviewSelect[0])
+
+        }
     }, [UserReviewSelect])
 
   
@@ -76,7 +81,7 @@ export default function UserReview({IndividualId, editable, editValues, UserRevi
                         leaveTo="opacity-0"
                         >
                         <Listbox.Options className="absolute z-10 w-full pl-0 mt-1 overflow-auto text-base bg-white max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" >
-                            {UserReviewSelect.map((source) => (
+                            {UserReviewSelectComp.map((source) => (
                             <Listbox.Option
                                 key={source.id}
                                 className={({ active }) =>
