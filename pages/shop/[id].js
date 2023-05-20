@@ -2,24 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useState, useRef } from "react";
 import home from '../../public/home.svg';
+import checkmark from '../../public/checkmark.png';
 import { ChevronRight } from 'react-bootstrap-icons';
 import ImageGallery from 'react-image-gallery';
-import {
-    EmailShareButton,
-    FacebookShareButton,
-    LinkedinShareButton,
-    PinterestShareButton,
-    RedditShareButton,
-    TwitterShareButton,
-    EmailIcon,
-    FacebookIcon,
-    LinkedinIcon,
-    PinterestIcon,
-    RedditIcon,
-    TwitterIcon
-  } from "react-share";
 import Head from 'next/head';
-import parse from 'html-react-parser';
 import {LOAD_PREMIUM_OFFERINGS_PAGE} from '../../GraphQL/Queries/PremiumOfferingPage';
 import {LOAD_STATIC_DIRECTORY} from '../../GraphQL/Queries/StaticPaths';
 import client from '../../components/GraphQL';
@@ -30,7 +16,7 @@ import star from '../../public/star.svg'
 import ReviewsComponent from '../../components/Person/Reviews';
 import axios from 'axios';
 
-export default function MainPremiumPage( {reviews, premium} ){
+export default function MainPremiumPage( {reviews, premium, individual} ){
     const [shareUrl, setShareUrl] = useState('');
     // const [content, setContent] = useState('');
     const [reviewAll, setreviewAll] = useState([]);
@@ -85,7 +71,6 @@ export default function MainPremiumPage( {reviews, premium} ){
       }
     
 
-    // let images = mainShop.page.image.map((e) => ({original: e, thumbnail: e}))
     return (
         <div>
             <Head>
@@ -95,47 +80,43 @@ export default function MainPremiumPage( {reviews, premium} ){
                         <div className="flex flex-row flex-wrap space-x-3">
                                 <div className="inline-flex items-center justify-center cursor-point">
                                 <Link href="/" >  
-                                <Image className="content-center h-4" width={20} height={20} src={home.src}/>
+                                <Image className="content-center h-4" width={20} height={20} src={home.src} alt='home link'/>
                                 </Link>
+                                <div className="inline-flex pointing-right"><ChevronRight/></div>
                                 </div>
 
-                                {/* <div className="text-whisper inline-block ml-2 no-underline" ><div>Lightroom Presets</div></div> */}
+                                <div className="inline-block ml-2 no-underline text-dark-blue font-semibold cursor-point">
+                                    <Link href={`/directory/${individual.category}/`}>{individual.category}</Link>
+                                    <div className="inline-flex pointing-right"><ChevronRight/></div>
+                                </div>
+                                <div className="inline-block ml-2 no-underline text-dark-blue font-semibold">
+                                    <b>Profile</b>
+                                </div>
                         </div>
                     
                     <div className="main-shop-tab">
                     <ImageGallery items={[{original: premium.imagelink}]}/>
                     <div>
-                        <h1 className="blog-header">{premium.name}</h1>
-                        <div className='margin-bottom-two margin-top-forty'>
-                        <div className='share-button'>Sharing is caring!</div>
-                            <div>
-                                <EmailShareButton url={shareUrl} className='margin-right-two'>
-                                    <EmailIcon size={40} round={false}/>
-                                </EmailShareButton>
-                                <FacebookShareButton url={shareUrl} className='margin-right-two'>
-                                    <FacebookIcon size={40} round={false}/>
-                                </FacebookShareButton>
-                                <LinkedinShareButton url={shareUrl} className='margin-right-two'>
-                                    <LinkedinIcon size={40} round={false}/>
-                                </LinkedinShareButton>
-                                <PinterestShareButton url={shareUrl} className='margin-right-two'>
-                                    <PinterestIcon size={40} round={false}/>
-                                </PinterestShareButton>
-                                <RedditShareButton url={shareUrl} className='margin-right-two'>
-                                    <RedditIcon size={40} round={false}/>
-                                </RedditShareButton >
-                                <TwitterShareButton url={shareUrl} className='margin-right-two'>
-                                    <TwitterIcon size={40} round={false}/>
-                                </TwitterShareButton>
-                            </div>
+                        <h1 className="premium-header">{premium.name}</h1>
+                        <div className='margin-top-10'>by <Link href={`/directory/person/${individual.linkname}`}>{individual.first_name + ' ' + individual.last_name}</Link></div>
+                        <div className='premium-subheader'>{premium.subheader}</div>
+                        <div className=""><button onClick={downloadButton} className='shop-download inline-block'>Buy</button>
+                        <div className='inline-block premium-description'>${premium.price}</div>
                         </div>
-                        <p>{premium.subheader}</p>
-                        <div className="shop-container"><button onClick={downloadButton} className='shop-download'>Download</button></div>
+                        <div className='margin-top-20'>
+                            <Image width={20} height={20} src={checkmark.src} alt='checkmark' className='inline-block margin-right-10'/>
+                            <div className='inline-block'>30-day money back gurantee</div>
+                        </div>
+                        <div className='margin-top-20'>
+                            <Image width={20} height={20} src={checkmark.src} alt='checkmark' className='inline-block margin-right-10'/>
+                            <div className='inline-block'>Full Lifetime Access</div>
+                        </div>
                     </div>
-                    <article className='shop-article-desc'>{premium.description}</article>
+                    <div>
+                    <div className="premium-description">Description</div>
+                    <article className='premium-description-text'>{premium.description}</article>
                     </div>
-
-
+                    </div>
 
                     <div className={"my-10"} >
                         <div>
@@ -213,7 +194,7 @@ export async function getStaticProps(context) {
 
     return {
         props: {
-            slug, reviews: getPremiumOfferingPage.reviews, premium: getPremiumOfferingPage.premium
+            slug, reviews: getPremiumOfferingPage.reviews, premium: getPremiumOfferingPage.premium, individual: getPremiumOfferingPage.individual
 
         },
     }

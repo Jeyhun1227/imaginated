@@ -539,9 +539,9 @@ export default function IndividualPageMain({Individual_values, category_values, 
                       <h3 className="">{key}</h3>
                       {/* <button className="px-4 text-sm text-center text-white truncate bg-dark-blue">View all {key} Presets</button> */}
                     </div>
-                    <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
-                    {premium_offers_types[key].map((value) => <div key={value.name} className=""><Link href={value.linkname}>
-                        <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="width-80per h-40 sm:w-64 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
+                    <div className="individual-grid-main">
+                    {premium_offers_types[key].map((value) => <div key={value.name} className="individual-grid-each"><Link href={value.linkname}>
+                        <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="h-40 sm:h-56"  width={256} height={224} onError={({ currentTarget }) => {
                           currentTarget.onerror = null; 
                           currentTarget.src=No_image.src;
                         }} />
@@ -562,7 +562,7 @@ export default function IndividualPageMain({Individual_values, category_values, 
                             <div className="text-denim">{value.avg}</div>
                             <div className="text-denim">{value.count ? `"${value.count}"`:null}</div>
                           </div>
-                        <div className="width-80per text-sm text-dim-grey">{get_description(value.description)}</div>
+                        <div className="text-sm text-dim-grey">{get_description(value.description)}</div>
                       </Link></div>)}
                       </div>
                     </div>)}
@@ -575,8 +575,8 @@ export default function IndividualPageMain({Individual_values, category_values, 
               </div>:null}
               {Object.keys(favorites_offers).map((key) => <div className="py-12 mx-0 border-b sm:mx-4 last:border-b-0 border-very-light-grey" key={key}>
                   <h3 className="pb-3">{key}</h3>
-                  <div className="grid person-flex mt-6 justify-items-center gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-16">
-                  {favorites_offers[key].map((value) => <div key={value.name} className="flex flex-col space-y-3 margin-bottom-mobile align-center-mobile">
+                  <div className="individual-grid-main">
+                  {favorites_offers[key].map((value) => <div key={value.name} className="individual-grid-each">
                       <Image src={value.imagelink? value.imagelink: No_image.src} alt={value.name} className="w-48 h-40 sm:w-64 sm:h-56"  width={256} height={224}  onError={({ currentTarget }) => {
                         currentTarget.onerror = null; 
                         currentTarget.src=No_image.src;
