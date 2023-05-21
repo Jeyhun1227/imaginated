@@ -927,19 +927,28 @@ color: #475467;
 
 #wtr-content p strong{
   font-family: Roboto, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 36px;
+}
+#wtr-content h2{
+  margin: 20px 0px;
+  font-size: 36px;
+}
+
+#wtr-content h3{
+  margin: 20px 0px;
+  font-size: 30px;
 }
 
 #wtr-content li{
   font-family: Roboto, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   list-style: disc;
 }
 
 #wtr-content p{
   font-family: Roboto, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 36px;
   overflow: hidden;
 }
