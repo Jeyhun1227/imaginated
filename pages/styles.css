@@ -1037,6 +1037,7 @@ color: #475467;
 }
 .is-right-sidebar {
   width: 30%;
+  z-index: 0;
 }
 
 .site-content{

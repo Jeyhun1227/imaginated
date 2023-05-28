@@ -23,6 +23,7 @@ import Image from 'next/image';
 import SettingsPersonsFavorite from '../components/SettingsPersons/SettingsPersonsFavorite'
 import SettingsPersonsFeature from '../components/SettingsPersons/SettingsPersonsFeature'
 import SettingsPersonsPremium from '../components/SettingsPersons/SettingsPersonsPremium'
+import SettingsPersonsVideos from '../components/SettingsPersons/SettingsPersonsVideos'
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, free_content, favorites}) {
   const {data: session} = useSession()
@@ -652,6 +653,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 {(selected.id === 2) ? <SettingsPersonsPremium getUserValues={getUserValues} category={Individual_values.category}/> : null}
                 {(selected.id === 3) ? <SettingsPersonsFeature  getUserValues={getUserValues}/> : null}
               </div>
+              <div><SettingsPersonsVideos/></div>
             </main>
         </div>
       </div>
