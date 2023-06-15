@@ -96,7 +96,6 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
   }
 
   const DeleteValueFavorite = async (delete_value, record_type) => {
-    console.log(delete_value)
     let main_id = delete_value.id;
     if(typeof main_id === 'string'){
       main_id = parseInt(delete_value.id.replace('USER_', ''))

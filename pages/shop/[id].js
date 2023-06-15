@@ -15,9 +15,12 @@ import {Rating} from '@mui/material';
 import star from '../../public/star.svg'
 import ReviewsComponent from '../../components/Person/Reviews';
 import axios from 'axios';
+import Payment_processing from '../../components/Payments/Payment_processing';
 
-export default function MainPremiumPage( {reviews, premium, individual} ){
+
+export default function MainPremiumPage( {reviews, premium, individual, productID} ){
     const [shareUrl, setShareUrl] = useState('');
+    const [alreadyOwned, setAlreadyOwned] = useState(false);
     // const [content, setContent] = useState('');
     const [reviewAll, setreviewAll] = useState([]);
     const [count_each_rating, setcount_each_rating] = useState({});
@@ -33,16 +36,15 @@ export default function MainPremiumPage( {reviews, premium, individual} ){
         setreviewAll(main_reviews_func[0])
         getUserFollowing()
     }, [premium, reviews])
+
+    const alreadyOwnedFunc = () => {
+        setAlreadyOwned(true)
+    }
     const {data: session} = useSession()
 
     const getUserFollowing = async () => {
         const getUser = await axios.post(`${window.location.origin}/api/User/GetUser/`, {id: premium.individual});
         setReviewEngagement(getUser.data.reviews_engagement)
-    }
-
-    const downloadButton = () => {
-        // console.log('mainShop.page.download: ', mainShop.page.download)
-        // window.open('https://imaginated-individual-image-public.s3.amazonaws.com/' + mainShop.page.download)
     }
 
     const reviewsFunc = () => {
@@ -61,6 +63,7 @@ export default function MainPremiumPage( {reviews, premium, individual} ){
     }
 
     const [showMoreReview, setShowMoreReview] = useState({itemsToShow: 3, expanded: false});
+    const [paymentProcessing, setPaymentProcessing] = useState(false);
 
     const reviewShowMore = () => {
         showMoreReview.itemsToShow === 3 ? (
@@ -69,7 +72,22 @@ export default function MainPremiumPage( {reviews, premium, individual} ){
           setShowMoreReview({ itemsToShow: 3, expanded: false })
         )
       }
-    
+    const buyButton = async() => {
+        if(alreadyOwned){
+            const response = await axios.post(`${window.location.origin}/api/download/purchased_downloads/`, {productID});
+            const res_date = await response.data
+            window.location.href = res_date.url;
+            // console.log('url: ', url)
+        }else{
+            setPaymentProcessing(true);
+        }
+
+    }
+
+    const paymentProcessingClose = () => {
+        setPaymentProcessing(false)
+    }
+
 
     return (
         <div>
@@ -93,14 +111,16 @@ export default function MainPremiumPage( {reviews, premium, individual} ){
                                     <b>Profile</b>
                                 </div>
                         </div>
-                    
                     <div className="main-shop-tab">
-                    <ImageGallery items={[{original: premium.imagelink}]}/>
+
+                    <Payment_processing alreadyOwnedFunc={alreadyOwnedFunc} paymentProcessing={paymentProcessing} paymentProcessingClose={paymentProcessingClose} productID={productID}/>
+
+                    <ImageGallery showFullscreenButton={false} showPlayButton={false} items={[{original: premium.imagelink}]}/>
                     <div>
                         <h1 className="premium-header">{premium.name}</h1>
                         <div className='margin-top-10'>by <Link href={`/directory/person/${individual.linkname}`}>{individual.first_name + ' ' + individual.last_name}</Link></div>
                         <div className='premium-subheader'>{premium.subheader}</div>
-                        <div className=""><button onClick={downloadButton} className='shop-download inline-block'>Buy</button>
+                        <div className=""><button onClick={buyButton} className='shop-download inline-block'>{alreadyOwned ? 'Download':'Buy'}</button>
                         <div className='inline-block premium-description'>${premium.price}</div>
                         </div>
                         <div className='margin-top-20'>
@@ -117,6 +137,7 @@ export default function MainPremiumPage( {reviews, premium, individual} ){
                     <article className='premium-description-text'>{premium.description}</article>
                     </div>
                     </div>
+
 
                     <div className={"my-10"} >
                         <div>
@@ -189,12 +210,13 @@ export async function getStaticProps(context) {
     // console.log('slug: ', slug.replace(/-/g, ' '))
     const individual_page_values = await client.query({query:LOAD_PREMIUM_OFFERINGS_PAGE, variables: { linkname: slug.replace(/-/g, ' ')}})
     const getPremiumOfferingPage = individual_page_values.data.getPremiumOfferingPage
-    // console.log('reviews: ', getPremiumOfferingPage.reviews)
+    // console.log('reviews: ', getPremiumOfferingPage)
     // console.log('premium: ', getPremiumOfferingPage.premium)
 
     return {
         props: {
-            slug, reviews: getPremiumOfferingPage.reviews, premium: getPremiumOfferingPage.premium, individual: getPremiumOfferingPage.individual
+            slug, reviews: getPremiumOfferingPage.reviews, premium: getPremiumOfferingPage.premium, individual: getPremiumOfferingPage.individual,
+            productID: getPremiumOfferingPage.premium.productid
 
         },
     }

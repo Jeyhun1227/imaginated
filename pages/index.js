@@ -20,7 +20,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IntroGif1 from '../public/introgif1.gif';
 import IntroGif2 from '../public/introgif2.gif';
 import IntroGif3 from '../public/introgif3.gif';
-
 export default function MainPage() {
   const [windowDimensions, setWindowDimensions] = useState(1000);
   const [getMainLink, setGetMainLink] = useState(0);
