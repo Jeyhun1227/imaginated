@@ -24,11 +24,19 @@ const CARD_ELEMENT_OPTIONS = {
     hidePostalCode:true,
   };
 
-  export default function CheckoutForm ({productID, prefilledCard, revertPrefillChange}){
+  const cardBrandLogos = {
+    visa: "/logos/visa-logo.png",
+    mastercard: "/logos/mastercard-logo.png",
+    amex: "/logos/amex-logo.png",
+    discover: "/logos/discover-logo.png",
+  };
+
+  export default function CheckoutForm ({productID, prefilledCard, clientSecret}){
     const inputRef = useRef(null);
     const [success, setSuccess ] = useState(false)
     const [errorValues, setErrorValues ] = useState()
     const [isLoading, setIsLoading] = useState(false);
+    const [prefillChange, setPrefillChange] = useState(false); 
 
     const stripe = useStripe()
     const elements = useElements()
@@ -121,7 +129,70 @@ const CARD_ELEMENT_OPTIONS = {
        return setSuccess(true)
     }
 
-  return (
+    const revertPrefillChange = () => {
+      setPrefillChange(false)
+    }
+
+
+    const handleSubmitPrefilled = async (event) => {
+      event.preventDefault();
+      
+      // Get the selected payment method ID
+      const selectedPaymentMethodId = prefilledCard.id;
+      
+      try {
+        // Send a request to your API to update the payment intent with the selected payment method
+        const response = await axios.post('/api/payments/update-payment-intent', {
+          paymentMethodId: selectedPaymentMethodId,
+          productID,
+          clientSecret: clientSecret
+        });
+  
+        const client_secret = await response.data.client_secret;
+  
+  
+  
+        const result = await stripe.confirmPaymentIntent(client_secret, {
+          return_url: window.location.href,
+        });
+        if(result.paymentIntent.status === 'succeeded') return window.location.reload();
+
+        if (result.paymentIntent.next_action.type === 'redirect_to_url') {
+          // Redirect the user to the URL provided in `result.next_action.redirect_to_url`
+          window.location.href = result.paymentIntent.next_action.redirect_to_url.url;
+        } 
+
+      } catch (e) {
+        if(e.message) setErrorValues(e.message)
+        // if(e) setErrorValues(e)
+        // Handle errors
+        console.error('Error updating payment intent:', e);
+      }
+    };
+
+
+    const prefilled_new_card = () => {
+      if(prefillChange) return false;
+      if(!prefilledCard) return false;
+      return true;
+    }
+
+  return (<div>
+    {prefilled_new_card() ?
+      
+      <form onSubmit={handleSubmitPrefilled}><div>
+        <h3 className='shop-checkout-text'>Checkout</h3>
+        
+        <div className='shop-card-prefill-container'>
+          <Image className='inline-block' src={cardBrandLogos[prefilledCard.brand] ? cardBrandLogos[prefilledCard.brand] : "/images/card-other.png"} alt={prefilledCard.brand} width={30} height={20} />
+          <div className='inline-block margin-left-10'>**** {prefilledCard.last4}</div>
+          <button className='shop-button-change' onClick={()=> setPrefillChange(true)}>Change</button>
+        </div>
+        <div>{errorValues}</div>
+        <div className='shop-purchase-container'>
+          <button  className='shop-purchase-button inline-block'>Purchase</button>
+        </div>
+      </div></form>:
     <form onSubmit={handleSubmit} className='shop-checkout-card'>
     {/* <Image src={Imaginated_logo.src}  alt="Imaginated Logo" className="xl:h-10 sm:h-5 md:h-7" width={160} height={40}/>   */}
     <div className='margin-bottom-10 '><h3 className='shop-checkout-text'>Checkout</h3></div>
@@ -195,8 +266,8 @@ const CARD_ELEMENT_OPTIONS = {
         <button disabled={isLoading || !stripe || !elements} className='shop-purchase-button inline-block'>Purchase</button>
         </div>
         </div>
-    </form>
-
+    </form>}
+  </div>
   );
 };
 

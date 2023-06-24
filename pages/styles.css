@@ -177,6 +177,10 @@ a{
   padding-top: 10px;
 }
 
+.padding-10{
+  padding: 10px;
+}
+
 .padding-top-15-4{
   padding-top: 8px;
 }
@@ -862,6 +866,18 @@ color: #475467;
 
 .margin-top-10{
   margin-top: 10px;
+}
+
+.font-semibold-500{
+  font-size: 500;
+}
+
+.margin-top-5{
+  margin-top: 5px;
+}
+
+.margin-tb15{
+  margin: 15px 0 ;
 }
 
 .margin-top-20{

@@ -17,7 +17,7 @@ const session = await getSessionFromCookie({req});
     const { paymentMethodId, clientSecret, productID } = req.body;
     
     try {
-        var customerValueStripe = await PoolConnection.query('SELECT DISTINCT paymentintentid, status FROM user_purchase_charges WHERE userid = $1 and productid = $2and active_flag=true', [session.user.id, productID])
+        var customerValueStripe = await PoolConnection.query('SELECT DISTINCT paymentintentid, status FROM user_purchase_charges WHERE userid = $1 and productid = $2 and active_flag=true', [session.user.id, productID])
         if(customerValueStripe.rows.length === 0 ) return res.status(500).json({ error: 'No paymentintent found. Refresh Browser.' });
         let strip_customer = customerValueStripe.rows[0]
         if(strip_customer.status === 'Approved') return res.status(500).json({ error: 'Item already purchased' });
@@ -30,12 +30,11 @@ const session = await getSessionFromCookie({req});
         });
         
         // Confirm the payment intent
-        const confirmedPaymentIntent = await stripe.paymentIntents.confirm(paymentIntent.id);
-        var productidUpdate = await PoolConnection.query("UPDATE user_purchase_charges set active_flag = false WHERE productid = $1;", [productID]);
+        // var productidUpdate = await PoolConnection.query("UPDATE user_purchase_charges set active_flag = false WHERE productid = $1;", [productID]);
 
-        var insert_values = await PoolConnection.query("UPDATE user_purchase_charges set status = 'Approved', active_flag=true WHERE paymentintentid = $1;", [paymentintentid]);
+        // var insert_values = await PoolConnection.query("UPDATE user_purchase_charges set status = 'Approved', active_flag=true WHERE paymentintentid = $1;", [paymentintentid]);
 
-        res.status(200).json({ success: true, paymentIntent: confirmedPaymentIntent });
+        res.status(200).json({ success: true, client_secret: paymentIntent.client_secret });
     } catch (error) {
         console.error('Error confirming payment intent:', error);
         res.status(500).json({ error: error });

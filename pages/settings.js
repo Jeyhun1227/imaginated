@@ -12,17 +12,20 @@ export default function Settings() {
   const {data} = useSession()
   const [windowType, setWindowType] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const [purchases, setPurchases] = useState([]);
 
   const get_setup = async () => {
     if(data === null) return window.location.href = "/directory/login/";
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     var type = 0;
-    var typeValues = ['Following', 'Ratings', 'Settings'];
+    var typeValues = ['Following', 'Purchases', 'Ratings', 'Settings'];
     if(urlParams.get('type')){
         let urlparamtype = urlParams.get('type');
         type = typeValues.findIndex((e) => e === urlparamtype)
         type = type ? type: 0;
+        console.log('TYPE: ', type)
+        if(type === -1) return window.location.href = "/directory/";
         setWindowType(type);  
     }
     let UserChanges = await axios.post('/api/User/GetUser/', {})
@@ -34,6 +37,7 @@ export default function Settings() {
     setUserFollow(UserChanges.data.user_follow) 
     setUser(UserChanges.data.user)
     setReviews(UserChanges.data.reviews)
+    setPurchases(UserChanges.data.purchases)
   }
   useEffect( () => {
     get_setup()
@@ -52,7 +56,7 @@ export default function Settings() {
       <div>
       <HeroNoBtn setLargeTextTop={"User Profile"} setLargeTextBottom={" "} setSmallText={" "}/>
       <SettingsPageMobile reviews={reviews} user={user} userFollow={userFollow} type={windowType}/>
-      <SettingsPage reviews={reviews} user={user} userFollow={userFollow} type={windowType}/>
+      <SettingsPage reviews={reviews} user={user} userFollow={userFollow} type={windowType} purchases={purchases}/>
       </div>
       {/* :null} */}
     </div>

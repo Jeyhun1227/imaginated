@@ -37,7 +37,7 @@ export default async function handler(req, res) {
             const customer_value = customerlist.rows[0]  
             customerid = customer_value.customerid
             // INCASE THE ITEM IS ALREADY PURCHASED BY USER
-            var user_product_purchase = await PoolConnection.query("SELECT DISTINCT customerid, status, paymentintentid FROM user_purchase_charges WHERE userid = $1 and productid = $2 and status = 'Approved' and active_flag = true", [session.user.id, productID])
+            var user_product_purchase = await PoolConnection.query("SELECT DISTINCT customerid, status, paymentintentid FROM user_purchase_charges WHERE userid = $1 and productid = $2 and active_flag = true", [session.user.id, productID])
             if(user_product_purchase.rows.length > 0){
                 const user_product_purchase_value = user_product_purchase.rows[0];
                 if(user_product_purchase_value.status === 'Approved') return res.status(200).json({alreadyOwned:true});

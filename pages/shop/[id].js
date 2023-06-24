@@ -19,6 +19,7 @@ import Payment_processing from '../../components/Payments/Payment_processing';
 
 
 export default function MainPremiumPage( {reviews, premium, individual, productID} ){
+
     const [shareUrl, setShareUrl] = useState('');
     const [alreadyOwned, setAlreadyOwned] = useState(false);
     // const [content, setContent] = useState('');
@@ -73,6 +74,9 @@ export default function MainPremiumPage( {reviews, premium, individual, productI
         )
       }
     const buyButton = async() => {
+        if(!session){
+            return window.location.href = `/directory/login?return_url=${window.location.pathname}`
+        }
         if(alreadyOwned){
             const response = await axios.post(`${window.location.origin}/api/download/purchased_downloads/`, {productID});
             const res_date = await response.data
@@ -107,8 +111,8 @@ export default function MainPremiumPage( {reviews, premium, individual, productI
                                     <Link href={`/directory/${individual.category}/`}>{individual.category}</Link>
                                     <div className="inline-flex pointing-right"><ChevronRight/></div>
                                 </div>
-                                <div className="inline-block ml-2 no-underline text-dark-blue font-semibold">
-                                    <b>Profile</b>
+                                <div className="inline-block ml-2 no-underline text-dark-blue font-semibold-500">
+                                    <b>Product</b>
                                 </div>
                         </div>
                     <div className="main-shop-tab">

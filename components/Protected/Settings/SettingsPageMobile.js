@@ -4,7 +4,8 @@ import HeroNoBtn from "../../Hero/HeroNoBtn";
 import SettingsFollowing from "./SettingsFollowing"
 import SettingsRatings from "./SettingsRatings";
 import SettingsSettings from "./SettingsSettings";
-import { Star, Gear, BoxArrowInRight, ChevronDown, CheckIcon } from 'react-bootstrap-icons';
+import SettingsPurchases from './SettingsPurchases'
+import { Star, Gear, BoxArrowInRight, ChevronDown, CheckIcon, CurrencyDollar } from 'react-bootstrap-icons';
 import { Listbox, Transition } from '@headlessui/react'
 
 export default function SettingsPageMobile(props) {
@@ -29,6 +30,12 @@ export default function SettingsPageMobile(props) {
                     <path id="Layer" fillRule="evenodd" className="" d="m13.5 4.9c1.4-1.4 4.9 1.1 0 4.3-4.9-3.2-1.4-5.7 0-4.3z"/>
                 </svg> , 
             component:<SettingsFollowing userFollow={userFollow}/>
+        },
+        {   
+            id: 1, 
+            title: 'Purchases', 
+            icon: <CurrencyDollar className="hover:fill-black"/>, 
+            component:<SettingsPurchases purchases={props.purchases}/>
         },
         {   
             id: 2, 
