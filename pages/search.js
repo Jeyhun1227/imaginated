@@ -9,10 +9,13 @@ import styles from '../styles/Home.module.css';
 import SearchDisplayVideos from '../components/search/SearchDisplayVideos'
 import Star from '../public/star.svg';
 import {ColorRing} from 'react-loader-spinner'
+import client from '../components/GraphQL';
+import {SEARCH_QUERY} from '../GraphQL/Queries/SearchQuery';
+
 
 export default function SearchFunction() {
     // const [userFollow, setUserFollow] = useState([])
-    const [youtubeChannel, setYoutubeChannel] = useState([]);
+    const [youtubeChannels, setYoutubeChannels] = useState([]);
     const [youtubeKeywords, setYoutubeKeywords] = useState([]);
     const [youtubeSubs, setYoutubeSubs] = useState([]);
     const [FormDetails, setFormDetails] = useState('');
@@ -23,18 +26,21 @@ export default function SearchFunction() {
 
     const resetValues = () => {
         setFormDetails('No Results found');
-        setYoutubeChannel([])
+        setYoutubeChannels([])
         setYoutubeKeywords([])
         setYoutubeSubs([])
         setPremiumOfferings([])
     }
     const getChannelValues = async () =>{
-        const res = await axios.post(`/api/search/search`, { keyword: query });
-        const data = res.data;
-        if(data.youtubeChannel.length === 0) return resetValues()
-        let mainSumValue = data.youtubeChannel.map((e) => e.match_rate).reduce((e, prev) => e + prev, 0)
-        let mainYoutubeChannel = data.youtubeChannel.map((e) => ({...e, match_rate: Math.round((e.match_rate / mainSumValue) * 100)}))
-        setYoutubeChannel(mainYoutubeChannel)
+        const res = await client.query({query:SEARCH_QUERY, variables: { keyword: query, category: 'Photography' }})
+        // const res = await axios.post(`/api/search/search`, { keyword: query });
+
+        const data = res.data.getSearchMainBar;
+        console.log('getChannelValues: ', data)
+        if(data.youtubeChannels.length === 0) return resetValues()
+        let mainSumValue = data.youtubeChannels.map((e) => e.match_rate).reduce((e, prev) => e + prev, 0)
+        let mainYoutubeChannels = data.youtubeChannels.map((e) => ({...e, match_rate: Math.round((e.match_rate / mainSumValue) * 100)}))
+        setYoutubeChannels(mainYoutubeChannels)
         setYoutubeKeywords(data.youtubeKeywords)
         setYoutubeSubs(data.youtubeSubs)
         setPremiumOfferings(data.premiumOfferings)
@@ -61,7 +67,7 @@ export default function SearchFunction() {
                 <div className="items-center px-4 sm:px-0 sm:col-span-4 min-height-200">
                 <div className="items-center">
                     {FormDetails ? <div className="text-xl font-semibold truncate md:text-3xl mt-5">{FormDetails}</div>:null}
-                    {!FormDetails && youtubeChannel.length === 0 ? <div  className="inline-block align-content-center  mt-5"><ColorRing
+                    {!FormDetails && youtubeChannels.length === 0 ? <div  className="inline-block align-content-center  mt-5"><ColorRing
                             visible={true}
                             height="120"
                             width="120"
@@ -73,7 +79,7 @@ export default function SearchFunction() {
                         /></div>:null
                     }
                     {
-                        youtubeChannel.map((yc) => 
+                        youtubeChannels.map((yc) => 
                         <div key={yc.id} className="padding-tb-50 border-b border-very-light-grey ">
               
                             <div className="">
