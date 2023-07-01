@@ -55,7 +55,7 @@ export default function Settings() {
       {/* {(data)? */}
       <div>
       <HeroNoBtn setLargeTextTop={"User Profile"} setLargeTextBottom={" "} setSmallText={" "}/>
-      <SettingsPageMobile reviews={reviews} user={user} userFollow={userFollow} type={windowType}/>
+      <SettingsPageMobile reviews={reviews} user={user} userFollow={userFollow} type={windowType} purchases={purchases}/>
       <SettingsPage reviews={reviews} user={user} userFollow={userFollow} type={windowType} purchases={purchases}/>
       </div>
       {/* :null} */}

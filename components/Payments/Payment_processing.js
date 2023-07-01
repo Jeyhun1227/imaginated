@@ -41,11 +41,7 @@ export default function Payment_processing({paymentProcessing, paymentProcessing
   useEffect(() => {
     setProcessPayments(paymentProcessing)
   }, [paymentProcessing]);
-  const create_account = async () => {
-    let stsub = await  axios.post('/api/payments/account_creation', 
-    {  
-    });
-  };
+
   // const openModal = () => {
   //   setProcessPayments(true);
   // }

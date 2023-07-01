@@ -12,9 +12,20 @@ export default function SettingsPurchases({purchases}) {
     const [processRefund, setProcessRefund] = useState(false);
     const [refundTitle, setRefundTitle] = useState();
     const [refundProductId, setRefundProductId] = useState();
-    const handleSubmitRefund = (e) => {
+    const [error, setError] = useState();
+    
+    const handleSubmitRefund = async (e) => {
         e.preventDefault();
         console.log('e.target.Address.value,: ', e.target.reason.value, refundProductId, refundTitle)
+        const refund_request = await axios.post("/api/payments/refund-request/", {
+            refund_reason: e.target.reason.value,
+            productid: refundProductId,
+        })
+        let refund_data = await refund_request.data;
+        if(refund_data.error) setError(refund_data.error)
+        closeModal()
+        setRefundTitle()
+        setRefundProductId()
     }
 
     const modalStyles = {
@@ -56,6 +67,7 @@ export default function SettingsPurchases({purchases}) {
                     className="margin-bottom-10 relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Refund Reason"
                     />
+                    <div>{error}</div>
                     <div className='shop-purchase-container'>
                         <button className='shop-purchase-button inline-block'>Submit</button>
                     </div>
@@ -64,15 +76,15 @@ export default function SettingsPurchases({purchases}) {
           </Modal>
         <div className="flex flex-col space-y-6">
 
-            <Disclosure as="div" className="border border-whisper lg:h-full">
-            {({ open }) => (
+            <div as="div" className="border border-whisper ">
+
                 <>
                 <div className="p-3">
                     
-                    <Disclosure.Button as="div" className="flex items-center justify-between w-full">
+                    <div as="div" className="flex items-center justify-between w-full">
                     <h4 className="mb-0">Purchases</h4>
 
-                    </Disclosure.Button>
+                    </div>
                     <ul className="pl-0 divide-y divide-whisper">
                         <li className="flex py-3" >
                             <div className="flex flex-col flex-1 space-y-2">
@@ -87,8 +99,8 @@ export default function SettingsPurchases({purchases}) {
                     </ul>
 
                 </div>
-                </>)}
-            </Disclosure>
+                </>
+            </div>
         </div> 
         </div>
 

@@ -1,10 +1,11 @@
-import { getSession } from "next-auth/react";
 const PoolConnection = require('../postgressql')
 import nc from "next-connect";
 const path = require('path');
 const { S3Client } = require('@aws-sdk/client-s3');
 const multer = require('multer'),
-multerS3 = require('multer-s3')
+multerS3 = require('multer-s3');
+import { getSessionFromCookie } from '../auth_token_response';
+
 
 const handler = nc({  onError: (err, req, res, next) => {
 
@@ -48,9 +49,9 @@ var upload = multer({
         // SET / MODIFY ORIGINAL FILE NAME
         key: async function (req, file, cb) {
 // path.extname(file.originalname).toLowerCase()
-            const session = await getSession({ req })
+            const session = await getSessionFromCookie({ req })
             console.log('file: ', file)
-            cb(null, 'user-' + session.id + path.extname(file.originalname)); //set unique file name if you wise using Date.toISOString()
+            cb(null, 'user-' + session.user.id + path.extname(file.originalname)); //set unique file name if you wise using Date.toISOString()
 
         }
     }),
@@ -59,7 +60,7 @@ var upload = multer({
     // FILTER OPTIONS LIKE VALIDATING FILE EXTENSION
     fileFilter: async function(req, file, cb) {
 
-        const session = await getSession({ req })
+      const session = await getSessionFromCookie({ req })
 
         if(!session) return cb("Error: you must be logged in first!");
         const filetypes = /jpeg|jpg|png|pdf/;
@@ -79,9 +80,10 @@ var upload = multer({
 let uploadFile = upload.single("Image");
 handler.use(uploadFile);
 handler.post(async (req, res) => {
-    const session = await getSession({ req })
+  const session = await getSessionFromCookie({ req })
 
-    var user_updated = await PoolConnection.query('UPDATE "User" SET image = $1 WHERE id = $2', ['https://imaginated-user-images-public.s3.amazonaws.com/user-' + session.id + path.extname(req.file.originalname), session.id])
+
+    var user_updated = await PoolConnection.query('UPDATE "User" SET image = $1 WHERE id = $2', ['https://imaginated-user-images-public.s3.amazonaws.com/user-' + session.user.id + path.extname(req.file.originalname), session.user.id])
 // https://imaginated-user-images-public.s3.amazonaws.com/ID-32220502-d874-4bda-bb95-34c1cf232885
   // console.log("req.individual: ", req.body.individual);
 // 

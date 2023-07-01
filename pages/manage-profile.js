@@ -23,7 +23,8 @@ import Image from 'next/image';
 import SettingsPersonsFavorite from '../components/SettingsPersons/SettingsPersonsFavorite'
 import SettingsPersonsFeature from '../components/SettingsPersons/SettingsPersonsFeature'
 import SettingsPersonsPremium from '../components/SettingsPersons/SettingsPersonsPremium'
-import SettingsPersonsVideos from '../components/SettingsPersons/SettingsPersonsVideos'
+import Stripe_logo from '../public/logos/stripe.png'
+// import SettingsPersonsVideos from '../components/SettingsPersons/SettingsPersonsVideos'
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, free_content, favorites}) {
   const {data: session} = useSession()
@@ -399,6 +400,14 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
     return 'Submit for Approval'
 
   }
+  const create_account = async () => {
+    let account_creation_req = await  axios.post('/api/payments/account_creation/', 
+    {  
+    });
+    let account_url = await account_creation_req.data;
+    return window.location.href = account_url.url
+
+  };
 
   return (
     <div>
@@ -474,8 +483,10 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
 
               <div ref={headerSection} className="sticky top-0 z-50 space-x-3 bg-white border-b flex-nowrap border-very-light-grey padding-left-20 z-index-5">
                 <div className='width-max-500 center-all'>
-                  {(getApproval() !== 'Save Changes first') ? <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2" onClick={SubmitChanges}>{getApproval()}</button>:null}
-                  <button className="relative flex justify-center px-4 py-2 text-white border border-transparent text-med bg-dark-blue group  inline-block" onClick={FreeSaveChanges}>{ changeNeeded() ? 'Save Changes': 'Up to Date!'}</button>
+                <div className="relative flex justify-center px-4 bg-white-smoke text-med group inline-block margin-2 cursor-point margin-top-20" onClick={create_account}>Connect Stripe <Image src={Stripe_logo} width={42} height={42} alt='stripe' className='inline-block'/></div>
+
+                  {(getApproval() !== 'Save Changes first') && <button className="relative flex justify-center px-4 py-2 bg-white-smoke text-med group inline-block margin-2 margin-top-20" onClick={SubmitChanges}>{getApproval()}</button>}
+                  <button className="relative flex justify-center px-4 py-2 text-white border border-transparent text-med bg-dark-blue group margin-top-20 inline-block" onClick={FreeSaveChanges}>{ changeNeeded() ? 'Save Changes': 'Up to Date!'}</button>
                 </div>
                 <div>
                   <div  onClick={(e) => {handleClick(aboutSection); chanUrlType('about');}} className={`cursor-pointer inline-block mt-3.5 pb-3.5 ${visibleSection === "about" ? "margin-2 md:mr-12 border-b border-black" : "md:mr-12 margin-2" }`}>
@@ -652,7 +663,7 @@ export default function IndividualPageMain({Individual_values, premium_offers, f
                 {(selected.id === 2) ? <SettingsPersonsPremium getUserValues={getUserValues} category={Individual_values.category}/> : null}
                 {(selected.id === 3) ? <SettingsPersonsFeature  getUserValues={getUserValues}/> : null}
               </div>
-              <div><SettingsPersonsVideos/></div>
+              {/* <div><SettingsPersonsVideos/></div> */}
             </main>
         </div>
       </div>

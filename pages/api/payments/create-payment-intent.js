@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     try {
         var user = await PoolConnection.query('SELECT DISTINCT * FROM "User" WHERE ID = $1', [session.user.id])
         var user_val = user.rows[0]
-        var customerlist = await PoolConnection.query('SELECT DISTINCT customerid FROM user_purchase_charges WHERE userid = $1 AND active_flag = true', [session.user.id])
+        var customerlist = await PoolConnection.query('SELECT DISTINCT customerid FROM user_purchase_charges WHERE userid = $1', [session.user.id])
         // console.log('customerlist.rows: ', customerlist.rows)
         var customerid = null;
         // console.log('customerlist.rows: ', customerlist.rows)
