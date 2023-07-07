@@ -15,7 +15,10 @@ import {PlayFill} from 'react-bootstrap-icons';
 import axios from 'axios';
 import HorizontalStackedBarChart from './BarChart';
 import YoutubePlayButton from '../../public/youtube-play-button.svg';
-import hex_colors_list from '../Colors/HexColorSub.json'
+import hex_colors_list from '../Colors/HexColorSub.json';
+import client from '../../components/GraphQL';
+import {SEARCH_INDIVIDUAL_QUERY} from '../../GraphQL/Queries/SearchQuery';
+
 
 export default function WordChart({wordChartIndividual, width, individual, Youtube_free_content, Youtube_free_offers, Youtube_name, Youtube_link}) {
     const hex_colors = { 100: "#214499", 1000: "#215151", 1100: "#215599", 21000: "#215950", 41000: "#215d99", 61000: "#216150", 81000: "#216599",
@@ -140,6 +143,7 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
 
     }
     const getMainQuery = async (query, videoid) => {
+      console.log('getMainQuery: ', query)
       let main_list = await getWordIndividual({value: query, param: true, videoid})
       if(main_list.length === 0) return getVideoId(null,'failed to find a match');
       let {parent, sub_bucket} = main_list[0];
@@ -185,11 +189,14 @@ export default function WordChart({wordChartIndividual, width, individual, Youtu
         return free_content_val
     }
     const getWordIndividual = async (query) => {
-      let youtubeKeywords = await axios.post(`${window.location.origin}/api/WordCloud/search/`, {query: query.value, videoid: query.videoid, individual, query_param: query.param})
+      let youtubeKeywords = await client.query({query:SEARCH_INDIVIDUAL_QUERY, variables: {query: query.value, videoid: query.videoid, individual, query_param: query.param}})
+      youtubeKeywords = youtubeKeywords.data.queryIndividualSearch
+      // let youtubeKeywords = await axios.post(`${window.location.origin}/api/WordCloud/search/`, {query: query.value, videoid: query.videoid, individual, query_param: query.param})
       // console.log('youtubeKeywords: ', youtubeKeywords)
       // let youtube_val = turnArrayIntoNestedArrayOf2(youtubeKeywords.data.indivudal_val)
       // setYoutubeKeywordsVal(youtube_val)
-      let currentList =  getCurrentList(youtubeKeywords.data.indivudal_val)
+      // console.log('youtubeKeywords: ', youtubeKeywords)
+      let currentList =  getCurrentList(youtubeKeywords.individualVal)
       // console.log('currentList: ', currentList)
       return currentList
       // if(!initialRun) setInitialRun(true)

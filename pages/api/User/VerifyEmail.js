@@ -3,6 +3,7 @@ const PoolConnection = require('../postgressql')
 import SendInitialEmail from './Email/CreateEmail';
 var jwt = require('jsonwebtoken');
 
+const { environment } = process.env;
 
 export default async (req, res) => {
   const session = await getSession({ req })
@@ -19,7 +20,7 @@ export default async (req, res) => {
             let signed_url = jwt.sign({
                 email: session.user.email,
                 userid: session.id
-              }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
+              }, process.env[`JWT_SECRET_KEY_${environment}`], { expiresIn: '30m' });
             // console.log(session)
             await SendInitialEmail(session.user.name, session.user.email, `https://www.imaginated.com/verification?token=${signed_url}`)
             let user_sent = await PoolConnection.query('UPDATE "USER_CUSTOM" SET email_sent = email_sent + 1, last_sent = CURRENT_TIMESTAMP WHERE userid = $1;', [session.id])
