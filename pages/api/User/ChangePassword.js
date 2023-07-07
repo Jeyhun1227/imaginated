@@ -3,7 +3,8 @@ import SendInitialEmail from './Email/CreateEmail';
 var jwt = require('jsonwebtoken');
 const yup =  require('yup');
 import bcrypt from 'bcryptjs';
-import { signIn, signOut, useSession } from "next-auth/react";
+
+const { environment } = process.env;
 
 export default async (req, res) => {
     if (req.method === 'POST') {
@@ -14,7 +15,7 @@ export default async (req, res) => {
                   .min(6, 'password must be at least 6 characters')
                   .max(255, 'password is at most 255 characters')
             }); 
-            const validation = jwt.verify(req.body.token, process.env.JWT_SECRET_KEY)   
+            const validation = jwt.verify(req.body.token, process.env[`JWT_SECRET_KEY_${environment}`])   
             try {
                 await schema.validate({password: req.body.password}, { abortEarly: false });
             } catch (err) {
