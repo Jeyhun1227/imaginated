@@ -3,7 +3,6 @@ import {getSessionFromCookie} from '../auth_token_response'
 const PoolConnection = require('../postgressql')
 const AWS = require('aws-sdk');
 
-const stripe = new Stripe('sk_test_51N8GfXHnVIn1RPeHYUwWGcfDsBtSBnCaNieoomEJ5MXZU2DOBsswU2Z9HQlIa5L0RYVSnaz600XXGrJgeYR90zVO00kaavxaYi');
 AWS.config.update({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,

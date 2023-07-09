@@ -7,9 +7,10 @@ import Modal from 'react-modal';
 import Image from 'next/image'
 import { useStripe } from "@stripe/react-stripe-js"
 
-const stripePromise = loadStripe("pk_test_51N8GfXHnVIn1RPeHqNoj7E4egzeS6pNGaugcuwqtRg3Kg1EbM83ntHgRIdNkCgKc7AAh9EhMAlXDXV0q7sb81p9Y00FKYloLNm");
+const stripePromise = loadStripe("pk_live_51N8GfXHnVIn1RPeHiCE2KbUvyLrycoVqwiUWF5JgkwVADMvkQqz7deVcXQP9xSAAIB9cTV3r7CDdViXouiWtoF2z00tcPDh0HX");
 
-
+// pk_live_51N8GfXHnVIn1RPeHiCE2KbUvyLrycoVqwiUWF5JgkwVADMvkQqz7deVcXQP9xSAAIB9cTV3r7CDdViXouiWtoF2z00tcPDh0HX
+// pk_test_51N8GfXHnVIn1RPeHqNoj7E4egzeS6pNGaugcuwqtRg3Kg1EbM83ntHgRIdNkCgKc7AAh9EhMAlXDXV0q7sb81p9Y00FKYloLNm
 export default function Payment_processing({paymentProcessing, paymentProcessingClose, alreadyOwnedFunc, productID}) {
   const [processPayments, setProcessPayments] = useState(false);
   const [ clientSecret, setClientSecret ] = useState();

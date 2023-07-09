@@ -1,7 +1,7 @@
-const stripe = require('stripe')('sk_test_51N8GfXHnVIn1RPeHYUwWGcfDsBtSBnCaNieoomEJ5MXZU2DOBsswU2Z9HQlIa5L0RYVSnaz600XXGrJgeYR90zVO00kaavxaYi');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 import {getSessionFromCookie} from '../auth_token_response'
 const PoolConnection = require('../postgressql')
-
+// sk_test_51N8GfXHnVIn1RPeHYUwWGcfDsBtSBnCaNieoomEJ5MXZU2DOBsswU2Z9HQlIa5L0RYVSnaz600XXGrJgeYR90zVO00kaavxaYi
 
 export default async (req, res) => {
     const session = await getSessionFromCookie({req});

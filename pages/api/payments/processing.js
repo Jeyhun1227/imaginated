@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import {getSessionFromCookie} from '../auth_token_response'
 // const PoolConnection = require('../postgressql')
 
-// const stripe = new Stripe('sk_test_51N8GfXHnVIn1RPeHYUwWGcfDsBtSBnCaNieoomEJ5MXZU2DOBsswU2Z9HQlIa5L0RYVSnaz600XXGrJgeYR90zVO00kaavxaYi');
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   res.status(200).end();
