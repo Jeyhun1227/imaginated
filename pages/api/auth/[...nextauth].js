@@ -53,7 +53,15 @@ export default (req, res) =>{
     debug: process.env.NODE_ENV === "development",
     secret: process.env[`AUTH_SECRET_${environment}`],
     callbacks: {
-      jwt: ({ token, user }) => {
+      jwt: async ({ token, user, isNewUser }) => {
+        // console.log('isNewUser: ', isNewUser, user)
+
+        if (isNewUser) {
+          const user_info_query = await PoolConnection.query('SELECT name, email FROM "User" WHERE "id" = $1', [user.id])
+          const user_info = user_info_query.rows[0]
+          axios.post('https://api.convertkit.com/v3/forms/5288199/subscribe', {api_key: process.env.CONVERTKIT_API_KEY, email: user_info.email, first_name: user_info.name.split(' ')[0]})
+          
+        }
         // first time jwt callback is run, user object is available
         // console.log("JWT: ", 'token: ', token, 'user: ', user)
         if (user) {

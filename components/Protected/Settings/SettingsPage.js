@@ -2,7 +2,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import SettingsFollowing from "./SettingsFollowing"
 import SettingsRatings from "./SettingsRatings";
 import SettingsSettings from "./SettingsSettings";
-import { Star, Gear, BoxArrowInRight, CardImage } from 'react-bootstrap-icons';
+import SettingsPurchases from './SettingsPurchases'
+import { Star, Gear, BoxArrowInRight, CardImage, CurrencyDollar } from 'react-bootstrap-icons';
 import { Tab } from '@headlessui/react'
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
@@ -38,10 +39,14 @@ export default function SettingsPage(props) {
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Following</Tab>
                             </li>
                             <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => changeType(1)}>
+                                <CurrencyDollar/>
+                                <Tab as="p" className="mb-0.5 text-base font-medium">Purchases</Tab>
+                            </li>
+                            <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => changeType(2)}>
                                 <Star className='fill-black'/>
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Ratings</Tab>
                             </li>
-                            <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => changeType(2)}>
+                            <li className='flex items-center py-1 pl-3 space-x-3 cursor-pointer sm:pr-auto lg:mr-0 hover:bg-dark-blue hover:text-white' onClick={() => changeType(3)}>
                                 <Gear/>
                                 <Tab as="p" className="mb-0.5 text-base font-medium">Settings</Tab>
                             </li>
@@ -58,6 +63,9 @@ export default function SettingsPage(props) {
                     <Tab.Panels as="div" className="lg:col-span-3">
                             <Tab.Panel as="div">
                                 <SettingsFollowing userFollow={props.userFollow}/>
+                            </Tab.Panel>
+                            <Tab.Panel as="div" className="">
+                                <SettingsPurchases purchases={props.purchases}/>
                             </Tab.Panel>
                             <Tab.Panel as="div" className="">
                                 <SettingsRatings reviews={props.reviews}/>

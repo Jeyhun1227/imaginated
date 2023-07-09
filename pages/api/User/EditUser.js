@@ -1,15 +1,15 @@
-import { getSession, signOut } from "next-auth/react";
 const PoolConnection = require('../postgressql')
 import PasswordChanged from './Email/PasswordChanged';
 import NewEmailUser from './Email/NewEmailUser';
 import bcrypt from 'bcryptjs';
 const yup =  require('yup');
 var jwt = require('jsonwebtoken');
+import { getSessionFromCookie } from '../auth_token_response';
 
 const { environment } = process.env;
 
 export default async (req, res) => {
-  const session = await getSession({ req })
+  const session = await getSessionFromCookie({ req })
     if (req.method === 'POST') {
         if (session) {
             var user_custom = await PoolConnection.query('SELECT DISTINCT * FROM "USER_CUSTOM" WHERE USERID = $1', [session.id])

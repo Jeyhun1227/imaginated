@@ -61,6 +61,7 @@ getPremiumOfferingPage(
                 avg
                 count
                 price
+                productid
               }
         }
       }
