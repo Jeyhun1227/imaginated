@@ -10,6 +10,7 @@ const PoolConnection = require('../postgressql')
 import prisma from '../../../lib/prisma.ts';
 // const prisma = new PrismaClient();
 
+const { environment } = process.env;
 
 export default (req, res) =>{
 
@@ -50,7 +51,7 @@ export default (req, res) =>{
       })
     ],
     debug: process.env.NODE_ENV === "development",
-    secret: process.env.AUTH_SECRET,
+    secret: process.env[`AUTH_SECRET_${environment}`],
     callbacks: {
       jwt: async ({ token, user, isNewUser }) => {
         // console.log('isNewUser: ', isNewUser, user)
@@ -81,10 +82,10 @@ export default (req, res) =>{
     session: {
       strategy: 'jwt',
     },
-    secret: process.env.JWT_SECRET,
+    secret: process.env[`JWT_SECRET_${environment}`],
 
     jwt: {
-      secret: process.env.JWT_SECRET,
+      secret: process.env[`JWT_SECRET_${environment}`],
     },
     adapter: PrismaAdapter(prisma),
     pages: {

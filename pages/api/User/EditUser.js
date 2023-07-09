@@ -6,6 +6,7 @@ const yup =  require('yup');
 var jwt = require('jsonwebtoken');
 import { getSessionFromCookie } from '../auth_token_response';
 
+const { environment } = process.env;
 
 export default async (req, res) => {
   const session = await getSessionFromCookie({ req })
@@ -53,7 +54,7 @@ export default async (req, res) => {
                 let signed_url = jwt.sign({
                     email: session.user.email,
                     userid: session.id
-                  }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
+                  }, process.env[`JWT_SECRET_KEY_${environment}`], { expiresIn: '30m' });
 
                 await NewEmailUser(session.user.name, req.body.email, `https://www.imaginated.com/verification?token=${signed_url}`)
                 var user_changed = await PoolConnection.query('UPDATE "User" SET email = $1, VERIFIED = TRUE WHERE id = $2', [req.body.email, session.id]);
@@ -84,7 +85,7 @@ export default async (req, res) => {
                 let signed_url = jwt.sign({
                     email: session.user.email,
                     userid: session.id
-                }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
+                }, process.env[`JWT_SECRET_KEY_${environment}`], { expiresIn: '15m' });
 
                 const hashedPassword = bcrypt.hashSync(req.body.passwordnew, 10);
                 // const match = await bcrypt.compare(req.body.passwordnew, hashedPassword);
