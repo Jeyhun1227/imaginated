@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 const yup =  require('yup');
 var jwt = require('jsonwebtoken');
 
+const { environment } = process.env;
 
 export default async (req, res) => {
     if (req.method === 'POST') {
@@ -34,7 +35,7 @@ export default async (req, res) => {
             let signed_url = jwt.sign({
                 email: req.body.email,
                 userid: user_custom.userid
-                }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
+                }, process.env[`JWT_SECRET_KEY_${environment}`], { expiresIn: '30m' });
 
             await SendPasswordEmail(req.body.email, `https://www.imaginated.com/passwordreset?token=${signed_url}`)
             

@@ -24,6 +24,7 @@ import SettingsPersonsFavorite from '../components/SettingsPersons/SettingsPerso
 import SettingsPersonsFeature from '../components/SettingsPersons/SettingsPersonsFeature'
 import SettingsPersonsPremium from '../components/SettingsPersons/SettingsPersonsPremium'
 import Stripe_logo from '../public/logos/stripe.png'
+
 // import SettingsPersonsVideos from '../components/SettingsPersons/SettingsPersonsVideos'
 
 export default function IndividualPageMain({Individual_values, premium_offers, free_offers, free_content, favorites}) {
