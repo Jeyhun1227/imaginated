@@ -6,7 +6,6 @@ import parse, { domToReact } from 'html-react-parser';
 import YouTube from 'react-youtube';
 import Head from 'next/head';
 import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
-import { JSDOM }  from "jsdom";
 
 
 import {
@@ -225,19 +224,21 @@ export async function getStaticProps(context) {
     let metadata_raw = await axios.get('https://wordpress.imaginated.com/wp-json/rankmath/v1/getHead?url=https://wordpress.imaginated.com/blog/' + context.params.id)
     let metadata = metadata_raw.data.head;
     let BannerText = null;
+    // console.log('metadata: ', metadata)
     if(metadata){
       // GET BANNER INTERENCE
-      const htmlDocument = new JSDOM(metadata);
-      const scriptElement = htmlDocument.window.document.querySelector("script");
-      // extract the JSON data from the script element
-      const jsonText = scriptElement.textContent.trim();
-
-      // parse the JSON data into a JavaScript object
-      let jsonObject = null;
-      if(jsonText){
-        jsonObject = JSON.parse(jsonText);
-        const BannerInterence = jsonObject['@graph'].find((e) => e['@type'] === 'BlogPosting')
-        if(BannerInterence && BannerInterence.keywords) BannerText = BannerInterence.keywords;
+      const jsonRegex = /<script type="application\/ld\+json" class="rank-math-schema">([^<]+)<\/script>/;
+      const match = metadata.match(jsonRegex);
+      // console.log('match: ', match)
+      if (match && match[1]) {
+        const jsonText = match[1];
+        const jsonObject = JSON.parse(jsonText);
+        const BannerInterence = jsonObject['@graph'].find(
+          (e) => e['@type'] === 'BlogPosting'
+        );
+        if (BannerInterence && BannerInterence.keywords) {
+          BannerText = BannerInterence.keywords;
+        }
       }
     }
 
